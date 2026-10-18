@@ -95,7 +95,7 @@
 
       <rect x="2435" y="50" width="200" height="38" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
       <text x="2535" y="74" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#4ade80" text-anchor="middle">
-        11 Entités &bull; 13 Relations
+        12 Entités &bull; 14 Relations
       </text>
 
 
@@ -187,6 +187,12 @@
       <path d="M 2275 1180 L 2275 1220" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,5" fill="none" />
       <text x="465" y="150" font-size="16" font-weight="700" fill="#1e3a8a">0,n</text>
       <text x="2290" y="1210" font-size="16" font-weight="700" fill="#dc2626">1,1</text>
+
+      <!-- 16. UTILISATEUR [Admin] <-> CONSIGNER <-> JOURNAL_MODERATION (RG12) -->
+      <path d="M 450 185 L 450 125 L 2460 125 L 2460 635 L 2347 635" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,5" fill="none" />
+      <path d="M 2275 660 L 2275 680" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,5" fill="none" />
+      <text x="465" y="130" font-size="16" font-weight="700" fill="#1e3a8a">0,n</text>
+      <text x="2290" y="675" font-size="16" font-weight="700" fill="#dc2626">1,1</text>
 
 
       <!-- ========================================== -->
@@ -293,6 +299,12 @@
       <g filter="url(#shadow)">
         <ellipse cx="2275" cy="1145" rx="72" ry="34" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
         <text x="2275" y="1150" font-size="13" font-weight="700" fill="#1e40af" text-anchor="middle">DÉCLARER [RG12]</text>
+      </g>
+
+      <!-- CONSIGNER (RG12) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="2275" cy="635" rx="72" ry="32" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+        <text x="2275" y="640" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">CONSIGNER [RG12]</text>
       </g>
 
 
@@ -480,7 +492,25 @@
         <text x="2125" y="595" font-size="11.5" font-weight="bold" fill="#b91c1c">[RG12] Traçabilité : qui, quand, quoi, pourquoi</text>
       </g>
 
-      <!-- 11. SIGNALEMENT -->
+      <!-- 11. JOURNAL_MODERATION (RG12) -->
+      <g filter="url(#shadow)">
+        <rect x="2100" y="680" width="350" height="285" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
+        <rect x="2100" y="680" width="350" height="48" rx="10" fill="url(#ent-admin)" />
+        <rect x="2100" y="718" width="350" height="10" fill="url(#ent-admin)" />
+        <text x="2275" y="713" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">JOURNAL_MODERATION</text>
+        
+        <!-- Attributs -->
+        <text x="2125" y="758" font-size="14" font-weight="700" fill="#991b1b" text-decoration="underline"># id_journal : INT</text>
+        <text x="2125" y="784" font-size="13.5" fill="#334155">id_admin : INT (FK)</text>
+        <text x="2125" y="810" font-size="13.5" fill="#334155">type_action : ENUM(...) <tspan fill="#dc2626" font-size="11" font-weight="bold">[Quoi]</tspan></text>
+        <text x="2125" y="836" font-size="13.5" fill="#334155">type_entite : ENUM(user, pro, avis, ...)</text>
+        <text x="2125" y="862" font-size="13.5" fill="#334155">id_entite : INT</text>
+        <text x="2125" y="888" font-size="13.5" fill="#334155">motif : TEXT <tspan fill="#dc2626" font-size="11" font-weight="bold">[Pourquoi - RG12]</tspan></text>
+        <text x="2125" y="914" font-size="13.5" fill="#64748b">date_action : DATETIME <tspan fill="#dc2626" font-size="11" font-weight="bold">[Quand]</tspan></text>
+        <text x="2125" y="945" font-size="11.5" font-weight="bold" fill="#b91c1c">[RG12] Traçabilité unifiée des décisions</text>
+      </g>
+
+      <!-- 12. SIGNALEMENT -->
       <g filter="url(#shadow)">
         <rect x="2100" y="1220" width="350" height="300" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
         <rect x="2100" y="1220" width="350" height="48" rx="10" fill="url(#ent-admin)" />
@@ -489,7 +519,7 @@
         
         <!-- Attributs -->
         <text x="2125" y="1298" font-size="14" font-weight="700" fill="#991b1b" text-decoration="underline"># id_signalement : INT</text>
-        <text x="2125" y="1326" font-size="13.5" fill="#334155">type_cible : ENUM(profil, msg, avis, dem)</text>
+        <text x="2125" y="1326" font-size="13.5" fill="#334155">type_cible : ENUM(profil, conv, msg, ...)</text>
         <text x="2125" y="1354" font-size="13.5" fill="#334155">id_cible : INT</text>
         <text x="2125" y="1382" font-size="13.5" fill="#334155">motif : VARCHAR(100)</text>
         <text x="2125" y="1410" font-size="13.5" fill="#334155">description : TEXT</text>
@@ -590,7 +620,7 @@
         <text x="305" y="1860" font-size="13" font-weight="600" fill="#334155">Évaluations & Avis</text>
 
         <circle cx="510" cy="1855" r="10" fill="#dc2626" />
-        <text x="535" y="1860" font-size="13" font-weight="600" fill="#334155">Modération, Contrôle & Validation</text>
+        <text x="535" y="1860" font-size="13" font-weight="600" fill="#334155">Modération, Validation & Audit [RG12]</text>
 
         <text x="65" y="1895" font-size="11.5" font-style="italic" fill="#64748b">
           Note : Les clés primaires (#) sont soulignées. Les clés étrangères (FK) sont dérivées au niveau logique (MLD) selon les cardinalités.

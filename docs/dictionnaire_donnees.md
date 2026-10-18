@@ -184,8 +184,8 @@ Dossier d'instruction et justificatifs soumis par le professionnel pour obtenir 
 | `id_validation` | Clé primaire | Entier (INT) | UNSIGNED AUTO_INCREMENT | Oui | admin | système |
 | `id_profil` | Profil professionnel soumis à examen | Entier (INT) | UNSIGNED (FK profil_professionnel) | Oui | admin | système |
 | `id_admin` | Administrateur ayant statué sur la demande | Entier (INT) | UNSIGNED (FK utilisateur) | Non | admin | système |
-| `type_document` | Nature du document produit (CNI, Passeport, Diplôme, Attestation) | Chaîne (VARCHAR) | 80 caractères | Oui | admin | saisie |
-| `fichier_justificatif` | Chemin d'accès au fichier téléversé et chiffré/sécurisé | Chaîne (VARCHAR) | 255 caractères | Oui | admin | saisie |
+| `type_document` | Nature du document produit (CNI, Passeport, Diplôme, Attestation) | Chaîne (VARCHAR) | 80 caractères | Non (si simple correction textuelle) | admin | saisie |
+| `fichier_justificatif` | Chemin d'accès au fichier téléversé et chiffré/sécurisé | Chaîne (VARCHAR) | 255 caractères | Non (si simple correction textuelle) | admin | saisie |
 | `statut_decision` | Décision administrative | Énumération (ENUM) | `'en_attente'`, `'approuve'`, `'refuse'`, `'a_corriger'` | Oui | admin | saisie |
 | `commentaire_admin` | Consignes de correction ou motif du refus notifié au pro | Texte (TEXT) | Texte libre | Non | privée (communiqué au pro) / admin | saisie |
 | `date_soumission` | Date de dépôt du dossier par le professionnel | Date/Heure (DATETIME) | `YYYY-MM-DD HH:MM:SS` | Oui | admin | système |
@@ -200,7 +200,7 @@ Procédure d'alerte pour abus, comportement frauduleux ou non-conformité.
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `id_signalement` | Clé primaire | Entier (INT) | UNSIGNED AUTO_INCREMENT | Oui | admin | système |
 | `id_auteur` | Utilisateur ayant signalé l'élément | Entier (INT) | UNSIGNED (FK utilisateur) | Oui | admin | système |
-| `type_cible` | Entité faisant l'objet du signalement | Énumération (ENUM) | `'profil'`, `'message'`, `'avis'`, `'demande'` | Oui | admin | saisie / système |
+| `type_cible` | Entité faisant l'objet du signalement | Énumération (ENUM) | `'profil'`, `'conversation'`, `'message'`, `'avis'`, `'demande'` | Oui | admin | saisie / système |
 | `id_cible` | Identifiant de l'élément incriminé | Entier (INT) | UNSIGNED | Oui | admin | système |
 | `motif` | Catégorisation du problème (harcèlement, arnaque, travail non livré, fausse identité) | Chaîne (VARCHAR) | 100 caractères | Oui | admin | saisie |
 | `description` | Explications fournies par le plaignant | Texte (TEXT) | Texte libre | Oui | admin | saisie |
@@ -208,6 +208,21 @@ Procédure d'alerte pour abus, comportement frauduleux ou non-conformité.
 | `decision_admin` | Action corrective retenue (ex: avertissement, suspension de compte, classement sans suite) | Chaîne (VARCHAR) | 255 caractères | Non | admin | saisie |
 | `date_signalement` | Date et heure du dépôt du signalement | Date/Heure (DATETIME) | `YYYY-MM-DD HH:MM:SS` | Oui | admin | système |
 | `date_traitement` | Date et heure de clôture du dossier | Date/Heure (DATETIME) | `YYYY-MM-DD HH:MM:SS` | Non | admin | système |
+
+---
+
+## 13. Entité : JOURNAL_MODERATION (`journal_moderation`)
+Historique centralisé et immuable de traçabilité des décisions administratives (conformité **RG12 : qui, quand, quoi, pourquoi**).
+
+| Donnée | Description | Type | Taille / Format | Obligatoire | Confidentialité | Source |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `id_journal` | Clé primaire unique de la trace | Entier (INT) | UNSIGNED AUTO_INCREMENT | Oui | admin | système |
+| `id_admin` | Administrateur ayant opéré la décision (Qui) | Entier (INT) | UNSIGNED (FK utilisateur) | Oui | admin | système |
+| `type_action` | Nature de l'opération de modération (Quoi) | Énumération (ENUM) | `'suspension_compte'`, `'activation_compte'`, `'masquage_avis'`, `'demande_correction_profil'`, `'refus_profil'`, `'traitement_signalement'` | Oui | admin | saisie / système |
+| `type_entite` | Nature de l'entité cible visée | Énumération (ENUM) | `'utilisateur'`, `'profil_professionnel'`, `'avis'`, `'signalement'` | Oui | admin | système |
+| `id_entite` | Identifiant numérique de l'élément visé | Entier (INT) | UNSIGNED | Oui | admin | système |
+| `motif` | Motif détaillé ou justification de l'action (Pourquoi) | Texte (TEXT) | Texte libre explicatif | Oui | admin | saisie |
+| `date_action` | Date et heure précises de l'opération (Quand) | Date/Heure (DATETIME) | `YYYY-MM-DD HH:MM:SS` | Oui | admin | système |
 
 ---
 
