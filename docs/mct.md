@@ -139,13 +139,15 @@ flowchart TD
      * Si correction demandée : `statut_profil = 'a_corriger'`.
      * Si refusé : `statut_profil = 'refuse'`.
      * Si suspendu : `statut_profil = 'suspendu'`.
-  6. **Journalisation dans l'audit de modération :** Enregistrement de l'action dans les journaux système (**RG12**).
+  6. **Journalisation dans la table d'audit (`journal_moderation`) :**
+     * Insertion de la trace : `INSERT INTO journal_moderation (id_admin, type_action, type_entite, id_entite, motif, date_action)` avec `type_entite = 'profil_professionnel'`, `id_entite = :idProfil`, `motif = :motif`, `date_action = NOW()` (**RG12**).
   7. **Validation :** `COMMIT` de la transaction.
   8. **Notification :** Mise à disposition de la décision et des consignes dans l'espace du professionnel.
-* **Résultat :** Le statut du professionnel est actualisé ; s'il est approuvé, son profil devient consultable par tous les visiteurs. Toute décision est tracée avec identité, date, motif et action.
+* **Résultat :** Le statut du professionnel est actualisé ; s'il est approuvé, son profil devient consultable par tous les visiteurs. Toute décision est archivée dans `validation_profil` et tracée de manière centralisée dans `journal_moderation` (**RG12**).
 * **Données modifiées :**
   * `validation_profil` : `statut_decision`, `id_admin`, `commentaire_admin`, `date_decision`.
   * `profil_professionnel` : `statut_profil`, `date_modification`.
+  * `journal_moderation` : Insertion de la ligne d'audit d'administration (**RG12**).
 
 ### Diagramme Mermaid
 
@@ -158,9 +160,9 @@ flowchart TD
     B -- Suspendre --> D
     D -- Non --> D1[Erreur : motif obligatoire pour justifier]
     D -- Oui --> E[UPDATE profil statut='a_corriger' / 'refuse' / 'suspendu']
-    C --> F[Enregistrement validation_profil avec id_admin, date, motif]
+    C --> F[UPDATE validation_profil avec id_admin, date, motif]
     E --> F
-    F --> G[Journalisation de l'action admin RG12]
+    F --> G[INSERT INTO journal_moderation type_entite='profil' RG12]
     G --> H[COMMIT Transaction]
     H --> I{Nouveau statut ?}
     I -- Approuvé --> J([Profil public actif et visible en recherche])
