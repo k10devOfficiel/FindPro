@@ -4,6 +4,9 @@
 > - **P0 (MVP - Indispensable) :** Cœur fonctionnel pour lancer la plateforme FindPro.
 > - **P1 (Important) :** Consolidation de l'expérience utilisateur, confiance et engagement.
 > - **P2 (Évolutions futures) :** Monétisation, fonctionnalités avancées et mise à l'échelle.
+>
+> **Règle de gouvernance de la base de données :**
+> - Le schéma ne change que par modification de `sql/schema.sql`, après décision écrite.
 
 ---
 
