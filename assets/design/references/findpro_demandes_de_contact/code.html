@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode": "class", "theme": {"extend": {"colors": {"surface-container-low": "#f1f3ff", "surface-container": "#e9edff", "surface-container-highest": "#dce2f7", "on-secondary-container": "#5c2400", "tertiary-fixed-dim": "#ffb95f", "secondary": "#9d4300", "surface-container-lowest": "#ffffff", "surface-container-high": "#e1e8fd", "tertiary": "#805000", "on-surface": "#141b2b", "surface": "#f9f9ff", "tertiary-fixed": "#ffddb8", "tertiary-container": "#a16600", "on-error": "#ffffff", "primary": "#b8001d", "on-primary-fixed-variant": "#930015", "error-container": "#ffdad6", "on-tertiary-container": "#fff9f5", "primary-fixed": "#ffdad7", "outline-variant": "#e6bdb9", "on-surface-variant": "#5d3f3d", "primary-fixed-dim": "#ffb3ae", "on-tertiary-fixed": "#2a1700", "inverse-surface": "#293040", "on-tertiary-fixed-variant": "#653e00", "background": "#f9f9ff", "on-background": "#141b2b", "on-secondary-fixed": "#341100", "secondary-fixed-dim": "#ffb690", "on-secondary": "#ffffff", "inverse-primary": "#ffb3ae", "surface-bright": "#f9f9ff", "primary-container": "#e11d2e", "inverse-on-surface": "#edf0ff", "surface-dim": "#d3daef", "error": "#ba1a1a", "on-primary-container": "#fff8f7", "on-secondary-fixed-variant": "#783200", "on-tertiary": "#ffffff", "secondary-container": "#fd761a", "surface-variant": "#dce2f7", "outline": "#916f6c", "surface-tint": "#c0001f", "on-primary-fixed": "#410004", "secondary-fixed": "#ffdbca", "on-error-container": "#93000a", "on-primary": "#ffffff"}, "borderRadius": {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"}, "spacing": {"gutter": "1.5rem", "space-xl": "2.5rem", "space-sm": "0.5rem", "space-md": "1rem", "margin-mobile": "1rem", "space-xs": "0.25rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "margin": "2rem"}, "fontFamily": {"display-hero-mobile": ["Space Grotesk"], "body-sm": ["Inter"], "headline-sm": ["Space Grotesk"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-lg": ["Inter"], "headline-lg": ["Space Grotesk"], "label-md": ["Inter"], "display-hero": ["Space Grotesk"], "label-sm": ["Inter"], "headline-md": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "title-md": ["Space Grotesk"]}, "fontSize": {"display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}], "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}], "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}], "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "700"}], "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}], "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600"}], "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700"}], "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed"><aside class="fixed inset-y-0 left-0 w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" id="dashboard-sidebar"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between"><a class="flex items-center gap-space-xs group" data-path="tableau-de-bord" href="#"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm"><span class="material-symbols-outlined text-[20px]">hub</span></div><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold">Find<span class="text-primary">Pro</span></span></a><button aria-label="Fermer le menu" class="lg:hidden p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" id="close-sidebar-btn"><span class="material-symbols-outlined">close</span></button></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs mb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Espace Client</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-sm"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="tableau-de-bord" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-lg text-label-lg">Tableau de bord</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-all bg-primary-container text-on-primary-container font-semibold shadow-sm" data-path="mes-demandes" href="#"><span class="material-symbols-outlined text-[20px]">assignment</span><span class="font-label-lg text-label-lg flex-1">Mes demandes</span><span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">4</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="experts-favoris" href="#"><span class="material-symbols-outlined text-[20px]">bookmark</span><span class="font-label-lg text-label-lg">Experts favoris</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="messagerie-securisee" href="#"><span class="material-symbols-outlined text-[20px]">mark_chat_unread</span><span class="font-label-lg text-label-lg flex-1">Messagerie sécurisée</span><span class="w-2 h-2 rounded-full bg-primary-container"></span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="parametres" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Paramètres</span></a></nav></div></div><div class="p-space-md m-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center gap-space-xs text-secondary"><span class="material-symbols-outlined text-[18px]">verified_user</span><span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Compte Entreprise</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Datashield SAS bénéficie de l'assistance dédiée 24/7 et du contrat cadre sécurisé.</p><a class="font-label-sm text-label-sm text-primary hover:text-on-primary-fixed-variant font-medium underline inline-flex items-center gap-1 mt-1" href="#">Consulter les garanties <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a></div></aside><div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-40 hidden lg:hidden" id="sidebar-backdrop"></div><div class="lg:pl-72 flex flex-col min-h-screen"><header class="fixed top-0 right-0 left-0 lg:left-72 h-16 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-30"><div class="h-16 w-full px-space-md lg:px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm flex-1 max-w-xl"><button aria-label="Ouvrir le menu" class="lg:hidden p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" id="open-sidebar-btn"><span class="material-symbols-outlined">menu</span></button><div class="relative w-full hidden sm:block"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full h-11 pl-10 pr-4 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all" placeholder="Rechercher des experts, missions, compétences (ex: Rust, Pentest, DevOps)..." type="search"/></div></div><div class="flex items-center gap-space-sm"><button aria-label="Rechercher" class="sm:hidden p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined">search</span></button><a class="hidden md:inline-flex items-center gap-space-xs h-11 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-sm hover:opacity-95 transition-opacity" data-path="lancer-un-brief" href="#"><span class="material-symbols-outlined text-[20px]">add_circle</span><span>Lancer un brief technique</span></a><button aria-label="Notifications (2 non lues)" class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container"></span></button><div class="h-6 w-px bg-surface-container-high hidden sm:block"></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="text-right hidden xl:block"><div class="font-label-lg text-label-lg text-on-surface leading-tight">Sophie Bernard</div><div class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Tech Lead • Datashield SAS</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="flex-1 w-full pt-16 bg-surface px-space-md lg:px-space-lg py-space-lg"><div class="flex flex-col w-full">
+<!-- QA Testing State Controller Bar -->
+<div class="w-full bg-surface-container-highest px-space-md py-space-xs rounded-xl flex flex-wrap items-center justify-between gap-space-sm mb-space-lg shadow-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">science</span>
+<span>Simulateur d'états QA :</span>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="px-space-sm py-1 rounded bg-surface-container-lowest font-label-sm text-label-sm text-primary font-semibold shadow-sm transition-all" id="qa-btn-normal" onclick="setViewState('normal')">
+        Normal (3 demandes)
+      </button>
+<button class="px-space-sm py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all" id="qa-btn-empty" onclick="setViewState('empty')">
+        État vide
+      </button>
+<button class="px-space-sm py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all" id="qa-btn-error" onclick="setViewState('error')">
+        Erreur API
+      </button>
+</div>
+</div>
+<!-- Header Section with Metas -->
+<header class="w-full mb-space-xl flex flex-col xl:flex-row xl:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex items-center gap-space-xs text-secondary font-label-sm text-label-sm font-semibold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">folder_managed</span>
+<span>Suivi Contractuel • FindPro Escrow Protect</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg tracking-tight text-on-surface">
+        Mes demandes de contact
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Suivi de vos sollicitations techniques et briefs transmis aux experts audités. Chaque échange est couvert par notre accord de confidentialité bilatéral strict.
+      </p>
+</div>
+<!-- Metrics Cards / KPI Row -->
+<div class="grid grid-cols-3 gap-space-sm sm:gap-space-md shrink-0">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+          Actives
+        </span>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">2</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-surface-variant"></span>
+          Finalisée
+        </span>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">1</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+          Réponse moy.
+        </span>
+<div class="font-headline-md text-headline-md text-primary mt-1">&lt; 3h</div>
+</div>
+</div>
+</header>
+<!-- Filter & Search Bar Container -->
+<div class="w-full bg-surface-container-lowest p-space-md rounded-xl shadow-sm mb-space-lg flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-md">
+<!-- Filter Pills -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 md:pb-0 text-nowrap" id="status-filters">
+<button class="filter-tab px-space-md h-10 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-semibold transition-all shadow-sm" data-filter="all" onclick="filterStatus('all')">
+        Tous <span class="ml-1 opacity-80">(3)</span>
+</button>
+<button class="filter-tab px-space-md h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" data-filter="pending" onclick="filterStatus('pending')">
+        En attente de réponse <span class="ml-1 opacity-80">(1)</span>
+</button>
+<button class="filter-tab px-space-md h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" data-filter="active" onclick="filterStatus('active')">
+        Échanges en cours <span class="ml-1 opacity-80">(1)</span>
+</button>
+<button class="filter-tab px-space-md h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" data-filter="closed" onclick="filterStatus('closed')">
+        Clôturées <span class="ml-1 opacity-80">(1)</span>
+</button>
+</div>
+<!-- Quick Search Input -->
+<div class="relative w-full md:w-80 shrink-0">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-8 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-sm transition-all" id="searchInput" oninput="handleSearch()" placeholder="Filtrer par expert ou brief..." type="text"/>
+<button class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface text-[14px]" id="clear-search-btn" onclick="clearSearch()">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+<!-- Main Content Wrapper: Normal View -->
+<div class="flex flex-col gap-space-lg w-full" id="view-normal">
+<!-- Item 1: Maxime Gauthier (En attente) -->
+<article class="request-card w-full bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all p-space-md sm:p-space-lg flex flex-col gap-space-md" data-category="pending" data-search="Maxime Gauthier Refonte Architecture Design System OWASP REQ-8941">
+<div class="flex flex-col md:flex-row md:items-start justify-between gap-space-md">
+<!-- Profile Identity & Metadata -->
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 shadow-sm bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait professionnel épuré d'un architecte logiciel homme trentenaire portant des lunettes fines dans un bureau contemporain aux teintes froides et douces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPzO8MWqA90Ah7SW2Ng-iVlBSJ0O9ERfoc33DcV9UsuNA0eRq6jLiv9Kj01VRT6s0vHHoIN7kU7F8M9o3ACT5HtKjuiWh8F83rT3vgrx_YddE4WlFwZfedI5v6r1W54TAtRjstHDL008nfISDLKztgNI2Lyle_0tnBpAYgtVGwQbrqMpgN_62y0PGd4Zjy73I2Lhu8NvCHjlSAiI5N60Fa6oU6TbkiCPN47RoCNLih8ZREvWwNnda7"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-tertiary-container shadow-sm ring-2 ring-surface-container-lowest" title="Délai moyen constaté &lt; 4h"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Maxime Gauthier</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span> Expert Certifié
+              </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide">ID: #REQ-8941</span>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-0.5">
+              Architecte Frontend &amp; Sécurité • TJM indicatif : 850 € HT
+            </div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Envoyé le 14 avril 2025 à 11h20 (il y a 2 jours)</span>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="shrink-0 flex items-center md:items-end flex-col gap-1">
+<div class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+            En attente de retour du pro
+          </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Délai moyen constaté &lt; 4h</span>
+</div>
+</div>
+<!-- Brief Description Box -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs">
+<div class="flex items-center justify-between gap-space-sm flex-wrap">
+<span class="font-title-md text-title-md text-on-surface font-semibold">
+            Refonte Architecture Design System &amp; Audit de conformité OWASP Frontend
+          </span>
+<span class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium">
+            Confidentialité standard FindPro
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+          Migration des micro-frontends Datashield vers un noyau Next.js/Tailwind mutualisé. Analyse approfondie des failles d'injection XSS et sécurisation des tokens JWT en contexte bancaire.
+        </p>
+<div class="flex items-center gap-space-md flex-wrap pt-space-xs font-label-sm text-label-sm text-on-surface">
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-1 rounded shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">payments</span>
+<span>Budget indicatif : <strong class="font-semibold">18 000 € HT</strong></span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-1 rounded shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">calendar_today</span>
+<span>Régie temps partiel • Démarrage sous 15 jours</span>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<button class="inline-flex items-center justify-center gap-1.5 px-space-md h-10 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-all" onclick="openBriefDrawer('maxime')">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Voir les détails du brief</span>
+</button>
+<button class="inline-flex items-center justify-center gap-1.5 px-space-md h-10 rounded-lg bg-primary-container text-on-primary-container hover:opacity-95 font-label-md text-label-md font-semibold shadow-sm transition-all" id="btn-remind-maxime" onclick="triggerReminder('Maxime Gauthier')">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+<span>Relancer l'expert</span>
+</button>
+</div>
+<button class="inline-flex items-center justify-center gap-1 px-space-sm h-10 rounded-lg text-primary hover:bg-error-container/20 font-label-sm text-label-sm font-semibold transition-all" onclick="openCancelModal('REQ-8941', 'Maxime Gauthier')">
+<span class="material-symbols-outlined text-[16px]">cancel</span>
+<span>Annuler la demande</span>
+</button>
+</div>
+</article>
+<!-- Item 2: Alexandre Vandermeer (Échange en cours) -->
+<article class="request-card w-full bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all p-space-md sm:p-space-lg flex flex-col gap-space-md" data-category="active" data-search="Alexandre Vandermeer Audit infrastructure AWS SOC2 EKS SecOps REQ-8872">
+<div class="flex flex-col md:flex-row md:items-start justify-between gap-space-md">
+<!-- Profile Identity & Metadata -->
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 shadow-sm bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait corporate d'un ingénieur sécurité cloud quadragénaire souriant et confiant sur fond de datacenter flou et moderne aux lumières bleutées." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-zBPVBhVMP7wS9iwfn2T5WqOQ5RlboQBGiuFVNJJHfmBgBOO36ZR840uXYmccgx9WoAXzX3WcOobK4h2uoS-3LFZZIL5KHx4cuxDeUwZv-uQLKWkcMPw811bOsvhmlYpGz-yKj_oXW2iymZ2tv3uHL9H1sLxXfj_uBVkIKDzfYZFLyjF29Ac4K-uN46beXyq-Tx3jCpr27vM-IACVLyU_gKD6QxGdDJH1IVvwu2deHAARQumV-x39"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary-container shadow-sm ring-2 ring-surface-container-lowest" title="Actif en ligne"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Alexandre Vandermeer</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">shield</span> Audit SecOps • Top 1%
+              </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide">ID: #REQ-8872</span>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-0.5">
+              Ingénieur Cloud SecOps • Enregistré Siren certifié FindPro
+            </div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Envoyé le 12 avril 2025</span>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="shrink-0 flex items-center md:items-end flex-col gap-1">
+<div class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-md text-label-md font-semibold">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+            Échange ouvert • Créneau confirmé
+          </div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">videocam</span>
+            Visio de cadrage demain à 14h00
+          </span>
+</div>
+</div>
+<!-- Brief Description Box -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs">
+<div class="flex items-center justify-between gap-space-sm flex-wrap">
+<span class="font-title-md text-title-md text-on-surface font-semibold">
+            Audit d'infrastructure AWS SOC2 &amp; Durcissement des clusters EKS
+          </span>
+<span class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium">
+            Chiffrement de bout-en-bout
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+          Vérification des stratégies IAM moindres privilèges, audit des pods Kubernetes via Falco/Trivy et préparation à l'audit SOC 2 Type II annuel de Datashield SAS.
+        </p>
+<div class="flex items-center gap-space-md flex-wrap pt-space-xs font-label-sm text-label-sm text-on-surface">
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-1 rounded shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">payments</span>
+<span>Forfait mission : <strong class="font-semibold">24 500 € HT</strong></span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-1 rounded shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">event_available</span>
+<span>Démarrage immédiat après cadrage</span>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs flex-wrap">
+<a class="inline-flex items-center justify-center gap-1.5 px-space-md h-10 rounded-lg bg-primary-container text-on-primary-container hover:opacity-95 font-label-md text-label-md font-semibold shadow-sm transition-all" data-path="messagerie-securisee" href="#">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>Accéder à la messagerie sécurisée</span>
+</a>
+<button class="inline-flex items-center justify-center gap-1.5 px-space-md h-10 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-all" onclick="openBriefDrawer('alexandre')">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span>Voir le récapitulatif du brief</span>
+</button>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">link</span>
+<span>Salon audio-vidéo chiffré généré</span>
+</div>
+</div>
+</article>
+<!-- Item 3: Sarah Benali (Finalisée / Archivée) -->
+<article class="request-card w-full bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all p-space-md sm:p-space-lg flex flex-col gap-space-md opacity-90" data-category="closed" data-search="Sarah Benali Audit pipeline CI/CD Terraform multi-cloud REQ-7420 DevOps SRE">
+<div class="flex flex-col md:flex-row md:items-start justify-between gap-space-md">
+<!-- Profile Identity & Metadata -->
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 shadow-sm bg-surface-container">
+<img class="w-full h-full object-cover grayscale-[30%]" data-alt="Portrait professionnel soigné d'une femme d'origine nord-africaine ingénieure DevOps chevronnée, souriant devant son poste de travail multi-écrans." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcISipAJv8h0_T980X0GgEw7fRPj0yJJ-dGIWkqiw9YAFcTEEydxJpHF4kbV8etT4rX4R-idBlaqWxMEo6naa2r82l0PLIYwuTHdtEtYTgw-CMHeuuBYUokdTMSyMe9XSTzOCC1gn0AcBRa8N9V_gZb2b1gu9UIddQzbtguqmyiW6mQPIAK1ggotEKEIrc6ZUkLREEIYhm0XZvRB-Pi32zy_Sgx0t-6YlW3ArZdGvidoicfhPOGwot"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-surface-dim shadow-sm ring-2 ring-surface-container-lowest" title="Mission close"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Sarah Benali</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">archive</span> Mission clôturée
+              </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide">ID: #REQ-7420</span>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-0.5">
+              Lead DevOps &amp; SRE • Évaluation finale : 5.0/5 ★
+            </div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="material-symbols-outlined text-[16px]">event_busy</span>
+<span>Demande émise le 28 mars 2025 • Livrée le 08 avril 2025</span>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="shrink-0 flex items-center md:items-end flex-col gap-1">
+<div class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[16px]">task_alt</span>
+            Mission finalisée / Archivée
+          </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Facture FIND-9942 acquittée</span>
+</div>
+</div>
+<!-- Brief Description Box -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs">
+<span class="font-title-md text-title-md text-on-surface font-semibold">
+          Audit de pipeline CI/CD et déploiement Terraform multi-cloud
+        </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+          Automatisation du provisionnement AWS/GCP, durcissement des workflows GitHub Actions et mise en place des scans SonarQube et Snyk.
+        </p>
+<div class="flex items-center gap-space-md flex-wrap pt-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span>Montant réalisé : <strong class="text-on-surface font-semibold">12 400 € HT</strong></span>
+<span>•</span>
+<span>Livrables validés et scellés sur l'Espace FindPro</span>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex items-center justify-between gap-space-sm pt-space-xs">
+<button class="inline-flex items-center gap-1.5 px-space-md h-10 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-all" onclick="openBriefDrawer('sarah')">
+<span class="material-symbols-outlined text-[18px]">history_edu</span>
+<span>Consulter l'archive du brief</span>
+</button>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">lock_clock</span>
+<span>Données conservées 5 ans (Réglementation fiscale)</span>
+</div>
+</div>
+</article>
+</div>
+<!-- QA State: Empty View (Hidden by default) -->
+<div class="hidden flex-col items-center justify-center p-space-xl bg-surface-container-lowest rounded-xl shadow-sm text-center" id="view-empty">
+<div class="w-20 h-20 rounded-full bg-surface-container-high flex items-center justify-center text-primary mb-space-md">
+<span class="material-symbols-outlined text-[36px]">mark_email_unread</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Aucune demande de contact active</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mt-space-xs mb-space-lg">
+      Vous n'avez actuellement aucune sollicitation en cours. Parcourez l'annuaire des 2 400+ ingénieurs et spécialistes certifiés FindPro pour initier un brief technique sécurisé.
+    </p>
+<a class="inline-flex items-center gap-space-xs px-space-lg h-11 rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-sm hover:opacity-95 transition-all" data-path="annuaire-experts" href="#">
+<span class="material-symbols-outlined text-[20px]">manage_search</span>
+<span>Explorer l'annuaire des experts certifiés</span>
+</a>
+</div>
+<!-- QA State: Error View (Hidden by default) -->
+<div class="hidden flex-col items-center justify-center p-space-xl bg-surface-container-lowest rounded-xl shadow-sm text-center" id="view-error">
+<div class="w-20 h-20 rounded-full bg-error-container flex items-center justify-center text-error mb-space-md">
+<span class="material-symbols-outlined text-[36px]">cloud_off</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Impossible de récupérer les demandes</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-space-xs mb-space-lg">
+      Un incident temporaire est survenu lors de la synchronisation sécurisée avec le registre des mandats FindPro (Code: HTTP_503_GW).
+    </p>
+<button class="inline-flex items-center gap-space-xs px-space-lg h-11 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg shadow-sm hover:opacity-95 transition-all" onclick="setViewState('normal')">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+<span>Réessayer la synchronisation</span>
+</button>
+</div>
+<!-- Bottom Privacy Banner -->
+<div class="w-full mt-space-xl bg-surface-container-low p-space-md rounded-xl flex items-start sm:items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-secondary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="font-title-md text-title-md text-on-surface font-semibold">Politique FindPro Privacy Shield • Datashield SAS</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Pour préserver l'intégrité de vos démarches et la sécurité des données sensibles, les coordonnées directes (téléphones, adresses privées) ne sont jamais divulguées. Toutes les négociations et transferts de documents s'effectuent sur le canal chiffré FindPro.
+      </p>
+</div>
+</div>
+<!-- Cancel Confirmation Modal -->
+<div class="fixed inset-0 bg-inverse-surface/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-space-md" id="cancel-modal">
+<div class="bg-surface-container-lowest rounded-xl max-w-lg w-full p-space-lg shadow-xl flex flex-col gap-space-md transform transition-all">
+<div class="flex items-center gap-space-sm text-error">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Confirmer l'annulation</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="modal-req-id">Dossier #REQ-8941</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Êtes-vous certaine de vouloir interrompre cette prise de contact avec <strong class="text-on-surface font-semibold" id="modal-expert-name">l'expert</strong> ? Le brief technique sera retiré et le créneau pré-réservé sera relâché sans frais.
+      </p>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-medium" for="cancel-reason">Motif de rétractation (facultatif)</label>
+<select class="w-full h-10 px-3 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="cancel-reason">
+<option>Changement de priorités internes Datashield</option>
+<option>Budget réalloué sur un autre projet</option>
+<option>Délais incompatibles avec nos sprints</option>
+<option>Autre motif technique</option>
+</select>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md h-10 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-all" onclick="closeCancelModal()">
+          Garder la demande
+        </button>
+<button class="px-space-md h-10 rounded-lg bg-primary text-on-primary hover:opacity-95 font-label-md text-label-md font-semibold shadow-sm transition-all" onclick="confirmCancel()">
+          Confirmer l'annulation
+        </button>
+</div>
+</div>
+</div>
+<!-- Drawer: Brief Details Inspector Slide-Over -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-xs z-50 hidden transition-opacity" id="brief-drawer-backdrop" onclick="closeBriefDrawer()"></div>
+<aside class="fixed top-0 right-0 bottom-0 w-full sm:w-[540px] bg-surface-container-lowest z-50 shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out" id="brief-drawer">
+<!-- Drawer Header -->
+<div class="p-space-lg bg-surface-container-low flex items-start justify-between gap-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold" id="drawer-tag">
+            REQ-8941
+          </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm" id="drawer-date">14 Avril 2025</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1" id="drawer-title">
+          Détails du brief technique
+        </h3>
+<span class="font-label-sm text-label-sm text-secondary font-medium" id="drawer-expert">
+          Attribué à Maxime Gauthier
+        </span>
+</div>
+<button class="w-9 h-9 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface flex items-center justify-center shadow-sm transition-all" onclick="closeBriefDrawer()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Drawer Content Scrollable Area -->
+<div class="p-space-lg flex-1 overflow-y-auto flex flex-col gap-space-lg">
+<!-- Section 1: Objectif & Description -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">1. Objectif du projet</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed" id="drawer-description">
+          Datashield SAS consolide sa suite d'outils analytiques frontend. Le mandat consiste à auditer l'exposition XSS et CSRF sur un écosystème Next.js / Tailwind v4 et structurer des composants durcis pour notre équipe produit.
+        </p>
+</div>
+<!-- Section 2: Stack Technique & Prérequis -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">2. Stack technique requise</span>
+<div class="flex items-center gap-2 flex-wrap" id="drawer-stack">
+<span class="px-2.5 py-1 rounded-md bg-surface-container font-label-md text-label-md text-on-surface font-medium">React / Next.js 14+</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-container font-label-md text-label-md text-on-surface font-medium">TypeScript strict</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-container font-label-md text-label-md text-on-surface font-medium">OWASP ASVS v4</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-container font-label-md text-label-md text-on-surface font-medium">Jest &amp; Playwright</span>
+</div>
+</div>
+<!-- Section 3: Livrables Contractuels -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">3. Livrables attendus</span>
+<ul class="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary shrink-0 mt-0.5">check_circle</span>
+<span>Rapport d'audit de sécurité des 38 micro-composants critiques.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary shrink-0 mt-0.5">check_circle</span>
+<span>Pull-request de refactorisation sur la branche de staging GitHub.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary shrink-0 mt-0.5">check_circle</span>
+<span>Guide de bonnes pratiques et transfert de compétences (2 demi-journées).</span>
+</li>
+</ul>
+</div>
+<!-- Section 4: Modalités Financières & Cadre Légal -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Modalités &amp; Garantie FindPro</span>
+<div class="flex justify-between items-center text-on-surface font-body-sm text-body-sm">
+<span>Enveloppe budgétaire :</span>
+<span class="font-semibold" id="drawer-budget">18 000 € HT</span>
+</div>
+<div class="flex justify-between items-center text-on-surface font-body-sm text-body-sm">
+<span>Clause de confidentialité :</span>
+<span class="text-primary font-medium">FindPro Bilateral NDA actif</span>
+</div>
+<div class="flex justify-between items-center text-on-surface font-body-sm text-body-sm">
+<span>Dépôt séquestre :</span>
+<span class="font-medium">FindPro Escrow Safe (0% acompte libéré avant validation)</span>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="p-space-md bg-surface-container-lowest flex items-center justify-between gap-space-sm shadow-sm">
+<button class="px-space-md h-10 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-all" onclick="closeBriefDrawer()">
+        Fermer
+      </button>
+<button class="inline-flex items-center gap-1.5 px-space-md h-10 rounded-lg bg-primary-container text-on-primary-container hover:opacity-95 font-label-md text-label-md font-semibold shadow-sm transition-all" onclick="downloadBriefPdf()">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Télécharger PDF officiel</span>
+</button>
+</div>
+</aside>
+<!-- Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-space-sm px-space-md py-space-sm rounded-xl bg-inverse-surface text-inverse-on-surface shadow-xl" id="toast-notification">
+<span class="material-symbols-outlined text-[20px] text-tertiary-fixed-dim" id="toast-icon">check_circle</span>
+<span class="font-body-sm text-body-sm" id="toast-message">Action effectuée</span>
+</div>
+</div>
+<script>
+  // Brief detail database for preview drawer
+  const briefsData = {
+    maxime: {
+      tag: "REQ-8941",
+      date: "14 Avril 2025 à 11h20",
+      expert: "Destinataire : Maxime Gauthier (Architecte Frontend & Sécurité)",
+      title: "Refonte Architecture Design System & Audit OWASP Frontend",
+      desc: "Refonte de nos bibliothèques de composants React internes et renforcement de la couche de rendu contre les attaques XSS/CSRF. Automatisation des tests de régression de sécurité via Playwright et audit de conformité OWASP ASVS.",
+      stack: ["React 19", "Next.js", "Tailwind CSS", "TypeScript", "OWASP ASVS", "Playwright"],
+      budget: "18 000 € HT",
+      deliverables: [
+        "Audit des 38 composants critiques du catalogue Datashield.",
+        "Mise aux normes OWASP Frontend et validation CSP stricte.",
+        "Pull-requests validées avec couverture de tests e2e > 85%."
+      ]
+    },
+    alexandre: {
+      tag: "REQ-8872",
+      date: "12 Avril 2025 à 09h40",
+      expert: "Destinataire : Alexandre Vandermeer (Ingénieur Cloud SecOps)",
+      title: "Audit d'infrastructure AWS SOC2 & Durcissement clusters EKS",
+      desc: "Accompagnement de Datashield SAS pour la certification SOC 2 Type II : audit des politiques IAM, sécurisation des clusters Kubernetes EKS hébergés en zone UE, et mise en conformité des flux réseau via Cilium et Falco.",
+      stack: ["AWS", "Amazon EKS", "Terraform", "Cilium CNI", "Falco", "SOC 2 Type II"],
+      budget: "24 500 € HT",
+      deliverables: [
+        "Rapport complet des vulnérabilités IAM et clusters de conteneurs.",
+        "Scripts d'automatisation Terraform de remédiation en CI/CD.",
+        "Attestation formelle préalable au passage devant l'auditeur externe."
+      ]
+    },
+    sarah: {
+      tag: "REQ-7420",
+      date: "28 Mars 2025 (Archivée)",
+      expert: "Consultant : Sarah Benali (Lead DevOps & SRE)",
+      title: "Audit de pipeline CI/CD et déploiement Terraform multi-cloud",
+      desc: "Mandat terminé avec succès. Migration des pipelines Jenkins vers GitHub Actions Enterprise avec intégration des scans SonarQube et Snyk.",
+      stack: ["GitHub Actions", "Terraform Cloud", "SonarQube", "Snyk", "Docker"],
+      budget: "12 400 € HT (Réglé)",
+      deliverables: [
+        "Pipelines de production opérationnels et zéro CVE critique.",
+        "Documentation technique d'exploitation et guide SRE transmis."
+      ]
+    }
+  };
+
+  // View state switcher (QA simulator)
+  function setViewState(state) {
+    const normalView = document.getElementById('view-normal');
+    const emptyView = document.getElementById('view-empty');
+    const errorView = document.getElementById('view-error');
+    const btnNormal = document.getElementById('qa-btn-normal');
+    const btnEmpty = document.getElementById('qa-btn-empty');
+    const btnError = document.getElementById('qa-btn-error');
+
+    // Reset styles
+    [btnNormal, btnEmpty, btnError].forEach(btn => {
+      btn.className = "px-space-sm py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all";
+    });
+
+    normalView.classList.add('hidden');
+    emptyView.classList.add('hidden');
+    errorView.classList.add('hidden');
+
+    if (state === 'normal') {
+      normalView.classList.remove('hidden');
+      btnNormal.className = "px-space-sm py-1 rounded bg-surface-container-lowest font-label-sm text-label-sm text-primary font-semibold shadow-sm transition-all";
+    } else if (state === 'empty') {
+      emptyView.classList.remove('hidden');
+      btnEmpty.className = "px-space-sm py-1 rounded bg-surface-container-lowest font-label-sm text-label-sm text-primary font-semibold shadow-sm transition-all";
+    } else if (state === 'error') {
+      errorView.classList.remove('hidden');
+      btnError.className = "px-space-sm py-1 rounded bg-surface-container-lowest font-label-sm text-label-sm text-primary font-semibold shadow-sm transition-all";
+    }
+  }
+
+  // Filter tabs
+  function filterStatus(category) {
+    const cards = document.querySelectorAll('.request-card');
+    const tabs = document.querySelectorAll('.filter-tab');
+
+    tabs.forEach(tab => {
+      if (tab.getAttribute('data-filter') === category) {
+        tab.className = "filter-tab px-space-md h-10 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-semibold transition-all shadow-sm";
+      } else {
+        tab.className = "filter-tab px-space-md h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all";
+      }
+    });
+
+    cards.forEach(card => {
+      if (category === 'all' || card.getAttribute('data-category') === category) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Search filter
+  function handleSearch() {
+    const input = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clear-search-btn');
+    const query = input.value.trim().toLowerCase();
+    const cards = document.querySelectorAll('.request-card');
+
+    if (query.length > 0) {
+      clearBtn.classList.remove('hidden');
+    } else {
+      clearBtn.classList.add('hidden');
+    }
+
+    cards.forEach(card => {
+      const text = card.getAttribute('data-search').toLowerCase();
+      if (text.includes(query)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function clearSearch() {
+    const input = document.getElementById('searchInput');
+    input.value = '';
+    handleSearch();
+  }
+
+  // Brief Drawer Logic
+  function openBriefDrawer(key) {
+    const data = briefsData[key];
+    if (!data) return;
+
+    document.getElementById('drawer-tag').innerText = data.tag;
+    document.getElementById('drawer-date').innerText = data.date;
+    document.getElementById('drawer-expert').innerText = data.expert;
+    document.getElementById('drawer-title').innerText = data.title;
+    document.getElementById('drawer-description').innerText = data.desc;
+    document.getElementById('drawer-budget').innerText = data.budget;
+
+    const stackContainer = document.getElementById('drawer-stack');
+    stackContainer.innerHTML = '';
+    data.stack.forEach(tech => {
+      const tag = document.createElement('span');
+      tag.className = 'px-2.5 py-1 rounded-md bg-surface-container font-label-md text-label-md text-on-surface font-medium';
+      tag.innerText = tech;
+      stackContainer.appendChild(tag);
+    });
+
+    const backdrop = document.getElementById('brief-drawer-backdrop');
+    const drawer = document.getElementById('brief-drawer');
+
+    backdrop.classList.remove('hidden');
+    drawer.classList.remove('translate-x-full');
+  }
+
+  function closeBriefDrawer() {
+    const backdrop = document.getElementById('brief-drawer-backdrop');
+    const drawer = document.getElementById('brief-drawer');
+
+    drawer.classList.add('translate-x-full');
+    setTimeout(() => {
+      backdrop.classList.add('hidden');
+    }, 300);
+  }
+
+  // Cancel Modal Logic
+  let pendingCancelId = null;
+  function openCancelModal(reqId, proName) {
+    pendingCancelId = reqId;
+    document.getElementById('modal-req-id').innerText = 'Demande ' + reqId;
+    document.getElementById('modal-expert-name').innerText = proName;
+    document.getElementById('cancel-modal').classList.remove('hidden');
+  }
+
+  function closeCancelModal() {
+    document.getElementById('cancel-modal').classList.add('hidden');
+    pendingCancelId = null;
+  }
+
+  function confirmCancel() {
+    closeCancelModal();
+    showToast('Demande ' + (pendingCancelId || '#REQ-8941') + ' annulée avec succès', 'info');
+  }
+
+  // Reminder interaction
+  function triggerReminder(proName) {
+    const btn = document.getElementById('btn-remind-maxime');
+    btn.disabled = true;
+    btn.classList.add('opacity-50', 'pointer-events-none');
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Relance transmise';
+    showToast('Une notification prioritaire FindPro a été envoyée à ' + proName, 'send');
+  }
+
+  function downloadBriefPdf() {
+    showToast('Génération du dossier sécurisé FindPro PDF en cours...', 'download');
+  }
+
+  // Toast Notification
+  function showToast(message, iconName) {
+    const toast = document.getElementById('toast-notification');
+    const toastMsg = document.getElementById('toast-message');
+    const toastIco = document.getElementById('toast-icon');
+
+    toastMsg.innerText = message;
+    toastIco.innerText = iconName || 'check_circle';
+
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0');
+    }, 3500);
+  }
+</script></main></div><script>const openBtn=document.getElementById('open-sidebar-btn');const closeBtn=document.getElementById('close-sidebar-btn');const sidebar=document.getElementById('dashboard-sidebar');const backdrop=document.getElementById('sidebar-backdrop');function toggleSidebar(){sidebar.classList.toggle('-translate-x-full');backdrop.classList.toggle('hidden');}if(openBtn&&closeBtn&&backdrop){openBtn.addEventListener('click',toggleSidebar);closeBtn.addEventListener('click',toggleSidebar);backdrop.addEventListener('click',toggleSidebar);}</script></body></html>

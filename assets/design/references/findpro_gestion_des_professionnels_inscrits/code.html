@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-surface":"#293040","background":"#f9f9ff","on-secondary-fixed-variant":"#783200","primary-container":"#e11d2e","surface-container-lowest":"#ffffff","inverse-on-surface":"#edf0ff","secondary":"#9d4300","surface-container-low":"#f1f3ff","surface-container-highest":"#dce2f7","primary-fixed-dim":"#ffb3ae","inverse-primary":"#ffb3ae","surface-dim":"#d3daef","on-tertiary":"#ffffff","on-surface":"#141b2b","on-error":"#ffffff","primary-fixed":"#ffdad7","surface-tint":"#c0001f","surface-container":"#e9edff","on-secondary-container":"#5c2400","on-error-container":"#93000a","outline-variant":"#e6bdb9","secondary-fixed-dim":"#ffb690","primary":"#b8001d","tertiary":"#805000","on-primary-fixed-variant":"#930015","tertiary-fixed":"#ffddb8","on-tertiary-container":"#fff9f5","error":"#ba1a1a","outline":"#916f6c","tertiary-container":"#a16600","surface-container-high":"#e1e8fd","on-primary":"#ffffff","surface-bright":"#f9f9ff","on-primary-fixed":"#410004","error-container":"#ffdad6","tertiary-fixed-dim":"#ffb95f","on-tertiary-fixed-variant":"#653e00","on-secondary":"#ffffff","surface-variant":"#dce2f7","on-secondary-fixed":"#341100","on-background":"#141b2b","secondary-fixed":"#ffdbca","secondary-container":"#fd761a","on-primary-container":"#fff8f7","surface":"#f9f9ff","on-tertiary-fixed":"#2a1700","on-surface-variant":"#5d3f3d"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"margin":"2rem","space-xs":"0.25rem","gutter":"1.5rem","space-md":"1rem","space-lg":"1.5rem","space-sm":"0.5rem","gutter-mobile":"1rem","margin-mobile":"1rem","space-xl":"2.5rem"},fontFamily:{"label-sm":["Inter"],"label-lg":["Inter"],"headline-lg-mobile":["Space Grotesk"],"headline-md":["Space Grotesk"],"label-md":["Inter"],"display-hero-mobile":["Space Grotesk"],"headline-sm":["Space Grotesk"],"body-md":["Inter"],"headline-lg":["Space Grotesk"],"display-hero":["Space Grotesk"],"body-sm":["Inter"],"body-lg":["Inter"],"title-md":["Space Grotesk"]},fontSize:{"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.015em","fontWeight":"700"}],"headline-md":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.015em","fontWeight":"700"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"title-md":["16px",{"lineHeight":"24px","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col flex-1 min-h-0"><div class="h-16 px-space-lg flex items-center justify-between border-b border-surface-container-highest/60"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-container to-secondary-container flex items-center justify-center text-on-primary font-headline-sm text-headline-sm shadow-sm">F</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">FindPro</span><span class="font-label-sm text-label-sm tracking-wider uppercase text-on-surface-variant font-semibold mt-0.5">Admin Core</span></div></div><span class="font-label-sm text-label-sm bg-surface-container-highest text-on-surface px-1.5 py-0.5 rounded">v2.4</span></div><div class="px-space-md py-space-sm"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant px-space-sm font-semibold">Gouvernance &amp; Opérations</span></div><nav class="flex-1 px-space-sm space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary font-label-lg shadow-sm"><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="vue-densemble" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Vue d'ensemble</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="professionnels" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">badge</span><span>Professionnels</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="validations" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">verified_user</span><span>Validations</span></div><span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-surface-container-highest text-on-surface font-semibold">14</span></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="utilisateurs" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">group</span><span>Utilisateurs</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="portfolios" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">photo_library</span><span>Portfolios</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="signalements" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">warning</span><span>Signalements</span></div><span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-error-container text-on-error-container font-bold">3</span></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="categories" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">category</span><span>Catégories</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="parametres" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">settings</span><span>Paramètres</span></div></a></nav></div><div class="p-space-md border-t border-surface-container-highest/60 bg-surface-container-low"><div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest border border-surface-container-highest"><div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Nœud PROD-EU-PAR1</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Chiffrement TLS 1.3 actif</span></div></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl border-b border-surface-container-highest/80 shadow-[0_1px_8px_rgba(0,0,0,0.03)] z-40 px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface px-2.5 py-1 rounded font-semibold uppercase tracking-wider">Console d'Administration</span><div class="hidden xl:flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant border-l border-surface-container-highest pl-space-md"><span class="material-symbols-outlined text-[16px] text-tertiary">shield</span><span>SecNumCloud · SOC2 Type II</span></div></div></div><div class="flex-1 max-w-xl mx-space-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span><input class="w-full h-10 pl-9 pr-12 rounded-lg bg-surface border border-surface-container-highest text-on-surface placeholder:text-on-surface-variant/70 font-body-sm text-body-sm focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/15 transition-all" placeholder="Rechercher un profil, SIREN, signalement, ticket, ID dossier..." type="search"/><span class="absolute right-2.5 top-1/2 -translate-y-1/2 font-label-sm text-label-sm bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded border border-surface-container-highest">⌘K</span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-container-low border border-surface-container-highest"><div class="w-2 h-2 rounded-full bg-emerald-500"></div><span class="font-label-sm text-label-sm font-medium text-on-surface">Système nominal (PROD-EU)</span></div><div class="relative"><button class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container"></span></div><div class="h-6 w-px bg-surface-container-highest"></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="flex flex-col text-right hidden sm:flex"><span class="font-label-lg text-label-lg font-semibold text-on-surface leading-tight">Marc Laurent</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Super-Admin SecOps</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- QA State Simulator & Developer Banner -->
+<section class="bg-surface-container-high/80 backdrop-blur px-space-lg py-2.5 flex flex-wrap items-center justify-between gap-space-sm shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-tertiary">science</span>
+<span class="font-semibold tracking-wider uppercase">QA Sandbox / Simulateur d'états</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant hidden md:inline">Testez instantanément les scénarios de conformité et d'erreurs réseau :</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5">
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-primary-container text-on-primary font-semibold transition-all shadow-sm" id="btn-state-nominal" onclick="switchState('nominal')">Nominal (8 profils)</button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest text-on-surface hover:bg-surface-container-highest transition-all" id="btn-state-empty" onclick="switchState('empty')">Filtre sans résultat (Vide)</button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest text-on-surface hover:bg-surface-container-highest transition-all" id="btn-state-error" onclick="switchState('error')">Erreur API Registre SIRENE</button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest text-on-surface hover:bg-surface-container-highest transition-all" id="btn-state-modal" onclick="openModal('refusal', 'Julien Danglard', '912 405 112')">Modale Démo</button>
+</div>
+</section>
+<!-- Error Banner (Hidden by default, triggered by simulator) -->
+<div class="hidden bg-error-container text-on-error-container px-space-lg py-3 flex flex-wrap items-center justify-between gap-space-md shadow-sm transition-all" id="api-error-banner">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-error text-[22px]">cloud_off</span>
+<div>
+<p class="font-label-lg text-label-lg font-bold">Échec de synchronisation avec le registre national SIRENE (Code HTTP 503)</p>
+<p class="font-body-sm text-body-sm text-on-error-container/90">L'API INSEE est temporairement inaccessible. Les certifications en temps réel sont passées en cache local sécurisé.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-low shadow-sm flex items-center gap-1.5" onclick="retrySync()">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+        Réessayer la synchronisation
+      </button>
+<button class="p-1 rounded hover:bg-black/5 text-on-error-container" onclick="dismissError()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Main Container -->
+<div class="px-space-lg py-space-lg space-y-space-lg">
+<!-- Breadcrumb & Top Header -->
+<div class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-md">
+<div class="space-y-1.5 max-w-3xl">
+<nav class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span>Console d'administration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Registre des Professionnels</span>
+</nav>
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg tracking-tight text-on-surface">Gestion des professionnels inscrits</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold">1 248 actifs</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Supervision du registre national, validation d'admissibilité SIRENE, audits techniques et gestion du cycle de vie des comptes professionnels FindPro.
+        </p>
+<div class="flex items-center gap-2 pt-1">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Données fictives de simulation · Journalisation d'audit SOC2 Type II active</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="h-11 px-4 rounded-lg bg-surface-container-lowest text-on-surface font-label-lg text-label-lg font-semibold hover:bg-surface-container-low shadow-sm flex items-center gap-2 transition-all" onclick="exportCSV()">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">file_download</span>
+<span>Exporter le registre (CSV)</span>
+</button>
+<button class="h-11 px-5 rounded-lg bg-gradient-to-br from-primary-container to-secondary-container text-on-primary font-label-lg text-label-lg font-semibold hover:shadow-md transition-all flex items-center gap-2" onclick="openDrawer('quick-add')">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span>Ajouter un professionnel</span>
+</button>
+</div>
+</div>
+<!-- Metrics Cards Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm space-y-1">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>PROFESSIONNELS ACTIFS</span>
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">verified</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">1 184</span>
+<span class="font-label-sm text-label-sm text-emerald-700 font-semibold">+8.4% ce mois</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">SIREN vérifié &amp; audits validés</p>
+</div>
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm space-y-1">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>EN ATTENTE D'AUDIT</span>
+<span class="material-symbols-outlined text-amber-600 text-[18px]">pending_actions</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">14</span>
+<span class="font-label-sm text-label-sm text-amber-800 font-semibold">Délai moyen : 36h</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">4 urgences &lt; 12 heures</p>
+</div>
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm space-y-1">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>SIGNALEMENTS &amp; SUSPENSIONS</span>
+<span class="material-symbols-outlined text-primary text-[18px]">gavel</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">12</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">2 sous médiation</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Gels conservatoires des séquestres</p>
+</div>
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm space-y-1">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>TAUX DE CONFORMITÉ RC/KBIS</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">policy</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">97.8%</span>
+<span class="font-label-sm text-label-sm text-emerald-700 font-semibold">Standard SOC2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">38 rejets définitifs en 2025</p>
+</div>
+</div>
+<!-- Filters, Search & View Controls Area -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm space-y-space-md">
+<!-- Tabs for quick status filter -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b-0">
+<div class="flex flex-wrap items-center gap-1.5 p-1 bg-surface-container-low rounded-lg">
+<button class="filter-tab px-3 py-1.5 rounded-md font-label-sm text-label-sm font-semibold bg-surface-container-lowest text-on-surface shadow-xs flex items-center gap-2" id="tab-all" onclick="filterStatus('all')">
+<span>Tous</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface text-[10px]">1 248</span>
+</button>
+<button class="filter-tab px-3 py-1.5 rounded-md font-label-sm text-label-sm font-semibold text-on-surface-variant hover:text-on-surface flex items-center gap-2" id="tab-pending" onclick="filterStatus('pending')">
+<span>En attente de validation</span>
+<span class="px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-900 text-[10px]">14</span>
+</button>
+<button class="filter-tab px-3 py-1.5 rounded-md font-label-sm text-label-sm font-semibold text-on-surface-variant hover:text-on-surface flex items-center gap-2" id="tab-approved" onclick="filterStatus('approved')">
+<span>Approuvés / Actifs</span>
+<span class="px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-900 text-[10px]">1 184</span>
+</button>
+<button class="filter-tab px-3 py-1.5 rounded-md font-label-sm text-label-sm font-semibold text-on-surface-variant hover:text-on-surface flex items-center gap-2" id="tab-suspended" onclick="filterStatus('suspended')">
+<span>Suspendus</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface text-[10px]">12</span>
+</button>
+<button class="filter-tab px-3 py-1.5 rounded-md font-label-sm text-label-sm font-semibold text-on-surface-variant hover:text-on-surface flex items-center gap-2" id="tab-rejected" onclick="filterStatus('rejected')">
+<span>Refusés</span>
+<span class="px-1.5 py-0.2 rounded-full bg-error-container text-on-error-container text-[10px]">38</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Dernière synchro SIRENE : Il y a 4 min</span>
+</div>
+</div>
+<!-- Search and Secondary Dropdowns -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-sm items-center">
+<!-- Search bar -->
+<div class="md:col-span-5 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full h-11 pl-9 pr-12 rounded-lg bg-surface text-on-surface placeholder:text-on-surface-variant/60 font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container shadow-xs" id="search-input" oninput="handleSearch(this.value)" placeholder="Rechercher par nom, email administratif, SIREN, spécialité..." type="search"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 font-label-sm text-label-sm bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded">⌘K</span>
+</div>
+<!-- Specialty Filter -->
+<div class="md:col-span-3">
+<select class="w-full h-11 px-3 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container shadow-xs" id="filter-specialty" onchange="applyFilters()">
+<option value="">Toutes spécialités confondues</option>
+<option value="react">Architecte Frontend &amp; Sécurité</option>
+<option value="rust">Lead Backend Rust / Go</option>
+<option value="devsecops">Architecte DevSecOps &amp; Cloud</option>
+<option value="pentest">Cybersécurité Senior &amp; Red Team</option>
+<option value="devops">DevOps &amp; SRE Kubernetes</option>
+</select>
+</div>
+<!-- KYC Status Filter -->
+<div class="md:col-span-2">
+<select class="w-full h-11 px-3 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container shadow-xs" id="filter-kyc" onchange="applyFilters()">
+<option value="">Statut KYC / SIREN</option>
+<option value="siren_ok">SIREN Vérifié (INSEE)</option>
+<option value="siren_wait">Vérification en cours</option>
+<option value="rcpro_missing">RC Pro manquante</option>
+<option value="rejected">Rejeté / Invalide</option>
+</select>
+</div>
+<!-- Date Range Filter -->
+<div class="md:col-span-2">
+<select class="w-full h-11 px-3 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container shadow-xs" id="filter-date" onchange="applyFilters()">
+<option value="">Date d'inscription</option>
+<option value="30d">30 derniers jours</option>
+<option value="90d">90 derniers jours</option>
+<option value="2025">Année 2025</option>
+<option value="2024">Année 2024</option>
+</select>
+</div>
+</div>
+<!-- Active Filter Pills (Optional dynamic bar) -->
+<div class="hidden flex items-center gap-2 pt-1 font-label-sm text-label-sm" id="active-filters-row">
+<span class="text-on-surface-variant">Filtres actifs :</span>
+<div class="flex flex-wrap gap-1.5" id="filter-badges-container"></div>
+<button class="text-primary hover:underline font-semibold ml-2" onclick="resetFilters()">Réinitialiser tout</button>
+</div>
+</div>
+<!-- Main Data Presentation (Nominal State) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden transition-all" id="table-container">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3.5 px-4 w-12 text-center">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" id="select-all" onclick="toggleSelectAll(this)" type="checkbox"/>
+</th>
+<th class="py-3.5 px-4 font-semibold">Professionnel &amp; Identité SIREN</th>
+<th class="py-3.5 px-4 font-semibold">Email Administratif</th>
+<th class="py-3.5 px-4 font-semibold">Spécialité &amp; Stack Auditée</th>
+<th class="py-3.5 px-4 font-semibold">Date d'inscription</th>
+<th class="py-3.5 px-4 font-semibold">Statut Registre</th>
+<th class="py-3.5 px-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y-0" id="professionals-tbody">
+<!-- Row 1 : Maxime Gauthier -->
+<tr class="hover:bg-surface-container-low/60 transition-colors professional-row" data-id="1" data-specialty="react" data-status="approved">
+<td class="py-3.5 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-title-md text-title-md text-primary font-bold shadow-xs">
+                    MG
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Maxime Gauthier</span>
+<span class="material-symbols-outlined text-[16px] text-emerald-600" title="Identité et SIREN vérifiés">verified</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono">SIREN 894 201 984</span>
+<span>•</span>
+<span>Paris (75)</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<span class="font-mono text-on-surface">m.gauthier@consult-pro.fr</span>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="copyText('m.gauthier@consult-pro.fr')" title="Copier l'email">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-emerald-700">DKIM / SPF certifié</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Architecte Frontend &amp; Sécurité</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">React 19</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Next.js</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">OWASP ASVS</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">12 Janv 2025</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">il y a 3 mois</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+<span>Approuvé &amp; Certifié</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" onclick="openDrawer('view-profile', 1)">
+                    Ouvrir le dossier
+                  </button>
+<div class="relative inline-block text-left">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="toggleActionMenu(event, 'menu-1')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="dropdown-menu hidden absolute right-0 mt-1 w-48 bg-surface-container-lowest rounded-xl shadow-xl z-30 py-1.5 text-left font-body-sm text-body-sm" id="menu-1">
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-on-surface" href="#" onclick="openDrawer('view-profile', 1); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">visibility</span> Voir profil public
+                      </a>
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-primary" href="#" onclick="openModal('suspend', 'Maxime Gauthier', '894 201 984'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span> Suspendre le compte
+                      </a>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 2 : Julien Danglard -->
+<tr class="hover:bg-surface-container-low/60 transition-colors professional-row" data-id="2" data-specialty="rust" data-status="pending">
+<td class="py-3.5 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-title-md text-title-md text-secondary font-bold shadow-xs">
+                    JD
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Julien Danglard</span>
+<span class="material-symbols-outlined text-[16px] text-amber-600" title="Vérification KYC en cours">schedule</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono">SIREN 912 405 112</span>
+<span>•</span>
+<span>Lyon (69)</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<span class="font-mono text-on-surface">j.danglard@fictif-pro.fr</span>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="copyText('j.danglard@fictif-pro.fr')">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Kbis certifié &lt; 30j</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Lead Développeur Rust &amp; Axum</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Rust 1.84</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Axum</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Tokio</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">14 Avril 2025</span>
+<span class="font-label-sm text-label-sm text-amber-800 font-semibold">il y a 2 jours</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse"></span>
+<span>En attente de validation</span>
+</div>
+<div class="text-[11px] text-on-surface-variant mt-0.5 font-medium">Audit technique en cours</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" onclick="openDrawer('view-profile', 2)">
+                    Ouvrir le dossier
+                  </button>
+<div class="relative inline-block text-left">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="toggleActionMenu(event, 'menu-2')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="dropdown-menu hidden absolute right-0 mt-1 w-52 bg-surface-container-lowest rounded-xl shadow-xl z-30 py-1.5 text-left font-body-sm text-body-sm" id="menu-2">
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-emerald-700 font-semibold" href="#" onclick="openModal('approval', 'Julien Danglard', '912 405 112'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">check_circle</span> Approuver le dossier
+                      </a>
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-primary" href="#" onclick="openModal('refusal', 'Julien Danglard', '912 405 112'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">cancel</span> Refuser avec motif
+                      </a>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 3 : Émilie Roche -->
+<tr class="hover:bg-surface-container-low/60 transition-colors professional-row" data-id="3" data-specialty="devsecops" data-status="pending">
+<td class="py-3.5 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-title-md text-title-md text-primary font-bold shadow-xs">
+                    ER
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Émilie Roche</span>
+<span class="material-symbols-outlined text-[16px] text-amber-600">report_problem</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono">SIREN 845 120 789</span>
+<span>•</span>
+<span>Paris (75)</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<span class="font-mono text-on-surface">e.roche@consult-audit.eu</span>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="copyText('e.roche@consult-audit.eu')">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-amber-800">Attestation RC Pro manquante</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Architecte DevSecOps</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">GitLab CI</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Trivy</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Vault</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">13 Avril 2025</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">il y a 3 jours</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+<span>En attente de validation</span>
+</div>
+<div class="text-[11px] text-error font-medium mt-0.5">Pièce justificative requise</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" onclick="openDrawer('view-profile', 3)">
+                    Ouvrir le dossier
+                  </button>
+<div class="relative inline-block text-left">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="toggleActionMenu(event, 'menu-3')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="dropdown-menu hidden absolute right-0 mt-1 w-52 bg-surface-container-lowest rounded-xl shadow-xl z-30 py-1.5 text-left font-body-sm text-body-sm" id="menu-3">
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-emerald-700" href="#" onclick="openModal('approval', 'Émilie Roche', '845 120 789'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">check_circle</span> Valider dérogation
+                      </a>
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-primary" href="#" onclick="openModal('refusal', 'Émilie Roche', '845 120 789'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">cancel</span> Demander complément
+                      </a>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 4 : Marc Valette -->
+<tr class="hover:bg-surface-container-low/60 transition-colors professional-row" data-id="4" data-specialty="pentest" data-status="suspended">
+<td class="py-3.5 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-inverse-surface text-inverse-on-surface flex items-center justify-center font-title-md text-title-md font-bold shadow-xs">
+                    MV
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Marc Valette</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">lock</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono">SIREN 789 456 123</span>
+<span>•</span>
+<span>Bordeaux (33)</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<span class="font-mono text-on-surface">m.valette@infosec-expert.com</span>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="copyText('m.valette@infosec-expert.com')">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Signalement #SIG-118</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Pentesteur Senior &amp; Red Team</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">OSCP</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Burp Pro</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">C2 Infra</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">02 Févr 2025</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">il y a 2 mois</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant"></span>
+<span>Suspendu (Mesure conservatoire)</span>
+</div>
+<div class="text-[11px] text-tertiary font-medium mt-0.5">En cours de médiation légale</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" onclick="openDrawer('view-profile', 4)">
+                    Ouvrir le dossier
+                  </button>
+<div class="relative inline-block text-left">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="toggleActionMenu(event, 'menu-4')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="dropdown-menu hidden absolute right-0 mt-1 w-52 bg-surface-container-lowest rounded-xl shadow-xl z-30 py-1.5 text-left font-body-sm text-body-sm" id="menu-4">
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-emerald-700" href="#" onclick="openModal('reactivate', 'Marc Valette', '789 456 123'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">lock_open</span> Lever la suspension
+                      </a>
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-primary" href="#" onclick="openModal('refusal', 'Marc Valette', '789 456 123'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">delete_forever</span> Résilier définitivement
+                      </a>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 5 : Aurélien Morin -->
+<tr class="hover:bg-surface-container-low/60 transition-colors professional-row" data-id="5" data-specialty="react" data-status="rejected">
+<td class="py-3.5 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-error-container text-on-error-container flex items-center justify-center font-title-md text-title-md font-bold shadow-xs">
+                    AM
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface line-through text-on-surface-variant">Aurélien Morin</span>
+<span class="material-symbols-outlined text-[16px] text-error">cancel</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono text-error">SIREN Rejeté</span>
+<span>•</span>
+<span>Nantes (44)</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<span class="font-mono text-on-surface-variant">a.morin@freelance-dev.net</span>
+</div>
+<span class="font-label-sm text-label-sm text-error">SIREN Inexistant INSEE</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold text-on-surface-variant">Développeur PHP / WP</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant font-mono">PHP 7.4</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant font-mono">WordPress</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">28 Mars 2025</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">il y a 20 jours</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>Refusé (Dossier non conforme)</span>
+</div>
+<div class="text-[11px] text-error font-medium mt-0.5">Kbis expiré (&gt; 6 mois)</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" onclick="openDrawer('view-profile', 5)">
+                    Consulter motif
+                  </button>
+<div class="relative inline-block text-left">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="toggleActionMenu(event, 'menu-5')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="dropdown-menu hidden absolute right-0 mt-1 w-48 bg-surface-container-lowest rounded-xl shadow-xl z-30 py-1.5 text-left font-body-sm text-body-sm" id="menu-5">
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-on-surface" href="#" onclick="openModal('approval', 'Aurélien Morin', 'N/A'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span> Réexaminer dossier
+                      </a>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 6 : Sarah Benali -->
+<tr class="hover:bg-surface-container-low/60 transition-colors professional-row" data-id="6" data-specialty="devops" data-status="approved">
+<td class="py-3.5 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-title-md text-title-md text-primary font-bold shadow-xs">
+                    SB
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Sarah Benali</span>
+<span class="material-symbols-outlined text-[16px] text-emerald-600">verified</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono">SIREN 833 912 445</span>
+<span>•</span>
+<span>Lyon (69)</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<span class="font-mono text-on-surface">s.benali@cloudscale.io</span>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="copyText('s.benali@cloudscale.io')">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-emerald-700">Audit code FindPro : A+</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Lead DevOps &amp; SRE Kubernetes</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">CKA</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Terraform</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">ArgoCD</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">10 Nov 2024</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">il y a 5 mois</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+<span>Approuvé &amp; Certifié</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" onclick="openDrawer('view-profile', 6)">
+                    Ouvrir le dossier
+                  </button>
+<div class="relative inline-block text-left">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="toggleActionMenu(event, 'menu-6')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="dropdown-menu hidden absolute right-0 mt-1 w-48 bg-surface-container-lowest rounded-xl shadow-xl z-30 py-1.5 text-left font-body-sm text-body-sm" id="menu-6">
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-on-surface" href="#" onclick="openDrawer('view-profile', 6); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">visibility</span> Profil public
+                      </a>
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-primary" href="#" onclick="openModal('suspend', 'Sarah Benali', '833 912 445'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span> Suspendre
+                      </a>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 7 : Karim Belkacem -->
+<tr class="hover:bg-surface-container-low/60 transition-colors professional-row" data-id="7" data-specialty="devops" data-status="pending">
+<td class="py-3.5 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-title-md text-title-md text-tertiary font-bold shadow-xs">
+                    KB
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Karim Belkacem</span>
+<span class="material-symbols-outlined text-[16px] text-amber-600">hourglass_top</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono">SIREN 874 551 230</span>
+<span>•</span>
+<span>Bordeaux (33)</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<span class="font-mono text-on-surface">k.belkacem@cloudscale.io</span>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="copyText('k.belkacem@cloudscale.io')">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Dossier déposé &lt; 5 jours</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Ingénieur Cloud AWS &amp; Terraform</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">AWS SA Pro</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Terraform</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">Terragrunt</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">11 Avril 2025</span>
+<span class="font-label-sm text-label-sm text-amber-800 font-semibold">il y a 5 jours</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+<span>En attente de validation</span>
+</div>
+<div class="text-[11px] text-on-surface-variant mt-0.5 font-medium">Revue administrative en cours</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" onclick="openDrawer('view-profile', 7)">
+                    Ouvrir le dossier
+                  </button>
+<div class="relative inline-block text-left">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="toggleActionMenu(event, 'menu-7')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="dropdown-menu hidden absolute right-0 mt-1 w-52 bg-surface-container-lowest rounded-xl shadow-xl z-30 py-1.5 text-left font-body-sm text-body-sm" id="menu-7">
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-emerald-700" href="#" onclick="openModal('approval', 'Karim Belkacem', '874 551 230'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">check_circle</span> Approuver
+                      </a>
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-primary" href="#" onclick="openModal('refusal', 'Karim Belkacem', '874 551 230'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">cancel</span> Refuser avec motif
+                      </a>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 8 : Julien Mercier -->
+<tr class="hover:bg-surface-container-low/60 transition-colors professional-row" data-id="8" data-specialty="pentest" data-status="approved">
+<td class="py-3.5 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-title-md text-title-md text-primary font-bold shadow-xs">
+                    JM
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Julien Mercier</span>
+<span class="material-symbols-outlined text-[16px] text-emerald-600">verified</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono">SIREN 801 334 982</span>
+<span>•</span>
+<span>Remote (France)</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<span class="font-mono text-on-surface">j.mercier@cyberdefense.fr</span>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="copyText('j.mercier@cyberdefense.fr')">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-emerald-700">Habilitation Confidentiel Défense</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Consultant Cybersécurité &amp; Pentest</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">CISSP</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">ISO 27001</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono">WebSec</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">18 Déc 2024</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">il y a 4 mois</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+<span>Approuvé &amp; Certifié</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" onclick="openDrawer('view-profile', 8)">
+                    Ouvrir le dossier
+                  </button>
+<div class="relative inline-block text-left">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="toggleActionMenu(event, 'menu-8')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="dropdown-menu hidden absolute right-0 mt-1 w-48 bg-surface-container-lowest rounded-xl shadow-xl z-30 py-1.5 text-left font-body-sm text-body-sm" id="menu-8">
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-on-surface" href="#" onclick="openDrawer('view-profile', 8); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">visibility</span> Profil public
+                      </a>
+<a class="flex items-center gap-2 px-3.5 py-2 hover:bg-surface-container-low text-primary" href="#" onclick="openModal('suspend', 'Julien Mercier', '801 334 982'); closeAllMenus();">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span> Suspendre
+                      </a>
+</div>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Bulk Actions Bar (Shown when multiple rows selected) -->
+<div class="hidden bg-inverse-surface text-inverse-on-surface px-space-lg py-3 flex items-center justify-between transition-all" id="bulk-actions-bar">
+<div class="flex items-center gap-3">
+<span class="font-label-md text-label-md font-semibold text-inverse-primary" id="selected-count-label">0 profil(s) sélectionné(s)</span>
+<span class="text-inverse-on-surface/50">|</span>
+<span class="font-body-sm text-body-sm text-inverse-on-surface/80">Actions groupées d'administration</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-emerald-700 text-white font-label-sm text-label-sm font-semibold hover:bg-emerald-600 shadow-sm flex items-center gap-1.5" onclick="bulkApprove()">
+<span class="material-symbols-outlined text-[16px]">verified</span> Approuver la sélection
+          </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high/20 text-inverse-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-high/30 flex items-center gap-1.5" onclick="bulkExport()">
+<span class="material-symbols-outlined text-[16px]">download</span> Exporter ZIP
+          </button>
+<button class="px-3 py-1.5 rounded-lg text-inverse-on-surface/70 hover:text-inverse-on-surface font-label-sm text-label-sm" onclick="clearSelection()">
+            Annuler
+          </button>
+</div>
+</div>
+<!-- Pagination Footer -->
+<div class="px-space-md py-space-sm bg-surface-container-low flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-space-md">
+<span id="pagination-text">Affichage de 1 à 8 sur 1 248 professionnels</span>
+<div class="flex items-center gap-1.5">
+<span>Lignes par page :</span>
+<select class="h-8 px-2 rounded bg-surface-container-lowest text-on-surface border-0 font-label-sm text-label-sm shadow-xs focus:ring-1 focus:ring-primary">
+<option selected="" value="10">10</option>
+<option value="25">25</option>
+<option value="50">50</option>
+<option value="100">100</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="h-8 px-2.5 rounded bg-surface-container-lowest text-on-surface font-semibold hover:bg-surface-container-highest disabled:opacity-40 transition-colors flex items-center gap-1" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span class="hidden sm:inline">Précédent</span>
+</button>
+<div class="flex items-center gap-1 px-1">
+<button class="w-8 h-8 rounded bg-primary-container text-on-primary font-bold shadow-xs">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-high text-on-surface font-semibold">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-high text-on-surface font-semibold">3</button>
+<span class="px-1 text-on-surface-variant">...</span>
+<button class="w-8 h-8 rounded hover:bg-surface-container-high text-on-surface font-semibold">156</button>
+</div>
+<button class="h-8 px-2.5 rounded bg-surface-container-lowest text-on-surface font-semibold hover:bg-surface-container-highest transition-colors flex items-center gap-1">
+<span class="hidden sm:inline">Suivant</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State View (Controlled via JS) -->
+<div class="hidden p-space-xl bg-surface-container-lowest rounded-xl shadow-sm text-center flex flex-col items-center justify-center max-w-xl mx-auto space-y-4 my-8" id="empty-state-view">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[36px]">filter_alt_off</span>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Aucun professionnel ne correspond aux critères</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Aucun dossier n'a été trouvé avec les filtres actuels. Modifiez vos termes de recherche ou réinitialisez les sélections.
+        </p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg w-full text-left font-label-sm text-label-sm space-y-1 text-on-surface-variant">
+<div class="flex justify-between"><span>Requête :</span> <span class="font-mono font-semibold text-on-surface" id="empty-query-label">"Recherche sans résultat"</span></div>
+<div class="flex justify-between"><span>Statut sélectionné :</span> <span class="font-semibold text-on-surface" id="empty-status-label">Tous</span></div>
+</div>
+<button class="px-5 py-2.5 rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold hover:opacity-90 shadow-sm flex items-center gap-2" onclick="resetFilters()">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Réinitialiser les filtres</span>
+</button>
+</div>
+<!-- Legal Compliance & Audit Footer -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-wrap items-center justify-between gap-space-md text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-[20px]">verified_user</span>
+<span>FindPro SIRENE Gateway · Conforme aux directives INSEE API Entreprise V3 &amp; RGPD Article 30</span>
+</div>
+<div class="flex items-center gap-4">
+<span>Session SecOps : Marc Laurent (ID: #ADM-8841)</span>
+<a class="underline hover:text-on-surface" href="#">Voir le registre des logs RGPD</a>
+</div>
+</div>
+</div>
+<!-- MODAL: Refuse Registration With Mandatory Reason -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity" id="modal-refusal">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+<div class="p-space-lg space-y-space-md">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">block</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Refuser l'admission au registre</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Notification administrative transmise avec accusé de réception</p>
+</div>
+</div>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high" onclick="closeModal('refusal')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Identity pill -->
+<div class="p-3 bg-surface-container-low rounded-xl flex items-center justify-between font-label-sm text-label-sm">
+<div>
+<span class="text-on-surface-variant">Professionnel ciblé :</span>
+<p class="font-label-lg text-label-lg font-bold text-on-surface" id="modal-refusal-target-name">Julien Danglard</p>
+</div>
+<div class="text-right">
+<span class="text-on-surface-variant">SIREN :</span>
+<p class="font-mono font-bold text-on-surface" id="modal-refusal-target-siren">912 405 112</p>
+</div>
+</div>
+<!-- Reason Selector -->
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">Motif réglementaire normalisé *</label>
+<select class="w-full h-11 px-3 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container" id="refusal-reason-select">
+<option value="kbis_expired">Extrait Kbis expiré ou non conforme (&gt; 3 mois)</option>
+<option value="code_audit_failed">Non-conformité aux exigences de l'audit technique de code FindPro</option>
+<option value="siren_insee_failure">Échec de vérification automatisée SIREN / Base INSEE</option>
+<option value="rcpro_invalid">Attestation d'assurance Responsabilité Civile Pro invalide</option>
+<option value="other">Autre motif motivé (détailler ci-dessous)</option>
+</select>
+</div>
+<!-- Detailed Notes -->
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">Motif détaillé communiqué au candidat *</label>
+<textarea class="w-full p-3 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container placeholder:text-on-surface-variant/60" id="refusal-notes" placeholder="Précisez les pièces justificatives ou le manquement constaté pour permettre une éventuelle nouvelle soumission..." rows="3"></textarea>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ce texte sera inséré verbatim dans l'email sécurisé officiel.</span>
+</div>
+<div class="p-3 bg-amber-50 rounded-lg flex items-start gap-2.5 text-amber-900 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-amber-700 text-[18px] shrink-0">info</span>
+<span>Le dossier passera immédiatement en statut "Refusé". L'utilisateur disposera d'un délai de 30 jours pour formuler un recours amiable.</span>
+</div>
+<div class="flex items-center justify-end gap-3 pt-2">
+<button class="px-4 py-2.5 rounded-lg text-on-surface font-label-lg text-label-lg font-semibold hover:bg-surface-container-high transition-colors" onclick="closeModal('refusal')">
+            Annuler
+          </button>
+<button class="px-5 py-2.5 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg font-semibold hover:bg-on-primary-fixed-variant shadow-sm flex items-center gap-2" onclick="confirmRefusal()">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Confirmer le refus et notifier</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL: Suspend Account (Irreversible warning) -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity" id="modal-suspend">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+<div class="p-space-lg space-y-space-md">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Suspendre le compte professionnel</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Mesure conservatoire immédiate avec séquestre</p>
+</div>
+</div>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high" onclick="closeModal('suspend')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-3 bg-error-container text-on-error-container rounded-xl flex items-start gap-3 font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-error text-[20px] shrink-0">warning</span>
+<div>
+<span class="font-bold">Conséquences de la suspension :</span>
+<ul class="list-disc list-inside mt-1 space-y-0.5 text-on-error-container/90 font-label-sm text-label-sm">
+<li>Le profil public et les offres de missions seront masqués immédiatement.</li>
+<li>Les fonds en séquestre associés aux contrats en cours seront gelés temporairement.</li>
+<li>Les accès API et consoles freelances seront révoqués sur-le-champ.</li>
+</ul>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">Justification de la mesure (Journal d'audit SOC2) *</label>
+<textarea class="w-full p-3 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container placeholder:text-on-surface-variant/60" id="suspend-reason" placeholder="Numéro de signalement, litige client, alerte de sécurité ou infraction aux CGU..." rows="3"></textarea>
+</div>
+<div class="flex items-center justify-end gap-3 pt-2">
+<button class="px-4 py-2.5 rounded-lg text-on-surface font-label-lg text-label-lg font-semibold hover:bg-surface-container-high transition-colors" onclick="closeModal('suspend')">
+            Abandonner
+          </button>
+<button class="px-5 py-2.5 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg font-semibold hover:bg-on-primary-fixed-variant shadow-sm flex items-center gap-2" onclick="confirmSuspension()">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>Appliquer la suspension</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL: Approve Profile -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity" id="modal-approval">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+<div class="p-space-lg space-y-space-md">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Approuver le profil professionnel</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Validation définitive et publication sur la marketplace</p>
+</div>
+</div>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high" onclick="closeModal('approval')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="space-y-2 p-3 bg-surface-container-low rounded-xl font-label-sm text-label-sm">
+<div class="flex items-center justify-between text-emerald-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Vérification d'existence légale SIRENE / INSEE</span>
+</div>
+<span class="font-bold">OK (100%)</span>
+</div>
+<div class="flex items-center justify-between text-emerald-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Attestation Responsabilité Civile Pro valide</span>
+</div>
+<span class="font-bold">OK</span>
+</div>
+<div class="flex items-center justify-between text-emerald-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Revue de code &amp; audit technique FindPro</span>
+</div>
+<span class="font-bold">Note A (Validé)</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          En approuvant ce dossier, vous attribuez automatiquement le badge <strong class="text-on-surface">"Vérifié FindPro"</strong> et autorisez la facturation directe via la plateforme.
+        </p>
+<div class="flex items-center justify-end gap-3 pt-2">
+<button class="px-4 py-2.5 rounded-lg text-on-surface font-label-lg text-label-lg font-semibold hover:bg-surface-container-high" onclick="closeModal('approval')">
+            Annuler
+          </button>
+<button class="px-5 py-2.5 rounded-lg bg-emerald-700 text-white font-label-lg text-label-lg font-semibold hover:bg-emerald-600 shadow-sm flex items-center gap-2" onclick="confirmApproval()">
+<span class="material-symbols-outlined text-[18px]">task_alt</span>
+<span>Émettre la certification &amp; Activer</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SLIDE-OVER DRAWER : Quick Profile Dossier -->
+<div class="fixed inset-0 z-50 hidden" id="drawer-container">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-black/40 backdrop-blur-xs transition-opacity" onclick="closeDrawer()"></div>
+<div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+<div class="w-screen max-w-xl bg-surface-container-lowest shadow-2xl flex flex-col justify-between">
+<!-- Drawer Header -->
+<div class="p-space-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center font-headline-sm text-headline-sm font-bold text-primary" id="drawer-avatar">
+              MG
+            </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface" id="drawer-name">Maxime Gauthier</h3>
+<span class="material-symbols-outlined text-[18px] text-emerald-600" id="drawer-verified-badge">verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="drawer-title">Architecte Frontend &amp; Sécurité · Paris (75)</p>
+</div>
+</div>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest" onclick="closeDrawer()">
+<span class="material-symbols-outlined text-[22px]">close</span>
+</button>
+</div>
+<!-- Drawer Content Body -->
+<div class="flex-1 overflow-y-auto p-space-lg space-y-space-lg">
+<!-- SIRENE Live Status Block -->
+<div class="p-space-md rounded-xl bg-surface-container-low space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">Données Légales SIRENE (Insee)</span>
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-bold">Actif au répertoire</span>
+</div>
+<div class="grid grid-cols-2 gap-3 font-body-sm text-body-sm">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">SIREN :</span>
+<span class="font-mono font-bold text-on-surface" id="drawer-siren">894 201 984</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Forme juridique :</span>
+<span class="text-on-surface">SASU à capital variable</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Code NAF / APE :</span>
+<span class="text-on-surface">6201Z (Prog. informatique)</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">TVA Intracommunautaire :</span>
+<span class="font-mono text-on-surface">FR88894201984</span>
+</div>
+</div>
+</div>
+<!-- Technical Stack & Audit Score -->
+<div class="space-y-2">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">Évaluation Technique FindPro</span>
+<div class="p-space-md rounded-xl bg-surface-container-low space-y-3">
+<div class="flex items-center justify-between">
+<div>
+<p class="font-label-lg text-label-lg font-bold text-on-surface">Score Global d'Admissibilité</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Test d'architecture et revue de code automatisée</p>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md font-bold text-primary">96/100</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2">
+<div class="bg-gradient-to-r from-primary to-secondary-container h-2 rounded-full" style="width: 96%"></div>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2.5 py-1 rounded-md bg-surface-container font-mono text-label-sm text-label-sm text-on-surface">React 19 &amp; Next.js</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-container font-mono text-label-sm text-label-sm text-on-surface">TypeScript Strict</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-container font-mono text-label-sm text-label-sm text-on-surface">SonarQube A</span>
+</div>
+</div>
+</div>
+<!-- Document Registry -->
+<div class="space-y-2">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">Pièces Justificatives Déposées</span>
+<div class="space-y-2">
+<div class="p-3 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px] text-tertiary">description</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Extrait Kbis (RCS Paris)</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Délivré le 05/01/2025 · Conforme (&lt; 3 mois)</p>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest font-label-sm text-label-sm hover:bg-surface-container-high text-on-surface">Consulter</button>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px] text-tertiary">verified_user</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Attestation Assurance RC Pro</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Allianz IARD · Valide jusqu'au 31/12/2025</p>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest font-label-sm text-label-sm hover:bg-surface-container-high text-on-surface">Consulter</button>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px] text-tertiary">badge</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Pièce d'identité Dirigeant</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">CNI France · Vérifiée par Onfido</p>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest font-label-sm text-label-sm hover:bg-surface-container-high text-on-surface">Consulter</button>
+</div>
+</div>
+</div>
+<!-- Activity History / Audit Trail -->
+<div class="space-y-2">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">Journal des Événements Administratifs</span>
+<div class="relative pl-6 space-y-3 font-label-sm text-label-sm before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-highest">
+<div class="relative">
+<div class="absolute -left-6 top-0.5 w-2.5 h-2.5 rounded-full bg-emerald-600"></div>
+<p class="font-semibold text-on-surface">Attestation de conformité émise</p>
+<span class="text-on-surface-variant">14 Janv 2025 à 16:32 · Par Marc Laurent (SecOps)</span>
+</div>
+<div class="relative">
+<div class="absolute -left-6 top-0.5 w-2.5 h-2.5 rounded-full bg-surface-container-highest"></div>
+<p class="font-semibold text-on-surface">Synchronisation SIRENE validée (200 OK)</p>
+<span class="text-on-surface-variant">12 Janv 2025 à 10:14 · Système automatique</span>
+</div>
+<div class="relative">
+<div class="absolute -left-6 top-0.5 w-2.5 h-2.5 rounded-full bg-surface-container-highest"></div>
+<p class="font-semibold text-on-surface">Dépôt initial de candidature</p>
+<span class="text-on-surface-variant">12 Janv 2025 à 09:48 · IP: 82.64.192.12</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Controls -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-between gap-space-sm">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-lg text-label-lg font-semibold hover:bg-surface-container-high" onclick="closeDrawer()">
+            Fermer
+          </button>
+<div class="flex items-center gap-2">
+<button class="px-3.5 py-2.5 rounded-lg bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest" onclick="openModal('suspend', 'Maxime Gauthier', '894 201 984'); closeDrawer();">
+              Suspendre profil
+            </button>
+<button class="px-4 py-2.5 rounded-lg bg-gradient-to-br from-primary-container to-secondary-container text-on-primary font-label-lg text-label-lg font-semibold shadow-sm" onclick="confirmApproval(); closeDrawer();">
+              Valider le statut
+            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Notification Toast Component -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
+</div>
+<script>
+  // UI Interactive State Management
+  let currentFilter = 'all';
+  let activeState = 'nominal';
+
+  // Quick State Simulator Switcher
+  function switchState(state) {
+    activeState = state;
+    const banner = document.getElementById('api-error-banner');
+    const tableContainer = document.getElementById('table-container');
+    const emptyState = document.getElementById('empty-state-view');
+
+    // Reset styles on simulator buttons
+    ['nominal', 'empty', 'error'].forEach(s => {
+      const btn = document.getElementById(`btn-state-${s}`);
+      if (btn) {
+        if (s === state) {
+          btn.className = "px-2.5 py-1 rounded font-label-sm text-label-sm bg-primary-container text-on-primary font-semibold transition-all shadow-sm";
+        } else {
+          btn.className = "px-2.5 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest text-on-surface hover:bg-surface-container-highest transition-all";
+        }
+      }
+    });
+
+    if (state === 'error') {
+      banner.classList.remove('hidden');
+      tableContainer.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      showToast('Simulation : Défaillance API INSEE activée', 'error');
+    } else if (state === 'empty') {
+      banner.classList.add('hidden');
+      tableContainer.classList.add('hidden');
+      emptyState.classList.remove('hidden');
+      document.getElementById('empty-query-label').textContent = '"Recherche sans résultat (Filtre vide)"';
+      document.getElementById('empty-status-label').textContent = 'Tous statuts';
+      showToast('Affichage du scénario de recherche infructueuse', 'info');
+    } else {
+      // Nominal
+      banner.classList.add('hidden');
+      tableContainer.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      resetFilters();
+      showToast('Mode nominal rétabli : 8 profils de simulation chargés', 'success');
+    }
+  }
+
+  function dismissError() {
+    document.getElementById('api-error-banner').classList.add('hidden');
+  }
+
+  function retrySync() {
+    showToast('Reconnexion au registre national SIRENE...', 'info');
+    setTimeout(() => {
+      dismissError();
+      showToast('Synchronisation réussie avec les registres d\'État (HTTP 200 OK)', 'success');
+    }, 1200);
+  }
+
+  // Filter Tabs Handler
+  function filterStatus(status) {
+    currentFilter = status;
+    const tabs = ['all', 'pending', 'approved', 'suspended', 'rejected'];
+    tabs.forEach(t => {
+      const tabEl = document.getElementById(`tab-${t}`);
+      if (tabEl) {
+        if (t === status) {
+          tabEl.className = "filter-tab px-3 py-1.5 rounded-md font-label-sm text-label-sm font-semibold bg-surface-container-lowest text-on-surface shadow-xs flex items-center gap-2";
+        } else {
+          tabEl.className = "filter-tab px-3 py-1.5 rounded-md font-label-sm text-label-sm font-semibold text-on-surface-variant hover:text-on-surface flex items-center gap-2";
+        }
+      }
+    });
+
+    applyFilters();
+  }
+
+  // Master Filter Engine
+  function applyFilters() {
+    const searchVal = document.getElementById('search-input').value.toLowerCase().trim();
+    const specialtyVal = document.getElementById('filter-specialty').value;
+    const rows = document.querySelectorAll('.professional-row');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const status = row.getAttribute('data-status');
+      const specialty = row.getAttribute('data-specialty');
+      const textContent = row.textContent.toLowerCase();
+
+      const matchStatus = (currentFilter === 'all' || status === currentFilter);
+      const matchSpecialty = (!specialtyVal || specialty === specialtyVal);
+      const matchSearch = (!searchVal || textContent.includes(searchVal));
+
+      if (matchStatus && matchSpecialty && matchSearch) {
+        row.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        row.classList.add('hidden');
+      }
+    });
+
+    const emptyView = document.getElementById('empty-state-view');
+    const tableContainer = document.getElementById('table-container');
+
+    if (visibleCount === 0) {
+      tableContainer.classList.add('hidden');
+      emptyView.classList.remove('hidden');
+      document.getElementById('empty-query-label').textContent = searchVal ? `"${searchVal}"` : "Critères combinés";
+      document.getElementById('empty-status-label').textContent = currentFilter.toUpperCase();
+    } else {
+      tableContainer.classList.remove('hidden');
+      emptyView.classList.add('hidden');
+      document.getElementById('pagination-text').textContent = `Affichage de 1 à ${visibleCount} sur 1 248 professionnels`;
+    }
+  }
+
+  function handleSearch(query) {
+    applyFilters();
+  }
+
+  function resetFilters() {
+    document.getElementById('search-input').value = '';
+    document.getElementById('filter-specialty').value = '';
+    document.getElementById('filter-kyc').value = '';
+    document.getElementById('filter-date').value = '';
+    filterStatus('all');
+  }
+
+  // Checkbox & Bulk Actions
+  function toggleSelectAll(master) {
+    const checkboxes = document.querySelectorAll('.row-checkbox');
+    checkboxes.forEach(cb => cb.checked = master.checked);
+    updateBulkBar();
+  }
+
+  document.querySelectorAll('.row-checkbox').forEach(cb => {
+    cb.addEventListener('change', updateBulkBar);
+  });
+
+  function updateBulkBar() {
+    const checked = document.querySelectorAll('.row-checkbox:checked');
+    const bar = document.getElementById('bulk-actions-bar');
+    const label = document.getElementById('selected-count-label');
+    if (checked.length > 0) {
+      bar.classList.remove('hidden');
+      label.textContent = `${checked.length} professionnel(s) sélectionné(s)`;
+    } else {
+      bar.classList.add('hidden');
+      const selectAll = document.getElementById('select-all');
+      if (selectAll) selectAll.checked = false;
+    }
+  }
+
+  function clearSelection() {
+    document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = false);
+    const selectAll = document.getElementById('select-all');
+    if (selectAll) selectAll.checked = false;
+    updateBulkBar();
+  }
+
+  function bulkApprove() {
+    const count = document.querySelectorAll('.row-checkbox:checked').length;
+    showToast(`${count} profil(s) validé(s) avec succès dans le registre national`, 'success');
+    clearSelection();
+  }
+
+  function bulkExport() {
+    showToast('Génération de l\'archive ZIP des dossiers sélectionnés...', 'info');
+    setTimeout(() => {
+      showToast('Téléchargement prêt : archive-dossiers-conforme.zip', 'success');
+      clearSelection();
+    }, 1000);
+  }
+
+  // Context Dropdown Menu Toggle
+  function toggleActionMenu(event, menuId) {
+    event.stopPropagation();
+    const menu = document.getElementById(menuId);
+    const isHidden = menu.classList.contains('hidden');
+    closeAllMenus();
+    if (isHidden) {
+      menu.classList.remove('hidden');
+    }
+  }
+
+  function closeAllMenus() {
+    document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.add('hidden'));
+  }
+
+  window.addEventListener('click', () => {
+    closeAllMenus();
+  });
+
+  // Modal Handlers
+  function openModal(type, targetName, siren) {
+    closeAllMenus();
+    if (type === 'refusal') {
+      document.getElementById('modal-refusal-target-name').textContent = targetName || 'Professionnel';
+      document.getElementById('modal-refusal-target-siren').textContent = siren || 'N/A';
+      document.getElementById('modal-refusal').classList.remove('hidden');
+    } else if (type === 'suspend') {
+      document.getElementById('modal-suspend').classList.remove('hidden');
+    } else if (type === 'approval') {
+      document.getElementById('modal-approval').classList.remove('hidden');
+    }
+  }
+
+  function closeModal(type) {
+    const modal = document.getElementById(`modal-${type}`);
+    if (modal) modal.classList.add('hidden');
+  }
+
+  function confirmRefusal() {
+    const reason = document.getElementById('refusal-reason-select').value;
+    closeModal('refusal');
+    showToast('Refus formalisé avec succès. Notification sécurisée expédiée.', 'warning');
+  }
+
+  function confirmSuspension() {
+    closeModal('suspend');
+    showToast('Compte suspendu. Les séquestres et offres ont été mis sous séquestre.', 'warning');
+  }
+
+  function confirmApproval() {
+    closeModal('approval');
+    showToast('Profil certifié et approuvé avec succès au registre national FindPro.', 'success');
+  }
+
+  // Quick Dossier Drawer
+  const profileDetails = {
+    1: { name: 'Maxime Gauthier', siren: '894 201 984', title: 'Architecte Frontend & Sécurité · Paris (75)', initials: 'MG' },
+    2: { name: 'Julien Danglard', siren: '912 405 112', title: 'Lead Développeur Rust & Axum · Lyon (69)', initials: 'JD' },
+    3: { name: 'Émilie Roche', siren: '845 120 789', title: 'Architecte DevSecOps · Paris (75)', initials: 'ER' },
+    4: { name: 'Marc Valette', siren: '789 456 123', title: 'Pentesteur Senior & Red Team · Bordeaux (33)', initials: 'MV' },
+    5: { name: 'Aurélien Morin', siren: 'Inconnu (Rejeté)', title: 'Développeur PHP / WP · Nantes (44)', initials: 'AM' },
+    6: { name: 'Sarah Benali', siren: '833 912 445', title: 'Lead DevOps & SRE Kubernetes · Lyon (69)', initials: 'SB' },
+    7: { name: 'Karim Belkacem', siren: '874 551 230', title: 'Ingénieur Cloud AWS & Terraform · Bordeaux (33)', initials: 'KB' },
+    8: { name: 'Julien Mercier', siren: '801 334 982', title: 'Consultant Cybersécurité & Pentest · Remote', initials: 'JM' },
+  };
+
+  function openDrawer(mode, id = 1) {
+    const drawer = document.getElementById('drawer-container');
+    if (profileDetails[id]) {
+      const p = profileDetails[id];
+      document.getElementById('drawer-name').textContent = p.name;
+      document.getElementById('drawer-title').textContent = p.title;
+      document.getElementById('drawer-siren').textContent = p.siren;
+      document.getElementById('drawer-avatar').textContent = p.initials;
+    }
+    drawer.classList.remove('hidden');
+  }
+
+  function closeDrawer() {
+    document.getElementById('drawer-container').classList.add('hidden');
+  }
+
+  // Utilities: Copy & Notifications
+  function copyText(str) {
+    navigator.clipboard.writeText(str);
+    showToast(`Adresse copiée : ${str}`, 'info');
+  }
+
+  function exportCSV() {
+    showToast('Génération du fichier CSV d\'export SIRENE en cours...', 'info');
+    setTimeout(() => {
+      showToast('Export FindPro_Registre_2025.csv téléchargé', 'success');
+    }, 900);
+  }
+
+  function showToast(message, type = 'info') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 text-body-sm font-label-md text-label-md transition-all duration-200 pointer-events-auto ' + 
+      (type === 'success' ? 'bg-inverse-surface text-inverse-on-surface border-l-4 border-emerald-500' :
+       type === 'warning' ? 'bg-inverse-surface text-inverse-on-surface border-l-4 border-amber-500' :
+       type === 'error' ? 'bg-inverse-surface text-inverse-on-surface border-l-4 border-primary-container' :
+       'bg-inverse-surface text-inverse-on-surface border-l-4 border-secondary-container');
+
+    const icon = type === 'success' ? 'check_circle' :
+                 type === 'warning' ? 'warning' :
+                 type === 'error' ? 'error' : 'info';
+
+    toast.innerHTML = `<span class="material-symbols-outlined text-[18px] text-emerald-400">${icon}</span><span>${message}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(10px)';
+      setTimeout(() => toast.remove(), 200);
+    }, 3200);
+  }
+</script></main></div></body></html>

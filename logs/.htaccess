@@ -1,0 +1,2 @@
+# Interdiction stricte de tout accès HTTP aux fichiers du dossier logs
+Require all denied

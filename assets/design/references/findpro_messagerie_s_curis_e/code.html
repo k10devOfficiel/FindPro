@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode": "class", "theme": {"extend": {"colors": {"surface-container-low": "#f1f3ff", "surface-container": "#e9edff", "surface-container-highest": "#dce2f7", "on-secondary-container": "#5c2400", "tertiary-fixed-dim": "#ffb95f", "secondary": "#9d4300", "surface-container-lowest": "#ffffff", "surface-container-high": "#e1e8fd", "tertiary": "#805000", "on-surface": "#141b2b", "surface": "#f9f9ff", "tertiary-fixed": "#ffddb8", "tertiary-container": "#a16600", "on-error": "#ffffff", "primary": "#b8001d", "on-primary-fixed-variant": "#930015", "error-container": "#ffdad6", "on-tertiary-container": "#fff9f5", "primary-fixed": "#ffdad7", "outline-variant": "#e6bdb9", "on-surface-variant": "#5d3f3d", "primary-fixed-dim": "#ffb3ae", "on-tertiary-fixed": "#2a1700", "inverse-surface": "#293040", "on-tertiary-fixed-variant": "#653e00", "background": "#f9f9ff", "on-background": "#141b2b", "on-secondary-fixed": "#341100", "secondary-fixed-dim": "#ffb690", "on-secondary": "#ffffff", "inverse-primary": "#ffb3ae", "surface-bright": "#f9f9ff", "primary-container": "#e11d2e", "inverse-on-surface": "#edf0ff", "surface-dim": "#d3daef", "error": "#ba1a1a", "on-primary-container": "#fff8f7", "on-secondary-fixed-variant": "#783200", "on-tertiary": "#ffffff", "secondary-container": "#fd761a", "surface-variant": "#dce2f7", "outline": "#916f6c", "surface-tint": "#c0001f", "on-primary-fixed": "#410004", "secondary-fixed": "#ffdbca", "on-error-container": "#93000a", "on-primary": "#ffffff"}, "borderRadius": {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"}, "spacing": {"gutter": "1.5rem", "space-xl": "2.5rem", "space-sm": "0.5rem", "space-md": "1rem", "margin-mobile": "1rem", "space-xs": "0.25rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "margin": "2rem"}, "fontFamily": {"display-hero-mobile": ["Space Grotesk"], "body-sm": ["Inter"], "headline-sm": ["Space Grotesk"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-lg": ["Inter"], "headline-lg": ["Space Grotesk"], "label-md": ["Inter"], "display-hero": ["Space Grotesk"], "label-sm": ["Inter"], "headline-md": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "title-md": ["Space Grotesk"]}, "fontSize": {"display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}], "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}], "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}], "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "700"}], "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}], "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600"}], "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700"}], "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed"><aside class="fixed inset-y-0 left-0 w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" id="dashboard-sidebar"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between"><a class="flex items-center gap-space-xs group" data-path="tableau-de-bord" href="#"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm"><span class="material-symbols-outlined text-[20px]">hub</span></div><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold">Find<span class="text-primary">Pro</span></span></a><button aria-label="Fermer le menu" class="lg:hidden p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" id="close-sidebar-btn"><span class="material-symbols-outlined">close</span></button></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs mb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Espace Client</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-sm"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="tableau-de-bord" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-lg text-label-lg">Tableau de bord</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="mes-demandes" href="#"><span class="material-symbols-outlined text-[20px]">assignment</span><span class="font-label-lg text-label-lg flex-1">Mes demandes</span><span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">4</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="experts-favoris" href="#"><span class="material-symbols-outlined text-[20px]">bookmark</span><span class="font-label-lg text-label-lg">Experts favoris</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="messagerie-securisee" href="#"><span class="material-symbols-outlined text-[20px]">mark_chat_unread</span><span class="font-label-lg text-label-lg flex-1">Messagerie sécurisée</span><span class="w-2 h-2 rounded-full bg-primary-container"></span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="parametres" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Paramètres</span></a></nav></div></div><div class="p-space-md m-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center gap-space-xs text-secondary"><span class="material-symbols-outlined text-[18px]">verified_user</span><span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Compte Entreprise</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Datashield SAS bénéficie de l'assistance dédiée 24/7 et du contrat cadre sécurisé.</p><a class="font-label-sm text-label-sm text-primary hover:text-on-primary-fixed-variant font-medium underline inline-flex items-center gap-1 mt-1" href="#">Consulter les garanties <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a></div></aside><div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-40 hidden lg:hidden" id="sidebar-backdrop"></div><div class="lg:pl-72 flex flex-col min-h-screen"><header class="fixed top-0 right-0 left-0 lg:left-72 h-16 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-30"><div class="h-16 w-full px-space-md lg:px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm flex-1 max-w-xl"><button aria-label="Ouvrir le menu" class="lg:hidden p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" id="open-sidebar-btn"><span class="material-symbols-outlined">menu</span></button><div class="relative w-full hidden sm:block"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full h-11 pl-10 pr-4 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all" placeholder="Rechercher des experts, missions, compétences (ex: Rust, Pentest, DevOps)..." type="search"/></div></div><div class="flex items-center gap-space-sm"><button aria-label="Rechercher" class="sm:hidden p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined">search</span></button><a class="hidden md:inline-flex items-center gap-space-xs h-11 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-sm hover:opacity-95 transition-opacity" data-path="lancer-un-brief" href="#"><span class="material-symbols-outlined text-[20px]">add_circle</span><span>Lancer un brief technique</span></a><button aria-label="Notifications (2 non lues)" class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container"></span></button><div class="h-6 w-px bg-surface-container-high hidden sm:block"></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="text-right hidden xl:block"><div class="font-label-lg text-label-lg text-on-surface leading-tight">Sophie Bernard</div><div class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Tech Lead • Datashield SAS</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="flex-1 w-full pt-16 bg-surface px-space-md lg:px-space-lg py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Command Bar / Status Row -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm mb-space-md">
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-sm text-label-sm font-semibold tracking-wider uppercase">Chiffrement SecOps E2EE</span>
+</div>
+<div class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest shadow-sm text-on-surface-variant">
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-600"></span>
+<span class="font-label-sm text-label-sm">Relais sécurisé Paris-Nord (SecNumCloud)</span>
+</div>
+</div>
+<!-- State Switcher Micro-UI for Prototype testing -->
+<div class="flex items-center gap-space-xs self-start md:self-auto bg-surface-container-lowest p-1 rounded-lg shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant px-2 hidden sm:inline">Simulateur :</span>
+<button class="px-2.5 py-1 rounded-md bg-primary-container text-on-primary-container font-label-sm text-label-sm shadow-sm transition-all" id="btn-state-active" onclick="switchState('active')">
+        Actif (Alexandre)
+      </button>
+<button class="px-2.5 py-1 rounded-md text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm transition-all" id="btn-state-unread" onclick="switchState('unread')">
+        Non-lu (Maxime)
+      </button>
+<button class="px-2.5 py-1 rounded-md text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm transition-all" id="btn-state-empty" onclick="switchState('empty')">
+        Boîte vide
+      </button>
+</div>
+</div>
+<!-- Messenger Main Layout (Two Panels) -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col lg:flex-row h-[calc(100vh-175px)] min-h-[640px]">
+<!-- LEFT PANEL: Conversation List -->
+<div class="w-full lg:w-[360px] xl:w-[400px] flex-shrink-0 flex flex-col bg-surface-container-lowest lg:shadow-[inset_-1px_0_0_0_rgba(20,27,43,0.06)]" id="conversations-sidebar">
+<!-- Panel Header & Search -->
+<div class="p-space-md flex flex-col gap-space-sm bg-surface-container-lowest">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Échanges</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm" id="unread-counter-pill">1 non lu</span>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" title="Archiver ou exporter les logs">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+<!-- Search input -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary shadow-inner transition-all" id="conv-search" oninput="handleSearch(this.value)" placeholder="Filtrer messages, missions, experts..." type="text"/>
+</div>
+<!-- Quick filter tabs -->
+<div class="flex items-center gap-1 p-1 bg-surface-container-low rounded-lg">
+<button class="flex-1 py-1 rounded-md text-center font-label-sm text-label-sm font-semibold bg-surface-container-lowest text-on-surface shadow-sm transition-all" id="filter-tab-all" onclick="setFilter('all')">
+            Toutes (3)
+          </button>
+<button class="flex-1 py-1 rounded-md text-center font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all flex items-center justify-center gap-1.5" id="filter-tab-unread" onclick="setFilter('unread')">
+<span>Non lues</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+</button>
+<button class="flex-1 py-1 rounded-md text-center font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all" id="filter-tab-briefs" onclick="setFilter('briefs')">
+            Missions
+          </button>
+</div>
+</div>
+<!-- Conversations Scrollable Area -->
+<div class="flex-1 overflow-y-auto px-space-xs py-space-xs space-y-1" id="conversations-list">
+<!-- Conversation Item 1 (Selected: Alexandre Vandermeer) -->
+<div class="conv-item group relative p-space-sm rounded-xl cursor-pointer bg-surface-container-high transition-all flex items-start gap-space-sm" id="conv-item-alexandre" onclick="selectConversation('alexandre')" role="button" tabindex="0">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait professionnel soigné d'un ingénieur sécurité cloud trentenaire souriant et confiant portant des lunettes modernes et une chemise sombre dans un bureau technologique lumineux aux teintes bleutées et chaleureuses." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNee6J8Qc3K98KEH1-ox_4BEi_Yph7OODmkXu_wI48YW3EgeNgt-wne9JGGn7XeDk4Ma4klF-IIYjLSlrnc-rU__wP-4ZYvNfTJvDdw1X51pv-ga3mxBfjEa76Q1wla9ZhO8MIz46DZqkKsPWgYhR4vzFZJw-gNkc5Z3xlCQAymx35_9c-0Ff2WtTzlxbsVuovQ-MMmlY95D4t2PKdDhzQQ7ZdldqM6-uMsnszs45gSA7oWaJgNusR"/>
+</div>
+<!-- Online status badge -->
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<span class="font-title-md text-title-md font-semibold text-on-surface truncate group-hover:text-primary transition-colors">Alexandre Vandermeer</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex-shrink-0">10h42</span>
+</div>
+<div class="flex items-center gap-1.5 mb-1">
+<span class="inline-block px-1.5 py-0.2 rounded bg-surface-container text-on-surface font-label-sm text-label-sm truncate max-w-[170px]">Cloud SecOps • AWS SOC2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+              J'ai bien noté le créneau de demain 14h pour la revue d'archi AWS...
+            </p>
+</div>
+<!-- Active indicator marker -->
+<div class="absolute left-0 top-3 bottom-3 w-1 bg-primary rounded-r"></div>
+</div>
+<!-- Conversation Item 2 (Unread: Maxime Gauthier) -->
+<div class="conv-item group relative p-space-sm rounded-xl cursor-pointer hover:bg-surface-container transition-all flex items-start gap-space-sm" id="conv-item-maxime" onclick="selectConversation('maxime')" role="button" tabindex="0">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Photographie portrait haute précision d'un architecte logiciel jeune dynamique aux cheveux châtains dans un environnement de travail contemporain avec éclairage diffus épuré et fond minimaliste." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNXLd8QpWbEqRMGnrxD4nHnnHtlJLnfhjHvvYLmpS07QRw6oVc1u1WOe9k3nFFk9sm5L6FllXxm7WbID0YvTlemGvKVfNujcHsVCo1_k69YzPr3xCCqfEXidiRaeX20P4vgBsf1n99vD3wVJSaEr_PfQxZs57WJqFeXsItOrnRNLRqf-NrKHxcJ5LCbGLGyfmYKh8O1hMokiJl7lSMqZkveXxxSNEDqhX4Ry5WagbxsmMcujNo9m5p"/>
+</div>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-slate-300 ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<span class="font-title-md text-title-md font-semibold text-on-surface truncate group-hover:text-primary transition-colors">Maxime Gauthier</span>
+<span class="font-label-sm text-label-sm font-semibold text-primary flex-shrink-0">Hier 18h20</span>
+</div>
+<div class="flex items-center gap-1.5 mb-1">
+<span class="inline-block px-1.5 py-0.2 rounded bg-surface-container text-on-surface font-label-sm text-label-sm truncate max-w-[170px]">Architecte Frontend React</span>
+</div>
+<div class="flex items-center justify-between gap-1">
+<p class="font-body-sm text-body-sm font-medium text-on-surface truncate">
+                Bonjour Sophie, merci pour le brief. J'ai deux questions sur le scope Tailwind...
+              </p>
+<span class="w-5 h-5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm flex items-center justify-center flex-shrink-0 font-bold">1</span>
+</div>
+</div>
+</div>
+<!-- Conversation Item 3 (System / Support Souveraineté) -->
+<div class="conv-item group relative p-space-sm rounded-xl cursor-pointer hover:bg-surface-container transition-all flex items-start gap-space-sm" id="conv-item-support" onclick="selectConversation('support')" role="button" tabindex="0">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<span class="font-title-md text-title-md font-semibold text-on-surface truncate group-hover:text-primary transition-colors">Support FindPro Souveraineté</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex-shrink-0">10 avr.</span>
+</div>
+<div class="flex items-center gap-1.5 mb-1">
+<span class="inline-block px-1.5 py-0.2 rounded bg-surface-container text-secondary font-label-sm text-label-sm">Conformité Entreprise</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+              Votre attestation RC Pro Datashield a été confirmée.
+            </p>
+</div>
+</div>
+</div>
+<!-- Left Panel Footer: Privacy Guarantee Callout -->
+<div class="p-space-sm m-space-sm rounded-xl bg-surface-container-low flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary flex-shrink-0 mt-0.5">shield</span>
+<div class="flex-1 min-w-0">
+<p class="font-label-sm text-label-sm font-semibold text-on-surface leading-tight">Zéro fuite de données</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant leading-snug">Les emails directs et mobiles personnels sont masqués pour protéger l'intégrité de vos audits.</p>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL: Chat View / Active Thread -->
+<div class="flex-1 flex flex-col bg-surface-container-lowest overflow-hidden" id="chat-thread-container">
+<!-- Thread Header -->
+<div class="px-space-md lg:px-space-lg py-space-sm bg-surface-container-lowest shadow-sm flex items-center justify-between gap-space-md z-10 flex-wrap sm:flex-nowrap">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container" id="thread-avatar">
+<img class="w-full h-full object-cover" data-alt="Gros plan sur un expert en cybersécurité certifié AWS souriant professionnellement en arrière-plan d'architecture cloud d'entreprise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGoIK4Mvq2borKw_JX1BtAUQ-MtomaT30hthEy9tSQnf865V-YRFj-PRDSgHhdJlUA6zU0vdzacJlLdFdc8_HTbdc-bmGAhFsui6wlPjGHMDr9gtdOiH1XK2szmiYdspZb2oON2Xsl1EliTvYSVMv61Z9khQSL-30LflaatvEFQO6nrmWf598PpPTwo4sdm2YHJuyg5pw8WO8NOLeOal8EJ8Asu9VTUCJNSTW379UAArUfLS3WF7pH"/>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest" id="thread-online-badge"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface truncate" id="thread-name">Alexandre Vandermeer</h2>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-low text-tertiary font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                Vérifié FindPro Elite
+              </span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md truncate">
+<span id="thread-role">Ingénieur Cloud SecOps</span>
+<span>•</span>
+<span class="text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">assignment</span>
+                Brief #BF-4091 — Audit AWS SOC2
+              </span>
+</div>
+</div>
+</div>
+<!-- Thread Actions -->
+<div class="flex items-center gap-2 flex-shrink-0">
+<a class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">description</span>
+            Voir le brief rattaché
+          </a>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">account_circle</span>
+<span class="hidden md:inline">Profil public</span>
+</a>
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" title="Options de sécurité et signalement">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Messages Message Stream Scrollable Area -->
+<div class="flex-1 overflow-y-auto px-space-md lg:px-space-lg py-space-md space-y-space-md bg-surface-bright" id="messages-scroll-area">
+<!-- System Date Separator -->
+<div class="flex items-center justify-center my-space-xs">
+<span class="px-3 py-1 rounded-full bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant font-medium shadow-xs">
+            Aujourd'hui • Session chiffrée n° 9812-FR
+          </span>
+</div>
+<!-- Message 1 (Expert - Left) -->
+<div class="flex items-start gap-space-sm max-w-2xl">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container flex-shrink-0 mt-1 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Avatar miniature expert sécurité cloud souriant sobrement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC46cE30FNCymVjrm59vNDM8uHgH5WFoD-J91NKrMHrVAOpnimGSCQwX5nVfk2fhey4WcwPORCKprtFPGtYBA7fmcdDzX25yZA2au_fu7f6rIVngxga8Jb3rSbP9kp9lxxZKWrV2goItklyHvwfpEhVhCM2PjDnxloE3Uk2vqRABUm3sZx-HQRdPPLS0TkrYoRJ9rCMKNScysFZ8Ajd8MAXGJV5Va5NkSZXhDpMBPMwQCEl_MoNb7PI"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Alexandre Vandermeer</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">09:14</span>
+</div>
+<div class="p-4 rounded-2xl rounded-tl-sm bg-surface-container-lowest text-on-surface shadow-sm font-body-md text-body-md leading-relaxed">
+              Bonjour Sophie. J'ai terminé la première analyse des politiques IAM et des buckets S3 mentionnés dans le brief Datashield. Deux points d'attention immédiats concernent le chiffrement KMS côté client et la rétention CloudTrail.
+            </div>
+</div>
+</div>
+<!-- Message 2 (Client - Sophie Bernard - Right) -->
+<div class="flex items-start justify-end gap-space-sm max-w-2xl ml-auto">
+<div class="flex flex-col items-end gap-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">09:32</span>
+<span class="font-label-md text-label-md font-semibold text-primary">Sophie Bernard (Vous)</span>
+</div>
+<div class="p-4 rounded-2xl rounded-tr-sm bg-primary text-on-primary shadow-md font-body-md text-body-md leading-relaxed">
+              Parfait Alexandre. Nous avons justement mis à jour le schéma du cluster EKS et le document d'architecture pour répondre au standard SOC2 Type II. Je vous transmets la révision technique pour examen préalable.
+            </div>
+<!-- Secure Attachment Card from Client -->
+<div class="w-full max-w-md p-3 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between gap-3 text-on-surface">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">picture_as_pdf</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-md text-label-md font-semibold truncate text-on-surface">Spécification_AWS_Datashield_v2.pdf</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5">
+<span>4.8 Mo</span>
+<span>•</span>
+<span class="text-emerald-700 font-medium flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">verified</span> Hachage SHA-256 certifié
+                    </span>
+</div>
+</div>
+</div>
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Télécharger le fichier sécurisé">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-emerald-600">done_all</span> Reçu et vérifié
+            </span>
+</div>
+</div>
+<!-- Message 3 (Expert - Left) -->
+<div class="flex items-start gap-space-sm max-w-2xl">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container flex-shrink-0 mt-1 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Avatar miniature expert sécurité cloud souriant sobrement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqHp8fO7K4amaCdmGiGsYONgpTOcIbm0g11bzxoz-JpLyhuVDe2GCphUVt9-GukmNm3aZ0gA29MC6_HPz-K8XwT656mqsD2fXLpVvUagSB29Gy9HS8dequUDD4ITXMzrGTuKfQtGlDnLCDVwpRqfe6h-tIYpqbPI_eI4xh5T4NJXJGeIlaq5jefdvhVw7pdSZHKNGXWSTvc1e5qG9XYKgUJzSQmDSGc7IBJyo1r4TyLpHKKISXX3fi"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Alexandre Vandermeer</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10:42</span>
+</div>
+<div class="p-4 rounded-2xl rounded-tl-sm bg-surface-container-lowest text-on-surface shadow-sm font-body-md text-body-md leading-relaxed">
+              J'ai bien noté le créneau de demain 14h pour la revue d'archi AWS. Je prépare la checklist de conformité ISO/SOC2 annotée afin qu'on puisse arbitrer chaque recommandation avec votre équipe DevOps.
+            </div>
+<!-- Inline Status badge -->
+<div class="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface font-label-sm text-label-sm mt-1">
+<span class="material-symbols-outlined text-[15px] text-primary">event_available</span>
+<span>Revue d'architecture fixée au Mercredi 17 avril • 14h00 CET</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Thread Input Footer -->
+<div class="p-space-md bg-surface-container-lowest shadow-[0_-2px_8px_rgba(0,0,0,0.03)] flex flex-col gap-2 z-10">
+<!-- Live Action Bar -->
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm px-1">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">lock</span>
+<span>Chiffrement souverain actif. Ne communiquez jamais d'identifiants bancaires ni de clés privées AWS.</span>
+</div>
+<span class="text-on-surface-variant hidden sm:inline" id="char-counter">0 / 2000 car.</span>
+</div>
+<!-- Input Box and Action controls -->
+<form class="relative flex flex-col bg-surface-container-low rounded-xl p-2 focus-within:ring-2 focus-within:ring-primary focus-within:bg-surface-container-lowest transition-all" onsubmit="handleSendMessage(event)">
+<textarea class="w-full bg-transparent border-0 focus:outline-none font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant resize-none px-2 py-1" id="message-input" oninput="updateCharCount(this)" placeholder="Rédigez votre message sécurisé à Alexandre Vandermeer..." rows="2"></textarea>
+<div class="flex items-center justify-between pt-2 px-1">
+<div class="flex items-center gap-1">
+<!-- Attachment Button -->
+<label class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors" title="Joindre un document chiffré (PDF, Code, Log jusqu'à 50 Mo)">
+<input class="hidden" onchange="handleFileUpload(this)" type="file"/>
+<span class="material-symbols-outlined text-[20px]">attach_file</span>
+</label>
+<!-- Code Snippet Insertion -->
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" onclick="insertCodeTemplate()" title="Insérer un bloc de configuration ou extrait de code" type="button">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</button>
+<!-- Emoji Picker trigger -->
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Insérer un émoji" type="button">
+<span class="material-symbols-outlined text-[20px]">mood</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden md:inline">Entrée pour envoyer</span>
+<button class="h-10 px-space-md rounded-lg bg-primary-container hover:opacity-95 text-on-primary-container font-label-lg text-label-lg shadow-sm flex items-center gap-1.5 transition-all" type="submit">
+<span>Envoyer</span>
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<!-- EMPTY STATE VIEW (Hidden by default, shown via toggle) -->
+<div class="hidden flex-1 flex-col items-center justify-center p-space-xl bg-surface-bright text-center" id="chat-empty-container">
+<div class="w-20 h-20 rounded-2xl bg-surface-container-high flex items-center justify-center text-primary mb-space-md shadow-sm">
+<span class="material-symbols-outlined text-[40px]">mark_chat_unread</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface mb-space-xs">Aucune conversation sélectionnée</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mb-space-lg leading-relaxed">
+        Lorsque vous contactez un expert ou qu'un brief technique est validé par nos équipes, vos échanges confidentiels et chiffrés apparaîtront instantanément ici.
+      </p>
+<div class="flex flex-col sm:flex-row items-center gap-3">
+<a class="h-11 px-space-lg rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg flex items-center gap-2 shadow-sm hover:opacity-95 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+          Explorer l'annuaire des talents
+        </a>
+<button class="h-11 px-space-md rounded-lg bg-surface-container-lowest shadow-sm hover:bg-surface-container text-on-surface font-label-lg text-label-lg transition-colors" onclick="switchState('active')">
+          Revenir à la discussion en cours
+        </button>
+</div>
+</div>
+</div>
+<!-- Bottom SecNumCloud & Privacy Assurance Banner -->
+<div class="mt-space-md p-space-md rounded-xl bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-md shadow-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">gavel</span>
+</div>
+<div>
+<div class="font-title-md text-title-md font-semibold text-on-surface">Protocole Datashield SAS • FindPro Trust &amp; Safety</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Conformité stricte RGPD Article 32 et hébergement certifié ISO 27001. Vos flux et livrables sont couverts par le contrat cadre d'assurance FindPro jusqu'à 2 000 000 €.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Dernier audit d'intégrité : Ce jour à 06h00</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+</div>
+</div>
+<script>
+  let currentActiveConv = 'alexandre';
+
+  function updateCharCount(textarea) {
+    const counter = document.getElementById('char-counter');
+    if (counter) {
+      counter.textContent = `${textarea.value.length} / 2000 car.`;
+    }
+  }
+
+  function handleSendMessage(e) {
+    e.preventDefault();
+    const input = document.getElementById('message-input');
+    const text = input.value.trim();
+    if (!text) return;
+
+    const scrollArea = document.getElementById('messages-scroll-area');
+    
+    // Create new client bubble
+    const now = new Date();
+    const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+    const newMsgWrapper = document.createElement('div');
+    newMsgWrapper.className = 'flex items-start justify-end gap-space-sm max-w-2xl ml-auto';
+    newMsgWrapper.innerHTML = `
+      <div class="flex flex-col items-end gap-1">
+        <div class="flex items-center gap-2">
+          <span class="font-label-sm text-label-sm text-on-surface-variant">${timeStr}</span>
+          <span class="font-label-md text-label-md font-semibold text-primary">Sophie Bernard (Vous)</span>
+        </div>
+        <div class="p-4 rounded-2xl rounded-tr-sm bg-primary text-on-primary shadow-md font-body-md text-body-md leading-relaxed">
+          ${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+        </div>
+        <span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px] text-emerald-600">done</span> Envoyé (chiffré)
+        </span>
+      </div>
+    `;
+
+    scrollArea.appendChild(newMsgWrapper);
+    input.value = '';
+    updateCharCount(input);
+    scrollArea.scrollTop = scrollArea.scrollHeight;
+  }
+
+  function handleFileUpload(fileInput) {
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      const scrollArea = document.getElementById('messages-scroll-area');
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+      const fileCard = document.createElement('div');
+      fileCard.className = 'flex items-start justify-end gap-space-sm max-w-2xl ml-auto';
+      fileCard.innerHTML = `
+        <div class="flex flex-col items-end gap-1">
+          <div class="flex items-center gap-2">
+            <span class="font-label-sm text-label-sm text-on-surface-variant">${timeStr}</span>
+            <span class="font-label-md text-label-md font-semibold text-primary">Sophie Bernard (Vous)</span>
+          </div>
+          <div class="w-full max-w-md p-3 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between gap-3 text-on-surface">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary flex-shrink-0">
+                <span class="material-symbols-outlined text-[24px]">verified</span>
+              </div>
+              <div class="min-w-0">
+                <div class="font-label-md text-label-md font-semibold truncate text-on-surface">${file.name}</div>
+                <div class="font-label-sm text-label-sm text-on-surface-variant">
+                  ${(file.size / (1024 * 1024)).toFixed(2)} Mo &bull; Fichier scellé E2EE
+                </div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[18px] text-emerald-600">lock</span>
+          </div>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">Chiffrement en cours... validé</span>
+        </div>
+      `;
+      scrollArea.appendChild(fileCard);
+      scrollArea.scrollTop = scrollArea.scrollHeight;
+      fileInput.value = '';
+    }
+  }
+
+  function insertCodeTemplate() {
+    const input = document.getElementById('message-input');
+    input.value += "\nbash\n# Exemple commande AWS CLI ou trace CloudTrail\naws iam get-account-summary --region eu-west-3\n\n";
+    input.focus();
+    updateCharCount(input);
+  }
+
+  function selectConversation(id) {
+    currentActiveConv = id;
+    const threadBox = document.getElementById('chat-thread-container');
+    const emptyBox = document.getElementById('chat-empty-container');
+    
+    threadBox.classList.remove('hidden');
+    threadBox.classList.add('flex');
+    emptyBox.classList.add('hidden');
+    emptyBox.classList.remove('flex');
+
+    const items = document.querySelectorAll('.conv-item');
+    items.forEach(el => {
+      el.classList.remove('bg-surface-container-high');
+      const marker = el.querySelector('.bg-primary.rounded-r');
+      if (marker) marker.remove();
+    });
+
+    const activeEl = document.getElementById(`conv-item-${id}`);
+    if (activeEl) {
+      activeEl.classList.add('bg-surface-container-high');
+      const activeBar = document.createElement('div');
+      activeBar.className = 'absolute left-0 top-3 bottom-3 w-1 bg-primary rounded-r';
+      activeEl.prepend(activeBar);
+    }
+
+    const nameEl = document.getElementById('thread-name');
+    const roleEl = document.getElementById('thread-role');
+    const placeholder = document.getElementById('message-input');
+
+    if (id === 'alexandre') {
+      nameEl.textContent = 'Alexandre Vandermeer';
+      roleEl.textContent = 'Ingénieur Cloud SecOps';
+      placeholder.placeholder = "Rédigez votre message sécurisé à Alexandre Vandermeer...";
+    } else if (id === 'maxime') {
+      nameEl.textContent = 'Maxime Gauthier';
+      roleEl.textContent = 'Architecte Frontend React';
+      placeholder.placeholder = "Rédigez votre réponse sur le scope Tailwind à Maxime...";
+    } else if (id === 'support') {
+      nameEl.textContent = 'Support FindPro Souveraineté';
+      roleEl.textContent = 'Service Client & Légal';
+      placeholder.placeholder = "Poser une question au support Datashield...";
+    }
+  }
+
+  function switchState(state) {
+    const threadBox = document.getElementById('chat-thread-container');
+    const emptyBox = document.getElementById('chat-empty-container');
+    const btnActive = document.getElementById('btn-state-active');
+    const btnUnread = document.getElementById('btn-state-unread');
+    const btnEmpty = document.getElementById('btn-state-empty');
+
+    [btnActive, btnUnread, btnEmpty].forEach(btn => {
+      btn.className = "px-2.5 py-1 rounded-md text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm transition-all";
+    });
+
+    if (state === 'active') {
+      btnActive.className = "px-2.5 py-1 rounded-md bg-primary-container text-on-primary-container font-label-sm text-label-sm shadow-sm transition-all";
+      selectConversation('alexandre');
+    } else if (state === 'unread') {
+      btnUnread.className = "px-2.5 py-1 rounded-md bg-primary-container text-on-primary-container font-label-sm text-label-sm shadow-sm transition-all";
+      selectConversation('maxime');
+    } else if (state === 'empty') {
+      btnEmpty.className = "px-2.5 py-1 rounded-md bg-primary-container text-on-primary-container font-label-sm text-label-sm shadow-sm transition-all";
+      threadBox.classList.add('hidden');
+      threadBox.classList.remove('flex');
+      emptyBox.classList.remove('hidden');
+      emptyBox.classList.add('flex');
+    }
+  }
+
+  function setFilter(type) {
+    const tabAll = document.getElementById('filter-tab-all');
+    const tabUnread = document.getElementById('filter-tab-unread');
+    const tabBriefs = document.getElementById('filter-tab-briefs');
+
+    [tabAll, tabUnread, tabBriefs].forEach(tab => {
+      tab.className = "flex-1 py-1 rounded-md text-center font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all";
+    });
+
+    const alexandreItem = document.getElementById('conv-item-alexandre');
+    const maximeItem = document.getElementById('conv-item-maxime');
+    const supportItem = document.getElementById('conv-item-support');
+
+    if (type === 'all') {
+      tabAll.className = "flex-1 py-1 rounded-md text-center font-label-sm text-label-sm font-semibold bg-surface-container-lowest text-on-surface shadow-sm transition-all";
+      alexandreItem.style.display = 'flex';
+      maximeItem.style.display = 'flex';
+      supportItem.style.display = 'flex';
+    } else if (type === 'unread') {
+      tabUnread.className = "flex-1 py-1 rounded-md text-center font-label-sm text-label-sm font-semibold bg-surface-container-lowest text-on-surface shadow-sm transition-all";
+      alexandreItem.style.display = 'none';
+      maximeItem.style.display = 'flex';
+      supportItem.style.display = 'none';
+    } else if (type === 'briefs') {
+      tabBriefs.className = "flex-1 py-1 rounded-md text-center font-label-sm text-label-sm font-semibold bg-surface-container-lowest text-on-surface shadow-sm transition-all";
+      alexandreItem.style.display = 'flex';
+      maximeItem.style.display = 'flex';
+      supportItem.style.display = 'none';
+    }
+  }
+
+  function handleSearch(query) {
+    const term = query.toLowerCase();
+    const items = document.querySelectorAll('.conv-item');
+    items.forEach(item => {
+      const text = item.innerText.toLowerCase();
+      if (text.includes(term)) {
+        item.style.display = 'flex';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+</script></main></div><script>const openBtn=document.getElementById('open-sidebar-btn');const closeBtn=document.getElementById('close-sidebar-btn');const sidebar=document.getElementById('dashboard-sidebar');const backdrop=document.getElementById('sidebar-backdrop');function toggleSidebar(){sidebar.classList.toggle('-translate-x-full');backdrop.classList.toggle('hidden');}if(openBtn&&closeBtn&&backdrop){openBtn.addEventListener('click',toggleSidebar);closeBtn.addEventListener('click',toggleSidebar);backdrop.addEventListener('click',toggleSidebar);}</script></body></html>

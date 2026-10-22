@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode": "class", "theme": {"extend": {"colors": {"surface-container-low": "#f1f3ff", "surface-container": "#e9edff", "surface-container-highest": "#dce2f7", "on-secondary-container": "#5c2400", "tertiary-fixed-dim": "#ffb95f", "secondary": "#9d4300", "surface-container-lowest": "#ffffff", "surface-container-high": "#e1e8fd", "tertiary": "#805000", "on-surface": "#141b2b", "surface": "#f9f9ff", "tertiary-fixed": "#ffddb8", "tertiary-container": "#a16600", "on-error": "#ffffff", "primary": "#b8001d", "on-primary-fixed-variant": "#930015", "error-container": "#ffdad6", "on-tertiary-container": "#fff9f5", "primary-fixed": "#ffdad7", "outline-variant": "#e6bdb9", "on-surface-variant": "#5d3f3d", "primary-fixed-dim": "#ffb3ae", "on-tertiary-fixed": "#2a1700", "inverse-surface": "#293040", "on-tertiary-fixed-variant": "#653e00", "background": "#f9f9ff", "on-background": "#141b2b", "on-secondary-fixed": "#341100", "secondary-fixed-dim": "#ffb690", "on-secondary": "#ffffff", "inverse-primary": "#ffb3ae", "surface-bright": "#f9f9ff", "primary-container": "#e11d2e", "inverse-on-surface": "#edf0ff", "surface-dim": "#d3daef", "error": "#ba1a1a", "on-primary-container": "#fff8f7", "on-secondary-fixed-variant": "#783200", "on-tertiary": "#ffffff", "secondary-container": "#fd761a", "surface-variant": "#dce2f7", "outline": "#916f6c", "surface-tint": "#c0001f", "on-primary-fixed": "#410004", "secondary-fixed": "#ffdbca", "on-error-container": "#93000a", "on-primary": "#ffffff"}, "borderRadius": {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"}, "spacing": {"gutter": "1.5rem", "space-xl": "2.5rem", "space-sm": "0.5rem", "space-md": "1rem", "margin-mobile": "1rem", "space-xs": "0.25rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "margin": "2rem"}, "fontFamily": {"display-hero-mobile": ["Space Grotesk"], "body-sm": ["Inter"], "headline-sm": ["Space Grotesk"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-lg": ["Inter"], "headline-lg": ["Space Grotesk"], "label-md": ["Inter"], "display-hero": ["Space Grotesk"], "label-sm": ["Inter"], "headline-md": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "title-md": ["Space Grotesk"]}, "fontSize": {"display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}], "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}], "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}], "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "700"}], "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}], "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600"}], "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700"}], "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed"><aside class="fixed inset-y-0 left-0 w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" id="dashboard-sidebar"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between"><a class="flex items-center gap-space-xs group" data-path="tableau-de-bord" href="#"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm"><span class="material-symbols-outlined text-[20px]">hub</span></div><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold">Find<span class="text-primary">Pro</span></span></a><button aria-label="Fermer le menu" class="lg:hidden p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" id="close-sidebar-btn"><span class="material-symbols-outlined">close</span></button></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs mb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Espace Client</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-sm"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="tableau-de-bord" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-lg text-label-lg">Tableau de bord</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="mes-demandes" href="#"><span class="material-symbols-outlined text-[20px]">assignment</span><span class="font-label-lg text-label-lg flex-1">Mes demandes</span><span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">4</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-all bg-primary-container text-on-primary-container font-semibold shadow-sm" data-path="experts-favoris" href="#"><span class="material-symbols-outlined text-[20px]">bookmark</span><span class="font-label-lg text-label-lg">Experts favoris</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="messagerie-securisee" href="#"><span class="material-symbols-outlined text-[20px]">mark_chat_unread</span><span class="font-label-lg text-label-lg flex-1">Messagerie sécurisée</span><span class="w-2 h-2 rounded-full bg-primary-container"></span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="parametres" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Paramètres</span></a></nav></div></div><div class="p-space-md m-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center gap-space-xs text-secondary"><span class="material-symbols-outlined text-[18px]">verified_user</span><span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Compte Entreprise</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Datashield SAS bénéficie de l'assistance dédiée 24/7 et du contrat cadre sécurisé.</p><a class="font-label-sm text-label-sm text-primary hover:text-on-primary-fixed-variant font-medium underline inline-flex items-center gap-1 mt-1" href="#">Consulter les garanties <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a></div></aside><div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-40 hidden lg:hidden" id="sidebar-backdrop"></div><div class="lg:pl-72 flex flex-col min-h-screen"><header class="fixed top-0 right-0 left-0 lg:left-72 h-16 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-30"><div class="h-16 w-full px-space-md lg:px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm flex-1 max-w-xl"><button aria-label="Ouvrir le menu" class="lg:hidden p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" id="open-sidebar-btn"><span class="material-symbols-outlined">menu</span></button><div class="relative w-full hidden sm:block"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full h-11 pl-10 pr-4 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all" placeholder="Rechercher des experts, missions, compétences (ex: Rust, Pentest, DevOps)..." type="search"/></div></div><div class="flex items-center gap-space-sm"><button aria-label="Rechercher" class="sm:hidden p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined">search</span></button><a class="hidden md:inline-flex items-center gap-space-xs h-11 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-sm hover:opacity-95 transition-opacity" data-path="lancer-un-brief" href="#"><span class="material-symbols-outlined text-[20px]">add_circle</span><span>Lancer un brief technique</span></a><button aria-label="Notifications (2 non lues)" class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container"></span></button><div class="h-6 w-px bg-surface-container-high hidden sm:block"></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="text-right hidden xl:block"><div class="font-label-lg text-label-lg text-on-surface leading-tight">Sophie Bernard</div><div class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Tech Lead • Datashield SAS</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="flex-1 w-full pt-16 bg-surface px-space-md lg:px-space-lg py-space-lg"><div class="flex flex-col w-full">
+<!-- Interactive QA State Switcher Toolbar -->
+<div class="w-full bg-surface-container-highest rounded-xl p-space-sm mb-space-md shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">build_circle</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Banc d'essai QA • Simulateur d'états :</span>
+</div>
+<div class="inline-flex p-0.5 rounded-lg bg-surface-container-lowest gap-1">
+<button class="px-space-sm py-1 rounded font-label-sm text-label-sm transition-all bg-primary-container text-on-primary-container font-semibold shadow-xs" id="qa-btn-standard" onclick="setViewState('standard')">
+          Nominal (3 favoris)
+        </button>
+<button class="px-space-sm py-1 rounded font-label-sm text-label-sm transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" id="qa-btn-empty" onclick="setViewState('empty')">
+          Liste vide
+        </button>
+<button class="px-space-sm py-1 rounded font-label-sm text-label-sm transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" id="qa-btn-error" onclick="setViewState('error')">
+          Erreur réseau
+        </button>
+</div>
+</div>
+</div>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+<div class="max-w-2xl">
+<div class="flex items-center gap-space-xs text-primary mb-1">
+<span class="material-symbols-outlined text-[18px]">bookmark_heart</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Vivier Technique Datashield</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Mes experts favoris</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+        Profils techniques audités au code et certifiés indépendamment par notre protocole technique. Réservés pour le staffing stratégique de Datashield SAS sans intermédiaire commercial.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="px-space-md py-space-sm rounded-xl bg-surface-container-lowest shadow-sm flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">verified</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface leading-none" id="fav-count-badge">3</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant leading-tight">profils sauvegardés</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Viewport Router Container -->
+<div class="w-full" id="view-container">
+<!-- VIEW 1: STANDARD (Cards Grid & Filters) -->
+<div class="flex flex-col gap-space-lg" id="state-standard">
+<!-- Filter and Sort Bar -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Filter Pills -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 lg:pb-0" id="filter-pills">
+<button class="filter-tab px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all bg-on-surface text-surface shadow-xs font-semibold whitespace-nowrap" onclick="filterDomain('all', this)">
+            Tous les profils (3)
+          </button>
+<button class="filter-tab px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:bg-surface-container hover:text-on-surface whitespace-nowrap" onclick="filterDomain('frontend', this)">
+            Frontend &amp; Design System
+          </button>
+<button class="filter-tab px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:bg-surface-container hover:text-on-surface whitespace-nowrap" onclick="filterDomain('cloud', this)">
+            Cloud &amp; SecOps
+          </button>
+<button class="filter-tab px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:bg-surface-container hover:text-on-surface whitespace-nowrap" onclick="filterDomain('cyber', this)">
+            Cybersécurité
+          </button>
+</div>
+<!-- Sort Select & Search Input -->
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap hidden sm:inline">Trier par :</span>
+<div class="relative">
+<select class="h-10 pl-3 pr-8 rounded-lg bg-surface-container-low font-label-md text-label-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary appearance-none cursor-pointer" id="sort-select" onchange="handleSort(this.value)">
+<option value="recent">Récemment ajoutés</option>
+<option value="tjm-asc">TJM croissant</option>
+<option value="tjm-desc">TJM décroissant</option>
+<option value="audit">Score d'audit technique (décroissant)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Experts Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg" id="experts-grid">
+<!-- Expert 1: Maxime Gauthier -->
+<article class="expert-card group flex flex-col justify-between rounded-xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all duration-200 relative" data-audit="98" data-domain="frontend" data-id="expert-maxime" data-recent="3" data-tjm="850">
+<div>
+<!-- Top Card Actions & Verification Badge -->
+<div class="flex items-start justify-between gap-space-sm mb-space-md">
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>Audit FindPro #8942-A</span>
+</div>
+<!-- Heart Delete Trigger -->
+<button aria-label="Retirer Maxime Gauthier des favoris" class="w-9 h-9 rounded-full bg-error-container/30 hover:bg-error-container text-primary flex items-center justify-center transition-colors" onclick="promptRemoveFavorite('Maxime Gauthier', 'expert-maxime')" title="Retirer des favoris">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Profile Info Header -->
+<div class="flex items-center gap-space-md mb-space-md">
+<div class="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of Maxime Gauthier, a French male software engineer in his mid thirties, sharp glasses, minimalist black crewneck sweater, soft studio lighting with subtle crimson background hue, high resolution corporate headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9tnMVt9FXvO7RSgtdP_RL03IuaEKusXkPQhjtxmRMPJ92BQxCYZ2iN_W1uO507vpAvCxrDngMGzuNS3wTuNbf8id9d7pHQ-9l6Be1MX8D0LZVCAk-zF7fweZIzO5wyX0XoDmXk98YNlR8DXjoM1_oicxD4O1lQ6QA3PlNDgsMdyRVKjV2cJSb4I3Ty9Tnw0TOxPwOfxImRbuYFt4JO7G2QZ9UYqja6AnL2mXusPWyt-DNAY84xBjy"/>
+<span class="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest" title="Disponible immédiatement"></span>
+</div>
+<div class="min-w-0 flex-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate font-bold">Maxime Gauthier</h2>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Architecte Frontend &amp; Sécurité</p>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span class="font-label-sm text-label-sm">Paris / Remote</span>
+</div>
+</div>
+</div>
+<!-- Audit Metrics & TJM Metric Callout -->
+<div class="p-space-sm rounded-lg bg-surface-container-low mb-space-md grid grid-cols-2 gap-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">TJM Négocié</span>
+<span class="font-title-md text-title-md text-on-surface font-bold">850 € <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">/jour</span></span>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Score Technique</span>
+<span class="inline-flex items-center gap-1 font-title-md text-title-md text-primary font-bold">
+<span class="material-symbols-outlined text-[16px]">military_tech</span>
+                  98/100
+                </span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md line-clamp-2">
+              Spécialiste de la refonte d'architectures frontend hautement résilientes aux attaques XSS/CSRF et des Design Systems d'échelle bancaire.
+            </p>
+<!-- Skills Cluster -->
+<div class="flex flex-wrap gap-1.5 mb-space-lg">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-medium">React</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-medium">Next.js</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-medium">TypeScript</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high font-label-sm text-label-sm text-secondary font-semibold">OWASP Web</span>
+</div>
+</div>
+<!-- Actions Footer -->
+<div class="flex flex-col gap-space-xs pt-space-sm">
+<button class="w-full h-11 rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg font-semibold flex items-center justify-center gap-space-xs shadow-sm hover:opacity-95 transition-opacity" onclick="openContactModal('Maxime Gauthier')">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Contacter l'expert</span>
+</button>
+<button class="w-full h-10 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-space-xs hover:bg-surface-container-high transition-colors" onclick="viewAuditSheet('Maxime Gauthier', '8942-A')">
+<span class="material-symbols-outlined text-[18px]">fact_check</span>
+<span>Voir le portfolio audité (6 livrables)</span>
+</button>
+</div>
+</article>
+<!-- Expert 2: Sarah Benali -->
+<article class="expert-card group flex flex-col justify-between rounded-xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all duration-200 relative" data-audit="96" data-domain="cloud" data-id="expert-sarah" data-recent="2" data-tjm="900">
+<div>
+<!-- Top Card Actions & Verification Badge -->
+<div class="flex items-start justify-between gap-space-sm mb-space-md">
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>Audit FindPro #7109-C</span>
+</div>
+<!-- Heart Delete Trigger -->
+<button aria-label="Retirer Sarah Benali des favoris" class="w-9 h-9 rounded-full bg-error-container/30 hover:bg-error-container text-primary flex items-center justify-center transition-colors" onclick="promptRemoveFavorite('Sarah Benali', 'expert-sarah')" title="Retirer des favoris">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Profile Info Header -->
+<div class="flex items-center gap-space-md mb-space-md">
+<div class="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Corporate portrait photograph of Sarah Benali, an Algerian-French female cloud infrastructure architect, confident posture, dark navy blazer, modern data center background bokeh with cool slate lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJbT4p7euIAlE9apndt-tUgTGjy5UACHR4dd4RvnWCdMtepEAz_3RYISXPi7g_ukRogvqzKPHoOeg42GUTLMUvoPaAj-brnZe1eFmgSOJjKXAeRDfZHZxELZTa52wZUhEjYCc7GTjBFOZH_RU_bnmMPssov1RAJB6GYgdwFR0ZKD7FI6TG96v2s8b-N1usTMLCTOttOjINiFORmzbDB3fNc29WKbOdxP95Z2-FcdxHwz0gv7S9k8P5"/>
+<span class="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest" title="Disponible immédiatement"></span>
+</div>
+<div class="min-w-0 flex-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate font-bold">Sarah Benali</h2>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Lead DevOps &amp; Ingénieure SRE</p>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span class="font-label-sm text-label-sm">Lyon / Remote</span>
+</div>
+</div>
+</div>
+<!-- Audit Metrics & TJM Metric Callout -->
+<div class="p-space-sm rounded-lg bg-surface-container-low mb-space-md grid grid-cols-2 gap-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">TJM Négocié</span>
+<span class="font-title-md text-title-md text-on-surface font-bold">900 € <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">/jour</span></span>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Score Technique</span>
+<span class="inline-flex items-center gap-1 font-title-md text-title-md text-primary font-bold">
+<span class="material-symbols-outlined text-[16px]">military_tech</span>
+                  96/100
+                </span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md line-clamp-2">
+              Certification Kubernetes CKA validée. Déploiement d'environnements Terraform multi-régions à haute disponibilité et Observabilité poussée.
+            </p>
+<!-- Skills Cluster -->
+<div class="flex flex-wrap gap-1.5 mb-space-lg">
+<span class="px-2 py-0.5 rounded bg-surface-container-high font-label-sm text-label-sm text-secondary font-semibold">Kubernetes CKA</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-medium">Terraform</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-medium">AWS / GCP</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-medium">Grafana / SRE</span>
+</div>
+</div>
+<!-- Actions Footer -->
+<div class="flex flex-col gap-space-xs pt-space-sm">
+<button class="w-full h-11 rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg font-semibold flex items-center justify-center gap-space-xs shadow-sm hover:opacity-95 transition-opacity" onclick="openContactModal('Sarah Benali')">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Contacter l'expert</span>
+</button>
+<button class="w-full h-10 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-space-xs hover:bg-surface-container-high transition-colors" onclick="viewAuditSheet('Sarah Benali', '7109-C')">
+<span class="material-symbols-outlined text-[18px]">fact_check</span>
+<span>Voir le portfolio audité (9 livrables)</span>
+</button>
+</div>
+</article>
+<!-- Expert 3: Julien Mercier -->
+<article class="expert-card group flex flex-col justify-between rounded-xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all duration-200 relative" data-audit="99" data-domain="cyber" data-id="expert-julien" data-recent="1" data-tjm="950">
+<div>
+<!-- Top Card Actions & Verification Badge -->
+<div class="flex items-start justify-between gap-space-sm mb-space-md">
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>Audit FindPro #4510-S</span>
+</div>
+<!-- Heart Delete Trigger -->
+<button aria-label="Retirer Julien Mercier des favoris" class="w-9 h-9 rounded-full bg-error-container/30 hover:bg-error-container text-primary flex items-center justify-center transition-colors" onclick="promptRemoveFavorite('Julien Mercier', 'expert-julien')" title="Retirer des favoris">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Profile Info Header -->
+<div class="flex items-center gap-space-md mb-space-md">
+<div class="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait photography of Julien Mercier, senior cybersecurity consultant and red teamer, athletic build, professional dark grey shirt, high contrast lighting with clean technical laboratory office atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVibzbnelOZ4eM1XYUX6CagQn-AGlpGw7aKq2Pw6pOc3Zd7orRhnt_p0K-F6E85gIRrVn_udrkTXuE4tvwcEyuidw4DCqB_aA87EG8k-63PlL2qnlMFb8XB0c9Pd4i53ZY9Dz9XqqpLBPYBB-xohmgYpDyUaGbVYLYdNW_PqKA8ab66vrsQf82pEYrgBC-fxvEioZdNxOhH00cgbvCv_S4AAdo0MCGoKrL7mxpombb3qsSTmYURZOk"/>
+<span class="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest" title="Disponible immédiatement"></span>
+</div>
+<div class="min-w-0 flex-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate font-bold">Julien Mercier</h2>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Consultant Cybersécurité &amp; Pentester</p>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span class="font-label-sm text-label-sm">Full Remote</span>
+</div>
+</div>
+</div>
+<!-- Audit Metrics & TJM Metric Callout -->
+<div class="p-space-sm rounded-lg bg-surface-container-low mb-space-md grid grid-cols-2 gap-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">TJM Négocié</span>
+<span class="font-title-md text-title-md text-on-surface font-bold">950 € <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">/jour</span></span>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Score Technique</span>
+<span class="inline-flex items-center gap-1 font-title-md text-title-md text-primary font-bold">
+<span class="material-symbols-outlined text-[16px]">military_tech</span>
+                  99/100
+                </span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md line-clamp-2">
+              Audits d'intrusion en boite noire et blanche, audits réseau industriels et tests d'ingénierie sociale certifiés OSCP &amp; CISSP.
+            </p>
+<!-- Skills Cluster -->
+<div class="flex flex-wrap gap-1.5 mb-space-lg">
+<span class="px-2 py-0.5 rounded bg-surface-container-high font-label-sm text-label-sm text-secondary font-semibold">Pentest Web</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-medium">Audits Réseau</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-medium">Red Teaming</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-medium">OSCP</span>
+</div>
+</div>
+<!-- Actions Footer -->
+<div class="flex flex-col gap-space-xs pt-space-sm">
+<button class="w-full h-11 rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg font-semibold flex items-center justify-center gap-space-xs shadow-sm hover:opacity-95 transition-opacity" onclick="openContactModal('Julien Mercier')">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Contacter l'expert</span>
+</button>
+<button class="w-full h-10 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-space-xs hover:bg-surface-container-high transition-colors" onclick="viewAuditSheet('Julien Mercier', '4510-S')">
+<span class="material-symbols-outlined text-[18px]">fact_check</span>
+<span>Voir le portfolio audité (11 livrables)</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Trust & Verification Policy Banner -->
+<div class="p-space-lg rounded-xl bg-surface-container-low shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest flex items-center justify-center text-secondary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[28px]">shield_lock</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Protocole FindPro : Zéro complaisance, 100% audité</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Contrairement aux plateformes classiques, nos scores sont basés sur des tests de code en aveugle et des audits d'architectures réels, garantissant des TJMs justes sans commissions opaques.
+            </p>
+</div>
+</div>
+<a class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-md text-label-md shrink-0 shadow-xs transition-colors" href="#">
+<span>Consulter le barème technique</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- VIEW 2: EMPTY STATE (Hidden by default) -->
+<div class="hidden flex-col items-center justify-center py-16 px-space-md text-center bg-surface-container-lowest rounded-2xl shadow-sm" id="state-empty">
+<div class="w-20 h-20 rounded-2xl bg-surface-container flex items-center justify-center text-on-surface-variant mb-space-md">
+<span class="material-symbols-outlined text-[44px]">bookmark_border</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight mb-space-xs">
+        Vous n'avez pas encore d'expert favori enregistré
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto mb-space-lg">
+        Explorez l'annuaire des 4 850+ freelances techniques certifiés sans commission cachée. Ajoutez vos profils d'intérêt à vos favoris en un clic pour vos prochains chantiers.
+      </p>
+<a class="inline-flex items-center gap-space-sm h-12 px-space-xl rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg font-bold shadow-md hover:opacity-95 transition-all" data-path="annuaire-experts" href="#">
+<span>Explorer l'annuaire des professionnels</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</a>
+<div class="mt-space-xl grid grid-cols-1 sm:grid-cols-3 gap-space-md max-w-2xl w-full text-left">
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary text-[20px] mb-1">terminal</span>
+<div class="font-label-lg text-label-lg text-on-surface font-semibold">Audits vérifiés</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Code source analysé par des seniors.</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary text-[20px] mb-1">attach_money</span>
+<div class="font-label-lg text-label-lg text-on-surface font-semibold">TJM direct</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Tarifs contractuels sans surcoût plateforme.</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary text-[20px] mb-1">lock</span>
+<div class="font-label-lg text-label-lg text-on-surface font-semibold">Contrats sécurisés</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Assurance Datashield et SLA garantis.</div>
+</div>
+</div>
+</div>
+<!-- VIEW 3: NETWORK ERROR STATE (Hidden by default) -->
+<div class="hidden flex-col items-center justify-center py-16 px-space-md text-center bg-surface-container-lowest rounded-2xl shadow-sm" id="state-error">
+<div class="w-20 h-20 rounded-2xl bg-error-container text-error flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-[44px]">cloud_off</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight mb-space-xs">
+        Impossible de charger vos experts favoris
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mx-auto mb-space-lg">
+        Une interruption réseau temporaire empêche la synchronisation avec le cluster de Datashield SAS. Nos serveurs sécurisés répondent habituellement en moins de 120ms.
+      </p>
+<div class="flex items-center gap-space-sm">
+<button class="inline-flex items-center gap-space-xs h-11 px-space-lg rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg font-semibold shadow-sm hover:opacity-95 transition-opacity" onclick="setViewState('standard')">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>Réessayer la synchronisation</span>
+</button>
+<button class="h-11 px-space-md rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" onclick="alert('Statut système : Tous les sous-systèmes d\'audit et de messagerie sont opérationnels.')">
+          Vérifier l'état du réseau
+        </button>
+</div>
+</div>
+</div>
+<!-- Remove Confirmation Modal Backdrop & Dialog -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/40 backdrop-blur-xs hidden p-space-md" id="remove-modal">
+<div class="w-full max-w-md rounded-2xl bg-surface-container-lowest p-space-lg shadow-xl flex flex-col gap-space-md transform scale-95 transition-transform duration-200" id="remove-modal-card">
+<div class="flex items-center gap-space-sm text-primary">
+<div class="w-10 h-10 rounded-full bg-error-container/40 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[24px]">heart_broken</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Retirer des favoris ?</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Êtes-vous sûr de vouloir retirer <span class="font-semibold text-on-surface" id="modal-expert-name">l'expert</span> de votre liste ?
+      </p>
+<div class="p-space-sm rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface-variant flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">info</span>
+<span>Vous pourrez retrouver ce profil à tout moment dans l'annuaire général grâce à son numéro d'audit unique.</span>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="h-11 px-space-md rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" onclick="closeRemoveModal()">
+          Annuler
+        </button>
+<button class="h-11 px-space-lg rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-semibold hover:opacity-95 shadow-sm transition-opacity flex items-center gap-space-xs" id="modal-confirm-remove-btn">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+<span>Confirmer le retrait</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Container -->
+<div class="fixed bottom-6 right-6 z-50 hidden items-center gap-space-sm px-space-md py-space-sm rounded-xl bg-inverse-surface text-inverse-on-surface shadow-xl font-label-md text-label-md transition-all" id="toast">
+<span class="material-symbols-outlined text-tertiary-fixed text-[20px]" id="toast-icon">check_circle</span>
+<span id="toast-msg">Opération effectuée avec succès</span>
+</div>
+</div>
+<script>
+  let targetExpertCardId = null;
+  let currentActiveFilter = 'all';
+
+  function showToast(message, icon = 'check_circle') {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+    const toastIcon = document.getElementById('toast-icon');
+    if (!toast || !toastMsg) return;
+    toastMsg.textContent = message;
+    toastIcon.textContent = icon;
+    toast.classList.remove('hidden');
+    toast.classList.add('flex');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+      toast.classList.remove('flex');
+    }, 3500);
+  }
+
+  function setViewState(state) {
+    const stdView = document.getElementById('state-standard');
+    const emptyView = document.getElementById('state-empty');
+    const errorView = document.getElementById('state-error');
+    
+    const btnStd = document.getElementById('qa-btn-standard');
+    const btnEmpty = document.getElementById('qa-btn-empty');
+    const btnErr = document.getElementById('qa-btn-error');
+    
+    // Reset buttons
+    [btnStd, btnEmpty, btnErr].forEach(btn => {
+      btn.className = "px-space-sm py-1 rounded font-label-sm text-label-sm transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high";
+    });
+
+    stdView.classList.add('hidden');
+    emptyView.classList.add('hidden');
+    errorView.classList.add('hidden');
+
+    if (state === 'standard') {
+      stdView.classList.remove('hidden');
+      btnStd.className = "px-space-sm py-1 rounded font-label-sm text-label-sm transition-all bg-primary-container text-on-primary-container font-semibold shadow-xs";
+    } else if (state === 'empty') {
+      emptyView.classList.remove('hidden');
+      emptyView.classList.add('flex');
+      btnEmpty.className = "px-space-sm py-1 rounded font-label-sm text-label-sm transition-all bg-primary-container text-on-primary-container font-semibold shadow-xs";
+    } else if (state === 'error') {
+      errorView.classList.remove('hidden');
+      errorView.classList.add('flex');
+      btnErr.className = "px-space-sm py-1 rounded font-label-sm text-label-sm transition-all bg-primary-container text-on-primary-container font-semibold shadow-xs";
+    }
+  }
+
+  function promptRemoveFavorite(expertName, cardId) {
+    targetExpertCardId = cardId;
+    const nameSpan = document.getElementById('modal-expert-name');
+    nameSpan.textContent = expertName;
+    const modal = document.getElementById('remove-modal');
+    modal.classList.remove('hidden');
+    
+    const confirmBtn = document.getElementById('modal-confirm-remove-btn');
+    confirmBtn.onclick = () => {
+      executeRemoveFavorite(expertName);
+    };
+  }
+
+  function closeRemoveModal() {
+    const modal = document.getElementById('remove-modal');
+    modal.classList.add('hidden');
+    targetExpertCardId = null;
+  }
+
+  function executeRemoveFavorite(name) {
+    if (targetExpertCardId) {
+      const card = document.querySelector(`[data-id="${targetExpertCardId}"]`);
+      if (card) {
+        card.remove();
+        updateFavoritesCount();
+        showToast(`${name} a été retiré de votre vivier favori.`);
+      }
+    }
+    closeRemoveModal();
+  }
+
+  function updateFavoritesCount() {
+    const remainingCards = document.querySelectorAll('.expert-card');
+    const badge = document.getElementById('fav-count-badge');
+    if (badge) {
+      badge.textContent = remainingCards.length;
+    }
+    if (remainingCards.length === 0) {
+      setViewState('empty');
+    }
+  }
+
+  function filterDomain(domain, btn) {
+    currentActiveFilter = domain;
+    const pills = document.querySelectorAll('.filter-tab');
+    pills.forEach(p => {
+      p.className = 'filter-tab px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:bg-surface-container hover:text-on-surface whitespace-nowrap';
+    });
+    btn.className = 'filter-tab px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all bg-on-surface text-surface shadow-xs font-semibold whitespace-nowrap';
+
+    const cards = document.querySelectorAll('.expert-card');
+    cards.forEach(card => {
+      if (domain === 'all' || card.dataset.domain === domain) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function handleSort(criteria) {
+    const grid = document.getElementById('experts-grid');
+    const cards = Array.from(document.querySelectorAll('.expert-card'));
+
+    cards.sort((a, b) => {
+      if (criteria === 'tjm-asc') {
+        return parseInt(a.dataset.tjm) - parseInt(b.dataset.tjm);
+      }
+      if (criteria === 'tjm-desc') {
+        return parseInt(b.dataset.tjm) - parseInt(a.dataset.tjm);
+      }
+      if (criteria === 'audit') {
+        return parseInt(b.dataset.audit) - parseInt(a.dataset.audit);
+      }
+      // default: recent
+      return parseInt(b.dataset.recent) - parseInt(a.dataset.recent);
+    });
+
+    cards.forEach(card => grid.appendChild(card));
+    showToast(`Tri appliqué : ${criteria}`);
+  }
+
+  function openContactModal(name) {
+    showToast(`Ouverture de la messagerie sécurisée avec ${name}...`, 'mark_chat_unread');
+  }
+
+  function viewAuditSheet(name, auditId) {
+    showToast(`Téléchargement du dossier d'audit #${auditId} (${name})`, 'file_download');
+  }
+</script></main></div><script>const openBtn=document.getElementById('open-sidebar-btn');const closeBtn=document.getElementById('close-sidebar-btn');const sidebar=document.getElementById('dashboard-sidebar');const backdrop=document.getElementById('sidebar-backdrop');function toggleSidebar(){sidebar.classList.toggle('-translate-x-full');backdrop.classList.toggle('hidden');}if(openBtn&&closeBtn&&backdrop){openBtn.addEventListener('click',toggleSidebar);closeBtn.addEventListener('click',toggleSidebar);backdrop.addEventListener('click',toggleSidebar);}</script></body></html>

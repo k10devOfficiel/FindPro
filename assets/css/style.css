@@ -1,0 +1,216 @@
+/**
+ * FINDPRO — Styles de base et variables de la charte graphique
+ * 
+ * Toutes les variables de couleurs et de typographies proviennent
+ * rigoureusement du document docs/CHARTE_GRAPHIQUE_FINDPRO.md.
+ */
+
+:root {
+    /* 1. Couleurs de marque */
+    --color-brand-red: #E11D2E;
+    --color-brand-orange: #F97316;
+    --color-accent: #F59E0B;
+    --gradient-brand: linear-gradient(135deg, #E11D2E 0%, #F97316 100%);
+
+    /* 2. Couleur principale de l'interface et structure */
+    --color-primary: #111827;
+    --color-bg-main: #F8FAFC;
+    --color-bg-surface: #FFFFFF;
+    --color-text-main: #1F2937;
+    --color-text-secondary: #64748B;
+    --color-border: #E2E8F0;
+
+    /* 3. Couleurs de statut */
+    --color-success: #15803D;
+    --color-danger: #B91C1C;
+    --color-warning: #B45309;
+
+    /* 4. Typographies */
+    --font-title: 'Oxanium', system-ui, -apple-system, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* 5. Rayons de courbure */
+    --radius-btn: 8px;
+    --radius-card: 12px;
+}
+
+/* Base et structure globale (mobile d'abord) */
+html,
+body {
+    min-height: 100vh;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--color-text-main);
+    background-color: var(--color-bg-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Titres */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-title);
+    color: var(--color-primary);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+/* Liens */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+}
+
+a:hover {
+    color: var(--color-brand-orange);
+}
+
+.hover-primary:hover {
+    color: var(--color-primary) !important;
+}
+
+/* Barre de navigation */
+.navbar {
+    background-color: var(--color-bg-surface) !important;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navbar-brand {
+    padding: 0;
+}
+
+.navbar-nav .nav-link {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--color-text-main);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-btn);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: var(--color-brand-orange);
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--color-brand-red);
+    font-weight: 600;
+}
+
+/* Boutons */
+.btn {
+    border-radius: var(--radius-btn);
+    font-family: var(--font-body);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.15s ease-in-out;
+}
+
+/* Bouton principal : bleu nuit #111827 */
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #FFFFFF;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #1f2937;
+    border-color: #1f2937;
+    color: #FFFFFF;
+}
+
+/* Bouton de marque : dégradé rouge-orange */
+.btn-brand {
+    background: var(--gradient-brand);
+    border: none;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.btn-brand:hover,
+.btn-brand:focus,
+.btn-brand:active {
+    background: var(--gradient-brand);
+    opacity: 0.92;
+    color: #FFFFFF;
+}
+
+/* Bouton secondaire / contour */
+.btn-outline-primary {
+    color: var(--color-primary);
+    border-color: var(--color-border);
+    background-color: var(--color-bg-surface);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #FFFFFF;
+}
+
+/* Cartes */
+.card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* Espace réservé gris pour visuels manquants */
+.img-placeholder {
+    background-color: var(--color-border);
+    color: var(--color-text-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    text-align: center;
+    min-height: 160px;
+}
+
+.img-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Alertes harmonisées avec les couleurs de statut */
+.alert-success {
+    background-color: #F0FDF4;
+    border-color: #BBF7D0;
+    color: var(--color-success);
+}
+
+.alert-danger {
+    background-color: #FEF2F2;
+    border-color: #FECACA;
+    color: var(--color-danger);
+}
+
+.alert-warning {
+    background-color: #FFFBEB;
+    border-color: #FDE68A;
+    color: var(--color-warning);
+}
+
+/* Accessibilité et focus */
+:focus-visible {
+    outline: 2px solid var(--color-brand-orange);
+    outline-offset: 2px;
+}

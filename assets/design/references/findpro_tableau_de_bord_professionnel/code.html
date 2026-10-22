@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#916f6c", "on-primary-fixed": "#410004", "error-container": "#ffdad6", "inverse-primary": "#ffb3ae", "secondary-container": "#fd761a", "on-primary": "#ffffff", "surface-bright": "#f9f9ff", "on-surface": "#141b2b", "primary-fixed": "#ffdad7", "on-secondary-container": "#5c2400", "primary-fixed-dim": "#ffb3ae", "on-primary-fixed-variant": "#930015", "on-primary-container": "#fff8f7", "primary-container": "#e11d2e", "tertiary-fixed-dim": "#ffb95f", "outline-variant": "#e6bdb9", "on-surface-variant": "#5d3f3d", "primary": "#b8001d", "secondary-fixed-dim": "#ffb690", "error": "#ba1a1a", "surface-container-highest": "#dce2f7", "surface-variant": "#dce2f7", "inverse-on-surface": "#edf0ff", "on-background": "#141b2b", "on-tertiary": "#ffffff", "on-error-container": "#93000a", "tertiary-fixed": "#ffddb8", "inverse-surface": "#293040", "secondary-fixed": "#ffdbca", "background": "#f9f9ff", "on-tertiary-fixed-variant": "#653e00", "on-secondary-fixed": "#341100", "surface-container-high": "#e1e8fd", "tertiary": "#805000", "surface-container-low": "#f1f3ff", "surface-tint": "#c0001f", "on-tertiary-container": "#fff9f5", "surface-dim": "#d3daef", "secondary": "#9d4300", "surface": "#f9f9ff", "surface-container-lowest": "#ffffff", "on-secondary": "#ffffff", "surface-container": "#e9edff", "on-error": "#ffffff", "on-secondary-fixed-variant": "#783200", "on-tertiary-fixed": "#2a1700", "tertiary-container": "#a16600" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "2.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter": "1.5rem", "margin": "2rem", "gutter-mobile": "1rem", "margin-mobile": "1rem" }, "fontFamily": { "headline-lg-mobile": ["Space Grotesk"], "title-md": ["Space Grotesk"], "label-sm": ["Inter"], "headline-md": ["Space Grotesk"], "display-hero": ["Space Grotesk"], "body-sm": ["Inter"], "body-lg": ["Inter"], "display-hero-mobile": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "label-md": ["Inter"], "label-lg": ["Inter"], "body-md": ["Inter"], "headline-lg": ["Space Grotesk"] }, "fontSize": { "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between py-space-lg px-space-md"><div class="flex flex-col gap-space-lg"><div class="flex items-center gap-space-sm px-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary-container text-[22px]">token</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">FindPro</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Espace Pro</span></div></div><div class="px-space-sm py-space-sm rounded-lg bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2.5 h-2.5 rounded-full bg-secondary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface">Statut dossier</span></div><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm"><span class="material-symbols-outlined text-[13px] text-secondary">hourglass_top</span>En attente</span></div><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2.5 transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="accueil-dashboard" href="#"><span class="material-symbols-outlined text-[20px]">space_dashboard</span><span>Accueil Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="mon-profil" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Mon Profil</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-space-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="portfolio-&amp;-livrables" href="#"><span class="material-symbols-outlined text-[20px]">folder_special</span><span>Portfolio &amp; Livrables</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="demandes-de-contact" href="#"><span class="material-symbols-outlined text-[20px]">mail</span><span>Demandes de contact</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="parametres" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Paramètres</span></a></nav></div><div class="flex flex-col gap-space-sm pt-space-md"><div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col overflow-hidden"><span class="font-label-md text-label-md text-on-surface truncate">Expert FindPro</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">pro@findpro.fr</span></div></div><a class="text-on-surface-variant hover:text-error transition-colors" data-path="connexion" href="#" title="Déconnexion"><span class="material-symbols-outlined text-[20px]">logout</span></a></div></div></aside><div class="pl-72 min-h-screen flex flex-col bg-surface"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Espace Membre Vérifié</span><div class="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] text-on-surface font-label-sm text-label-sm"><span class="material-symbols-outlined text-[14px] text-tertiary">verified</span><span>Accréditation en cours d'examen</span></div></div><div class="flex items-center gap-space-md"><button class="w-9 h-9 rounded-lg flex items-center justify-center bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="w-9 h-9 rounded-lg flex items-center justify-center bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors relative" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface px-gutter py-space-lg flex-1"><div class="flex flex-col w-full">
+<!-- Simulation State Switcher Bar (Interactive preview bar for reviewer) -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-lg flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Mode de simulation</span>
+<span class="font-title-md text-title-md text-on-surface">État d'accréditation du compte pro</span>
+</div>
+</div>
+<!-- Toggle Controls -->
+<div class="flex items-center bg-surface-container-low p-1 rounded-lg gap-1" id="state-toggle-group">
+<button class="px-3 py-1.5 rounded text-on-surface font-label-md text-label-md transition-all bg-surface-container-lowest shadow-sm flex items-center gap-1.5" id="btn-mode-verified" onclick="setDashboardMode('verified')" type="button">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span>Profil vérifié &amp; audité</span>
+</button>
+<button class="px-3 py-1.5 rounded text-on-surface-variant font-label-md text-label-md transition-all hover:text-on-surface flex items-center gap-1.5" id="btn-mode-pending" onclick="setDashboardMode('pending')" type="button">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span>En attente (48h)</span>
+</button>
+<button class="px-3 py-1.5 rounded text-on-surface-variant font-label-md text-label-md transition-all hover:text-on-surface flex items-center gap-1.5" id="btn-mode-empty" onclick="setDashboardMode('empty')" type="button">
+<span class="w-2 h-2 rounded-full bg-surface-variant"></span>
+<span>Nouvel utilisateur</span>
+</button>
+</div>
+</div>
+<!-- Breadcrumbs & Context meta -->
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">home</span>
+<span>Espace Pro</span>
+</a>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">Tableau de bord</span>
+</div>
+<div class="flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-primary">schedule</span>
+        Dernière synchronisation : Aujourd'hui à 09:42
+      </span>
+</div>
+</div>
+<!-- Dynamic State Banner: EN ATTENTE DE VALIDATION (Hidden in Verified Mode) -->
+<div class="hidden mb-space-lg w-full rounded-xl bg-surface-container-high p-space-md shadow-sm" id="banner-pending">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0 text-secondary">
+<span class="material-symbols-outlined text-[24px]">hourglass_top</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Audit technique en cours</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm">Délai indicatif ≤ 48h</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Nos ingénieurs examinent actuellement vos codes sources GitHub, certifications ISO/IEC et livrables d'architecture frontend. Votre profil sera indexé sur la place de marché dès confirmation.
+          </p>
+</div>
+</div>
+<button class="shrink-0 px-4 py-2 rounded-lg bg-surface-container-lowest text-on-surface font-label-lg text-label-lg shadow-sm hover:bg-surface-bright transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+<span>Contacter la modération</span>
+</button>
+</div>
+</div>
+<!-- Dynamic State Banner: NOUVEL UTILISATEUR / ÉTAT VIDE -->
+<div class="hidden mb-space-lg w-full rounded-xl bg-primary-fixed p-space-md shadow-sm" id="banner-empty">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">rocket_launch</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Activez la visibilité de votre profil technique</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Complétez vos coordonnées fiscales, uploadez au minimum un livrable architectural et renseignez votre TJM pour soumettre votre dossier à l'accréditation.
+          </p>
+</div>
+</div>
+<button class="shrink-0 px-4 py-2 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-lg text-label-lg shadow-md hover:opacity-95 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Démarrer le parcours d'audit</span>
+</button>
+</div>
+</div>
+<!-- Welcome Hero & Identity Strip -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-sm mb-space-lg relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg relative z-10">
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md">
+<div class="relative">
+<div class="w-20 h-20 rounded-xl overflow-hidden bg-surface-container-high shadow-md">
+<img class="w-full h-full object-cover" data-alt="Portrait studio professionnel haute fidélité d'un architecte logiciel homme trentenaire portant des lunettes modernes et un polo sombre sobre, regard serein et confiant, éclairage neutre épuré de bureau tech moderne avec touches subtiles de tons carmin." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3lqH66EEyRfYeA8b1B64Jci2cQG7d9z5m-5kyL1y_1RZRigLhxyJfxpFJ1MX6u8xVKaYB52rlv-f21QlpA1WKU6GNFZydKr92Ra8RNkjJ1Dy_Mjqs-dgdDEOHhmCzWy0B11SU68fd3hEEo1zX6xvzKtvWNPYcgrjIS2k9MoOZNfMtiQDG_s4isdeNm2W9z1HCSNEhFZOQOAvJCPiahYxokR5wHQgt69G0xhB7cUcxTl6026NVyG-x"/>
+</div>
+<!-- Dynamic verification badge on avatar -->
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-md" id="avatar-verified-badge">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight" id="user-display-name">Bonjour Maxime Gauthier</h1>
+<span class="text-on-surface-variant hidden sm:inline">—</span>
+<span class="font-title-md text-title-md text-primary font-semibold">Architecte Frontend &amp; Sécurité</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-md mt-2">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 font-label-md text-label-md" id="badge-verified-container">
+<span class="material-symbols-outlined text-[15px] text-emerald-600" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-semibold">Profil audité &amp; vérifié</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[15px] text-tertiary">speed</span>
+<span>Score technique : <strong class="text-on-surface font-semibold" id="tech-score-val">98/100</strong></span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[15px]">location_on</span>
+<span>Paris (75) &amp; Remote</span>
+</div>
+<div class="inline-flex items-center gap-1.5 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[15px]">payments</span>
+<span>TJM : <strong class="text-on-surface">850 €</strong> / jour</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Header Metric Callout -->
+<div class="flex items-center gap-space-md bg-surface-container-low p-space-md rounded-xl shrink-0">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Disponibilité certifiée</span>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+<span class="font-title-md text-title-md text-on-surface">Immédiate (Q2 2025)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Temps plein ou mission commando</span>
+</div>
+<button class="px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-high transition-colors" type="button">
+          Modifier
+        </button>
+</div>
+</div>
+<!-- Profile Completion Progress Track -->
+<div class="mt-space-lg pt-space-md bg-surface-container-low/60 rounded-xl p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex-1">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface">Niveau d'achèvement de votre dossier</span>
+<span class="px-2 py-0.2 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm" id="progress-chip">Étape 4 / 5</span>
+</div>
+<span class="font-title-md text-title-md text-primary font-bold" id="completion-percentage">85%</span>
+</div>
+<!-- Segmented bar -->
+<div class="w-full h-2.5 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="h-full bg-gradient-to-r from-primary to-secondary-container transition-all duration-500 rounded-full" id="progress-bar-fill" style="width: 85%;"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2" id="completion-hint">
+<span class="font-semibold text-on-surface">Recommandation de l'audit :</span> Ajoutez un 3ème livrable audité pour atteindre 100% de visibilité dans l'algorithme d'affectation grand compte.
+        </p>
+</div>
+<button class="shrink-0 px-4 py-2 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md shadow-sm hover:bg-surface-container-high transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">add_task</span>
+<span>Compléter la section</span>
+</button>
+</div>
+</div>
+<!-- Mandatory Compliance Alert: RC Pro Expiration -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md bg-gradient-to-r from-surface-container-lowest via-surface-container-lowest to-surface-container-low">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Vérification de conformité légale</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Échéance dans 30 jours</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+          Votre attestation d'assurance Responsabilité Civile Professionnelle (RC Pro) arrive à expiration le 15 mai 2025. Mettez-la à jour pour préserver votre label vérifié auprès des acheteurs.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest transition-colors">
+        Ignorer
+      </button>
+<button class="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md shadow-sm hover:opacity-95 transition-opacity flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Téléverser l'attestation</span>
+</button>
+</div>
+</div>
+<!-- Key Metrics & Pure Verifiable Stats Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md mb-space-lg" id="stats-grid">
+<!-- Stat 1: Consultations -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-medium">Consultations profil</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</div>
+</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="stat-views-val">142</span>
+<span class="font-label-sm text-label-sm text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">trending_up</span>
+            +18%
+          </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-1">Visiteurs uniques vérifiés ce mois</span>
+</div>
+<!-- Micro Sparkline SVG -->
+<div class="mt-space-md pt-space-sm bg-surface-bright rounded p-1">
+<svg class="w-full h-7 text-primary" fill="none" viewbox="0 0 100 24">
+<path d="M0 20 L15 17 L30 19 L45 12 L60 14 L75 8 L90 10 L100 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M0 20 L15 17 L30 19 L45 12 L60 14 L75 8 L90 10 L100 3 L100 24 L0 24 Z" fill="currentColor" fill-opacity="0.08"></path>
+</svg>
+</div>
+</div>
+<!-- Stat 2: Demandes Qualifiées -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-medium">Demandes qualifiées</span>
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">mark_email_unread</span>
+</div>
+</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="stat-requests-val">5</span>
+<span class="font-label-sm text-label-sm text-primary bg-primary-fixed px-2 py-0.5 rounded-full font-semibold">
+            3 nouvelles
+          </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-1">Briefs avec budget validé</span>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Taux de conversion profil</span>
+<span class="font-semibold text-on-surface">3.5%</span>
+</div>
+</div>
+<!-- Stat 3: Livrables Validés -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-medium">Livrables certifiés</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="stat-deliverables-val">6</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">sur 7 soumis</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-1">Validés par l'équipe FindPro</span>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1 rapport d'audit en révision</span>
+</div>
+</div>
+<!-- Stat 4: Délai de réponse -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-medium">Délai moyen de réponse</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">timelapse</span>
+</div>
+</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="stat-speed-val">4 h</span>
+<span class="font-label-sm text-label-sm text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-semibold">
+            Optimal
+          </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-1">Objectif plateforme &lt; 12h</span>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Assiduité de réponse</span>
+<span class="font-semibold text-on-surface">100%</span>
+</div>
+</div>
+</div>
+<!-- Primary Split Section: Action Shortcuts & Contact Requests -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column (8 cols): Recent Direct Contact Requests -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md mb-space-md gap-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Demandes de contact reçues</h2>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold" id="requests-badge-count">3 en attente</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+              Propositions directes de donneurs d'ordres avec enveloppe budgétaire et spécifications auditées.
+            </p>
+</div>
+<a class="font-label-md text-label-md text-primary hover:underline flex items-center gap-1 shrink-0" href="#">
+<span>Voir l'ensemble (5)</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Dynamic Requests Container -->
+<div class="flex flex-col gap-space-md" id="requests-list">
+<!-- Contact Item 1 -->
+<div class="p-space-md rounded-xl bg-surface-bright hover:bg-surface-container-low transition-colors flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-title-md text-title-md text-on-surface font-bold shrink-0">
+                DS
+              </div>
+<div class="flex flex-col min-w-0">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface font-semibold truncate">Datashield SAS</span>
+<span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 font-label-sm text-label-sm font-medium">Client Grand Compte</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• Reçu il y a 2h</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface mt-1 font-medium">Refonte Architecture Design System &amp; Audit OWASP</span>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary">attach_money</span>
+                    Budget estimé : <strong class="text-on-surface">18 000 € HT</strong>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">calendar_today</span>
+                    Durée : 3 mois (Régie partielle)
+                  </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">apartment</span>
+                    Secteur : FinTech / Sécurité bancaire
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+                Décliner
+              </button>
+<button class="px-4 py-2 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-md text-label-md shadow-sm hover:opacity-95 transition-opacity flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">reply</span>
+<span>Répondre au brief</span>
+</button>
+</div>
+</div>
+<!-- Contact Item 2 -->
+<div class="p-space-md rounded-xl bg-surface-bright hover:bg-surface-container-low transition-colors flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-title-md text-title-md text-on-surface font-bold shrink-0">
+                NE
+              </div>
+<div class="flex flex-col min-w-0">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface font-semibold truncate">NovaEnergy Group</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium">Entreprise Vérifiée</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• Reçu hier à 16:30</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface mt-1 font-medium">Accompagnement Migration Micro-frontends (Module Federation)</span>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary">attach_money</span>
+                    Budget estimé : <strong class="text-on-surface">32 500 € HT</strong>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">calendar_today</span>
+                    Durée : 4 mois (Lead tech)
+                  </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">bolt</span>
+                    Secteur : GreenTech &amp; Énergie
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+                Décliner
+              </button>
+<button class="px-4 py-2 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-md text-label-md shadow-sm hover:opacity-95 transition-opacity flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">reply</span>
+<span>Répondre au brief</span>
+</button>
+</div>
+</div>
+<!-- Contact Item 3 -->
+<div class="p-space-md rounded-xl bg-surface-bright hover:bg-surface-container-low transition-colors flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-title-md text-title-md text-on-surface font-bold shrink-0">
+                KL
+              </div>
+<div class="flex flex-col min-w-0">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface font-semibold truncate">Kylin Health</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium">Santé / HDS</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• Reçu le 14 avr.</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface mt-1 font-medium">Revue de code &amp; Audit de performance Next.js / Cloudflare Workers</span>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary">attach_money</span>
+                    Budget estimé : <strong class="text-on-surface">6 800 € HT</strong>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">calendar_today</span>
+                    Durée : Forfait 8 jours
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+                Décliner
+              </button>
+<button class="px-4 py-2 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-md text-label-md shadow-sm hover:opacity-95 transition-opacity flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">reply</span>
+<span>Répondre au brief</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State Container (Displayed via JavaScript simulator) -->
+<div class="hidden py-space-xl flex flex-col items-center justify-center text-center" id="requests-empty-state">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant mb-space-md">
+<span class="material-symbols-outlined text-[32px]">inbox</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Aucune demande de contact active</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm mt-1">
+            Dès que votre audit sera achevé et votre profil publié, les acheteurs accrédités pourront vous envoyer des opportunités ciblées.
+          </p>
+</div>
+</div>
+<!-- Verified Deliverables Showcase Snippet -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">folder_managed</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Derniers livrables audités par FindPro</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">6 livrables certifiés conformes</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Deliverable 1 -->
+<div class="p-space-md rounded-xl bg-surface-bright flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm">Architecture Frontend</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-emerald-700 font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                  Validé
+                </span>
+</div>
+<span class="font-title-md text-title-md text-on-surface font-medium block">Spécification technique Design System Multi-Marques</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+                Document d'architecture de 48 pages détaillant les tokens W3C, l'intégration Web Components et les tests de non-régression visuelle Playwright.
+              </p>
+</div>
+<div class="flex items-center justify-between mt-space-md pt-2 text-on-surface-variant font-label-sm text-label-sm">
+<span>Audit de conformité : 100/100</span>
+<a class="text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+                Consulter
+                <span class="material-symbols-outlined text-[13px]">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Deliverable 2 -->
+<div class="p-space-md rounded-xl bg-surface-bright flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm">Sécurité applicative</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-emerald-700 font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                  Validé
+                </span>
+</div>
+<span class="font-title-md text-title-md text-on-surface font-medium block">Matrice de durcissement CSP &amp; Sanitization XSS</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+                Rapport de benchmark avec preuve de concept d'atténuation des failles d'injection pour les portails bancaires React/Next.js.
+              </p>
+</div>
+<div class="flex items-center justify-between mt-space-md pt-2 text-on-surface-variant font-label-sm text-label-sm">
+<span>Audit de conformité : 96/100</span>
+<a class="text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+                Consulter
+                <span class="material-symbols-outlined text-[13px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (4 cols): Quick Access Actions & Profile Health -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Quick Action Center -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center gap-2 mb-space-md">
+<span class="material-symbols-outlined text-primary text-[20px]">bolt</span>
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Raccourcis d'actions rapides</h3>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Action 1 -->
+<a class="group p-space-md rounded-xl bg-surface-bright hover:bg-surface-container-high transition-colors flex items-center justify-between" href="#">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[20px]">add_box</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold group-hover:text-primary transition-colors">Gérer mon portfolio</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ajouter ou remplacer un livrable</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-0.5 transition-transform text-[18px]">chevron_right</span>
+</a>
+<!-- Action 2 -->
+<a class="group p-space-md rounded-xl bg-surface-bright hover:bg-surface-container-high transition-colors flex items-center justify-between" href="#">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold group-hover:text-secondary transition-colors">Compétences &amp; TJM</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Actuellement 850 € / jour</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-0.5 transition-transform text-[18px]">chevron_right</span>
+</a>
+<!-- Action 3 -->
+<a class="group p-space-md rounded-xl bg-surface-bright hover:bg-surface-container-high transition-colors flex items-center justify-between" href="#">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">mark_email_unread</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold group-hover:text-primary transition-colors">Demandes reçues</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="shortcut-msg-count">3 demandes en attente</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold">3</span>
+</a>
+</div>
+</div>
+<!-- Verified Competency Matrix (Audited Only) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Compétences validées</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Audit FindPro 2025</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+            Architecture React / Next.js
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+            TypeScript Stricte
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+            Sécurité OWASP Web
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+            Design Systems &amp; Tokens
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+            CI/CD Playwright &amp; Cypress
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+            Micro-frontends
+          </span>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low p-space-sm rounded-lg flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">verified</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">
+            Les compétences présentées sont confirmées par revue de dépôt privé et ne reposent sur aucune auto-déclaration non prouvée.
+          </p>
+</div>
+</div>
+<!-- Legal & Accreditations Checklist Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<h3 class="font-title-md text-title-md text-on-surface font-bold mb-space-sm">Conformité réglementaire</h3>
+<div class="flex flex-col gap-space-sm mt-3">
+<div class="flex items-center justify-between py-1 text-on-surface font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">task_alt</span>
+<span>Extrait Kbis (&lt; 3 mois)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Validé</span>
+</div>
+<div class="flex items-center justify-between py-1 text-on-surface font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">task_alt</span>
+<span>Attestation URSSAF de vigilance</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Conforme</span>
+</div>
+<div class="flex items-center justify-between py-1 text-on-surface font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">error</span>
+<span>Attestation RC Professionnelle</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">30j restants</span>
+</div>
+<div class="flex items-center justify-between py-1 text-on-surface font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">task_alt</span>
+<span>Vérification d'identité (KYC)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Validé</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Simulation Logic Script for switching between the 3 modes requested -->
+<script>
+    function setDashboardMode(mode) {
+      const btnVerified = document.getElementById('btn-mode-verified');
+      const btnPending = document.getElementById('btn-mode-pending');
+      const btnEmpty = document.getElementById('btn-mode-empty');
+
+      const bannerPending = document.getElementById('banner-pending');
+      const bannerEmpty = document.getElementById('banner-empty');
+      const badgeVerifiedContainer = document.getElementById('badge-verified-container');
+      const avatarBadge = document.getElementById('avatar-verified-badge');
+
+      const techScoreVal = document.getElementById('tech-score-val');
+      const completionPercentage = document.getElementById('completion-percentage');
+      const progressBarFill = document.getElementById('progress-bar-fill');
+      const completionHint = document.getElementById('completion-hint');
+      const progressChip = document.getElementById('progress-chip');
+
+      const statViews = document.getElementById('stat-views-val');
+      const statRequests = document.getElementById('stat-requests-val');
+      const statDeliverables = document.getElementById('stat-deliverables-val');
+      const statSpeed = document.getElementById('stat-speed-val');
+
+      const requestsList = document.getElementById('requests-list');
+      const requestsEmptyState = document.getElementById('requests-empty-state');
+      const requestsBadgeCount = document.getElementById('requests-badge-count');
+      const shortcutMsgCount = document.getElementById('shortcut-msg-count');
+      const userName = document.getElementById('user-display-name');
+
+      // Reset button classes
+      [btnVerified, btnPending, btnEmpty].forEach(btn => {
+        btn.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-on-surface');
+        btn.classList.add('text-on-surface-variant');
+      });
+
+      if (mode === 'verified') {
+        btnVerified.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-on-surface');
+        btnVerified.classList.remove('text-on-surface-variant');
+
+        bannerPending.classList.add('hidden');
+        bannerEmpty.classList.add('hidden');
+        badgeVerifiedContainer.classList.remove('hidden');
+        badgeVerifiedContainer.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 font-label-md text-label-md";
+        badgeVerifiedContainer.innerHTML = '<span class="material-symbols-outlined text-[15px] text-emerald-600" style="font-variation-settings: \'FILL\' 1;">verified_user</span><span class="font-semibold">Profil audité &amp; vérifié</span>';
+        avatarBadge.classList.remove('hidden');
+
+        userName.textContent = "Bonjour Maxime Gauthier";
+        techScoreVal.textContent = "98/100";
+        completionPercentage.textContent = "85%";
+        progressBarFill.style.width = "85%";
+        progressChip.textContent = "Étape 4 / 5";
+        completionHint.innerHTML = '<span class="font-semibold text-on-surface">Recommandation de l\'audit :</span> Ajoutez un 3ème livrable audité pour atteindre 100% de visibilité dans l\'algorithme d\'affectation grand compte.';
+
+        statViews.textContent = "142";
+        statRequests.textContent = "5";
+        statDeliverables.textContent = "6";
+        statSpeed.textContent = "4 h";
+
+        requestsList.classList.remove('hidden');
+        requestsEmptyState.classList.add('hidden');
+        requestsBadgeCount.textContent = "3 en attente";
+        shortcutMsgCount.textContent = "3 demandes en attente";
+      } else if (mode === 'pending') {
+        btnPending.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-on-surface');
+        btnPending.classList.remove('text-on-surface-variant');
+
+        bannerPending.classList.remove('hidden');
+        bannerEmpty.classList.add('hidden');
+        badgeVerifiedContainer.classList.remove('hidden');
+        badgeVerifiedContainer.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-highest text-secondary font-label-md text-label-md";
+        badgeVerifiedContainer.innerHTML = '<span class="material-symbols-outlined text-[15px] text-secondary">hourglass_top</span><span class="font-semibold">⏳ En attente de validation</span>';
+        avatarBadge.classList.add('hidden');
+
+        userName.textContent = "Bonjour Maxime Gauthier";
+        techScoreVal.textContent = "Audit en cours";
+        completionPercentage.textContent = "60%";
+        progressBarFill.style.width = "60%";
+        progressChip.textContent = "Audit sous 48h";
+        completionHint.innerHTML = '<span class="font-semibold text-secondary">Examen par l\'équipe :</span> Vos documents ont été reçus. Le label vérifié sera attribué dès confirmation de vos dépôts.';
+
+        statViews.textContent = "18";
+        statRequests.textContent = "0";
+        statDeliverables.textContent = "3";
+        statSpeed.textContent = "--";
+
+        requestsList.classList.add('hidden');
+        requestsEmptyState.classList.remove('hidden');
+        requestsBadgeCount.textContent = "Indexation suspendue";
+        shortcutMsgCount.textContent = "0 demande reçue";
+      } else if (mode === 'empty') {
+        btnEmpty.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-on-surface');
+        btnEmpty.classList.remove('text-on-surface-variant');
+
+        bannerPending.classList.add('hidden');
+        bannerEmpty.classList.remove('hidden');
+        badgeVerifiedContainer.classList.remove('hidden');
+        badgeVerifiedContainer.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md";
+        badgeVerifiedContainer.innerHTML = '<span class="material-symbols-outlined text-[15px]">edit_note</span><span>Profil vierge non publié</span>';
+        avatarBadge.classList.add('hidden');
+
+        userName.textContent = "Bienvenue sur FindPro";
+        techScoreVal.textContent = "Non évalué";
+        completionPercentage.textContent = "15%";
+        progressBarFill.style.width = "15%";
+        progressChip.textContent = "Étape 1 / 5";
+        completionHint.innerHTML = '<span class="font-semibold text-primary">Action requise :</span> Uploadez votre Kbis, votre assurance RC Pro et au moins 1 livrable pour déclencher l\'audit initial.';
+
+        statViews.textContent = "0";
+        statRequests.textContent = "0";
+        statDeliverables.textContent = "0";
+        statSpeed.textContent = "N/A";
+
+        requestsList.classList.add('hidden');
+        requestsEmptyState.classList.remove('hidden');
+        requestsBadgeCount.textContent = "0 demande";
+        shortcutMsgCount.textContent = "Aucune demande";
+      }
+    }
+  </script>
+</div></main></div></body></html>
