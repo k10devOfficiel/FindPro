@@ -97,6 +97,8 @@ $nomUtilisateur = $estConnecte && $utilisateurCourant['prenom'] !== '' ? $utilis
                                     <li><h6 class="dropdown-header">Espace Professionnel</h6></li>
                                     <li><a class="dropdown-item" href="<?= url('pro/index.php') ?>"><i class="bi bi-briefcase me-2"></i>Tableau de bord</a></li>
                                     <li><a class="dropdown-item" href="<?= url('pro/profil.php') ?>"><i class="bi bi-person-lines-fill me-2"></i>Mon profil</a></li>
+                                    <li><a class="dropdown-item" href="<?= url('pro/competences.php') ?>"><i class="bi bi-award me-2"></i>Mes compétences</a></li>
+                                    <li><a class="dropdown-item" href="<?= url('pro/portfolio.php') ?>"><i class="bi bi-images me-2"></i>Portfolio</a></li>
                                 <?php else: ?>
                                     <li><h6 class="dropdown-header">Espace Client</h6></li>
                                     <li><a class="dropdown-item" href="<?= url('client/index.php') ?>"><i class="bi bi-grid me-2"></i>Mes demandes</a></li>

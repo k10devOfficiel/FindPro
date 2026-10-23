@@ -110,8 +110,11 @@ CREATE TABLE projet_portfolio (
     id_profil INT UNSIGNED NOT NULL,
     titre VARCHAR(150) NOT NULL,
     description TEXT NULL,
-    url_media VARCHAR(500) NOT NULL,
-    type_media ENUM('lien', 'image') NOT NULL DEFAULT 'image',
+    lien_externe VARCHAR(500) NULL,
+    image VARCHAR(255) NULL,
+    date_projet DATE NULL,
+    url_media VARCHAR(500) NULL,
+    type_media ENUM('lien', 'image') NULL DEFAULT 'image',
     date_ajout DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_portfolio_profil
         FOREIGN KEY (id_profil) REFERENCES profil_professionnel(id_profil)

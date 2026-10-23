@@ -49,12 +49,17 @@ require_once __DIR__ . '/../includes/header.php';
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-secondary btn-sm" href="#" onclick="return false;">
+                <a class="nav-link text-secondary btn-sm" href="<?= url('pro/profil.php') ?>">
                     <i class="bi bi-person-lines-fill me-1"></i>Mon profil
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-secondary btn-sm" href="#" onclick="return false;">
+                <a class="nav-link text-secondary btn-sm" href="<?= url('pro/competences.php') ?>">
+                    <i class="bi bi-award me-1"></i>Compétences
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary btn-sm" href="<?= url('pro/portfolio.php') ?>">
                     <i class="bi bi-images me-1"></i>Portfolio
                 </a>
             </li>
@@ -84,13 +89,17 @@ require_once __DIR__ . '/../includes/header.php';
                         <span><i class="bi bi-speedometer2 me-2"></i>Vue d'ensemble</span>
                         <i class="bi bi-chevron-right small"></i>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2" onclick="return false;">
+                    <a href="<?= url('pro/profil.php') ?>" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2">
                         <span><i class="bi bi-person-lines-fill me-2"></i>Mon profil</span>
-                        <span class="badge bg-light text-secondary border">Bientôt</span>
+                        <i class="bi bi-chevron-right small"></i>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2" onclick="return false;">
+                    <a href="<?= url('pro/competences.php') ?>" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2">
+                        <span><i class="bi bi-award me-2"></i>Compétences</span>
+                        <i class="bi bi-chevron-right small"></i>
+                    </a>
+                    <a href="<?= url('pro/portfolio.php') ?>" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2">
                         <span><i class="bi bi-images me-2"></i>Portfolio</span>
-                        <span class="badge bg-light text-secondary border">Bientôt</span>
+                        <i class="bi bi-chevron-right small"></i>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2" onclick="return false;">
                         <span><i class="bi bi-inbox me-2"></i>Demandes</span>
