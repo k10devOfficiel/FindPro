@@ -9,14 +9,15 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/session.php';
+require_once __DIR__ . '/csrf.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+demarrer_session();
 
-$estConnecte = isset($_SESSION['utilisateur']) && is_array($_SESSION['utilisateur']);
-$roleUtilisateur = $estConnecte ? ($_SESSION['utilisateur']['role'] ?? 'client') : null;
-$nomUtilisateur = $estConnecte ? ($_SESSION['utilisateur']['prenom'] ?? $_SESSION['utilisateur']['nom'] ?? 'Mon compte') : '';
+$utilisateurCourant = utilisateur_courant();
+$estConnecte = $utilisateurCourant !== null;
+$roleUtilisateur = $estConnecte ? $utilisateurCourant['role'] : null;
+$nomUtilisateur = $estConnecte && $utilisateurCourant['prenom'] !== '' ? $utilisateurCourant['prenom'] : 'Mon compte';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -79,10 +80,10 @@ $nomUtilisateur = $estConnecte ? ($_SESSION['utilisateur']['prenom'] ?? $_SESSIO
                 <div class="d-flex align-items-center gap-2 pt-2 pt-lg-0">
                     <?php if (!$estConnecte): ?>
                         <!-- Emplacements pour visiteur non connecté -->
-                        <a href="<?= url('connexion.php') ?>" class="btn btn-outline-primary btn-sm">Connexion</a>
-                        <a href="<?= url('inscription.php') ?>" class="btn btn-brand btn-sm">Inscription</a>
+                        <a href="<?= url('login.php') ?>" class="btn btn-outline-primary btn-sm">Connexion</a>
+                        <a href="<?= url('register.php') ?>" class="btn btn-brand btn-sm">Inscription</a>
                     <?php else: ?>
-                        <!-- Emplacement préparé pour utilisateur connecté selon le rôle -->
+                        <!-- Emplacement pour utilisateur connecté selon le rôle -->
                         <div class="dropdown">
                             <button class="btn btn-outline-primary btn-sm dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle"></i>
@@ -91,17 +92,24 @@ $nomUtilisateur = $estConnecte ? ($_SESSION['utilisateur']['prenom'] ?? $_SESSIO
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                                 <?php if ($roleUtilisateur === 'admin'): ?>
                                     <li><h6 class="dropdown-header">Administration</h6></li>
-                                    <li><a class="dropdown-item" href="<?= url('admin/dashboard.php') ?>"><i class="bi bi-speedometer2 me-2"></i>Tableau de bord</a></li>
+                                    <li><a class="dropdown-item" href="<?= url('admin/index.php') ?>"><i class="bi bi-speedometer2 me-2"></i>Tableau de bord</a></li>
                                 <?php elseif ($roleUtilisateur === 'professionnel'): ?>
                                     <li><h6 class="dropdown-header">Espace Professionnel</h6></li>
-                                    <li><a class="dropdown-item" href="<?= url('pro/dashboard.php') ?>"><i class="bi bi-briefcase me-2"></i>Tableau de bord</a></li>
+                                    <li><a class="dropdown-item" href="<?= url('pro/index.php') ?>"><i class="bi bi-briefcase me-2"></i>Tableau de bord</a></li>
                                     <li><a class="dropdown-item" href="<?= url('pro/profil.php') ?>"><i class="bi bi-person-lines-fill me-2"></i>Mon profil</a></li>
                                 <?php else: ?>
                                     <li><h6 class="dropdown-header">Espace Client</h6></li>
-                                    <li><a class="dropdown-item" href="<?= url('client/dashboard.php') ?>"><i class="bi bi-grid me-2"></i>Mes demandes</a></li>
+                                    <li><a class="dropdown-item" href="<?= url('client/index.php') ?>"><i class="bi bi-grid me-2"></i>Mes demandes</a></li>
                                 <?php endif; ?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="<?= url('deconnexion.php') ?>"><i class="bi bi-box-arrow-right me-2"></i>Déconnexion</a></li>
+                                <li>
+                                    <form action="<?= url('logout.php') ?>" method="POST" class="m-0 p-0">
+                                        <?= csrf_field() ?>
+                                        <button type="submit" class="dropdown-item text-danger d-flex align-items-center">
+                                            <i class="bi bi-box-arrow-right me-2"></i>Déconnexion
+                                        </button>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                     <?php endif; ?>
