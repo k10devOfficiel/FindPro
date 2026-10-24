@@ -379,15 +379,6 @@ require_once __DIR__ . '/../includes/header.php';
                         </form>
                     <?php endif; ?>
 
-                    <div class="mt-4 pt-3 border-top bg-light p-3 rounded">
-                        <h3 class="h6 fw-semibold mb-2 text-dark">Règles de gestion</h3>
-                        <ul class="small text-secondary ps-3 mb-0">
-                            <li>Pas de doublon : chaque compétence ne peut être associée qu'une seule fois.</li>
-                            <li>Plafond maximum : 15 compétences par profil.</li>
-                            <li>En cas de changement de métier sur <a href="<?= url('pro/profil.php') ?>">votre profil</a>, les compétences incompatibles sont automatiquement retirées.</li>
-                        </ul>
-                    </div>
-
                 </div>
             </div>
 

@@ -344,7 +344,7 @@ require_once __DIR__ . '/includes/header.php';
                         <?php endif; ?>
                     </div>
 
-                    <p class="fs-5 text-primary fw-semibold mb-2">
+                    <p class="fs-5 text-primary fw-semibold mb-2 text-break">
                         <?= e($titre) ?>
                     </p>
 
@@ -417,7 +417,7 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
                 <div class="card-body p-4">
                     <?php if (!empty($profil['description'])): ?>
-                        <div class="text-secondary leading-relaxed" style="white-space: pre-line;">
+                        <div class="text-secondary leading-relaxed text-break" style="white-space: pre-line;">
                             <?= e($profil['description']) ?>
                         </div>
                     <?php else: ?>
@@ -506,7 +506,7 @@ require_once __DIR__ . '/includes/header.php';
                                         <?php endif; ?>
 
                                         <div class="card-body p-3 d-flex flex-column">
-                                            <h3 class="h6 fw-bold text-dark mb-1">
+                                            <h3 class="h6 fw-bold text-dark mb-1 text-break">
                                                 <?= e($projet['titre']) ?>
                                             </h3>
                                             <?php if (!empty($projet['date_projet'])): ?>
@@ -515,7 +515,7 @@ require_once __DIR__ . '/includes/header.php';
                                                 </span>
                                             <?php endif; ?>
 
-                                            <p class="text-secondary small mb-3 flex-grow-1">
+                                            <p class="text-secondary small mb-3 flex-grow-1 text-break">
                                                 <?= e($projet['description'] ?? '') ?>
                                             </p>
 
@@ -591,7 +591,7 @@ require_once __DIR__ . '/includes/header.php';
                                     </div>
 
                                     <?php if (!empty($av['commentaire'])): ?>
-                                        <p class="text-secondary small mb-0 fst-italic">
+                                        <p class="text-secondary small mb-0 fst-italic text-break">
                                             « <?= e($av['commentaire']) ?> »
                                         </p>
                                     <?php endif; ?>
@@ -649,7 +649,7 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </div>
 
-            <!-- Encadré déontologique RG11 si Cybersécurité -->
+            <!-- Encadré déontologique si Cybersécurité -->
             <?php if ($isCyber): ?>
                 <div class="card border-warning-subtle bg-warning-subtle bg-opacity-25 shadow-2xs mb-4">
                     <div class="card-body p-3.5">
@@ -657,7 +657,7 @@ require_once __DIR__ . '/includes/header.php';
                             <i class="bi bi-shield-lock-fill text-warning fs-4 flex-shrink-0" aria-hidden="true"></i>
                             <div>
                                 <h3 class="h6 fw-bold text-dark mb-1">
-                                    Engagement cybersécurité (RG11)
+                                    Engagement cybersécurité
                                 </h3>
                                 <p class="small text-secondary mb-0 leading-relaxed">
                                     Conformément à la déontologie FindPro, toute prestation d'audit ou de test de sécurité nécessite une autorisation écrite explicite du propriétaire du système cible avant tout diagnostic.

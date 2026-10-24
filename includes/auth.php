@@ -78,6 +78,10 @@ function exiger_role(string ...$roles): array
     $utilisateur = exiger_connexion();
 
     if (!in_array($utilisateur['role'], $roles, true)) {
+        if ($roles === ['client'] && $utilisateur['role'] === 'professionnel') {
+            $message403 = 'Seuls les comptes clients peuvent envoyer une demande.';
+            $titre403 = 'Action réservée aux clients';
+        }
         // Émission formelle d'un HTTP 403 avec affichage de la page d'interdiction
         require __DIR__ . '/403.php';
         exit;

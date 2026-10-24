@@ -260,7 +260,7 @@ require_once __DIR__ . '/includes/header.php';
 
                     <div class="text-center small text-secondary">
                         Vous n'avez pas encore de compte ? 
-                        <a href="<?= url('register.php') ?>" class="fw-semibold text-primary">Créer un compte</a>
+                        <a href="<?= url('register.php' . ($urlRetour !== null ? '?retour=' . urlencode($urlRetour) : '')) ?>" class="fw-semibold text-primary">Créer un compte</a>
                     </div>
                 </form>
             </div>

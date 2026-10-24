@@ -413,7 +413,7 @@ require_once __DIR__ . '/includes/header.php';
                                 required
                             >
                             <label class="form-check-label small" for="conditions">
-                                J'accepte les <a href="<?= url('mentions-legales.php') ?>" target="_blank" class="text-decoration-underline">règles d'usage</a> et la politique de confidentialité de FindPro. <span class="text-danger">*</span>
+                                J'accepte les <a href="<?= url('regles.php') ?>" target="_blank" class="text-decoration-underline text-primary">règles d'utilisation</a>, les <a href="<?= url('mentions.php') ?>" target="_blank" class="text-decoration-underline text-primary">mentions légales</a> et la <a href="<?= url('confidentialite.php') ?>" target="_blank" class="text-decoration-underline text-primary">politique de confidentialité</a> de FindPro. <span class="text-danger">*</span>
                             </label>
                             <?php if (isset($erreurs['conditions'])): ?>
                                 <div class="invalid-feedback d-block"><?= e($erreurs['conditions']) ?></div>
@@ -428,7 +428,7 @@ require_once __DIR__ . '/includes/header.php';
 
                     <div class="text-center small text-secondary">
                         Vous avez déjà un compte ? 
-                        <a href="<?= url('login.php') ?>" class="fw-semibold text-primary">Se connecter</a>
+                        <a href="<?= url('login.php' . ($urlRetourValidee !== null ? '?retour=' . urlencode($urlRetourValidee) : '')) ?>" class="fw-semibold text-primary">Se connecter</a>
                     </div>
                 </form>
             </div>

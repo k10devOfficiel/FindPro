@@ -42,3 +42,6 @@ $RECYCLE.BIN/
 ._*
 .Spotlight-V100
 .Trashes
+
+# Dossier scratch temporaire
+scratch/

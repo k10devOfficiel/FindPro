@@ -44,6 +44,16 @@ function csrf_field(): string
 }
 
 /**
+ * Alias français de csrf_field().
+ *
+ * @return string Balise HTML <input type="hidden">
+ */
+function csrf_champ(): string
+{
+    return csrf_field();
+}
+
+/**
  * Valide le jeton CSRF transmis par rapport à celui présent en session.
  * 
  * Récupère le jeton soit :

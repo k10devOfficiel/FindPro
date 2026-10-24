@@ -8,6 +8,7 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/securite.php';
 require_once __DIR__ . '/functions.php';
 require_once __DIR__ . '/session.php';
 require_once __DIR__ . '/csrf.php';
@@ -96,12 +97,14 @@ $nomUtilisateur = $estConnecte && $utilisateurCourant['prenom'] !== '' ? $utilis
                                 <?php elseif ($roleUtilisateur === 'professionnel'): ?>
                                     <li><h6 class="dropdown-header">Espace Professionnel</h6></li>
                                     <li><a class="dropdown-item" href="<?= url('pro/index.php') ?>"><i class="bi bi-briefcase me-2"></i>Tableau de bord</a></li>
+                                    <li><a class="dropdown-item" href="<?= url('pro/demandes.php') ?>"><i class="bi bi-inbox me-2"></i>Demandes reçues</a></li>
                                     <li><a class="dropdown-item" href="<?= url('pro/profil.php') ?>"><i class="bi bi-person-lines-fill me-2"></i>Mon profil</a></li>
                                     <li><a class="dropdown-item" href="<?= url('pro/competences.php') ?>"><i class="bi bi-award me-2"></i>Mes compétences</a></li>
                                     <li><a class="dropdown-item" href="<?= url('pro/portfolio.php') ?>"><i class="bi bi-images me-2"></i>Portfolio</a></li>
                                 <?php else: ?>
                                     <li><h6 class="dropdown-header">Espace Client</h6></li>
-                                    <li><a class="dropdown-item" href="<?= url('client/index.php') ?>"><i class="bi bi-grid me-2"></i>Mes demandes</a></li>
+                                    <li><a class="dropdown-item" href="<?= url('client/index.php') ?>"><i class="bi bi-speedometer2 me-2"></i>Tableau de bord</a></li>
+                                    <li><a class="dropdown-item" href="<?= url('client/demandes.php') ?>"><i class="bi bi-grid me-2"></i>Mes demandes</a></li>
                                 <?php endif; ?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>

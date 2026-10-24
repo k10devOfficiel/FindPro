@@ -25,9 +25,9 @@ require_once __DIR__ . '/header.php';
                     </span>
                 </div>
 
-                <h1 class="h3 fw-bold mb-2">Accès refusé (403)</h1>
+                <h1 class="h3 fw-bold mb-2"><?= isset($titre403) && $titre403 !== '' ? e($titre403) : 'Accès refusé (403)' ?></h1>
                 <p class="text-secondary small mb-4">
-                    Vous ne disposez pas des autorisations nécessaires pour accéder à cet espace. Veuillez vérifier votre rôle ou contacter l'administration de FindPro.
+                    <?= isset($message403) && $message403 !== '' ? e($message403) : 'Vous ne disposez pas des autorisations nécessaires pour accéder à cet espace. Veuillez vérifier votre rôle ou contacter l\'administration de FindPro.' ?>
                 </p>
 
                 <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">

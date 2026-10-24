@@ -135,6 +135,7 @@ function utilisateur_courant(): ?array
 
     return [
         'id'     => $id,
+        'nom'    => (string) ($user['nom'] ?? ''),
         'prenom' => (string) ($user['prenom'] ?? ''),
         'role'   => (string) ($user['role'] ?? 'client'),
     ];

@@ -320,9 +320,6 @@ require_once __DIR__ . '/../includes/header.php';
                                 <!-- Date de soumission (triée croissante) -->
                                 <td>
                                     <span class="text-dark fw-medium d-block"><?= e($dateSoum) ?></span>
-                                    <small class="text-secondary font-monospace" style="font-size: 0.72rem;">
-                                        ID profil #<?= (int) $p['id_profil'] ?>
-                                    </small>
                                 </td>
 
                                 <!-- Statut -->

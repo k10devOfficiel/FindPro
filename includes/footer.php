@@ -22,11 +22,15 @@ declare(strict_types=1);
                 <div class="col-12 col-md-6 text-center text-md-end">
                     <ul class="list-inline mb-0 small">
                         <li class="list-inline-item">
-                            <a href="<?= url('mentions-legales.php') ?>" class="text-secondary hover-primary">Mentions légales</a>
+                            <a href="<?= url('mentions.php') ?>" class="text-secondary hover-primary">Mentions légales</a>
                         </li>
                         <li class="list-inline-item text-muted">•</li>
                         <li class="list-inline-item">
                             <a href="<?= url('confidentialite.php') ?>" class="text-secondary hover-primary">Confidentialité</a>
+                        </li>
+                        <li class="list-inline-item text-muted">•</li>
+                        <li class="list-inline-item">
+                            <a href="<?= url('regles.php') ?>" class="text-secondary hover-primary">Règles d'utilisation</a>
                         </li>
                     </ul>
                 </div>
@@ -36,5 +40,8 @@ declare(strict_types=1);
 
     <!-- Bootstrap 5 JS Bundle CDN (avec Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Script JavaScript global FindPro -->
+    <script src="<?= url('assets/js/main.js') ?>"></script>
 </body>
 </html>

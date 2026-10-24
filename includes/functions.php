@@ -88,7 +88,17 @@ function url(string $chemin = ''): string
 
     if ($baseUrl === null) {
         $config = require __DIR__ . '/../config/config.php';
-        $baseUrl = rtrim((string) ($config['app_url'] ?? ''), '/');
+        $configuredUrl = rtrim((string) ($config['app_url'] ?? ''), '/');
+
+        // Adaptation dynamique à l'hôte courant (permet le test sur mobile via IP locale sans conflit de domaine)
+        if (!empty($_SERVER['HTTP_HOST'])) {
+            $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+            $host = (string) $_SERVER['HTTP_HOST'];
+            $path = parse_url($configuredUrl, PHP_URL_PATH) ?: '/findpro';
+            $baseUrl = rtrim($scheme . '://' . $host . $path, '/');
+        } else {
+            $baseUrl = $configuredUrl;
+        }
     }
 
     $cheminNettoye = ltrim($chemin, '/');

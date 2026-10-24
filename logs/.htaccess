@@ -1,2 +1,8 @@
-# Interdiction stricte de tout accès HTTP aux fichiers du dossier logs
-Require all denied
+# Interdiction stricte de l'accès direct par le Web
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order Deny,Allow
+    Deny from all
+</IfModule>

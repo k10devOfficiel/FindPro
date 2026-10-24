@@ -585,7 +585,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if ($messageRg06Declenche) {
-                flash_set('warning', 'Règle RG06 appliquée : Vos modifications sur vos informations clés nécessitent une nouvelle vérification administrative. Votre profil est temporairement retiré de la recherche publique.');
+                flash_set('warning', 'Vos modifications sur vos informations clés nécessitent une nouvelle vérification administrative. Votre profil est temporairement retiré de la recherche publique.');
             } else {
                 flash_set('success', 'Vos modifications ont été enregistrées avec succès en mode brouillon.');
             }
@@ -757,12 +757,12 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
     <?php endif; ?>
 
-    <!-- BANNIÈRE 3 : Règle RG06 si le profil est déjà approuvé -->
+    <!-- BANNIÈRE 3 : Alerte si le profil est déjà approuvé -->
     <?php if ($statutCourant === 'approuve'): ?>
         <div class="alert alert-warning d-flex align-items-start mb-4 shadow-sm" role="alert">
             <i class="bi bi-shield-exclamation fs-4 me-3 flex-shrink-0 text-warning"></i>
             <div>
-                <strong class="d-block mb-1">Règle de gestion RG06 :</strong>
+                <strong class="d-block mb-1">Information importante :</strong>
                 <p class="small mb-0">
                     Votre profil est actuellement <strong>approuvé et visible dans la recherche publique</strong>. 
                     Si vous modifiez votre <strong>catégorie de métier</strong>, votre <strong>titre</strong> ou votre <strong>description</strong>, votre profil repassera automatiquement au statut <em>« En attente de validation »</em> et disparaîtra temporairement des résultats publics le temps de la revérification administrative.
@@ -1071,7 +1071,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <?php elseif (in_array($statutCourant, ['approuve', 'suspendu'], true)): ?>
                         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 pt-2 border-top">
                             <button type="submit" name="action" value="brouillon" class="btn btn-outline-primary py-2 px-3">
-                                <i class="bi bi-save me-1"></i>Mettre à jour le profil (RG06)
+                                <i class="bi bi-save me-1"></i>Mettre à jour le profil
                             </button>
                             <span class="badge bg-light text-secondary border small py-2 px-3">
                                 <i class="bi bi-info-circle me-1"></i>Déjà <?= e($badgeActuel['label']) ?>

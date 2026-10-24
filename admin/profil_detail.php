@@ -251,7 +251,7 @@ $avatarDefautExiste = file_exists(__DIR__ . '/../' . $avatarDefautRel);
 $photoUrl = !empty($profil['photo']) && file_exists(__DIR__ . '/../' . $profil['photo']) ? url($profil['photo']) : null;
 $avatarDefaut = $avatarDefautExiste ? url($avatarDefautRel) : null;
 
-$titre_page = 'Dossier #' . $idProfil . ' — ' . $profil['prenom'] . ' ' . $profil['nom'];
+$titre_page = 'Dossier professionnel — ' . $profil['prenom'] . ' ' . $profil['nom'];
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
@@ -264,11 +264,11 @@ require_once __DIR__ . '/../includes/header.php';
                 <ol class="breadcrumb small mb-1">
                     <li class="breadcrumb-item"><a href="<?= url('admin/index.php') ?>" class="text-decoration-none text-secondary">Administration</a></li>
                     <li class="breadcrumb-item"><a href="<?= url('admin/validation.php') ?>" class="text-decoration-none text-secondary">Validation des profils</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Dossier #<?= (int) $idProfil ?></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dossier professionnel</li>
                 </ol>
             </nav>
             <h1 class="h3 fw-bold mb-0">
-                Arbitrage du dossier professionnel #<?= (int) $idProfil ?>
+                Arbitrage du dossier professionnel
             </h1>
         </div>
         <div>

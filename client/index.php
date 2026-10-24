@@ -49,7 +49,7 @@ require_once __DIR__ . '/../includes/header.php';
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-secondary btn-sm" href="#" onclick="return false;">
+                <a class="nav-link text-secondary btn-sm" href="<?= url('client/demandes.php') ?>">
                     <i class="bi bi-grid me-1"></i>Mes demandes
                 </a>
             </li>
@@ -79,9 +79,9 @@ require_once __DIR__ . '/../includes/header.php';
                         <span><i class="bi bi-speedometer2 me-2"></i>Vue d'ensemble</span>
                         <i class="bi bi-chevron-right small"></i>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2" onclick="return false;">
+                    <a href="<?= url('client/demandes.php') ?>" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2">
                         <span><i class="bi bi-grid me-2"></i>Mes demandes</span>
-                        <span class="badge bg-light text-secondary border">Bientôt</span>
+                        <i class="bi bi-chevron-right small"></i>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2" onclick="return false;">
                         <span><i class="bi bi-chat-dots me-2"></i>Messages</span>

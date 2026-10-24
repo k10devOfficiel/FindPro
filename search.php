@@ -207,7 +207,7 @@ if ($categorieSlug !== '') {
 }
 
 if ($idCompetence !== null) {
-    $nomComp = $competencesById[$idCompetence]['libelle'] ?? ('Compétence #' . $idCompetence);
+    $nomComp = $competencesById[$idCompetence]['libelle'] ?? ('Compétence ' . $idCompetence);
     $filtresActifs[] = [
         'cle'        => 'competence',
         'libelle'    => 'Compétence : ' . $nomComp,
@@ -497,12 +497,12 @@ require_once __DIR__ . '/includes/header.php';
                             </form>
                         </div>
                         
-                        <!-- Rappel déontologique et de conformité RG05 -->
+                        <!-- Rappel déontologique et de conformité -->
                         <div class="card-footer bg-light border-top p-3 small text-secondary">
                             <div class="d-flex align-items-start gap-2">
                                 <i class="bi bi-shield-check text-success fs-5 flex-shrink-0" aria-hidden="true"></i>
                                 <div>
-                                    <span class="fw-semibold text-dark d-block">Garantie FindPro (RG05)</span>
+                                    <span class="fw-semibold text-dark d-block">Garantie FindPro</span>
                                     <span>Tous les profils affichés ont été rigoureusement audités et approuvés par nos administrateurs.</span>
                                 </div>
                             </div>

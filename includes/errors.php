@@ -97,7 +97,9 @@ set_exception_handler(function (Throwable $e) use ($appEnv, $logFile): void {
 
     error_log($logEntry, 3, $logFile);
 
-    http_response_code(500);
+    if (!headers_sent()) {
+        http_response_code(500);
+    }
 
     // Mode CLI : sortie texte concise
     if (PHP_SAPI === 'cli') {

@@ -69,7 +69,7 @@ require_once __DIR__ . '/../includes/header.php';
                                     <span class="fw-semibold text-dark d-block"><?= e($s['auteur_prenom'] . ' ' . $s['auteur_nom']) ?></span>
                                     <small class="text-secondary"><?= e($s['auteur_email']) ?></small>
                                 </td>
-                                <td><span class="badge bg-light text-dark border"><?= e($s['type_cible']) ?> (ID: <?= (int) $s['id_cible'] ?>)</span></td>
+                                <td><span class="badge bg-light text-dark border"><?= e($s['type_cible']) ?></span></td>
                                 <td><span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25"><?= e($s['motif']) ?></span></td>
                                 <td>
                                     <span class="badge <?= $s['statut'] === 'nouveau' ? 'bg-danger' : 'bg-secondary' ?>">

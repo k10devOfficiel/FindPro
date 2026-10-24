@@ -134,14 +134,14 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
 
         <?php if ($estCyber): ?>
-            <!-- Encadré spécifique Cybersécurité (RG11) -->
+            <!-- Encadré spécifique Cybersécurité -->
             <div class="alert alert-warning border-warning border-opacity-50 p-4 rounded-3 shadow-sm mb-5 d-flex gap-3 align-items-start" role="alert">
                 <div class="flex-shrink-0 text-warning fs-3 mt-0.5">
                     <i class="bi bi-shield-exclamation" aria-hidden="true"></i>
                 </div>
                 <div>
                     <h2 class="h6 fw-bold text-dark mb-1 d-flex flex-wrap align-items-center gap-2">
-                        <span>Cadre déontologique et légal strict (RG11)</span>
+                        <span>Cadre déontologique et légal strict</span>
                         <span class="badge bg-warning bg-opacity-25 text-dark border border-warning border-opacity-50 small font-monospace">Obligatoire</span>
                     </h2>
                     <p class="mb-0 text-secondary small leading-relaxed">

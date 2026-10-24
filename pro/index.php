@@ -50,12 +50,8 @@ $derniereDecision = null;
 if ($idProfil !== null) {
     $stmtDecisions = $pdo->prepare('
         SELECT 
-            vp.*,
-            u.prenom AS admin_prenom,
-            u.nom AS admin_nom,
-            u.email AS admin_email
+            vp.*
         FROM validation_profil vp
-        JOIN utilisateur u ON vp.id_administrateur = u.id_utilisateur
         WHERE vp.id_profil = :id_profil
         ORDER BY vp.date_decision DESC, vp.id_validation DESC
     ');
@@ -135,6 +131,11 @@ require_once __DIR__ . '/../includes/header.php';
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-secondary btn-sm" href="<?= url('pro/demandes.php') ?>">
+                    <i class="bi bi-inbox me-1"></i>Demandes
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-secondary btn-sm" href="<?= url('pro/profil.php') ?>">
                     <i class="bi bi-person-lines-fill me-1"></i>Mon profil
                 </a>
@@ -163,6 +164,10 @@ require_once __DIR__ . '/../includes/header.php';
                 <div class="list-group list-group-flush small">
                     <a href="<?= url('pro/index.php') ?>" class="list-group-item list-group-item-action active d-flex align-items-center justify-content-between py-2 fw-medium">
                         <span><i class="bi bi-speedometer2 me-2"></i>Vue d'ensemble</span>
+                        <i class="bi bi-chevron-right small"></i>
+                    </a>
+                    <a href="<?= url('pro/demandes.php') ?>" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2">
+                        <span><i class="bi bi-inbox me-2"></i>Demandes reçues</span>
                         <i class="bi bi-chevron-right small"></i>
                     </a>
                     <a href="<?= url('pro/profil.php') ?>" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2">
@@ -420,9 +425,6 @@ require_once __DIR__ . '/../includes/header.php';
                                         <div class="d-flex align-items-center gap-2">
                                             <span class="badge <?= e($cfgDec['badge']) ?> px-2.5 py-1">
                                                 <i class="bi <?= e($cfgDec['icon']) ?> me-1"></i><?= e($cfgDec['label']) ?>
-                                            </span>
-                                            <span class="small text-secondary">
-                                                Évalué par <strong><?= e($decision['admin_prenom'] . ' ' . $decision['admin_nom']) ?></strong> (Administration)
                                             </span>
                                         </div>
                                         <span class="small text-muted font-monospace"><?= e($dateDec) ?></span>
