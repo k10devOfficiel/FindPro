@@ -102,7 +102,7 @@ require_once __DIR__ . '/../includes/header.php';
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 pb-2 border-bottom">
         <div>
             <h1 class="h3 fw-bold mb-1">
-                Tableau de bord — <?= e($utilisateur['prenom'] . ' ' . $utilisateur['nom']) ?>
+                Tableau de bord — <?= e($utilisateur['prenom'] . (!empty($utilisateur['nom']) ? ' ' . $utilisateur['nom'] : '')) ?>
             </h1>
             <p class="text-secondary small mb-0">
                 Gérez votre profil professionnel, vos réalisations et suivez le statut de validation administrative.

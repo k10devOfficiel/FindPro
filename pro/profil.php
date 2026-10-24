@@ -377,6 +377,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'date_engagement_cyber'  => ($estCatCyber && $engagementCyberSaisie) ? date('Y-m-d H:i:s') : null,
                     ]);
                 } else {
+                    $cyberFlagDraft = ($estCatCyber && $engagementCyberSaisie) ? 1 : (int) ($profil['engagement_cyber'] ?? 0);
+                    $dateCyberDraft = ($cyberFlagDraft === 1) ? ($profil['date_engagement_cyber'] ?? date('Y-m-d H:i:s')) : null;
+
                     $stmtUpdateDraft = $pdo->prepare('
                         UPDATE profil_professionnel SET
                             id_categorie = :id_cat,
@@ -386,11 +389,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             disponibilite = :dispo,
                             photo = :photo,
                             engagement_cyber = :engagement_cyber,
-                            date_engagement_cyber = CASE 
-                                WHEN :engagement_cyber = 1 AND date_engagement_cyber IS NULL THEN NOW() 
-                                WHEN :engagement_cyber = 1 THEN date_engagement_cyber 
-                                ELSE NULL 
-                            END
+                            date_engagement_cyber = :date_engagement_cyber
                         WHERE id_utilisateur = :id_user
                     ');
                     $stmtUpdateDraft->execute([
@@ -400,7 +399,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'zone'                   => $zone,
                         'dispo'                  => $disponibilite,
                         'photo'                  => $photoActuelle,
-                        'engagement_cyber'       => ($estCatCyber && $engagementCyberSaisie) ? 1 : ($profil['engagement_cyber'] ?? 0),
+                        'engagement_cyber'       => $cyberFlagDraft,
+                        'date_engagement_cyber'  => $dateCyberDraft,
                         'id_user'                => $idUtilisateur,
                     ]);
                 }
@@ -448,6 +448,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ]);
                 }
 
+                $cyberFlagSubmit = ($estCatCyber && $engagementCyberSaisie) ? 1 : 0;
+                $dateCyberSubmit = ($cyberFlagSubmit === 1) ? ($profil['date_engagement_cyber'] ?? date('Y-m-d H:i:s')) : null;
+
                 $stmtUpdate = $pdo->prepare('
                     UPDATE profil_professionnel SET
                         id_categorie = :id_cat,
@@ -459,11 +462,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         statut_validation = \'soumis\',
                         date_soumission = NOW(),
                         engagement_cyber = :engagement_cyber,
-                        date_engagement_cyber = CASE 
-                            WHEN :engagement_cyber = 1 AND date_engagement_cyber IS NULL THEN NOW() 
-                            WHEN :engagement_cyber = 1 THEN date_engagement_cyber 
-                            ELSE NULL 
-                        END
+                        date_engagement_cyber = :date_engagement_cyber
                     WHERE id_utilisateur = :id_user
                 ');
                 $stmtUpdate->execute([
@@ -473,7 +472,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'zone'                   => $zone,
                     'dispo'                  => $disponibilite,
                     'photo'                  => $photoActuelle,
-                    'engagement_cyber'       => ($estCatCyber && $engagementCyberSaisie) ? 1 : 0,
+                    'engagement_cyber'       => $cyberFlagSubmit,
+                    'date_engagement_cyber'  => $dateCyberSubmit,
                     'id_user'                => $idUtilisateur,
                 ]);
             }
@@ -548,6 +548,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $nbCompetencesPurgees = $stmtPurge->rowCount();
             }
 
+            $cyberFlagBrouillon = ($estCatCyber && $engagementCyberSaisie) ? 1 : (int) ($profil['engagement_cyber'] ?? 0);
+            $dateCyberBrouillon = ($cyberFlagBrouillon === 1) ? ($profil['date_engagement_cyber'] ?? date('Y-m-d H:i:s')) : null;
+            $dateSoumBrouillon = ($nouveauStatut === 'soumis') ? date('Y-m-d H:i:s') : ($profil['date_soumission'] ?? null);
+
             $stmtUpdate = $pdo->prepare('
                 UPDATE profil_professionnel SET
                     id_categorie = :id_cat,
@@ -557,13 +561,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     disponibilite = :dispo,
                     photo = :photo,
                     statut_validation = :statut,
-                    date_soumission = CASE WHEN :statut_est_soumis = 1 THEN NOW() ELSE date_soumission END,
+                    date_soumission = :date_soumission,
                     engagement_cyber = :engagement_cyber,
-                    date_engagement_cyber = CASE 
-                        WHEN :engagement_cyber = 1 AND date_engagement_cyber IS NULL THEN NOW() 
-                        WHEN :engagement_cyber = 1 THEN date_engagement_cyber 
-                        ELSE NULL 
-                    END
+                    date_engagement_cyber = :date_engagement_cyber
                 WHERE id_utilisateur = :id_user
             ');
             $stmtUpdate->execute([
@@ -574,8 +574,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'dispo'                  => $disponibilite,
                 'photo'                  => $photoActuelle,
                 'statut'                 => $nouveauStatut,
-                'statut_est_soumis'      => ($nouveauStatut === 'soumis') ? 1 : 0,
-                'engagement_cyber'       => ($estCatCyber && $engagementCyberSaisie) ? 1 : ($profil['engagement_cyber'] ?? 0),
+                'date_soumission'        => $dateSoumBrouillon,
+                'engagement_cyber'       => $cyberFlagBrouillon,
+                'date_engagement_cyber'  => $dateCyberBrouillon,
                 'id_user'                => $idUtilisateur,
             ]);
 
