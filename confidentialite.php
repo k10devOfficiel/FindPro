@@ -188,24 +188,6 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
                     </section>
 
-                    <!-- 6. Recommandations juridiques -->
-                    <section class="border-top pt-4">
-                        <div class="alert alert-warning border-warning-subtle small mb-0">
-                            <h3 class="h6 fw-bold text-dark mb-1">
-                                <i class="bi bi-exclamation-triangle-fill text-warning me-1"></i>
-                                Points à faire vérifier par un juriste spécialisé
-                            </h3>
-                            <p class="mb-2 text-secondary">
-                                La présente politique définit des engagements de sécurité et de transparence clairs. Avant un déploiement commercial à grande échelle, nous recommandons de soumettre ce document à un <strong>juriste ou cabinet spécialisé en protection des données personnelles</strong> afin de :
-                            </p>
-                            <ul class="mb-0 ps-3 text-secondary">
-                                <li>Vérifier la conformité formelle avec la loi ivoirienne n° 2013-450 relative à la protection des données à caractère personnel et les exigences de l'<strong>ARTCI</strong> (Autorité de Régulation des Télécommunications/TIC de Côte d'Ivoire).</li>
-                                <li>Finaliser la déclaration préalable de traitement de données auprès de l'autorité compétente.</li>
-                                <li>Valider la politique de gestion des cookies et traceurs techniques.</li>
-                            </ul>
-                        </div>
-                    </section>
-
                 </div>
             </div>
 

@@ -127,24 +127,6 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
                     </section>
 
-                    <!-- 7. Recommandation juridique -->
-                    <section class="border-top pt-4">
-                        <div class="alert alert-warning border-warning-subtle small mb-0">
-                            <h3 class="h6 fw-bold text-dark mb-1">
-                                <i class="bi bi-exclamation-triangle-fill text-warning me-1"></i>
-                                Recommandations juridiques complémentaires
-                            </h3>
-                            <p class="mb-2 text-secondary">
-                                Ces règles d'usage constituent le socle déontologique de la plateforme. Avant le lancement commercial à grande échelle, il est recommandé de faire vérifier par un <strong>juriste ou avocat d'affaires</strong> :
-                            </p>
-                            <ul class="mb-0 ps-3 text-secondary">
-                                <li>L'opposabilité juridique des Conditions Générales d'Utilisation (CGU) et leur mécanisme d'acceptation par case à cocher.</li>
-                                <li>Les clauses limitatives et exonératoires de responsabilité relatives au rôle d'intermédiaire technique.</li>
-                                <li>L'encadrement des procédures contradictoires de suspension ou de bannissement de compte pour prévenir les contestations.</li>
-                            </ul>
-                        </div>
-                    </section>
-
                 </div>
             </div>
 

@@ -75,49 +75,15 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
                     </section>
 
-                    <!-- 3. Hébergement -->
-                    <section class="mb-5">
-                        <h2 class="h5 fw-bold text-dark mb-3 d-flex align-items-center gap-2">
-                            <i class="bi bi-hdd-network text-primary" aria-hidden="true"></i>
-                            <span>3. Hébergement</span>
-                        </h2>
-                        <div class="bg-light p-3.5 rounded border small leading-relaxed text-secondary">
-                            <p class="mb-0">
-                                La plateforme FindPro est hébergée sur des infrastructures cloud sécurisées fournies par :<br>
-                                <strong>OVH SAS</strong><br>
-                                2 rue Kellermann, 59100 Roubaix, France<br>
-                                Site web : <a href="https://www.ovhcloud.com" target="_blank" rel="noopener noreferrer" class="text-primary text-decoration-none">www.ovhcloud.com</a>
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- 4. Propriété intellectuelle -->
-                    <section class="mb-5">
+                    <!-- 3. Propriété intellectuelle -->
+                    <section class="mb-4">
                         <h2 class="h5 fw-bold text-dark mb-3 d-flex align-items-center gap-2">
                             <i class="bi bi-shield-lock text-primary" aria-hidden="true"></i>
-                            <span>4. Propriété intellectuelle</span>
+                            <span>3. Propriété intellectuelle</span>
                         </h2>
-                        <p class="text-secondary small leading-relaxed">
+                        <p class="text-secondary small leading-relaxed mb-0">
                             L'ensemble des éléments constituant la plateforme FindPro (structure générale, arborescence, textes, éléments graphiques, photographies, logos, marques et interfaces logicielles) sont protégés par le droit de la propriété intellectuelle. Toute reproduction, représentation, diffusion ou exploitation totale ou partielle sans l'accord exprès préalable de FindPro est strictement interdite.
                         </p>
-                    </section>
-
-                    <!-- 5. Recommandations et vérifications juridiques -->
-                    <section class="border-top pt-4">
-                        <div class="alert alert-warning border-warning-subtle small mb-0">
-                            <h3 class="h6 fw-bold text-dark mb-1">
-                                <i class="bi bi-exclamation-triangle-fill text-warning me-1"></i>
-                                Note d'information juridique
-                            </h3>
-                            <p class="mb-2 text-secondary">
-                                La présente page fournit les informations d'identification de base de FindPro. Elle ne dispense pas d'un audit de conformité formel. Pour la mise en production définitive, il est recommandé de faire vérifier par un <strong>juriste ou avocat spécialisé en droit du numérique et des affaires</strong> :
-                            </p>
-                            <ul class="mb-0 ps-3 text-secondary">
-                                <li>L'exactitude des informations d'immatriculation (RCCM, forme sociétaire définitive et régime fiscal en Côte d'Ivoire).</li>
-                                <li>L'adéquation des clauses de limitation de responsabilité de l'hébergeur et de l'intermédiaire technique.</li>
-                                <li>L'articulation avec les textes applicables dans l'espace OHADA et la législation ivoirienne relative au commerce électronique.</li>
-                            </ul>
-                        </div>
                     </section>
 
                 </div>
