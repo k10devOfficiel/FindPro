@@ -1,17 +1,25 @@
 <?php
 /**
- * Édition et gestion du profil professionnel et de ses compétences — FindPro.
+ * Édition, complétude et soumission du profil professionnel — FindPro.
  * 
  * - Accès strictement réservé aux professionnels authentifiés (exiger_role('professionnel')).
  * - L'identifiant du profil est STRICTEMENT dérivé de la session ($_SESSION['utilisateur']['id']).
  * - Aucun paramètre d'URL n'est accepté pour cibler un profil (protection anti-IDOR).
  * - Enregistrement en brouillon possible même si incomplet.
- * - Téléversement sécurisé de photo de profil (televerser_image dans uploads/avatars/).
- *   Remplacement de la photo supprime l'ancien fichier du disque.
- *   Image par défaut affichée si aucune photo (avec espace réservé gris si le visuel est absent).
- * - Règle RG06 : modification d'un profil approuvé réinitialise le statut à 'soumis' et masque de la recherche.
- * - Gestion des compétences associées : max 15, pas de doublon, suppression protégée par CSRF,
- *   purge automatique si changement de catégorie de métier avec message explicatif.
+ * - Bouton "Soumettre mon profil" avec CSRF et contrôle rigoureux de complétude côté serveur :
+ *     * Catégorie choisie
+ *     * Titre professionnel
+ *     * Description d'au moins 100 caractères
+ *     * Ville / zone d'intervention
+ *     * Disponibilité
+ *     * Au moins 3 compétences déclarées dans le métier
+ *     * Au moins 1 projet dans le portfolio
+ *     * Photo recommandée mais non obligatoire
+ *     * Si catégorie Cybersécurité : engagement déontologique obligatoire enregistré avec horodatage
+ * - En cas d'éléments manquants : refus de soumission avec liste précise des éléments manquants.
+ * - Si complet : statut passe à 'soumis', date_soumission mise à jour à NOW(), profil non public tant que non approuvé.
+ * - Règle de resoumission : un profil 'soumis', 'en_verification', 'approuve' ou 'suspendu' ne peut pas être soumis à nouveau (sauf passage par 'a_corriger').
+ * - Règle de lecture seule : tant que le profil est 'soumis' ou 'en_verification', le formulaire est verrouillé en lecture seule.
  */
 
 declare(strict_types=1);
@@ -24,16 +32,16 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/csrf.php';
 require_once __DIR__ . '/../includes/upload.php';
 
-// RÈGLE OBLIGATOIRE : exiger_role('professionnel') en tête
+// 1. Authentification stricte du professionnel
 demarrer_session();
 $utilisateur = exiger_role('professionnel');
 $idUtilisateur = (int) $utilisateur['id'];
 
 $pdo = db();
 
-// 1. Récupération du profil professionnel existant (toujours via l'ID de session)
+// 2. Récupération du profil professionnel existant (toujours via l'ID de session)
 $stmtProfil = $pdo->prepare('
-    SELECT p.*, c.libelle AS categorie_libelle 
+    SELECT p.*, c.libelle AS categorie_libelle, c.slug AS categorie_slug
     FROM profil_professionnel p
     LEFT JOIN categorie c ON p.id_categorie = c.id_categorie
     WHERE p.id_utilisateur = :id_user
@@ -42,23 +50,35 @@ $stmtProfil = $pdo->prepare('
 $stmtProfil->execute(['id_user' => $idUtilisateur]);
 $profil = $stmtProfil->fetch();
 
-// 2. Chargement des catégories disponibles
-$categories = $pdo->query('SELECT id_categorie, libelle FROM categorie ORDER BY libelle ASC')->fetchAll();
+// Statut courant et vérification de la lecture seule
+$statutCourant = $profil ? (string) $profil['statut_validation'] : 'brouillon';
+$estLectureSeule = in_array($statutCourant, ['soumis', 'en_verification'], true);
 
-// 3. Initialisation des champs du formulaire de profil
+// 3. Chargement des catégories disponibles
+$categories = $pdo->query('SELECT id_categorie, libelle, slug FROM categorie ORDER BY libelle ASC')->fetchAll();
+
+// 4. Initialisation des champs du formulaire de profil
 $idCategorie = $profil ? (int) $profil['id_categorie'] : ($categories[0]['id_categorie'] ?? 0);
 $titre = $profil ? (string) $profil['titre'] : '';
 $description = $profil ? (string) $profil['description'] : '';
 $zone = $profil ? (string) $profil['zone'] : '';
 $disponibilite = $profil ? (string) $profil['disponibilite'] : 'disponible';
 $photoActuelle = $profil && !empty($profil['photo']) ? (string) $profil['photo'] : null;
-$statutValidation = $profil ? (string) $profil['statut_validation'] : 'brouillon';
+$statutValidation = $statutCourant;
+$engagementCyber = $profil ? (bool) ($profil['engagement_cyber'] ?? false) : false;
+$dateEngagementCyber = $profil ? ($profil['date_engagement_cyber'] ?? null) : null;
 
 $erreurs = [];
 
-// 4. Traitement des formulaires POST
+// 5. Traitement des requêtes POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_verifier();
+
+    // RÈGLE MÉTIER : Tant que le profil est soumis ou en_verification, le formulaire est en lecture seule
+    if ($estLectureSeule) {
+        flash_set('warning', 'Votre profil est actuellement en cours d\'examen par notre équipe. Les modifications sont verrouillées en lecture seule.');
+        redirect(url('pro/profil.php'));
+    }
 
     $action = (string) ($_POST['action'] ?? 'brouillon');
 
@@ -75,12 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idCompetence = (int) ($_POST['id_competence'] ?? 0);
         $niveauDeclare = (string) ($_POST['niveau_declare'] ?? 'intermediaire');
 
-        // Validation du niveau
         if (!in_array($niveauDeclare, ['debutant', 'intermediaire', 'avance', 'expert'], true)) {
             $niveauDeclare = 'intermediaire';
         }
 
-        // Compter les compétences déjà associées (maximum 15)
         $stmtCountComp = $pdo->prepare('SELECT COUNT(*) FROM profil_competence WHERE id_profil = :id_profil');
         $stmtCountComp->execute(['id_profil' => $idProfil]);
         $totalCompetences = (int) $stmtCountComp->fetchColumn();
@@ -90,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             redirect(url('pro/profil.php#competences'));
         }
 
-        // Vérifier que la compétence appartient bien à la catégorie actuelle du profil
         $stmtVerifCompCat = $pdo->prepare('
             SELECT COUNT(*) 
             FROM competence 
@@ -106,7 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             redirect(url('pro/profil.php#competences'));
         }
 
-        // Vérifier qu'elle n'est pas déjà associée (anti-doublon)
         $stmtVerifDoublon = $pdo->prepare('
             SELECT COUNT(*) 
             FROM profil_competence 
@@ -122,7 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             redirect(url('pro/profil.php#competences'));
         }
 
-        // Insertion sécurisée
         $stmtInsertComp = $pdo->prepare('
             INSERT INTO profil_competence (id_profil, id_competence, niveau_declare)
             VALUES (:id_profil, :id_comp, :niveau)
@@ -148,7 +163,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idProfil = (int) $profil['id_profil'];
         $idCompetence = (int) ($_POST['id_competence'] ?? 0);
 
-        // Suppression avec vérification stricte d'appartenance au profil du pro connecté
         $stmtSupprComp = $pdo->prepare('
             DELETE FROM profil_competence 
             WHERE id_profil = :id_profil AND id_competence = :id_comp
@@ -166,29 +180,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // -------------------------------------------------------------------------
-    // CAS C : Enregistrement ou mise à jour du profil (Brouillon / Soumission)
+    // CAS C : Enregistrement Brouillon OU Soumission du profil
     // -------------------------------------------------------------------------
+    
+    // RÈGLE DE RESOUMISSION :
+    // Un profil soumis, en_verification, approuve ou suspendu ne peut pas être soumis à nouveau (sauf passage par a_corriger)
+    if ($action === 'soumettre' && $profil) {
+        if (in_array($statutCourant, ['soumis', 'en_verification', 'approuve', 'suspendu'], true)) {
+            if ($statutCourant === 'approuve') {
+                flash_set('info', 'Votre profil est déjà validé et actif publiquement. Il ne peut pas être soumis à nouveau.');
+            } elseif ($statutCourant === 'suspendu') {
+                flash_set('danger', 'Votre profil est actuellement suspendu. Veuillez contacter le support.');
+            } else {
+                flash_set('warning', 'Votre profil est déjà en cours de vérification par nos modérateurs.');
+            }
+            redirect(url('pro/profil.php'));
+        }
+    }
+
     $idCategorie = (int) ($_POST['id_categorie'] ?? 0);
     $titre = trim((string) ($_POST['titre'] ?? ''));
     $description = trim((string) ($_POST['description'] ?? ''));
     $zone = trim((string) ($_POST['zone'] ?? ''));
     $disponibiliteSaisie = (string) ($_POST['disponibilite'] ?? 'disponible');
+    $engagementCyberSaisie = !empty($_POST['engagement_cyber']);
 
-    // Validation de la disponibilité
     if (in_array($disponibiliteSaisie, ['disponible', 'limitee', 'indisponible'], true)) {
         $disponibilite = $disponibiliteSaisie;
     } else {
         $disponibilite = 'disponible';
     }
 
-    // Vérification de l'existence de la catégorie
-    $stmtVerifCat = $pdo->prepare('SELECT COUNT(*) FROM categorie WHERE id_categorie = :id');
+    // Vérification de la catégorie sélectionnée
+    $stmtVerifCat = $pdo->prepare('SELECT id_categorie, libelle, slug FROM categorie WHERE id_categorie = :id');
     $stmtVerifCat->execute(['id' => $idCategorie]);
-    if ((int) $stmtVerifCat->fetchColumn() === 0) {
+    $catSelectionnee = $stmtVerifCat->fetch();
+    if (!$catSelectionnee) {
         $erreurs['id_categorie'] = 'Veuillez sélectionner une catégorie valide.';
     }
 
-    // Validation des longueurs maximales
     if (mb_strlen($titre) > 120) {
         $erreurs['titre'] = 'Le titre ne peut pas dépasser 120 caractères.';
     }
@@ -198,22 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (mb_strlen($zone) > 120) {
-        $erreurs['zone'] = 'La ville ou zone d\'intervention ne peut pas dépasser 120 caractères.';
-    }
-
-    // Si l'utilisateur clique sur "Soumettre pour validation", tous les champs obligatoires sont requis
-    if ($action === 'soumettre') {
-        if ($titre === '') {
-            $erreurs['titre'] = 'Le titre professionnel est obligatoire pour soumettre votre profil.';
-        }
-        if ($description === '') {
-            $erreurs['description'] = 'La description de vos compétences et prestations est obligatoire.';
-        } elseif (mb_strlen($description) < 100) {
-            $erreurs['description'] = 'La description doit comporter au moins 100 caractères pour être soumise (actuellement ' . mb_strlen($description) . ' caractères).';
-        }
-        if ($zone === '') {
-            $erreurs['zone'] = 'La ville ou zone d\'intervention est obligatoire.';
-        }
+        $erreurs['zone'] = 'La zone d\'intervention ne peut pas dépasser 120 caractères.';
     }
 
     // Gestion du téléversement de la photo de profil (optionnelle)
@@ -222,10 +237,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_FILES['photo']) && is_array($_FILES['photo']) && (int) ($_FILES['photo']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
         try {
-            // Téléversement sécurisé dans uploads/avatars/
             $nouvellePhotoChemin = televerser_image($_FILES['photo'], 'avatars');
 
-            // Si un ancien fichier existait sur le disque, le supprimer
             if ($photoActuelle !== null) {
                 $cheminAncien = realpath(__DIR__ . '/../' . $photoActuelle);
                 $racineUploads = realpath(__DIR__ . '/../uploads');
@@ -238,7 +251,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $erreurs['photo'] = $e->getMessage();
         }
     } elseif ($supprimerPhotoDemandee && $photoActuelle !== null) {
-        // Demande explicite de suppression de la photo
         $cheminAncien = realpath(__DIR__ . '/../' . $photoActuelle);
         $racineUploads = realpath(__DIR__ . '/../uploads');
         if ($cheminAncien !== false && $racineUploads !== false && str_starts_with($cheminAncien, $racineUploads) && file_exists($cheminAncien)) {
@@ -247,57 +259,261 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $photoActuelle = null;
     }
 
-    // Si aucune erreur bloquante
-    if (empty($erreurs)) {
+    // Vérifier si la catégorie sélectionnée relève de la cybersécurité
+    $slugCat = $catSelectionnee ? (string) ($catSelectionnee['slug'] ?? '') : '';
+    $libelleCat = $catSelectionnee ? (string) ($catSelectionnee['libelle'] ?? '') : '';
+    $estCatCyber = ($slugCat === 'cybersecurite' || str_contains(mb_strtolower($libelleCat), 'cyber'));
+
+    // -------------------------------------------------------------------------
+    // VÉRIFICATION DE COMPLÉTUDE CÔTÉ SERVEUR POUR SOUMISSION
+    // -------------------------------------------------------------------------
+    if ($action === 'soumettre') {
+        $elementsManquants = [];
+
+        // 1. Catégorie choisie
+        if (!$catSelectionnee) {
+            $elementsManquants[] = 'Une catégorie de métier valide doit être choisie.';
+        }
+
+        // 2. Titre professionnel
+        if ($titre === '') {
+            $elementsManquants[] = 'Un titre professionnel clair (ex: Développeur PHP Fullstack, Auditeur de sécurité).';
+        }
+
+        // 3. Description d\'au moins 100 caractères
+        $longueurDesc = mb_strlen($description);
+        if ($longueurDesc < 100) {
+            $elementsManquants[] = 'Une présentation détaillée d\'au moins 100 caractères (actuellement ' . $longueurDesc . ' caractère' . ($longueurDesc > 1 ? 's' : '') . ').';
+        }
+
+        // 4. Zone / Ville
+        if ($zone === '') {
+            $elementsManquants[] = 'Une ville ou zone d\'intervention (ex: Abidjan - Cocody, Télétravail).';
+        }
+
+        // 5. Disponibilité
+        if (!in_array($disponibiliteSaisie, ['disponible', 'limitee', 'indisponible'], true)) {
+            $elementsManquants[] = 'Votre statut de disponibilité pour de nouvelles missions.';
+        }
+
+        // 6. Au moins 3 compétences déclarées pour cette catégorie
+        $idProfilActuel = $profil ? (int) $profil['id_profil'] : null;
+        $nbCompetencesValides = 0;
+        if ($idProfilActuel) {
+            $stmtCountCompCat = $pdo->prepare('
+                SELECT COUNT(*) 
+                FROM profil_competence pc
+                JOIN competence c ON pc.id_competence = c.id_competence
+                WHERE pc.id_profil = :id_profil AND c.id_categorie = :id_cat
+            ');
+            $stmtCountCompCat->execute([
+                'id_profil' => $idProfilActuel,
+                'id_cat'    => $idCategorie,
+            ]);
+            $nbCompetencesValides = (int) $stmtCountCompCat->fetchColumn();
+        }
+        if ($nbCompetencesValides < 3) {
+            $elementsManquants[] = 'Au moins 3 compétences associées à votre métier (actuellement ' . $nbCompetencesValides . ' compétence' . ($nbCompetencesValides > 1 ? 's' : '') . ').';
+        }
+
+        // 7. Au moins 1 projet de portfolio
+        $nbProjetsPortfolio = 0;
+        if ($idProfilActuel) {
+            $stmtCountPort = $pdo->prepare('SELECT COUNT(*) FROM projet_portfolio WHERE id_profil = :id_profil');
+            $stmtCountPort->execute(['id_profil' => $idProfilActuel]);
+            $nbProjetsPortfolio = (int) $stmtCountPort->fetchColumn();
+        }
+        if ($nbProjetsPortfolio < 1) {
+            $elementsManquants[] = 'Au moins 1 projet ou réalisation dans votre portfolio (actuellement 0).';
+        }
+
+        // 8. Photo recommandée mais NON obligatoire (ne bloque pas la soumission)
+
+        // 9. Si catégorie Cybersécurité : exige la case cochée
+        if ($estCatCyber && !$engagementCyberSaisie) {
+            $elementsManquants[] = 'Engagement déontologique obligatoire en cybersécurité : vous devez cocher la mention « Je m\'engage à ne proposer que des prestations autorisées par le propriétaire du système concerné (aucun piratage, aucun accès non autorisé) ».';
+        }
+
+        // SI QUELQUE CHOSE MANQUE : NE SOUMET PAS, AFFICHE LA LISTE PRÉCISE DES ÉLÉMENTS MANQUANTS
+        if (!empty($elementsManquants)) {
+            // Sauvegarder les données saisies en brouillon pour ne pas perdre la saisie
+            if (empty($erreurs)) {
+                if (!$profil) {
+                    $stmtInsertDraft = $pdo->prepare('
+                        INSERT INTO profil_professionnel (
+                            id_utilisateur, id_categorie, titre, description, zone, disponibilite, photo, statut_validation, date_soumission, engagement_cyber, date_engagement_cyber
+                        ) VALUES (
+                            :id_user, :id_cat, :titre, :description, :zone, :dispo, :photo, \'brouillon\', NULL, :engagement_cyber, :date_engagement_cyber
+                        )
+                    ');
+                    $stmtInsertDraft->execute([
+                        'id_user'                => $idUtilisateur,
+                        'id_cat'                 => $idCategorie,
+                        'titre'                  => $titre !== '' ? $titre : 'Professionnel du numérique',
+                        'description'            => $description,
+                        'zone'                   => $zone !== '' ? $zone : 'Abidjan',
+                        'dispo'                  => $disponibilite,
+                        'photo'                  => $photoActuelle,
+                        'engagement_cyber'       => ($estCatCyber && $engagementCyberSaisie) ? 1 : 0,
+                        'date_engagement_cyber'  => ($estCatCyber && $engagementCyberSaisie) ? date('Y-m-d H:i:s') : null,
+                    ]);
+                } else {
+                    $stmtUpdateDraft = $pdo->prepare('
+                        UPDATE profil_professionnel SET
+                            id_categorie = :id_cat,
+                            titre = :titre,
+                            description = :description,
+                            zone = :zone,
+                            disponibilite = :dispo,
+                            photo = :photo,
+                            engagement_cyber = :engagement_cyber,
+                            date_engagement_cyber = CASE 
+                                WHEN :engagement_cyber = 1 AND date_engagement_cyber IS NULL THEN NOW() 
+                                WHEN :engagement_cyber = 1 THEN date_engagement_cyber 
+                                ELSE NULL 
+                            END
+                        WHERE id_utilisateur = :id_user
+                    ');
+                    $stmtUpdateDraft->execute([
+                        'id_cat'                 => $idCategorie,
+                        'titre'                  => $titre,
+                        'description'            => $description,
+                        'zone'                   => $zone,
+                        'dispo'                  => $disponibilite,
+                        'photo'                  => $photoActuelle,
+                        'engagement_cyber'       => ($estCatCyber && $engagementCyberSaisie) ? 1 : ($profil['engagement_cyber'] ?? 0),
+                        'id_user'                => $idUtilisateur,
+                    ]);
+                }
+            }
+
+            $_SESSION['profil_elements_manquants'] = $elementsManquants;
+            flash_set('danger', 'Votre profil est incomplet pour être soumis à validation. Veuillez compléter les ' . count($elementsManquants) . ' élément(s) manquant(s) listé(s) ci-dessous.');
+            redirect(url('pro/profil.php'));
+        }
+
+        // SI TOUT EST COMPLET : statut passe à 'soumis', date_soumission mise à jour, confirmation
+        if (empty($erreurs)) {
+            if (!$profil) {
+                $stmtInsert = $pdo->prepare('
+                    INSERT INTO profil_professionnel (
+                        id_utilisateur, id_categorie, titre, description, zone, disponibilite, photo, statut_validation, date_soumission, engagement_cyber, date_engagement_cyber
+                    ) VALUES (
+                        :id_user, :id_cat, :titre, :description, :zone, :dispo, :photo, \'soumis\', NOW(), :engagement_cyber, :date_engagement_cyber
+                    )
+                ');
+                $stmtInsert->execute([
+                    'id_user'                => $idUtilisateur,
+                    'id_cat'                 => $idCategorie,
+                    'titre'                  => $titre,
+                    'description'            => $description,
+                    'zone'                   => $zone,
+                    'dispo'                  => $disponibilite,
+                    'photo'                  => $photoActuelle,
+                    'engagement_cyber'       => ($estCatCyber && $engagementCyberSaisie) ? 1 : 0,
+                    'date_engagement_cyber'  => ($estCatCyber && $engagementCyberSaisie) ? date('Y-m-d H:i:s') : null,
+                ]);
+            } else {
+                $ancienneCategorie = (int) $profil['id_categorie'];
+                if ($ancienneCategorie !== $idCategorie) {
+                    $stmtPurge = $pdo->prepare('
+                        DELETE FROM profil_competence 
+                        WHERE id_profil = :id_profil 
+                          AND id_competence IN (
+                              SELECT id_competence FROM competence WHERE id_categorie != :nouveau_id_cat OR id_categorie IS NULL
+                          )
+                    ');
+                    $stmtPurge->execute([
+                        'id_profil'       => (int) $profil['id_profil'],
+                        'nouveau_id_cat'  => $idCategorie,
+                    ]);
+                }
+
+                $stmtUpdate = $pdo->prepare('
+                    UPDATE profil_professionnel SET
+                        id_categorie = :id_cat,
+                        titre = :titre,
+                        description = :description,
+                        zone = :zone,
+                        disponibilite = :dispo,
+                        photo = :photo,
+                        statut_validation = \'soumis\',
+                        date_soumission = NOW(),
+                        engagement_cyber = :engagement_cyber,
+                        date_engagement_cyber = CASE 
+                            WHEN :engagement_cyber = 1 AND date_engagement_cyber IS NULL THEN NOW() 
+                            WHEN :engagement_cyber = 1 THEN date_engagement_cyber 
+                            ELSE NULL 
+                        END
+                    WHERE id_utilisateur = :id_user
+                ');
+                $stmtUpdate->execute([
+                    'id_cat'                 => $idCategorie,
+                    'titre'                  => $titre,
+                    'description'            => $description,
+                    'zone'                   => $zone,
+                    'dispo'                  => $disponibilite,
+                    'photo'                  => $photoActuelle,
+                    'engagement_cyber'       => ($estCatCyber && $engagementCyberSaisie) ? 1 : 0,
+                    'id_user'                => $idUtilisateur,
+                ]);
+            }
+
+            unset($_SESSION['profil_elements_manquants']);
+            flash_set('success', 'Félicitations ! Votre profil complet a été soumis avec succès à l\'équipe de modération FindPro. Il est désormais en attente de vérification et n\'apparaîtra publiquement qu\'après approbation administrative.');
+            redirect(url('pro/profil.php'));
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // ENREGISTREMENT EN MODE BROUILLON
+    // -------------------------------------------------------------------------
+    if ($action === 'brouillon' && empty($erreurs)) {
         $nouveauStatut = $statutValidation;
         $messageRg06Declenche = false;
         $nbCompetencesPurgees = 0;
 
-        if ($action === 'soumettre') {
-            $nouveauStatut = 'soumis';
-        } elseif ($action === 'brouillon') {
-            // RÈGLE RG06 : Si le profil était déjà approuvé et qu'une information clé est modifiée
-            if ($profil && $profil['statut_validation'] === 'approuve') {
-                $aModifieCategorie = ((int) $profil['id_categorie'] !== $idCategorie);
-                $aModifieTitre = ($profil['titre'] !== $titre);
-                $aModifieDescription = ($profil['description'] !== $description);
+        // RÈGLE RG06 : Si le profil était déjà approuvé et qu'une information clé est modifiée
+        if ($profil && $profil['statut_validation'] === 'approuve') {
+            $aModifieCategorie = ((int) $profil['id_categorie'] !== $idCategorie);
+            $aModifieTitre = ($profil['titre'] !== $titre);
+            $aModifieDescription = ($profil['description'] !== $description);
 
-                if ($aModifieCategorie || $aModifieTitre || $aModifieDescription) {
-                    $nouveauStatut = 'soumis';
-                    $messageRg06Declenche = true;
-                }
-            } elseif (!$profil || $profil['statut_validation'] === 'brouillon' || $profil['statut_validation'] === 'a_corriger') {
-                $nouveauStatut = 'brouillon';
+            if ($aModifieCategorie || $aModifieTitre || $aModifieDescription) {
+                $nouveauStatut = 'soumis';
+                $messageRg06Declenche = true;
             }
+        } elseif (!$profil || $profil['statut_validation'] === 'brouillon' || $profil['statut_validation'] === 'a_corriger') {
+            $nouveauStatut = 'brouillon';
         }
 
         if (!$profil) {
-            // Création initiale du profil (INSERT)
             $stmtInsert = $pdo->prepare('
                 INSERT INTO profil_professionnel (
-                    id_utilisateur, id_categorie, titre, description, zone, disponibilite, photo, statut_validation, date_soumission
+                    id_utilisateur, id_categorie, titre, description, zone, disponibilite, photo, statut_validation, date_soumission, engagement_cyber, date_engagement_cyber
                 ) VALUES (
-                    :id_user, :id_cat, :titre, :description, :zone, :dispo, :photo, :statut, :date_soumission
+                    :id_user, :id_cat, :titre, :description, :zone, :dispo, :photo, :statut, :date_soumission, :engagement_cyber, :date_engagement_cyber
                 )
             ');
             $stmtInsert->execute([
-                'id_user'         => $idUtilisateur,
-                'id_cat'          => $idCategorie,
-                'titre'           => $titre !== '' ? $titre : 'Professionnel du numérique',
-                'description'     => $description,
-                'zone'            => $zone !== '' ? $zone : 'Abidjan',
-                'dispo'           => $disponibilite,
-                'photo'           => $photoActuelle,
-                'statut'          => $nouveauStatut,
-                'date_soumission' => ($nouveauStatut === 'soumis') ? date('Y-m-d H:i:s') : null,
+                'id_user'                => $idUtilisateur,
+                'id_cat'                 => $idCategorie,
+                'titre'                  => $titre !== '' ? $titre : 'Professionnel du numérique',
+                'description'            => $description,
+                'zone'                   => $zone !== '' ? $zone : 'Abidjan',
+                'dispo'                  => $disponibilite,
+                'photo'                  => $photoActuelle,
+                'statut'                 => $nouveauStatut,
+                'date_soumission'        => ($nouveauStatut === 'soumis') ? date('Y-m-d H:i:s') : null,
+                'engagement_cyber'       => ($estCatCyber && $engagementCyberSaisie) ? 1 : 0,
+                'date_engagement_cyber'  => ($estCatCyber && $engagementCyberSaisie) ? date('Y-m-d H:i:s') : null,
             ]);
 
-            flash_set('success', 'Votre profil a été créé en mode brouillon.');
+            flash_set('success', 'Votre profil a été créé et enregistré en mode brouillon.');
         } else {
             $idProfil = (int) $profil['id_profil'];
             $ancienneCategorie = (int) $profil['id_categorie'];
 
-            // RÈGLE : Si la catégorie du profil change, retirer les compétences incompatibles
             if ($ancienneCategorie !== $idCategorie) {
                 $stmtPurge = $pdo->prepare('
                     DELETE FROM profil_competence 
@@ -313,7 +529,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $nbCompetencesPurgees = $stmtPurge->rowCount();
             }
 
-            // Mise à jour du profil existant (UPDATE strict sur l'ID de session)
             $stmtUpdate = $pdo->prepare('
                 UPDATE profil_professionnel SET
                     id_categorie = :id_cat,
@@ -323,19 +538,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     disponibilite = :dispo,
                     photo = :photo,
                     statut_validation = :statut,
-                    date_soumission = CASE WHEN :statut_est_soumis = 1 THEN NOW() ELSE date_soumission END
+                    date_soumission = CASE WHEN :statut_est_soumis = 1 THEN NOW() ELSE date_soumission END,
+                    engagement_cyber = :engagement_cyber,
+                    date_engagement_cyber = CASE 
+                        WHEN :engagement_cyber = 1 AND date_engagement_cyber IS NULL THEN NOW() 
+                        WHEN :engagement_cyber = 1 THEN date_engagement_cyber 
+                        ELSE NULL 
+                    END
                 WHERE id_utilisateur = :id_user
             ');
             $stmtUpdate->execute([
-                'id_cat'             => $idCategorie,
-                'titre'              => $titre,
-                'description'        => $description,
-                'zone'               => $zone,
-                'dispo'              => $disponibilite,
-                'photo'              => $photoActuelle,
-                'statut'             => $nouveauStatut,
-                'statut_est_soumis'  => ($nouveauStatut === 'soumis') ? 1 : 0,
-                'id_user'            => $idUtilisateur,
+                'id_cat'                 => $idCategorie,
+                'titre'                  => $titre,
+                'description'            => $description,
+                'zone'                   => $zone,
+                'dispo'                  => $disponibilite,
+                'photo'                  => $photoActuelle,
+                'statut'                 => $nouveauStatut,
+                'statut_est_soumis'      => ($nouveauStatut === 'soumis') ? 1 : 0,
+                'engagement_cyber'       => ($estCatCyber && $engagementCyberSaisie) ? 1 : ($profil['engagement_cyber'] ?? 0),
+                'id_user'                => $idUtilisateur,
             ]);
 
             if ($nbCompetencesPurgees > 0) {
@@ -344,10 +566,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($messageRg06Declenche) {
                 flash_set('warning', 'Règle RG06 appliquée : Vos modifications sur vos informations clés nécessitent une nouvelle vérification administrative. Votre profil est temporairement retiré de la recherche publique.');
-            } elseif ($nouveauStatut === 'soumis') {
-                flash_set('success', 'Votre profil a été soumis à l\'équipe de modération FindPro. Vous recevrez une notification dès sa validation.');
             } else {
-                flash_set('success', 'Vos modifications ont été enregistrées avec succès.');
+                flash_set('success', 'Vos modifications ont été enregistrées avec succès en mode brouillon.');
             }
         }
 
@@ -355,15 +575,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// 5. Chargement des compétences associées et disponibles (si profil existant)
+// 6. Récupération des éléments manquants stockés en session
+$elementsManquantsAffiches = $_SESSION['profil_elements_manquants'] ?? [];
+unset($_SESSION['profil_elements_manquants']);
+
+// 7. Chargement des compétences associées et disponibles (si profil existant)
 $competencesProfil = [];
 $competencesDisponibles = [];
+$totalCompetencesProfil = 0;
+$totalProjetsPortfolio = 0;
 
 if ($profil) {
     $idProfil = (int) $profil['id_profil'];
     $catActuelle = (int) $profil['id_categorie'];
 
-    // Compétences déjà associées
     $stmtMesComp = $pdo->prepare('
         SELECT c.id_competence, c.libelle, pc.niveau_declare 
         FROM profil_competence pc
@@ -373,8 +598,8 @@ if ($profil) {
     ');
     $stmtMesComp->execute(['id_profil' => $idProfil]);
     $competencesProfil = $stmtMesComp->fetchAll();
+    $totalCompetencesProfil = count($competencesProfil);
 
-    // Compétences disponibles dans la catégorie et non encore associées
     $stmtCompDispo = $pdo->prepare('
         SELECT id_competence, libelle 
         FROM competence 
@@ -389,10 +614,14 @@ if ($profil) {
         'id_profil' => $idProfil,
     ]);
     $competencesDisponibles = $stmtCompDispo->fetchAll();
+
+    // Nombre de projets de portfolio
+    $stmtCountPort = $pdo->prepare('SELECT COUNT(*) FROM projet_portfolio WHERE id_profil = :id_profil');
+    $stmtCountPort->execute(['id_profil' => $idProfil]);
+    $totalProjetsPortfolio = (int) $stmtCountPort->fetchColumn();
 }
 
-// 6. Configuration visuelle du badge de statut
-$statutCourant = $profil ? $profil['statut_validation'] : 'brouillon';
+// 8. Configuration visuelle du badge de statut
 $badgesStatut = [
     'brouillon'       => ['label' => 'Brouillon', 'class' => 'bg-secondary text-white', 'icon' => 'bi-pencil-square'],
     'soumis'          => ['label' => 'En attente de validation', 'class' => 'bg-info text-dark', 'icon' => 'bi-hourglass-split'],
@@ -415,6 +644,16 @@ $labelsNiveaux = [
 $cheminAvatarDefautRel = 'assets/img/avatar-defaut.svg';
 $avatarDefautExiste = file_exists(__DIR__ . '/../' . $cheminAvatarDefautRel);
 
+// Vérifier si la catégorie courante est Cybersécurité
+$slugCatCourante = '';
+foreach ($categories as $c) {
+    if ((int) $c['id_categorie'] === $idCategorie) {
+        $slugCatCourante = (string) $c['slug'];
+        break;
+    }
+}
+$estCatCyberCourante = ($slugCatCourante === 'cybersecurite');
+
 $titre_page = 'Mon profil professionnel';
 require_once __DIR__ . '/../includes/header.php';
 ?>
@@ -431,7 +670,7 @@ require_once __DIR__ . '/../includes/header.php';
                 </span>
             </div>
             <p class="text-secondary small mb-0">
-                Renseignez votre photo, vos compétences et votre présentation pour attirer des clients sur FindPro.
+                Renseignez votre photo, vos compétences et votre portfolio pour attirer des clients sur FindPro.
             </p>
         </div>
         <div class="d-flex align-items-center gap-2 flex-wrap">
@@ -439,15 +678,42 @@ require_once __DIR__ . '/../includes/header.php';
                 <i class="bi bi-arrow-left me-1"></i>Tableau de bord
             </a>
             <a href="<?= url('pro/competences.php') ?>" class="btn btn-outline-secondary btn-sm">
-                <i class="bi bi-award me-1"></i>Mes compétences
+                <i class="bi bi-award me-1"></i>Mes compétences (<?= $totalCompetencesProfil ?>)
             </a>
             <a href="<?= url('pro/portfolio.php') ?>" class="btn btn-outline-secondary btn-sm">
-                <i class="bi bi-images me-1"></i>Mon Portfolio
+                <i class="bi bi-images me-1"></i>Mon Portfolio (<?= $totalProjetsPortfolio ?>)
             </a>
         </div>
     </div>
 
-    <!-- Alerte prompte pour la règle RG06 si le profil est approuvé -->
+    <!-- BANNIÈRE 1 : Profil en lecture seule (soumis ou en_verification) -->
+    <?php if ($estLectureSeule): ?>
+        <div class="alert alert-info d-flex align-items-start mb-4 shadow-sm border-info" role="alert">
+            <i class="bi bi-shield-lock-fill fs-3 text-info me-3 flex-shrink-0"></i>
+            <div>
+                <strong class="d-block mb-1">Dossier en cours d'examen administratif (<?= e($badgeActuel['label']) ?>)</strong>
+                <p class="small mb-0">
+                    Votre profil a été soumis le <?= !empty($profil['date_soumission']) ? e(date('d/m/Y à H:i', strtotime($profil['date_soumission']))) : 'récemment' ?>.
+                    Pendant toute la phase de vérification par notre équipe de modération, le formulaire est <strong>verrouillé en lecture seule</strong>. Votre profil n'apparaîtra publiquement dans la recherche qu'après validation.
+                </p>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!-- BANNIÈRE 2 : Corrections demandées (a_corriger) -->
+    <?php if ($statutCourant === 'a_corriger'): ?>
+        <div class="alert alert-warning d-flex align-items-start mb-4 shadow-sm border-warning" role="alert">
+            <i class="bi bi-exclamation-triangle-fill fs-3 text-warning me-3 flex-shrink-0"></i>
+            <div>
+                <strong class="d-block mb-1">Ajustements requis sur votre profil</strong>
+                <p class="small mb-0">
+                    L'équipe de modération FindPro a demandé des corrections sur votre dossier. Veuillez ajuster vos informations, compléter vos compétences ou votre portfolio ci-dessous, puis cliquer sur <strong>« Soumettre mon profil »</strong> pour relancer l'examen.
+                </p>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!-- BANNIÈRE 3 : Règle RG06 si le profil est déjà approuvé -->
     <?php if ($statutCourant === 'approuve'): ?>
         <div class="alert alert-warning d-flex align-items-start mb-4 shadow-sm" role="alert">
             <i class="bi bi-shield-exclamation fs-4 me-3 flex-shrink-0 text-warning"></i>
@@ -461,24 +727,57 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
     <?php endif; ?>
 
+    <!-- BANNIÈRE 4 : Liste précise des éléments manquants (si refus de soumission) -->
+    <?php if (!empty($elementsManquantsAffiches)): ?>
+        <div class="alert alert-danger shadow-sm mb-4 border-danger" role="alert">
+            <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-exclamation-octagon-fill fs-4 me-2 text-danger"></i>
+                <strong class="h6 mb-0 text-danger">Soumission refusée : profil incomplet</strong>
+            </div>
+            <p class="small mb-2">
+                Votre profil ne peut pas être soumis à la modération tant que les critères d'exhaustivité suivants ne sont pas remplis :
+            </p>
+            <ul class="mb-2 small ps-3">
+                <?php foreach ($elementsManquantsAffiches as $manquant): ?>
+                    <li class="mb-1 fw-medium text-danger-emphasis"><?= e($manquant) ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <div class="small text-muted border-top pt-2">
+                <i class="bi bi-info-circle me-1"></i>Remarque : la photo de profil est recommandée pour attirer des clients mais n'est pas bloquante.
+            </div>
+        </div>
+    <?php endif; ?>
+
     <div class="row g-4 justify-content-center">
         
         <!-- COLONNE 1 : Informations générales et Photo -->
         <div class="col-12 col-lg-7">
             <div class="card p-4 p-md-5 shadow-sm border h-100">
                 
-                <h2 class="h5 fw-bold mb-3 pb-2 border-bottom">
-                    <i class="bi bi-person-lines-fill text-primary me-2"></i>Informations générales
-                </h2>
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                    <h2 class="h5 fw-bold mb-0">
+                        <i class="bi bi-person-lines-fill text-primary me-2"></i>Informations générales
+                    </h2>
+                    <?php if ($estLectureSeule): ?>
+                        <span class="badge bg-secondary bg-opacity-10 text-secondary border small">
+                            <i class="bi bi-lock me-1"></i>Lecture seule
+                        </span>
+                    <?php endif; ?>
+                </div>
 
                 <form method="POST" action="<?= url('pro/profil.php') ?>" enctype="multipart/form-data" novalidate>
                     <?= csrf_field() ?>
 
                     <!-- Bloc Photo de profil avec prévisualisation -->
                     <div class="mb-4 p-3 bg-light rounded border">
-                        <label class="form-label fw-semibold small mb-2 d-block">
-                            Photo de profil professionnelle (optionnelle)
-                        </label>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label class="form-label fw-semibold small mb-0">
+                                Photo de profil professionnelle <span class="badge bg-info bg-opacity-10 text-info border border-info border-opacity-25 ms-1">Recommandée</span>
+                            </label>
+                            <?php if (empty($photoActuelle)): ?>
+                                <span class="badge bg-light text-muted border small">Facultative</span>
+                            <?php endif; ?>
+                        </div>
                         <div class="d-flex align-items-center gap-3">
                             
                             <!-- Rendu Avatar ou Espace Réservé Gris -->
@@ -500,7 +799,6 @@ require_once __DIR__ . '/../includes/header.php';
                                         style="width: 80px; height: 80px;"
                                     >
                                 <?php else: ?>
-                                    <!-- Espace réservé gris si avatar-defaut.svg n'a pas encore été déposé -->
                                     <div 
                                         id="apercu-avatar-placeholder" 
                                         class="rounded-circle bg-secondary bg-opacity-25 text-secondary d-flex align-items-center justify-content-center border shadow-sm" 
@@ -526,6 +824,7 @@ require_once __DIR__ . '/../includes/header.php';
                                     id="photo" 
                                     class="form-control form-control-sm <?= isset($erreurs['photo']) ? 'is-invalid' : '' ?>"
                                     accept="image/jpeg,image/png,image/webp"
+                                    <?= $estLectureSeule ? 'disabled' : '' ?>
                                 >
                                 <?php if (isset($erreurs['photo'])): ?>
                                     <div class="invalid-feedback d-block"><?= e($erreurs['photo']) ?></div>
@@ -535,7 +834,7 @@ require_once __DIR__ . '/../includes/header.php';
                                     </div>
                                 <?php endif; ?>
 
-                                <?php if ($photoActuelle !== null): ?>
+                                <?php if ($photoActuelle !== null && !$estLectureSeule): ?>
                                     <div class="form-check mt-2">
                                         <input class="form-check-input" type="checkbox" name="supprimer_photo" value="1" id="supprimer_photo">
                                         <label class="form-check-label small text-danger" for="supprimer_photo">
@@ -557,10 +856,15 @@ require_once __DIR__ . '/../includes/header.php';
                             name="id_categorie" 
                             id="id_categorie" 
                             class="form-select <?= isset($erreurs['id_categorie']) ? 'is-invalid' : '' ?>"
+                            <?= $estLectureSeule ? 'disabled' : '' ?>
                             required
                         >
                             <?php foreach ($categories as $cat): ?>
-                                <option value="<?= (int) $cat['id_categorie'] ?>" <?= $idCategorie === (int) $cat['id_categorie'] ? 'selected' : '' ?>>
+                                <option 
+                                    value="<?= (int) $cat['id_categorie'] ?>" 
+                                    data-slug="<?= e($cat['slug']) ?>" 
+                                    <?= $idCategorie === (int) $cat['id_categorie'] ? 'selected' : '' ?>
+                                >
                                     <?= e($cat['libelle']) ?>
                                 </option>
                             <?php endforeach; ?>
@@ -578,7 +882,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <div class="mb-3">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <label for="titre" class="form-label fw-medium small mb-0">
-                                Titre professionnel <span class="text-secondary small">(ex: Développeur PHP Fullstack)</span>
+                                Titre professionnel <span class="text-danger">*</span> <span class="text-secondary small">(ex: Développeur PHP Fullstack)</span>
                             </label>
                             <span class="text-muted small" id="compteur-titre">0/120</span>
                         </div>
@@ -590,6 +894,8 @@ require_once __DIR__ . '/../includes/header.php';
                             value="<?= e($titre) ?>" 
                             maxlength="120"
                             placeholder="Votre spécialité ou titre d'activité"
+                            <?= $estLectureSeule ? 'readonly disabled' : '' ?>
+                            required
                         >
                         <?php if (isset($erreurs['titre'])): ?>
                             <div class="invalid-feedback"><?= e($erreurs['titre']) ?></div>
@@ -599,7 +905,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <!-- Ville / Zone d'intervention -->
                     <div class="mb-3">
                         <label for="zone" class="form-label fw-medium small">
-                            Ville / Zone de service <span class="text-secondary small">(ex: Abidjan - Cocody, Télétravail)</span>
+                            Ville / Zone de service <span class="text-danger">*</span> <span class="text-secondary small">(ex: Abidjan - Cocody, Télétravail)</span>
                         </label>
                         <div class="input-group">
                             <span class="input-group-text bg-white text-secondary"><i class="bi bi-geo-alt"></i></span>
@@ -611,6 +917,8 @@ require_once __DIR__ . '/../includes/header.php';
                                 value="<?= e($zone) ?>" 
                                 maxlength="120"
                                 placeholder="Localisation ou périmètre d'intervention"
+                                <?= $estLectureSeule ? 'readonly disabled' : '' ?>
+                                required
                             >
                         </div>
                         <?php if (isset($erreurs['zone'])): ?>
@@ -621,12 +929,14 @@ require_once __DIR__ . '/../includes/header.php';
                     <!-- Disponibilité -->
                     <div class="mb-3">
                         <label for="disponibilite" class="form-label fw-medium small">
-                            Disponibilité actuelle pour des missions
+                            Disponibilité actuelle pour des missions <span class="text-danger">*</span>
                         </label>
                         <select 
                             name="disponibilite" 
                             id="disponibilite" 
                             class="form-select"
+                            <?= $estLectureSeule ? 'disabled' : '' ?>
+                            required
                         >
                             <option value="disponible" <?= $disponibilite === 'disponible' ? 'selected' : '' ?>>Disponible immédiatement</option>
                             <option value="limitee" <?= $disponibilite === 'limitee' ? 'selected' : '' ?>>Disponibilité limitée (délais à prévoir)</option>
@@ -639,7 +949,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <div class="mb-4">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <label for="description" class="form-label fw-medium small mb-0">
-                                Présentation détaillée & prestations
+                                Présentation détaillée & prestations <span class="text-danger">*</span>
                             </label>
                             <span class="text-muted small" id="compteur-desc">0/2000 (min 100 pour soumission)</span>
                         </div>
@@ -649,7 +959,9 @@ require_once __DIR__ . '/../includes/header.php';
                             name="description" 
                             rows="7" 
                             maxlength="2000"
-                            placeholder="Décrivez votre expérience, les technologies ou outils que vous maîtrisez, vos réalisations et votre méthode de travail..."
+                            placeholder="Décrivez votre expérience, les technologies ou outils que vous maîtrisez, vos réalisations et votre méthode de travail (au moins 100 caractères)..."
+                            <?= $estLectureSeule ? 'readonly disabled' : '' ?>
+                            required
                         ><?= e($description) ?></textarea>
                         <?php if (isset($erreurs['description'])): ?>
                             <div class="invalid-feedback"><?= e($erreurs['description']) ?></div>
@@ -658,15 +970,71 @@ require_once __DIR__ . '/../includes/header.php';
                         <?php endif; ?>
                     </div>
 
-                    <!-- Boutons d'action -->
-                    <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 pt-2 border-top">
-                        <button type="submit" name="action" value="brouillon" class="btn btn-outline-primary py-2 px-3">
-                            <i class="bi bi-save me-1"></i>Enregistrer le brouillon
-                        </button>
-                        <button type="submit" name="action" value="soumettre" class="btn btn-brand py-2 px-4">
-                            <i class="bi bi-send-check me-1"></i>Soumettre pour validation
-                        </button>
+                    <!-- BLOC SPÉCIFIQUE : Engagement déontologique Cybersécurité -->
+                    <div class="mb-4 p-3 rounded border <?= $estCatCyberCourante ? '' : 'd-none' ?>" id="bloc-engagement-cyber" style="background-color: #fff9e6; border-color: #ffe082 !important;">
+                        <div class="d-flex align-items-start gap-2">
+                            <i class="bi bi-shield-check text-warning fs-3 flex-shrink-0"></i>
+                            <div class="flex-grow-1">
+                                <label class="form-label fw-bold text-dark small mb-1">
+                                    Engagement déontologique obligatoire — Cybersécurité <span class="text-danger">*</span>
+                                </label>
+                                <div class="form-check">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="checkbox" 
+                                        name="engagement_cyber" 
+                                        id="engagement_cyber" 
+                                        value="1" 
+                                        <?= $engagementCyber ? 'checked' : '' ?> 
+                                        <?= $estLectureSeule ? 'disabled' : '' ?>
+                                    >
+                                    <label class="form-check-label text-dark small fw-medium" for="engagement_cyber">
+                                        Je m'engage à ne proposer que des prestations autorisées par le propriétaire du système concerné (aucun piratage, aucun accès non autorisé).
+                                    </label>
+                                </div>
+                                <?php if (!empty($dateEngagementCyber)): ?>
+                                    <div class="form-text text-success small mt-1">
+                                        <i class="bi bi-check2-circle me-1"></i>Engagement attesté le <?= e(date('d/m/Y à H:i', strtotime($dateEngagementCyber))) ?>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="form-text text-muted small mt-1">
+                                        Exigé pour les professionnels de la cybersécurité. Horodaté et consigné en base de données.
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Actions du formulaire -->
+                    <?php if ($estLectureSeule): ?>
+                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 pt-2 border-top">
+                            <span class="text-secondary small">
+                                <i class="bi bi-lock-fill me-1"></i>Formulaire en lecture seule — Profil <?= e($badgeActuel['label']) ?>
+                            </span>
+                            <button type="button" class="btn btn-secondary py-2 px-4" disabled>
+                                <i class="bi bi-hourglass-split me-1"></i>Examen en cours
+                            </button>
+                        </div>
+                    <?php elseif (in_array($statutCourant, ['approuve', 'suspendu'], true)): ?>
+                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 pt-2 border-top">
+                            <button type="submit" name="action" value="brouillon" class="btn btn-outline-primary py-2 px-3">
+                                <i class="bi bi-save me-1"></i>Mettre à jour le profil (RG06)
+                            </button>
+                            <span class="badge bg-light text-secondary border small py-2 px-3">
+                                <i class="bi bi-info-circle me-1"></i>Déjà <?= e($badgeActuel['label']) ?>
+                            </span>
+                        </div>
+                    <?php else: ?>
+                        <!-- Bouton Enregistrer Brouillon et Bouton Soumettre mon profil -->
+                        <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 pt-2 border-top">
+                            <button type="submit" name="action" value="brouillon" class="btn btn-outline-primary py-2 px-3">
+                                <i class="bi bi-save me-1"></i>Enregistrer le brouillon
+                            </button>
+                            <button type="submit" name="action" value="soumettre" class="btn btn-brand py-2 px-4">
+                                <i class="bi bi-send-check me-1"></i>Soumettre mon profil
+                            </button>
+                        </div>
+                    <?php endif; ?>
 
                 </form>
             </div>
@@ -674,14 +1042,14 @@ require_once __DIR__ . '/../includes/header.php';
 
         <!-- COLONNE 2 : Gestion des compétences du profil -->
         <div class="col-12 col-lg-5" id="competences">
-            <div class="card p-4 shadow-sm border h-100 d-flex flex-col justify-content-between">
+            <div class="card p-4 shadow-sm border h-100 d-flex flex-column justify-content-between">
                 <div>
                     <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
                         <h2 class="h5 fw-bold mb-0">
                             <i class="bi bi-award text-primary me-2"></i>Compétences clés
                         </h2>
                         <span class="badge bg-light text-dark border px-2.5 py-1.5 font-monospace small">
-                            <?= count($competencesProfil) ?> / 15
+                            <?= $totalCompetencesProfil ?> / 15
                         </span>
                     </div>
 
@@ -694,8 +1062,12 @@ require_once __DIR__ . '/../includes/header.php';
                         </div>
                     <?php else: ?>
 
-                        <!-- Formulaire d'ajout de compétence -->
-                        <?php if (count($competencesProfil) < 15 && !empty($competencesDisponibles)): ?>
+                        <!-- Formulaire d'ajout de compétence (verrouillé si lecture seule) -->
+                        <?php if ($estLectureSeule): ?>
+                            <div class="alert alert-light border small py-2 mb-3 text-secondary">
+                                <i class="bi bi-lock me-1"></i>Gestion des compétences verrouillée pendant l'examen de votre profil.
+                            </div>
+                        <?php elseif ($totalCompetencesProfil < 15 && !empty($competencesDisponibles)): ?>
                             <form method="POST" action="<?= url('pro/profil.php#competences') ?>" class="bg-light p-3 rounded border mb-4">
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="action" value="ajouter_competence">
@@ -730,7 +1102,7 @@ require_once __DIR__ . '/../includes/header.php';
                                     <i class="bi bi-plus-circle me-1"></i>Ajouter à mon profil
                                 </button>
                             </form>
-                        <?php elseif (count($competencesProfil) >= 15): ?>
+                        <?php elseif ($totalCompetencesProfil >= 15): ?>
                             <div class="alert alert-warning small py-2 mb-4">
                                 <i class="bi bi-exclamation-triangle me-1"></i>Vous avez atteint le quota maximal de 15 compétences. Supprimez-en une pour en ajouter une autre.
                             </div>
@@ -741,15 +1113,18 @@ require_once __DIR__ . '/../includes/header.php';
                         <?php endif; ?>
 
                         <!-- Liste des compétences actuelles -->
-                        <h3 class="h6 fw-semibold text-secondary mb-2">Compétences actuellement associées :</h3>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h3 class="h6 fw-semibold text-secondary mb-0">Compétences associées :</h3>
+                            <span class="small text-muted"><?= $totalCompetencesProfil ?> / 3 requises</span>
+                        </div>
 
                         <?php if (empty($competencesProfil)): ?>
-                            <div class="text-center py-4 text-muted bg-light rounded border border-dashed">
+                            <div class="text-center py-4 text-muted bg-light rounded border border-dashed mb-3">
                                 <i class="bi bi-award fs-2 text-secondary opacity-50 d-block mb-1"></i>
-                                <small>Aucune compétence associée pour l'instant.</small>
+                                <small>Aucune compétence associée pour l'instant (min 3 requises pour soumission).</small>
                             </div>
                         <?php else: ?>
-                            <div class="list-group list-group-flush border rounded">
+                            <div class="list-group list-group-flush border rounded mb-3">
                                 <?php foreach ($competencesProfil as $cp): 
                                     $cfgNiveau = $labelsNiveaux[$cp['niveau_declare']] ?? $labelsNiveaux['intermediaire'];
                                 ?>
@@ -760,18 +1135,33 @@ require_once __DIR__ . '/../includes/header.php';
                                                 <?= e($cfgNiveau['label']) ?>
                                             </span>
                                         </div>
-                                        <form method="POST" action="<?= url('pro/profil.php#competences') ?>" class="m-0 p-0" onsubmit="return confirm('Retirer cette compétence de votre profil ?');">
-                                            <?= csrf_field() ?>
-                                            <input type="hidden" name="action" value="supprimer_competence">
-                                            <input type="hidden" name="id_competence" value="<?= (int) $cp['id_competence'] ?>">
-                                            <button type="submit" class="btn btn-outline-danger btn-sm p-1 border-0" title="Retirer cette compétence" aria-label="Supprimer <?= e($cp['libelle']) ?>">
-                                                <i class="bi bi-trash3"></i>
-                                            </button>
-                                        </form>
+                                        <?php if (!$estLectureSeule): ?>
+                                            <form method="POST" action="<?= url('pro/profil.php#competences') ?>" class="m-0 p-0" onsubmit="return confirm('Retirer cette compétence de votre profil ?');">
+                                                <?= csrf_field() ?>
+                                                <input type="hidden" name="action" value="supprimer_competence">
+                                                <input type="hidden" name="id_competence" value="<?= (int) $cp['id_competence'] ?>">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm p-1 border-0" title="Retirer cette compétence" aria-label="Supprimer <?= e($cp['libelle']) ?>">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </form>
+                                        <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
+
+                        <!-- Raccourci vers Portfolio -->
+                        <div class="bg-light p-3 rounded border">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-semibold small d-block">Projets de portfolio</span>
+                                    <small class="text-secondary"><?= $totalProjetsPortfolio ?> projet(s) enregistré(s) (min 1 requis)</small>
+                                </div>
+                                <a href="<?= url('pro/portfolio.php') ?>" class="btn btn-sm btn-outline-primary">
+                                    Gérer <i class="bi bi-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
 
                     <?php endif; ?>
 
@@ -792,19 +1182,44 @@ document.addEventListener('DOMContentLoaded', function () {
     const photoInput = document.getElementById('photo');
     const apercuAvatar = document.getElementById('apercu-avatar');
     const placeholderAvatar = document.getElementById('apercu-avatar-placeholder');
+    const selectCat = document.getElementById('id_categorie');
+    const blocCyber = document.getElementById('bloc-engagement-cyber');
 
     function updateCompteurs() {
         if (titreInput && compteurTitre) {
             compteurTitre.textContent = titreInput.value.length + '/120';
         }
         if (descInput && compteurDesc) {
-            compteurDesc.textContent = descInput.value.length + '/2000 (min 100 pour soumission)';
+            const len = descInput.value.length;
+            compteurDesc.textContent = len + '/2000 (min 100 pour soumission)';
+            if (len >= 100) {
+                compteurDesc.classList.remove('text-danger');
+                compteurDesc.classList.add('text-success');
+            } else {
+                compteurDesc.classList.remove('text-success');
+                compteurDesc.classList.add('text-danger');
+            }
+        }
+    }
+
+    function updateBlocCyber() {
+        if (!selectCat || !blocCyber) return;
+        const selectedOption = selectCat.options[selectCat.selectedIndex];
+        const slug = selectedOption ? selectedOption.getAttribute('data-slug') : '';
+        const text = selectedOption ? selectedOption.textContent.toLowerCase() : '';
+        if (slug === 'cybersecurite' || text.includes('cyber')) {
+            blocCyber.classList.remove('d-none');
+        } else {
+            blocCyber.classList.add('d-none');
         }
     }
 
     if (titreInput) titreInput.addEventListener('input', updateCompteurs);
     if (descInput) descInput.addEventListener('input', updateCompteurs);
+    if (selectCat) selectCat.addEventListener('change', updateBlocCyber);
+    
     updateCompteurs();
+    updateBlocCyber();
 
     // Prévisualisation instantanée de l'avatar sélectionné
     if (photoInput) {

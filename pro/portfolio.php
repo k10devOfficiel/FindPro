@@ -202,6 +202,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect(url('pro/profil.php'));
     }
 
+    $statutProfil = (string) ($profil['statut_validation'] ?? 'brouillon');
+    if (in_array($statutProfil, ['soumis', 'en_verification'], true)) {
+        flash_set('warning', 'Votre profil est actuellement en cours d\'examen par notre équipe. Les projets de votre portfolio sont verrouillés en lecture seule.');
+        redirect(url('pro/portfolio.php'));
+    }
+
     $action = (string) ($_POST['action'] ?? '');
 
     // -------------------------------------------------------------------------
@@ -505,6 +511,8 @@ if ($idProfil !== null) {
 }
 
 $limiteAtteinte = ($totalProjets >= 12);
+$statutProfil = (string) ($profil['statut_validation'] ?? 'brouillon');
+$estLectureSeule = in_array($statutProfil, ['soumis', 'en_verification'], true);
 
 $titre_page = 'Mon Portfolio — Réalisations';
 require_once __DIR__ . '/../includes/header.php';
@@ -512,6 +520,16 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div class="container py-4 py-lg-5">
     
+    <?php if ($estLectureSeule): ?>
+        <div class="alert alert-info d-flex align-items-center mb-4 shadow-sm border-info" role="alert">
+            <i class="bi bi-shield-lock-fill fs-3 text-info me-3 flex-shrink-0"></i>
+            <div>
+                <strong class="d-block">Profil en cours d'examen administratif</strong>
+                <span class="small">Votre portfolio est verrouillé en <strong>lecture seule</strong> pendant toute la durée de la vérification.</span>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <!-- En-tête principal -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 pb-3 border-bottom">
         <div>
@@ -535,7 +553,7 @@ require_once __DIR__ . '/../includes/header.php';
             <a href="<?= url('pro/competences.php') ?>" class="btn btn-outline-secondary btn-sm">
                 <i class="bi bi-award me-1"></i>Mes compétences
             </a>
-            <?php if ($profil): ?>
+            <?php if ($profil && !$estLectureSeule): ?>
                 <button 
                     type="button" 
                     class="btn btn-brand btn-sm d-inline-flex align-items-center gap-1 shadow-sm"
@@ -708,27 +726,35 @@ require_once __DIR__ . '/../includes/header.php';
                                 <?php endif; ?>
 
                                 <!-- Actions : Modifier / Supprimer -->
-                                <div class="d-flex align-items-center justify-content-between gap-2 pt-2 border-top mt-auto">
-                                    <button 
-                                        type="button" 
-                                        class="btn btn-light border btn-sm text-dark d-inline-flex align-items-center gap-1"
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#modalModifierProjet<?= $idP ?>"
-                                    >
-                                        <i class="bi bi-pencil-square"></i>
-                                        <span>Modifier</span>
-                                    </button>
+                                <?php if (!$estLectureSeule): ?>
+                                    <div class="d-flex align-items-center justify-content-between gap-2 pt-2 border-top mt-auto">
+                                        <button 
+                                            type="button" 
+                                            class="btn btn-light border btn-sm text-dark d-inline-flex align-items-center gap-1"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#modalModifierProjet<?= $idP ?>"
+                                        >
+                                            <i class="bi bi-pencil-square"></i>
+                                            <span>Modifier</span>
+                                        </button>
 
-                                    <button 
-                                        type="button" 
-                                        class="btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-1"
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#modalSupprimerProjet<?= $idP ?>"
-                                    >
-                                        <i class="bi bi-trash3"></i>
-                                        <span>Supprimer</span>
-                                    </button>
-                                </div>
+                                        <button 
+                                            type="button" 
+                                            class="btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-1"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#modalSupprimerProjet<?= $idP ?>"
+                                        >
+                                            <i class="bi bi-trash3"></i>
+                                            <span>Supprimer</span>
+                                        </button>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="pt-2 border-top mt-auto text-end">
+                                        <span class="badge bg-light text-secondary border small">
+                                            <i class="bi bi-lock me-1"></i>Projet en lecture seule
+                                        </span>
+                                    </div>
+                                <?php endif; ?>
 
                             </div>
                         </div>

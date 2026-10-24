@@ -70,6 +70,8 @@ CREATE TABLE profil_professionnel (
     disponibilite ENUM('disponible', 'limitee', 'indisponible') NOT NULL DEFAULT 'disponible',
     photo VARCHAR(255) NULL,
     statut_validation ENUM('brouillon', 'soumis', 'en_verification', 'a_corriger', 'approuve', 'refuse', 'suspendu') NOT NULL DEFAULT 'brouillon',
+    engagement_cyber TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Attestation de déontologie obligatoire pour la catégorie cybersécurité',
+    date_engagement_cyber DATETIME NULL COMMENT 'Horodatage de la signature de l engagement cybersécurité',
     date_soumission DATETIME NULL,
     date_validation DATETIME NULL,
     date_maj DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

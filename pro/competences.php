@@ -76,6 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect(url('pro/profil.php'));
     }
 
+    $statutProfil = (string) ($profil['statut_validation'] ?? 'brouillon');
+    if (in_array($statutProfil, ['soumis', 'en_verification'], true)) {
+        flash_set('warning', 'Votre profil est actuellement en cours d\'examen par notre équipe. Les compétences sont verrouillées en lecture seule.');
+        redirect(url('pro/competences.php'));
+    }
+
     $action = (string) ($_POST['action'] ?? '');
 
     // -------------------------------------------------------------------------
@@ -210,12 +216,24 @@ if ($profil) {
 
 $nbCompetences = count($competencesProfil);
 $limiteAtteinte = ($nbCompetences >= 15);
+$statutProfil = (string) ($profil['statut_validation'] ?? 'brouillon');
+$estLectureSeule = in_array($statutProfil, ['soumis', 'en_verification'], true);
 
 $titre_page = 'Gestion des compétences';
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="container py-4 py-lg-5">
+
+    <?php if ($estLectureSeule): ?>
+        <div class="alert alert-info d-flex align-items-center mb-4 shadow-sm border-info" role="alert">
+            <i class="bi bi-shield-lock-fill fs-3 text-info me-3 flex-shrink-0"></i>
+            <div>
+                <strong class="d-block">Profil en cours d'examen administratif</strong>
+                <span class="small">Vos compétences sont verrouillées en <strong>lecture seule</strong> pendant toute la durée de la vérification.</span>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <!-- En-tête principal -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 pb-3 border-bottom">
@@ -309,7 +327,11 @@ require_once __DIR__ . '/../includes/header.php';
                         <i class="bi bi-plus-circle text-primary me-2"></i>Ajouter une compétence
                     </h2>
 
-                    <?php if ($limiteAtteinte): ?>
+                    <?php if ($estLectureSeule): ?>
+                        <div class="alert alert-secondary small mb-0">
+                            <i class="bi bi-lock-fill me-1"></i>L'ajout de compétences est désactivé pendant que votre profil est en attente ou en cours d'examen.
+                        </div>
+                    <?php elseif ($limiteAtteinte): ?>
                         <div class="alert alert-warning small mb-0">
                             <i class="bi bi-exclamation-triangle-fill me-1"></i>Plafond atteint. Vous avez déjà associé 15 compétences à votre profil.
                         </div>
@@ -402,20 +424,22 @@ require_once __DIR__ . '/../includes/header.php';
                                         </small>
                                     </div>
 
-                                    <form method="POST" action="<?= url('pro/competences.php') ?>" class="m-0 p-0" onsubmit="return confirm('Retirer la compétence « <?= e(addslashes($cp['libelle'])) ?> » de votre profil ?');">
-                                        <?= csrf_field() ?>
-                                        <input type="hidden" name="action" value="supprimer_competence">
-                                        <input type="hidden" name="id_competence" value="<?= (int) $cp['id_competence'] ?>">
-                                        <button 
-                                            type="submit" 
-                                            class="btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-1"
-                                            title="Retirer cette compétence"
-                                            aria-label="Supprimer <?= e($cp['libelle']) ?>"
-                                        >
-                                            <i class="bi bi-trash3"></i>
-                                            <span class="d-none d-sm-inline">Retirer</span>
-                                        </button>
-                                    </form>
+                                    <?php if (!$estLectureSeule): ?>
+                                        <form method="POST" action="<?= url('pro/competences.php') ?>" class="m-0 p-0" onsubmit="return confirm('Retirer la compétence « <?= e(addslashes($cp['libelle'])) ?> » de votre profil ?');">
+                                            <?= csrf_field() ?>
+                                            <input type="hidden" name="action" value="supprimer_competence">
+                                            <input type="hidden" name="id_competence" value="<?= (int) $cp['id_competence'] ?>">
+                                            <button 
+                                                type="submit" 
+                                                class="btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-1"
+                                                title="Retirer cette compétence"
+                                                aria-label="Supprimer <?= e($cp['libelle']) ?>"
+                                            >
+                                                <i class="bi bi-trash3"></i>
+                                                <span class="d-none d-sm-inline">Retirer</span>
+                                            </button>
+                                        </form>
+                                    <?php endif; ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
