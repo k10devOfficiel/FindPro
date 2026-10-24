@@ -161,38 +161,90 @@ function profils_publics(PDO $pdo, array $filtres = [], int $limite = 20, int $d
 
     // Filtre par zone / commune
     if (!empty($filtres['zone'])) {
-        $conditions[] = "p.zone LIKE :zone";
-        $params['zone'] = '%' . trim((string) $filtres['zone']) . '%';
+        $zoneNettoyee = trim((string) $filtres['zone']);
+        if ($zoneNettoyee !== '') {
+            $conditions[] = "p.zone LIKE :zone";
+            $params['zone'] = '%' . addcslashes($zoneNettoyee, '%_\\') . '%';
+        }
     }
 
-    // Filtre par disponibilité
+    // Filtre par disponibilité (liste blanche)
     if (!empty($filtres['disponibilite']) && in_array($filtres['disponibilite'], ['disponible', 'limitee', 'indisponible'], true)) {
         $conditions[] = "p.disponibilite = :disponibilite";
         $params['disponibilite'] = (string) $filtres['disponibilite'];
     }
 
-    // Filtre de recherche textuelle globale (titre, description, compétences, métier)
-    if (!empty($filtres['recherche'])) {
-        $motCle = '%' . trim((string) $filtres['recherche']) . '%';
+    // Filtre par compétence (ID entier)
+    if (!empty($filtres['competence']) && (is_numeric($filtres['competence']) || ctype_digit((string) $filtres['competence']))) {
+        $idCompetence = (int) $filtres['competence'];
+        if ($idCompetence > 0) {
+            $conditions[] = "EXISTS (
+                SELECT 1 FROM profil_competence pc_filtre 
+                WHERE pc_filtre.id_profil = p.id_profil 
+                AND pc_filtre.id_competence = :id_comp_filtre
+            )";
+            $params['id_comp_filtre'] = $idCompetence;
+        }
+    }
+
+    // Filtre mot-clé : recherche dans le titre, la description, le nom et les compétences
+    $motCleBrut = trim((string) ($filtres['q'] ?? $filtres['recherche'] ?? ''));
+    $motCleLike = '';
+    if ($motCleBrut !== '') {
+        $motCleEchappe = addcslashes($motCleBrut, '%_\\');
+        $motCleLike = '%' . $motCleEchappe . '%';
         $conditions[] = "(
             p.titre LIKE :q_titre 
             OR p.description LIKE :q_desc 
-            OR p.zone LIKE :q_zone 
-            OR c.libelle LIKE :q_cat 
             OR u.prenom LIKE :q_prenom 
             OR u.nom LIKE :q_nom 
+            OR CONCAT(u.prenom, ' ', u.nom) LIKE :q_nomcomplet 
             OR comps.competences_brutes LIKE :q_comp
         )";
-        $params['q_titre'] = $motCle;
-        $params['q_desc'] = $motCle;
-        $params['q_zone'] = $motCle;
-        $params['q_cat'] = $motCle;
-        $params['q_prenom'] = $motCle;
-        $params['q_nom'] = $motCle;
-        $params['q_comp'] = $motCle;
+        $params['q_titre'] = $motCleLike;
+        $params['q_desc'] = $motCleLike;
+        $params['q_prenom'] = $motCleLike;
+        $params['q_nom'] = $motCleLike;
+        $params['q_nomcomplet'] = $motCleLike;
+        $params['q_comp'] = $motCleLike;
     }
 
     $whereSql = implode(' AND ', $conditions);
+
+    // Détermination du tri (liste blanche : pertinence, recents, note)
+    $tri = (string) ($filtres['tri'] ?? '');
+    if (!in_array($tri, ['pertinence', 'recents', 'note'], true)) {
+        $tri = ($motCleBrut !== '') ? 'pertinence' : 'recents';
+    }
+
+    $selectScoreSql = '';
+    $orderBySql = '';
+
+    if ($tri === 'pertinence') {
+        if ($motCleBrut !== '') {
+            $selectScoreSql = ", (
+                (CASE WHEN p.titre LIKE :q_score_titre THEN 1 ELSE 0 END) +
+                (CASE WHEN p.description LIKE :q_score_desc THEN 1 ELSE 0 END) +
+                (CASE WHEN u.prenom LIKE :q_score_prenom OR u.nom LIKE :q_score_nom OR CONCAT(u.prenom, ' ', u.nom) LIKE :q_score_nomcomplet THEN 1 ELSE 0 END) +
+                (CASE WHEN comps.competences_brutes LIKE :q_score_comp THEN 1 ELSE 0 END)
+            ) AS score_pertinence";
+            $orderBySql = "score_pertinence DESC, p.date_maj DESC, p.id_profil DESC";
+            $params['q_score_titre'] = $motCleLike;
+            $params['q_score_desc'] = $motCleLike;
+            $params['q_score_prenom'] = $motCleLike;
+            $params['q_score_nom'] = $motCleLike;
+            $params['q_score_nomcomplet'] = $motCleLike;
+            $params['q_score_comp'] = $motCleLike;
+        } else {
+            $orderBySql = "p.date_maj DESC, p.id_profil DESC";
+        }
+    } elseif ($tri === 'note') {
+        // Tri : note moyenne décroissante (les profils sans avis en dernier)
+        $orderBySql = "CASE WHEN notes.note_moyenne IS NULL THEN 1 ELSE 0 END ASC, notes.note_moyenne DESC, COALESCE(notes.nb_avis, 0) DESC, p.date_maj DESC, p.id_profil DESC";
+    } else {
+        // Tri : récents = date_maj décroissante
+        $orderBySql = "p.date_maj DESC, p.date_validation DESC, p.id_profil DESC";
+    }
 
     // Requête préparée avec agrégation des avis publiés et compétences
     $sql = "
@@ -215,6 +267,7 @@ function profils_publics(PDO $pdo, array $filtres = [], int $limite = 20, int $d
             notes.note_moyenne,
             COALESCE(notes.nb_avis, 0) AS nb_avis,
             comps.competences_brutes
+            {$selectScoreSql}
         FROM profil_professionnel p
         JOIN utilisateur u ON p.id_utilisateur = u.id_utilisateur
         LEFT JOIN categorie c ON p.id_categorie = c.id_categorie
@@ -243,10 +296,7 @@ function profils_publics(PDO $pdo, array $filtres = [], int $limite = 20, int $d
             GROUP BY pc.id_profil
         ) comps ON p.id_profil = comps.id_profil
         WHERE {$whereSql}
-        ORDER BY 
-            p.date_maj DESC,
-            p.date_validation DESC,
-            p.id_profil DESC
+        ORDER BY {$orderBySql}
         LIMIT {$limite} OFFSET {$decalage}
     ";
 
@@ -298,7 +348,7 @@ function profils_publics(PDO $pdo, array $filtres = [], int $limite = 20, int $d
  * Compte le nombre total de profils publics approuvés répondant aux critères (RG05).
  *
  * @param PDO   $pdo     Instance active de connexion PDO
- * @param array $filtres Filtres optionnels (categorie, zone, disponibilite, recherche)
+ * @param array $filtres Filtres optionnels (categorie, zone, disponibilite, competence, q/recherche)
  * @return int Nombre total de profils approuvés correspondants
  */
 function compter_profils_publics(PDO $pdo, array $filtres = []): int
@@ -320,8 +370,11 @@ function compter_profils_publics(PDO $pdo, array $filtres = []): int
     }
 
     if (!empty($filtres['zone'])) {
-        $conditions[] = "p.zone LIKE :zone";
-        $params['zone'] = '%' . trim((string) $filtres['zone']) . '%';
+        $zoneNettoyee = trim((string) $filtres['zone']);
+        if ($zoneNettoyee !== '') {
+            $conditions[] = "p.zone LIKE :zone";
+            $params['zone'] = '%' . addcslashes($zoneNettoyee, '%_\\') . '%';
+        }
     }
 
     if (!empty($filtres['disponibilite']) && in_array($filtres['disponibilite'], ['disponible', 'limitee', 'indisponible'], true)) {
@@ -329,22 +382,36 @@ function compter_profils_publics(PDO $pdo, array $filtres = []): int
         $params['disponibilite'] = (string) $filtres['disponibilite'];
     }
 
-    if (!empty($filtres['recherche'])) {
-        $motCle = '%' . trim((string) $filtres['recherche']) . '%';
+    if (!empty($filtres['competence']) && (is_numeric($filtres['competence']) || ctype_digit((string) $filtres['competence']))) {
+        $idCompetence = (int) $filtres['competence'];
+        if ($idCompetence > 0) {
+            $conditions[] = "EXISTS (
+                SELECT 1 FROM profil_competence pc_filtre 
+                WHERE pc_filtre.id_profil = p.id_profil 
+                AND pc_filtre.id_competence = :id_comp_filtre
+            )";
+            $params['id_comp_filtre'] = $idCompetence;
+        }
+    }
+
+    $motCleBrut = trim((string) ($filtres['q'] ?? $filtres['recherche'] ?? ''));
+    if ($motCleBrut !== '') {
+        $motCleEchappe = addcslashes($motCleBrut, '%_\\');
+        $motCleLike = '%' . $motCleEchappe . '%';
         $conditions[] = "(
             p.titre LIKE :q_titre 
             OR p.description LIKE :q_desc 
-            OR p.zone LIKE :q_zone 
-            OR c.libelle LIKE :q_cat 
             OR u.prenom LIKE :q_prenom 
-            OR u.nom LIKE :q_nom
+            OR u.nom LIKE :q_nom 
+            OR CONCAT(u.prenom, ' ', u.nom) LIKE :q_nomcomplet 
+            OR comps.competences_brutes LIKE :q_comp
         )";
-        $params['q_titre'] = $motCle;
-        $params['q_desc'] = $motCle;
-        $params['q_zone'] = $motCle;
-        $params['q_cat'] = $motCle;
-        $params['q_prenom'] = $motCle;
-        $params['q_nom'] = $motCle;
+        $params['q_titre'] = $motCleLike;
+        $params['q_desc'] = $motCleLike;
+        $params['q_prenom'] = $motCleLike;
+        $params['q_nom'] = $motCleLike;
+        $params['q_nomcomplet'] = $motCleLike;
+        $params['q_comp'] = $motCleLike;
     }
 
     $whereSql = implode(' AND ', $conditions);
@@ -354,6 +421,14 @@ function compter_profils_publics(PDO $pdo, array $filtres = []): int
         FROM profil_professionnel p
         JOIN utilisateur u ON p.id_utilisateur = u.id_utilisateur
         LEFT JOIN categorie c ON p.id_categorie = c.id_categorie
+        LEFT JOIN (
+            SELECT 
+                pc.id_profil,
+                GROUP_CONCAT(comp.libelle SEPARATOR '||') AS competences_brutes
+            FROM profil_competence pc
+            JOIN competence comp ON pc.id_competence = comp.id_competence
+            GROUP BY pc.id_profil
+        ) comps ON p.id_profil = comps.id_profil
         WHERE {$whereSql}
     ";
 
