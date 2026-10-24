@@ -342,7 +342,7 @@ require_once __DIR__ . '/../includes/header.php';
 
                                 <!-- Bouton Examiner -->
                                 <td class="text-end pe-3">
-                                    <a href="<?= url('admin/validation-detail.php?id=' . (int) $p['id_profil']) ?>" class="btn btn-sm btn-brand d-inline-flex align-items-center gap-1 shadow-sm">
+                                    <a href="<?= url('admin/profil_detail.php?id=' . (int) $p['id_profil']) ?>" class="btn btn-sm btn-brand d-inline-flex align-items-center gap-1 shadow-sm">
                                         <i class="bi bi-patch-check"></i>
                                         <span>Examiner</span>
                                     </a>

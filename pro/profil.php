@@ -52,7 +52,20 @@ $profil = $stmtProfil->fetch();
 
 // Statut courant et vérification de la lecture seule
 $statutCourant = $profil ? (string) $profil['statut_validation'] : 'brouillon';
-$estLectureSeule = in_array($statutCourant, ['soumis', 'en_verification'], true);
+$estLectureSeule = in_array($statutCourant, ['soumis', 'en_verification', 'refuse'], true);
+
+// Récupération de la dernière décision administrative pour afficher le motif
+$derniereDecision = null;
+if ($profil) {
+    $stmtLastDec = $pdo->prepare('
+        SELECT * FROM validation_profil 
+        WHERE id_profil = :id_profil 
+        ORDER BY date_decision DESC, id_validation DESC 
+        LIMIT 1
+    ');
+    $stmtLastDec->execute(['id_profil' => (int) $profil['id_profil']]);
+    $derniereDecision = $stmtLastDec->fetch();
+}
 
 // 3. Chargement des catégories disponibles
 $categories = $pdo->query('SELECT id_categorie, libelle, slug FROM categorie ORDER BY libelle ASC')->fetchAll();
@@ -73,6 +86,12 @@ $erreurs = [];
 // 5. Traitement des requêtes POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_verifier();
+
+    // RÈGLE MÉTIER : Si le profil est définitivement refusé
+    if ($statutCourant === 'refuse') {
+        flash_set('danger', 'Votre profil a fait l\'objet d\'un rejet définitif. Aucune nouvelle soumission n\'est possible sans nouvelle autorisation de l\'administration.');
+        redirect(url('pro/profil.php'));
+    }
 
     // RÈGLE MÉTIER : Tant que le profil est soumis ou en_verification, le formulaire est en lecture seule
     if ($estLectureSeule) {
@@ -686,8 +705,26 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
     </div>
 
-    <!-- BANNIÈRE 1 : Profil en lecture seule (soumis ou en_verification) -->
-    <?php if ($estLectureSeule): ?>
+    <!-- BANNIÈRE 1 : Rejet définitif (refuse) -->
+    <?php if ($statutCourant === 'refuse'): ?>
+        <div class="alert alert-danger d-flex align-items-start mb-4 shadow-sm border-danger" role="alert">
+            <i class="bi bi-x-octagon-fill fs-3 text-danger me-3 flex-shrink-0"></i>
+            <div>
+                <strong class="d-block mb-1">Dossier de candidature refusé</strong>
+                <p class="small mb-2">
+                    Votre profil a fait l'objet d'un refus définitif par l'administration. Aucune nouvelle soumission n'est possible sans autorisation préalable de l'équipe de modération.
+                </p>
+                <?php if ($derniereDecision && !empty($derniereDecision['motif'])): ?>
+                    <div class="p-2.5 bg-white rounded border border-danger-subtle small text-dark">
+                        <strong class="text-danger d-block mb-1" style="font-size: 0.72rem;">MOTIF DU REFUS NOTIFIÉ :</strong>
+                        <div style="white-space: pre-wrap; line-height: 1.5;"><?= e($derniereDecision['motif']) ?></div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
+    <!-- BANNIÈRE 2 : Profil en cours d'examen (soumis ou en_verification) -->
+    <?php elseif (in_array($statutCourant, ['soumis', 'en_verification'], true)): ?>
         <div class="alert alert-info d-flex align-items-start mb-4 shadow-sm border-info" role="alert">
             <i class="bi bi-shield-lock-fill fs-3 text-info me-3 flex-shrink-0"></i>
             <div>
@@ -700,15 +737,21 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
     <?php endif; ?>
 
-    <!-- BANNIÈRE 2 : Corrections demandées (a_corriger) -->
+    <!-- BANNIÈRE 3 : Corrections demandées (a_corriger) -->
     <?php if ($statutCourant === 'a_corriger'): ?>
         <div class="alert alert-warning d-flex align-items-start mb-4 shadow-sm border-warning" role="alert">
             <i class="bi bi-exclamation-triangle-fill fs-3 text-warning me-3 flex-shrink-0"></i>
             <div>
                 <strong class="d-block mb-1">Ajustements requis sur votre profil</strong>
-                <p class="small mb-0">
-                    L'équipe de modération FindPro a demandé des corrections sur votre dossier. Veuillez ajuster vos informations, compléter vos compétences ou votre portfolio ci-dessous, puis cliquer sur <strong>« Soumettre mon profil »</strong> pour relancer l'examen.
+                <p class="small mb-2">
+                    L'équipe de modération FindPro a demandé des corrections sur votre dossier. Votre formulaire est à nouveau <strong>en mode modifiable</strong>. Veuillez corriger vos informations selon les remarques ci-dessous, puis cliquer sur <strong>« Soumettre mon profil »</strong> pour relancer l'arbitrage.
                 </p>
+                <?php if ($derniereDecision && !empty($derniereDecision['motif'])): ?>
+                    <div class="p-2.5 bg-white rounded border border-warning-subtle small text-dark">
+                        <strong class="text-secondary d-block mb-1" style="font-size: 0.72rem;">INSTRUCTIONS DE L'ADMINISTRATION :</strong>
+                        <div style="white-space: pre-wrap; line-height: 1.5;"><?= e($derniereDecision['motif']) ?></div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     <?php endif; ?>
@@ -1006,7 +1049,16 @@ require_once __DIR__ . '/../includes/header.php';
                     </div>
 
                     <!-- Actions du formulaire -->
-                    <?php if ($estLectureSeule): ?>
+                    <?php if ($statutCourant === 'refuse'): ?>
+                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 pt-2 border-top">
+                            <span class="text-danger small">
+                                <i class="bi bi-x-circle-fill me-1"></i>Dossier refusé — Formulaire verrouillé
+                            </span>
+                            <button type="button" class="btn btn-outline-danger py-2 px-4" disabled>
+                                <i class="bi bi-slash-circle me-1"></i>Rejet définitif
+                            </button>
+                        </div>
+                    <?php elseif (in_array($statutCourant, ['soumis', 'en_verification'], true)): ?>
                         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 pt-2 border-top">
                             <span class="text-secondary small">
                                 <i class="bi bi-lock-fill me-1"></i>Formulaire en lecture seule — Profil <?= e($badgeActuel['label']) ?>
