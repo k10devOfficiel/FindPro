@@ -96,7 +96,7 @@ require_once __DIR__ . '/../includes/header.php';
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-secondary btn-sm" href="<?= url('admin/validations.php') ?>">
+                <a class="nav-link text-secondary btn-sm" href="<?= url('admin/validation.php') ?>">
                     <i class="bi bi-patch-check me-1"></i>Validation (<?= $nbProfilsEnAttente ?>)
                 </a>
             </li>
@@ -131,7 +131,7 @@ require_once __DIR__ . '/../includes/header.php';
                         <span><i class="bi bi-speedometer2 me-2"></i>Vue d'ensemble</span>
                         <i class="bi bi-chevron-right small"></i>
                     </a>
-                    <a href="<?= url('admin/validations.php') ?>" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2">
+                    <a href="<?= url('admin/validation.php') ?>" class="list-group-item list-group-item-action text-secondary d-flex align-items-center justify-content-between py-2">
                         <span><i class="bi bi-patch-check me-2 text-primary"></i>Validation des profils</span>
                         <?php if ($nbProfilsEnAttente > 0): ?>
                             <span class="badge bg-warning text-dark rounded-pill"><?= $nbProfilsEnAttente ?></span>
@@ -176,7 +176,7 @@ require_once __DIR__ . '/../includes/header.php';
                 
                 <!-- Carte 1 : Profils en attente (Crucial) -->
                 <div class="col">
-                    <a href="<?= url('admin/validations.php') ?>" class="text-decoration-none h-100 d-block">
+                    <a href="<?= url('admin/validation.php') ?>" class="text-decoration-none h-100 d-block">
                         <div class="card p-3 shadow-sm border h-100 hover-shadow transition-all <?= $nbProfilsEnAttente > 0 ? 'border-warning bg-warning bg-opacity-10' : 'bg-white' ?>">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="small fw-semibold <?= $nbProfilsEnAttente > 0 ? 'text-warning-emphasis' : 'text-secondary' ?> text-uppercase tracking-wider" style="font-size: 0.72rem;">
@@ -290,7 +290,7 @@ require_once __DIR__ . '/../includes/header.php';
                         <span class="text-secondary small">Les 5 dernières candidatures en attente de vérification administrative</span>
                     </div>
                     <div>
-                        <a href="<?= url('admin/validations.php') ?>" class="btn btn-outline-primary btn-sm">
+                        <a href="<?= url('admin/validation.php') ?>" class="btn btn-outline-primary btn-sm">
                             Voir toute la file (<?= $nbProfilsEnAttente ?>) <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -377,7 +377,7 @@ require_once __DIR__ . '/../includes/header.php';
                                             <?php endif; ?>
                                         </td>
                                         <td class="text-end pe-3">
-                                            <a href="<?= url('admin/validations.php?id=' . (int) $p['id_profil']) ?>" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
+                                            <a href="<?= url('admin/validation.php?id=' . (int) $p['id_profil']) ?>" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
                                                 <i class="bi bi-patch-check"></i>
                                                 <span>Examiner</span>
                                             </a>
