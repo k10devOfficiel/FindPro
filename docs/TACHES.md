@@ -34,14 +34,17 @@
 - [ ] Suppression et gestion de l'ordre d'affichage des photos de réalisations (Jour 3)
 
 ### 4. Validation Manuelle
-- [ ] Ajout du statut de vérification (`en_attente`, `approuve`, `rejete`) sur le profil professionnel (Jour 4)
+- [x] Ajout du statut de vérification (`en_attente`, `approuve`, `rejete`, `a_corriger`, `suspendu`) sur le profil professionnel (Jour 4)
 - [ ] Upload des pièces justificatives / documents d'identité par le professionnel (Jour 4)
-- [ ] Interface d'examen des demandes de validation dans l'espace administration (Jour 4)
-- [ ] Actions d'approbation et de rejet avec motif notifié au professionnel (Jour 4)
+- [x] Interface d'examen des demandes de validation dans l'espace administration (`admin/validation.php`, `admin/profil_detail.php`) (Jour 4)
+- [x] Actions d'approbation et de rejet avec motif notifié au professionnel (`pro/index.php`, `pro/profil.php`) (Jour 4)
+- [x] Validation des tests T05 (correction -> resoumission -> approbation) et T06 (soumission -> refus avec motif -> consultation pro)
+- [x] Traçabilité intégrale de toutes les décisions dans `validation_profil` (RG12)
 
 ### 5. Consultation Publique
+- [ ] Règle obligatoire (RG05) : seul le statut `approuve` (avec compte utilisateur actif) est visible dans toute requête publique (`profils_publics()` dans `includes/functions.php`, `includes/carte_profil.php`) — *à vérifier dès l'étape 8*
 - [ ] Page de profil public accessible aux visiteurs et clients (`/pro/{id}`) (Jour 4)
-- [ ] Affichage de la carte d'identité pro : badge vérifié, note moyenne, métiers exercés, zone couverte (Jour 4)
+- [x] Affichage de la carte d'identité pro : badge vérifié ("Profil approuvé par FindPro"), badge de disponibilité coloré, note moyenne et avis, métiers exercés, zone couverte (`includes/carte_profil.php`) (Jour 4)
 - [ ] Galerie interactive (lightbox) du portfolio de réalisations (Jour 4)
 - [ ] Bouton d'action proéminent "Demander un service / Contacter" (Jour 4)
 

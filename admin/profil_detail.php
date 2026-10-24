@@ -38,23 +38,7 @@ $pdo = db();
 // 2. Validation stricte du paramètre GET 'id'
 $idRaw = $_GET['id'] ?? '';
 if (!is_string($idRaw) || !ctype_digit($idRaw) || (int) $idRaw <= 0) {
-    http_response_code(404);
-    $titre_page = 'Profil introuvable — Erreur 404';
-    require_once __DIR__ . '/../includes/header.php';
-    ?>
-    <div class="container py-5 text-center">
-        <div class="card p-5 shadow-sm border mx-auto" style="max-width: 540px;">
-            <i class="bi bi-exclamation-triangle fs-1 text-warning mb-3"></i>
-            <h1 class="h4 fw-bold">Profil professionnel introuvable</h1>
-            <p class="text-secondary small mb-4">L'identifiant de profil spécifié est invalide ou inexistant.</p>
-            <a href="<?= url('admin/validation.php') ?>" class="btn btn-primary btn-sm">
-                <i class="bi bi-arrow-left me-1"></i>Retour à la file de validation
-            </a>
-        </div>
-    </div>
-    <?php
-    require_once __DIR__ . '/../includes/footer.php';
-    exit;
+    page_introuvable('L\'identifiant de profil spécifié est invalide ou inexistant.', 'Profil professionnel introuvable');
 }
 
 $idProfil = (int) $idRaw;
@@ -83,23 +67,7 @@ $stmt->execute(['id' => $idProfil]);
 $profil = $stmt->fetch();
 
 if (!$profil) {
-    http_response_code(404);
-    $titre_page = 'Profil non trouvé — Erreur 404';
-    require_once __DIR__ . '/../includes/header.php';
-    ?>
-    <div class="container py-5 text-center">
-        <div class="card p-5 shadow-sm border mx-auto" style="max-width: 540px;">
-            <i class="bi bi-person-x fs-1 text-danger mb-3"></i>
-            <h1 class="h4 fw-bold">Dossier introuvable</h1>
-            <p class="text-secondary small mb-4">Ce profil professionnel n'existe pas en base de données.</p>
-            <a href="<?= url('admin/validation.php') ?>" class="btn btn-primary btn-sm">
-                <i class="bi bi-arrow-left me-1"></i>Retour à la file de validation
-            </a>
-        </div>
-    </div>
-    <?php
-    require_once __DIR__ . '/../includes/footer.php';
-    exit;
+    page_introuvable('Ce profil professionnel n\'existe pas en base de données.', 'Dossier introuvable');
 }
 
 // 4. AUTOMATISME : Si le profil est au statut 'soumis', passage à 'en_verification'

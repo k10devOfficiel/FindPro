@@ -62,16 +62,16 @@ $nomUtilisateur = $estConnecte && $utilisateurCourant['prenom'] !== '' ? $utilis
                         <a class="nav-link" href="<?= url('') ?>">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= url('developpement.php') ?>">Développement</a>
+                        <a class="nav-link <?= (($_GET['slug'] ?? '') === 'developpement') ? 'active' : '' ?>" href="<?= url('category.php?slug=developpement') ?>">Développement informatique</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= url('montage-video.php') ?>">Montage vidéo</a>
+                        <a class="nav-link <?= (($_GET['slug'] ?? '') === 'montage-video') ? 'active' : '' ?>" href="<?= url('category.php?slug=montage-video') ?>">Montage vidéo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= url('cybersecurite.php') ?>">Cybersécurité</a>
+                        <a class="nav-link <?= (($_GET['slug'] ?? '') === 'cybersecurite') ? 'active' : '' ?>" href="<?= url('category.php?slug=cybersecurite') ?>">Cybersécurité</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= url('recherche.php') ?>">
+                        <a class="nav-link" href="<?= url('search.php') ?>">
                             <i class="bi bi-search me-1" aria-hidden="true"></i>Recherche
                         </a>
                     </li>

@@ -8,7 +8,7 @@ Ce document consigne les règles de gestion (RG) applicables à la plateforme **
 | **RG02** | Seul un client authentifie peut envoyer une demande de service. | |
 | **RG03** | Une demande est liee a un seul client et a un seul professionnel. | |
 | **RG04** | La conversation privee est accessible apres l'envoi de la demande et uniquement a ses participants autorises. | |
-| **RG05** | Seuls les profils approuves sont affiches dans la recherche publique. | |
+| **RG05** | Seuls les profils approuves sont affiches dans la recherche publique. | `includes/functions.php` (`profils_publics`), `includes/carte_profil.php` (à compléter à l'étape 8) |
 | **RG06** | Un professionnel peut modifier son profil, mais l'administration peut demander une nouvelle verification. | |
 | **RG07** | Un avis est possible uniquement apres une demande terminee et confirmee par le client. | |
 | **RG08** | Les mots de passe ne sont jamais stockes en clair. | |
