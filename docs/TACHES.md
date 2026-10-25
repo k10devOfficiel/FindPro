@@ -213,3 +213,22 @@
 - [ ] Validation de l'opposabilité contractuelle des CGU et des clauses exonératoires de responsabilité de FindPro en tant qu'intermédiaire technique (droit OHADA et commerce électronique ivoirien).
 - [ ] Revue du mandat écrit type obligatoire pour les prestations de tests d'intrusion et audits de cybersécurité.
 
+---
+
+## Campagne d'Audit Annexe C (25/10/2026) — Contrôle d'Accès & Sécurité
+
+### 1. Protocole Réalisé
+- Réinitialisation complète de la base de données : `sql/schema.sql` exécuté, `sql/seed.sql` injecté, administrateur créé (`k10developpeur@gmail.com`), données de test générées (`scripts/donnees_test.php`).
+- Exécution des 14 tests de l'Annexe C via 5 sessions isolées (Visiteur, Client auteur, Professionnel assigné, Administrateur, Tiers).
+- Validation du rejet HTTP 403 systématique sur soumissions POST sans jeton CSRF valide.
+
+### 2. Classification des Bugs par Gravité
+
+| Niveau de Gravité | Définition | Nombre de bugs détectés | Liste & Observations |
+| :--- | :--- | :---: | :--- |
+| **Bloquant** | Empêche la démonstration ou compromet directement l'intégrité du système | **0** | Aucun bug bloquant. Toutes les fonctions maîtresses opèrent normalement. |
+| **Important** | Anomalie fonctionnelle notable sans rupture du service critique | **0** | Aucun bug important. Contrôle d'accès et isolation validés à 100%. |
+| **Mineur** | Imperfection cosmétique ou ergonomique sans impact de sécurité | **0** | Aucun bug mineur constaté sur les routes et flux audités. |
+
+> **Bilan global :** 14/14 tests validés avec succès (**OK**). L'annexe C est entièrement remplie et consignée dans `docs/annexe_suivi_tests.md`.
+

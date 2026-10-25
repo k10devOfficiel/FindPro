@@ -199,7 +199,7 @@ Ce document consigne l'historique et les procès-verbaux d'exécution des campag
 | `demande_detail.php?id=[id]` | 302 -> `/login.php` | 200 (Client auteur) | 200 (Pro destinataire) | 200 (Supervision lecture seule) | 403 (Accès refusé) |
 | `chat/conversation.php?id=[id]` | 302 -> `/login.php` | 200 (Client participant) | 200 (Pro participant) | 403 (Accès refusé - canal privé) | 403 (Accès refusé) |
 | `chat/poll.php?id=[id]` | 401 (Non authentifié) | 200 (Client participant) | 200 (Pro participant) | 403 (Accès refusé) | 403 (Accès refusé) |
-| `chat/send.php` | 405 (GET) / 401 (POST) | 201 (POST participant) | 201 (POST participant) | 403 (Accès refusé) | 403 (Accès refusé) |
+| `chat/send.php` | 401 (POST) / 405 (GET) | 201 (POST participant) | 201 (POST participant) | 403 (Accès refusé) | 403 (Accès refusé) |
 | `client/avis_nouveau.php?demande=[id]` | 404 (Introuvable) | 404 (Introuvable) | 404 (Introuvable) | 404 (Introuvable) | 404 (Introuvable) |
 | `request_new.php?profil=[id]` | 302 -> `/login.php` | 200 (Autorisé) | 403 (Réservé aux clients) | 403 (Réservé aux clients) | 200 (Autorisé pour son compte propre) |
 | `profile.php?id=[profil non approuvé]` | 404 (Introuvable) | 404 (Introuvable) | 404 (Introuvable) | 200 (Aperçu d'arbitrage) | 404 (Introuvable) |
@@ -208,7 +208,28 @@ Ce document consigne l'historique et les procès-verbaux d'exécution des campag
 
 ---
 
-### 3. Matrice de Rejet CSRF (Formulaires POST sans Jeton)
+### 3. Exécution Détaillée des 14 Tests de l'Annexe C (Campagne du 25/10/2026)
+
+| N° | URL testée | Périmètre & Scénario | Statut | Date | Note d'analyse & Conformité |
+| :---: | :--- | :--- | :---: | :---: | :--- |
+| **1** | `admin/index.php` | Tableau de bord administration | **OK** | 25/10/2026 | Visiteur redirigé (302), Client, Pro et Tiers bloqués (403), Admin autorisé (200). Isolation parfaite du back-office. |
+| **2** | `admin/validation.php` | File d'attente de validation des profils | **OK** | 25/10/2026 | Visiteur redirigé (302), rôles non-admin bloqués en 403, Admin accède à la file (200). 0 fuite de données de profils en attente. |
+| **3** | `admin/profil_detail.php?id=1` | Examen d'un profil pro par l'administration | **OK** | 25/10/2026 | Visiteur 302, Client/Pro/Tiers 403, Admin 200. Décisions d'arbitrage strictement réservées à l'administrateur. |
+| **4** | `pro/profil.php` | Espace professionnel : édition profil | **OK** | 25/10/2026 | Visiteur 302, Client/Admin/Tiers bloqués avec 403, Pro autorisé (200). Espace réservé aux professionnels. |
+| **5** | `pro/portfolio.php` | Espace professionnel : gestion portfolio | **OK** | 25/10/2026 | Visiteur 302, Client/Admin/Tiers bloqués (403), Pro autorisé (200). Protection complète du formulaire de portfolio. |
+| **6** | `pro/demandes.php` | Espace professionnel : opportunités reçues | **OK** | 25/10/2026 | Visiteur 302, Client/Admin/Tiers bloqués (403), Pro autorisé (200). Seul le pro voit les demandes qui lui sont adressées. |
+| **7** | `client/demandes.php` | Espace client : suivi des demandes émises | **OK** | 25/10/2026 | Visiteur 302, Pro et Admin bloqués (403), Clients autorisés (200). Chaque client ne voit strictement que ses propres demandes. |
+| **8** | `demande_detail.php?id=1` | Fiche détaillée d'une demande de service | **OK** | 25/10/2026 | Visiteur 302, Client auteur (200), Pro assigné (200), Admin supervision (200), Tiers strictement bloqué (403). Confidentialité respectée. |
+| **9** | `chat/conversation.php?id=1` | Canal de messagerie privée en direct | **OK** | 25/10/2026 | Visiteur 302, Client participant (200), Pro assigné (200), Admin bloqué (403 - RG04 secret des correspondances), Tiers bloqué (403). |
+| **10** | `chat/poll.php?id=1` | Endpoint de polling AJAX des messages | **OK** | 25/10/2026 | Visiteur 401 (JSON API), Participants 200, Admin 403 (RG04), Tiers 403. Zéro fuite de messages privés par polling. |
+| **11** | `chat/send.php` | Endpoint API d'envoi de message | **OK** | 25/10/2026 | Visiteur 401, Participants 201 avec CSRF, Admin 403 (RG04), Tiers 403. Requêtes GET rejetées en 405 Method Not Allowed. |
+| **12** | `client/avis_nouveau.php?demande=1` | Route inexistante / dépréciée d'avis | **OK** | 25/10/2026 | Réponse HTTP 404 Not Found uniforme pour l'ensemble des 5 rôles. Aucun contournement possible. |
+| **13** | `request_new.php?profil=1` | Création d'une nouvelle demande de prestation | **OK** | 25/10/2026 | Visiteur 302 vers login, Clients (auteur ou tiers) autorisés (200), Pro et Admin bloqués en 403 (action réservée aux clients). |
+| **14** | `profile.php?id=4` | Consultation publique de profil NON approuvé | **OK** | 25/10/2026 | Visiteur, Client, Pro et Tiers reçoivent HTTP 404 strict (anti-énumération). Seul l'Admin peut prévisualiser (200). |
+
+---
+
+### 4. Matrice de Rejet CSRF (Formulaires POST sans Jeton)
 
 | Formulaire POST sensible testé | Action / Méthode | Jeton CSRF | Statut HTTP attendu | Statut HTTP obtenu | Statut |
 | :--- | :--- | :---: | :---: | :---: | :---: |
@@ -221,10 +242,12 @@ Ce document consigne l'historique et les procès-verbaux d'exécution des campag
 
 ---
 
-### 4. Bilan et Synthèse de Conformité
+### 5. Bilan et Synthèse de Conformité
+- **Résultat de l'audit Annexe C :** 14 / 14 tests **OK** (100% de réussite).
 - **Fuite de données non autorisées :** 0 faille constatée (0 fuite).
 - **Taux de blocage des accès illégitimes :** 100%.
 - **Taux de rejet des formulaires sans CSRF :** 100% (HTTP 403 systématique).
+- **Liste des bugs :** Aucun bug bloquant, aucun bug important, aucun bug mineur détecté sur le périmètre Annexe C.
 
 ---
 
