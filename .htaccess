@@ -1,0 +1,51 @@
+# =============================================================================
+# FindPro — Configuration de sécurité Apache (.htaccess racine)
+# =============================================================================
+
+# 1. Autorisation d'accès pour le réseau local et mobile (Wi-Fi)
+<IfModule mod_authz_core.c>
+    Require all granted
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order Allow,Deny
+    Allow from all
+</IfModule>
+
+# 2. Désactivation du listage et de l'exploration des répertoires
+Options -Indexes
+
+# 2. Réécriture d'URL pour le Sitemap XML Google
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^sitemap\.xml$ sitemap.php [L]
+</IfModule>
+
+# 3. Déclaration des pages d'erreur personnalisées
+ErrorDocument 403 /403.php
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+# 3. Encodage par défaut
+AddDefaultCharset UTF-8
+
+# 4. Blocage de l'accès direct aux fichiers cachés (.git, .env, etc.)
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Deny,Allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 5. Blocage de l'accès direct aux fichiers de données sensibles (.sql, .log, .ini, .md)
+<FilesMatch "(?i)\.(log|sql|ini|env|sh|bak|swp|md)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Deny,Allow
+        Deny from all
+    </IfModule>
+</FilesMatch>

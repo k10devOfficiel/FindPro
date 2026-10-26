@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_blank" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#916f6c", "on-primary-fixed": "#410004", "error-container": "#ffdad6", "inverse-primary": "#ffb3ae", "secondary-container": "#fd761a", "on-primary": "#ffffff", "surface-bright": "#f9f9ff", "on-surface": "#141b2b", "primary-fixed": "#ffdad7", "on-secondary-container": "#5c2400", "primary-fixed-dim": "#ffb3ae", "on-primary-fixed-variant": "#930015", "on-primary-container": "#fff8f7", "primary-container": "#e11d2e", "tertiary-fixed-dim": "#ffb95f", "outline-variant": "#e6bdb9", "on-surface-variant": "#5d3f3d", "primary": "#b8001d", "secondary-fixed-dim": "#ffb690", "error": "#ba1a1a", "surface-container-highest": "#dce2f7", "surface-variant": "#dce2f7", "inverse-on-surface": "#edf0ff", "on-background": "#141b2b", "on-tertiary": "#ffffff", "on-error-container": "#93000a", "tertiary-fixed": "#ffddb8", "inverse-surface": "#293040", "secondary-fixed": "#ffdbca", "background": "#f9f9ff", "on-tertiary-fixed-variant": "#653e00", "on-secondary-fixed": "#341100", "surface-container-high": "#e1e8fd", "tertiary": "#805000", "surface-container-low": "#f1f3ff", "surface-tint": "#c0001f", "on-tertiary-container": "#fff9f5", "surface-dim": "#d3daef", "secondary": "#9d4300", "surface": "#f9f9ff", "surface-container-lowest": "#ffffff", "on-secondary": "#ffffff", "surface-container": "#e9edff", "on-error": "#ffffff", "on-secondary-fixed-variant": "#783200", "on-tertiary-fixed": "#2a1700", "tertiary-container": "#a16600" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "2.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter": "1.5rem", "margin": "2rem", "gutter-mobile": "1rem", "margin-mobile": "1rem" }, "fontFamily": { "headline-lg-mobile": ["Space Grotesk"], "title-md": ["Space Grotesk"], "label-sm": ["Inter"], "headline-md": ["Space Grotesk"], "display-hero": ["Space Grotesk"], "body-sm": ["Inter"], "body-lg": ["Inter"], "display-hero-mobile": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "label-md": ["Inter"], "label-lg": ["Inter"], "body-md": ["Inter"], "headline-lg": ["Space Grotesk"] }, "fontSize": { "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen"><main class="w-full min-h-screen bg-surface flex flex-col justify-center items-center py-space-xl px-gutter-mobile sm:px-gutter"><div class="flex flex-col w-full max-w-5xl mx-auto space-y-8">
+<div class="w-full bg-surface-container-low p-space-md rounded-xl shadow-sm flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">tune</span>
+<span class="font-label-lg text-label-lg text-on-surface">Simulateur de flux FindPro</span>
+<span class="font-label-sm text-label-sm bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded">Preview Mode</span>
+</div>
+<div class="flex items-center flex-wrap gap-1.5" id="stepSimulatorButtons">
+<button class="sim-btn px-3 py-1.5 rounded font-label-md text-label-md bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm transition-all" data-sim="1" onclick="goToStep(1)" type="button">1. Identité</button>
+<button class="sim-btn px-3 py-1.5 rounded font-label-md text-label-md bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm transition-all" data-sim="2" onclick="goToStep(2)" type="button">2. Métier</button>
+<button class="sim-btn px-3 py-1.5 rounded font-label-md text-label-md bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm transition-all" data-sim="3" onclick="goToStep(3)" type="button">3. Expérience</button>
+<button class="sim-btn px-3 py-1.5 rounded font-label-md text-label-md bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm transition-all" data-sim="4" onclick="goToStep(4)" type="button">4. Livrables</button>
+<button class="sim-btn px-3 py-1.5 rounded font-label-md text-label-md bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm transition-all" data-sim="5" onclick="goToStep(5)" type="button">5. Bilan</button>
+<button class="sim-btn px-3 py-1.5 rounded font-label-md text-label-md bg-surface-container-highest text-primary font-bold hover:bg-surface-container shadow-sm transition-all" data-sim="6" onclick="goToStep(6)" type="button">6. Validation</button>
+</div>
+</div>
+<header class="w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary font-headline-sm text-headline-sm">
+          FP
+        </div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">FindPro</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Plateforme d'experts techniques certifiés</span>
+</div>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-primary text-base">security</span>
+<span class="font-label-md text-label-md text-on-surface">Audit technique d'intégrité</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<h1 class="font-headline-md text-headline-md text-on-surface">Complétez votre profil professionnel</h1>
+<span class="font-label-lg text-label-lg text-primary" id="progressText">Étape 1 sur 5 (20%)</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all duration-300 rounded-full" id="progressBar" style="width: 20%;"></div>
+</div>
+</div>
+<nav aria-label="Progression du dossier" class="hidden md:grid grid-cols-5 gap-2 pt-2">
+<button class="milestone-pill text-left p-2 rounded-lg bg-surface-container-low transition-all" id="pill-1" onclick="goToStep(1)" type="button">
+<span class="font-label-sm text-label-sm text-primary block font-semibold">01. IDENTITÉ</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate block">Coordonnées légales</span>
+</button>
+<button class="milestone-pill text-left p-2 rounded-lg bg-surface-container-lowest transition-all" id="pill-2" onclick="goToStep(2)" type="button">
+<span class="font-label-sm text-label-sm text-on-surface-variant block font-semibold">02. COMPÉTENCES</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate block">Spécialité &amp; TJM</span>
+</button>
+<button class="milestone-pill text-left p-2 rounded-lg bg-surface-container-lowest transition-all" id="pill-3" onclick="goToStep(3)" type="button">
+<span class="font-label-sm text-label-sm text-on-surface-variant block font-semibold">03. PARCOURS</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate block">Démarche &amp; stack</span>
+</button>
+<button class="milestone-pill text-left p-2 rounded-lg bg-surface-container-lowest transition-all" id="pill-4" onclick="goToStep(4)" type="button">
+<span class="font-label-sm text-label-sm text-on-surface-variant block font-semibold">04. PORTFOLIO</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate block">Études de cas</span>
+</button>
+<button class="milestone-pill text-left p-2 rounded-lg bg-surface-container-lowest transition-all" id="pill-5" onclick="goToStep(5)" type="button">
+<span class="font-label-sm text-label-sm text-on-surface-variant block font-semibold">05. REVUE</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate block">Synthèse finale</span>
+</button>
+</nav>
+</header>
+<form class="w-full" id="onboardingForm" onsubmit="event.preventDefault();">
+<div class="step-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-6" id="step-1">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Étape 1 sur 5</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-1">Identité professionnelle &amp; Statut légal</h2>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">badge</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+<div class="md:col-span-4 bg-surface-container-low p-4 rounded-xl flex flex-col items-center text-center gap-3">
+<div class="relative w-28 h-28 rounded-full overflow-hidden bg-surface-container flex items-center justify-center shadow-inner">
+<img alt="Aperçu photo" class="w-full h-full object-cover hidden" data-alt="High-contrast modern portrait of a technical consultant in a minimal architectural studio with soft rim lighting, slate and dark red ambiance" id="avatarPreview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM87vQ93w-Vy4wD3w1wigpSnGYIA3HiwkOw3khWy28im7ZYD37PpbHRxQ9ImAmWjlTrX7-boUIaTWJBr1KPpX5AIrzksMqhY1ioU4CopC8yyCZ3N3mqboweEYwsXEql_PB7GPb10S-B2JBxR-wNg19gzojc2MD842Eks2kD_jXW7kWZzHWhSD5mS-mRioQvmrj9johH3tYVJ0-fCa1iCaLFE5JsCyMdw7IyM1NLq0RtDnD3Iq-nvGO"/>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant" id="avatarFallback">person</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">Photo de profil</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Format carré, fond neutre</span>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container shadow-sm transition-all flex items-center gap-1.5" onclick="simulateAvatarUpload()" type="button">
+<span class="material-symbols-outlined text-sm">upload</span>
+            Charger un portrait
+          </button>
+</div>
+<div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Prénom</label>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-low transition-all" id="inputFirstName" placeholder="ex. Thomas" type="text" value="Alexandre"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Nom</label>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-low transition-all" id="inputLastName" placeholder="ex. Dubois" type="text" value="Vandermeer"/>
+</div>
+<div class="sm:col-span-2 flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Titre professionnel officiel</label>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-low transition-all" id="inputTitle" placeholder="ex. Développeur Fullstack TypeScript Senior" type="text" value="Ingénieur Cloud &amp; Architecte Sécurité Informatique"/>
+</div>
+<div class="sm:col-span-2 flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface">Numéro SIRET / Immatriculation légale</label>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">info</span> Audit légal systématique
+              </span>
+</div>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-low transition-all" id="inputSiret" placeholder="14 chiffres" type="text" value="849 203 912 00028"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ce numéro permet de vérifier la validité de l'entreprise avant toute mise en relation.</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Ville principale</label>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-low transition-all" id="inputCity" placeholder="ex. Nantes" type="text" value="Lyon, France"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Modalités d'intervention</label>
+<select class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-low transition-all" id="inputWorkMode">
+<option value="Télétravail complet &amp; Déplacements ciblés">Télétravail complet &amp; Déplacements ciblés</option>
+<option value="100% Télétravail">100% Télétravail exclusif</option>
+<option value="Hybride régional">Hybride (Sur site 1 à 2j/semaine)</option>
+<option value="Sur site exclusivement">Sur site client exclusivement</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div class="step-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hidden flex-col gap-6" id="step-2">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Étape 2 sur 5</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-1">Métier principal &amp; Compétences clés</h2>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<label class="cursor-pointer p-4 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col gap-2 relative">
+<input class="sr-only domain-radio" name="mainDomain" onchange="updateDomainSelect(this)" type="radio" value="Développement Web"/>
+<span class="material-symbols-outlined text-primary text-2xl">code</span>
+<span class="font-label-lg text-label-lg text-on-surface">Dév Web &amp; Logiciel</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Front-end, API, architectures SaaS complexes</span>
+</label>
+<label class="cursor-pointer p-4 rounded-xl bg-surface-container hover:bg-surface-container transition-all flex flex-col gap-2 relative ring-2 ring-primary">
+<input checked="" class="sr-only domain-radio" name="mainDomain" onchange="updateDomainSelect(this)" type="radio" value="Cybersécurité"/>
+<span class="material-symbols-outlined text-primary text-2xl">shield</span>
+<span class="font-label-lg text-label-lg text-on-surface">Cybersécurité</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Audit SSI, Pentesting, Durcissement Cloud</span>
+</label>
+<label class="cursor-pointer p-4 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col gap-2 relative">
+<input class="sr-only domain-radio" name="mainDomain" onchange="updateDomainSelect(this)" type="radio" value="Cloud / DevOps"/>
+<span class="material-symbols-outlined text-primary text-2xl">cloud_sync</span>
+<span class="font-label-lg text-label-lg text-on-surface">Cloud / DevOps</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kubernetes, Terraform, CI/CD résiliente</span>
+</label>
+<label class="cursor-pointer p-4 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col gap-2 relative">
+<input class="sr-only domain-radio" name="mainDomain" onchange="updateDomainSelect(this)" type="radio" value="Montage Vidéo &amp; VFX"/>
+<span class="material-symbols-outlined text-primary text-2xl">movie</span>
+<span class="font-label-lg text-label-lg text-on-surface">Montage Vidéo</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Motion Design, DaVinci, Post-prod 4K</span>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-7 flex flex-col gap-3">
+<label class="font-label-md text-label-md text-on-surface">Ajouter des compétences techniques vérifiables</label>
+<div class="flex gap-2">
+<input class="h-11 px-3 flex-1 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-low transition-all" id="newSkillInput" placeholder="ex. Kubernetes, Rust, ISO 27001..." type="text"/>
+<button class="h-11 px-4 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container transition-all flex items-center gap-1 shadow-sm" onclick="addSkill()" type="button">
+<span class="material-symbols-outlined text-base">add</span>
+              Ajouter
+            </button>
+</div>
+<div class="flex flex-wrap gap-2 mt-2" id="skillTagsContainer">
+<span class="skill-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-surface-container text-on-surface font-label-md text-label-md">
+<span>Kubernetes CKA</span>
+<button class="text-on-surface-variant hover:text-error flex items-center" onclick="this.parentElement.remove()" type="button"><span class="material-symbols-outlined text-xs">close</span></button>
+</span>
+<span class="skill-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-surface-container text-on-surface font-label-md text-label-md">
+<span>Terraform AWS</span>
+<button class="text-on-surface-variant hover:text-error flex items-center" onclick="this.parentElement.remove()" type="button"><span class="material-symbols-outlined text-xs">close</span></button>
+</span>
+<span class="skill-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-surface-container text-on-surface font-label-md text-label-md">
+<span>Zero-Trust Architecture</span>
+<button class="text-on-surface-variant hover:text-error flex items-center" onclick="this.parentElement.remove()" type="button"><span class="material-symbols-outlined text-xs">close</span></button>
+</span>
+<span class="skill-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-surface-container text-on-surface font-label-md text-label-md">
+<span>Audit Pentest OWASP</span>
+<button class="text-on-surface-variant hover:text-error flex items-center" onclick="this.parentElement.remove()" type="button"><span class="material-symbols-outlined text-xs">close</span></button>
+</span>
+</div>
+</div>
+<div class="md:col-span-5 flex flex-col gap-4 bg-surface-container-low p-4 rounded-xl">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Tarif Journalier Moyen indicatif (TJM)</label>
+<div class="relative">
+<input class="h-11 pl-3 pr-12 w-full rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container transition-all" id="inputTjm" type="number" value="780"/>
+<span class="absolute right-3 top-3 font-label-md text-label-md text-on-surface-variant">€ HT / jour</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Visible des recruteurs et clients contractuels.</span>
+</div>
+<div class="p-3 bg-surface-container rounded-lg flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-lg">policy</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">L'équipe d'audit compare vos compétences déclarées avec les dépôts et certifications fournis à l'étape 4.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="step-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hidden flex-col gap-6" id="step-3">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Étape 3 sur 5</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-1">Démarche technique &amp; Expérience</h2>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface">Années d'expérience totale</label>
+<div class="flex items-center gap-2 mt-1">
+<input class="h-11 w-24 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" id="inputExpYears" max="40" min="1" type="number" value="9"/>
+<span class="font-body-md text-body-md text-on-surface">ans d'exercice actif</span>
+</div>
+</div>
+<div class="md:col-span-2 bg-surface-container-low p-4 rounded-xl flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface">Environnements &amp; OS de prédilection</label>
+<input class="h-11 px-3 mt-1 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" id="inputEnvironments" type="text" value="Linux Hardened (Debian/Alpine), AWS Multi-Account, Gitlab CI, Vault"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface">Présentation de votre démarche et rigueur opérationnelle</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Min. 200 caractères</span>
+</div>
+<textarea class="p-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-low transition-all" id="inputBio" rows="6">Ingénieur infrastructure et sécurité avec 9 années de pratique sur des architectures souveraines et clouds critiques. J'interviens de la formalisation des politiques de sécurité jusqu'à l'implémentation opérationnelle (Infrastructure as Code, gestion des secrets, segmentation réseau Zero-Trust). Habitué aux audits d'homologation et aux environnements sous contraintes réglementaires fortes.</textarea>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Cette description servira d'introduction officielle pour vos futures propositions d'intervention.</span>
+</div>
+</div>
+<div class="step-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hidden flex-col gap-6" id="step-4">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Étape 4 sur 5</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-1">Réalisations &amp; Liens de portfolio vérifiables</h2>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">folder_open</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Présentez 1 à 3 études de cas représentatives. Pour les travaux protégés par accord de confidentialité, cochez la mention NDA.</p>
+<div class="flex flex-col gap-4" id="caseStudiesContainer">
+<div class="case-study-item bg-surface-container-low p-4 rounded-xl flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary font-bold">Étude de cas #1</span>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface-variant">Élément principal</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" placeholder="Titre du livrable" type="text" value="Migration Zero-Trust et automatisation AWS IAM"/>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" placeholder="Stack technique employée" type="text" value="Terraform, AWS, HashiCorp Vault, Python"/>
+</div>
+<textarea class="p-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" placeholder="Description concise du contexte, contraintes et résultats mesurés..." rows="2">Déploiement d'une architecture multi-comptes avec rotation automatique des clés d'accès et conformité PCI-DSS validée sans réserve.</textarea>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none flex-1" placeholder="Lien public (GitHub, Storybook, Documentation)" type="url" value="https://github.com/alexandre-cloud/terraform-vault-modules"/>
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input class="w-4 h-4 rounded text-primary" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface">Sous clause NDA / Extraits confidentiels</span>
+</label>
+</div>
+</div>
+<div class="case-study-item bg-surface-container-low p-4 rounded-xl flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary font-bold">Étude de cas #2</span>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface-variant">Optionnel</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" placeholder="Titre du livrable" type="text" value="Pipeline DevSecOps avec SAST/DAST intégrés"/>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" placeholder="Stack technique employée" type="text" value="GitLab CI, Trivy, SonarQube, Docker"/>
+</div>
+<textarea class="p-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" placeholder="Description concise du contexte..." rows="2">Blocage automatisé des builds en cas de CVE critique détectée. Réduction de 70% des vulnérabilités avant recette.</textarea>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none flex-1" placeholder="Lien GitHub ou démo publique" type="url"/>
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface">Sous clause NDA / Extraits confidentiels</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="step-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hidden flex-col gap-6" id="step-5">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Étape 5 sur 5</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-1">Coordonnées publiques &amp; Récapitulatif avant audit</h2>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">rate_review</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Email professionnel public</label>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" id="inputPublicEmail" type="email" value="contact@vandermeer-sec.cloud"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Téléphone pro (optionnel)</label>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" id="inputPublicPhone" type="tel" value="+33 6 42 19 88 00"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Lien LinkedIn ou GitHub</label>
+<input class="h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" id="inputSocialLink" type="text" value="linkedin.com/in/alexandre-vandermeer"/>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Aperçu fiche consultable</span>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-1 rounded text-on-surface-variant">Format annuaire après audit</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm flex flex-col md:flex-row gap-4 items-start">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0 overflow-hidden">
+<span class="material-symbols-outlined text-3xl">person</span>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface" id="recapName">Alexandre Vandermeer</span>
+<span class="font-label-lg text-label-lg text-secondary" id="recapTjm">780 € HT / jour</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant" id="recapTitle">Ingénieur Cloud &amp; Architecte Sécurité Informatique</span>
+<div class="flex flex-wrap items-center gap-3 text-on-surface-variant font-label-md text-label-md mt-1">
+<span class="flex items-center gap-1" id="recapCity"><span class="material-symbols-outlined text-xs">location_on</span> Lyon, France</span>
+<span class="flex items-center gap-1" id="recapSiret"><span class="material-symbols-outlined text-xs">business</span> SIRET 849 203 912 00028</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified_user</span> Audit de conformité requis</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-3 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-xl">gavel</span>
+<span class="font-body-sm text-body-sm text-on-surface">En soumettant votre profil, vous autorisez l'équipe FindPro à procéder aux vérifications d'usage sur votre registre légal et vos justificatifs techniques.</span>
+</div>
+</div>
+</div>
+<div class="step-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hidden flex-col gap-8 text-center items-center" id="step-6">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-3xl">hourglass_top</span>
+</div>
+<div class="max-w-2xl flex flex-col gap-3">
+<span class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Transmission effectuée</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">⏳ Profil en cours de validation par l'équipe FindPro</h2>
+<div class="bg-surface-container-low p-space-lg rounded-xl text-left flex flex-col gap-3 mt-2">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+            Votre dossier et vos pièces justificatives (SIRET, dépôts techniques) ont bien été transmis à nos référents techniques.
+          </p>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+            L'audit d'intégrité prend en moyenne <strong>24 à 48 heures ouvrées</strong>. Aucun faux badge n'étant délivré sur FindPro, votre fiche n'apparaîtra dans l'annuaire public qu'après validation complète.
+          </p>
+<div class="flex items-center gap-2 pt-2 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Numéro de suivi d'audit : <strong>FP-2025-9832A</strong></span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-4">
+<a class="h-11 px-6 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-2 shadow-sm hover:opacity-90 transition-all" href="#dashboard">
+<span class="material-symbols-outlined text-sm">dashboard</span>
+          Accéder à mon tableau de bord
+        </a>
+<button class="h-11 px-5 rounded-lg bg-surface-container-low text-on-surface font-label-lg text-label-lg hover:bg-surface-container transition-all" onclick="goToStep(1)" type="button">
+          Modifier les informations transmises
+        </button>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3 mt-6" id="navigationBar">
+<button class="h-11 px-5 rounded-lg bg-surface-container-low text-on-surface font-label-lg text-label-lg hover:bg-surface-container transition-all flex items-center gap-2 opacity-50 cursor-not-allowed" disabled="" id="prevBtn" onclick="prevStep()" type="button">
+<span class="material-symbols-outlined text-base">arrow_back</span>
+        Étape précédente
+      </button>
+<div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+<button class="h-11 px-4 rounded-lg bg-surface-container-low text-on-surface font-label-lg text-label-lg hover:bg-surface-container transition-all flex items-center gap-1.5 shadow-sm" onclick="saveDraft()" type="button">
+<span class="material-symbols-outlined text-base">bookmark</span>
+          Enregistrer le brouillon
+        </button>
+<button class="h-11 px-6 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-2 shadow-sm hover:opacity-95 transition-all" id="nextBtn" onclick="nextStep()" type="button">
+<span>Étape suivante</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</form>
+<div class="fixed bottom-6 right-6 bg-surface-container-highest text-on-surface px-4 py-3 rounded-lg shadow-lg hidden items-center gap-3 z-50" id="toastNotification">
+<span class="material-symbols-outlined text-secondary">info</span>
+<span class="font-body-sm text-body-sm font-medium" id="toastMessage">Brouillon sauvegardé avec succès.</span>
+</div>
+</div>
+<script>
+  let currentStep = 1;
+  const totalSteps = 5;
+
+  function updateUI() {
+    for (let i = 1; i <= 6; i++) {
+      const stepElem = document.getElementById('step-' + i);
+      if (stepElem) {
+        if (i === currentStep) {
+          stepElem.classList.remove('hidden');
+          stepElem.classList.add('flex');
+        } else {
+          stepElem.classList.remove('flex');
+          stepElem.classList.add('hidden');
+        }
+      }
+    }
+
+    const simButtons = document.querySelectorAll('.sim-btn');
+    simButtons.forEach(btn => {
+      const stepVal = parseInt(btn.getAttribute('data-sim'));
+      if (stepVal === currentStep) {
+        btn.classList.remove('bg-surface-container-lowest', 'bg-surface-container-highest');
+        btn.classList.add('bg-primary', 'text-on-primary', 'font-bold');
+      } else {
+        btn.classList.remove('bg-primary', 'text-on-primary', 'font-bold');
+        btn.classList.add('bg-surface-container-lowest', 'text-on-surface');
+      }
+    });
+
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const navigationBar = document.getElementById('navigationBar');
+
+    if (currentStep <= 5) {
+      navigationBar.classList.remove('hidden');
+      navigationBar.classList.add('flex');
+      const percent = (currentStep / totalSteps) * 100;
+      progressBar.style.width = percent + '%';
+      progressText.textContent = `Étape ${currentStep} sur 5 (${percent}%)`;
+
+      if (currentStep === 1) {
+        prevBtn.disabled = true;
+        prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        prevBtn.disabled = false;
+        prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+
+      if (currentStep === 5) {
+        nextBtn.innerHTML = `<span>Soumettre mon profil à l'audit FindPro</span><span class="material-symbols-outlined text-base">send</span>`;
+        nextBtn.classList.add('bg-primary');
+        nextBtn.classList.remove('bg-secondary');
+        syncRecap();
+      } else {
+        nextBtn.innerHTML = `<span>Étape suivante</span><span class="material-symbols-outlined text-base">arrow_forward</span>`;
+      }
+
+      for (let p = 1; p <= 5; p++) {
+        const pill = document.getElementById('pill-' + p);
+        if (pill) {
+          const title = pill.querySelector('span:first-child');
+          if (p === currentStep) {
+            pill.classList.remove('bg-surface-container-lowest');
+            pill.classList.add('bg-surface-container-low');
+            title.classList.remove('text-on-surface-variant');
+            title.classList.add('text-primary');
+          } else {
+            pill.classList.remove('bg-surface-container-low');
+            pill.classList.add('bg-surface-container-lowest');
+            title.classList.remove('text-primary');
+            title.classList.add('text-on-surface-variant');
+          }
+        }
+      }
+    } else {
+      navigationBar.classList.remove('flex');
+      navigationBar.classList.add('hidden');
+      progressBar.style.width = '100%';
+      progressText.textContent = 'Dossier transmis (100%)';
+    }
+  }
+
+  function goToStep(stepNumber) {
+    currentStep = stepNumber;
+    updateUI();
+  }
+
+  function nextStep() {
+    if (currentStep < 5) {
+      currentStep++;
+      updateUI();
+    } else if (currentStep === 5) {
+      currentStep = 6;
+      updateUI();
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 1 && currentStep <= 5) {
+      currentStep--;
+      updateUI();
+    }
+  }
+
+  function addSkill() {
+    const input = document.getElementById('newSkillInput');
+    const val = input.value.trim();
+    if (val) {
+      const container = document.getElementById('skillTagsContainer');
+      const tag = document.createElement('span');
+      tag.className = 'skill-tag inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-surface-container text-on-surface font-label-md text-label-md';
+      tag.innerHTML = `<span>${val}</span><button type="button" onclick="this.parentElement.remove()" class="text-on-surface-variant hover:text-error flex items-center"><span class="material-symbols-outlined text-xs">close</span></button>`;
+      container.appendChild(tag);
+      input.value = '';
+    }
+  }
+
+  function updateDomainSelect(radio) {
+    const parentLabels = document.querySelectorAll('.domain-radio');
+    parentLabels.forEach(r => {
+      r.parentElement.classList.remove('ring-2', 'ring-primary', 'bg-surface-container');
+      r.parentElement.classList.add('bg-surface-container-low');
+    });
+    radio.parentElement.classList.add('ring-2', 'ring-primary', 'bg-surface-container');
+    radio.parentElement.classList.remove('bg-surface-container-low');
+  }
+
+  function simulateAvatarUpload() {
+    const preview = document.getElementById('avatarPreview');
+    const fallback = document.getElementById('avatarFallback');
+    preview.classList.remove('hidden');
+    fallback.classList.add('hidden');
+    showToast('Portrait professionnel simulé avec succès.');
+  }
+
+  function syncRecap() {
+    const fName = document.getElementById('inputFirstName').value;
+    const lName = document.getElementById('inputLastName').value;
+    const title = document.getElementById('inputTitle').value;
+    const tjm = document.getElementById('inputTjm').value;
+    const city = document.getElementById('inputCity').value;
+    const siret = document.getElementById('inputSiret').value;
+
+    document.getElementById('recapName').textContent = `${fName} ${lName}`;
+    document.getElementById('recapTitle').textContent = title || 'Titre non spécifié';
+    document.getElementById('recapTjm').textContent = `${tjm} € HT / jour`;
+    document.getElementById('recapCity').innerHTML = `<span class="material-symbols-outlined text-xs">location_on</span> ${city}`;
+    document.getElementById('recapSiret').innerHTML = `<span class="material-symbols-outlined text-xs">business</span> SIRET ${siret}`;
+  }
+
+  function saveDraft() {
+    showToast('Brouillon sauvegardé. Vous pourrez reprendre cette saisie à tout moment.');
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toastNotification');
+    const toastMsg = document.getElementById('toastMessage');
+    toastMsg.textContent = msg;
+    toast.classList.remove('hidden');
+    toast.classList.add('flex');
+    setTimeout(() => {
+      toast.classList.remove('flex');
+      toast.classList.add('hidden');
+    }, 3500);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    updateUI();
+  });
+</script></main></body></html>

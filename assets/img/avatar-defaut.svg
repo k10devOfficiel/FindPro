@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Avatar par défaut">
+  <!-- Fond circulaire neutre (palette FindPro #F8FAFC et bordure #E2E8F0) -->
+  <defs>
+    <clipPath id="circleClip">
+      <circle cx="64" cy="64" r="63"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#circleClip)">
+    <rect width="128" height="128" fill="#F8FAFC"/>
+    <!-- Tête de la silhouette neutre (couleur texte secondaire #64748B) -->
+    <circle cx="64" cy="46" r="21" fill="#64748B"/>
+    <!-- Buste / épaules de la silhouette neutre -->
+    <path d="M22 116 C22 88 40 76 64 76 C88 76 106 88 106 116 C106 124 98 128 90 128 L38 128 C30 128 22 124 22 116 Z" fill="#64748B"/>
+  </g>
+  <circle cx="64" cy="64" r="63" fill="none" stroke="#E2E8F0" stroke-width="2"/>
+</svg>

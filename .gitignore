@@ -1,0 +1,47 @@
+# ==========================================
+# .gitignore pour FindPro (PHP / WAMP)
+# ==========================================
+
+# Configuration d'environnement locale
+config/config.local.php
+.env
+.env.local
+
+# Fichiers de logs
+logs/*.log
+*.log
+
+# Uploads et médias (ignore le contenu mais conserve l'arborescence et les .gitkeep)
+uploads/*
+!uploads/**/
+!uploads/**/.gitkeep
+
+# Sauvegardes de base de données SQL
+*.sql.bak
+backups/
+
+# Dépendances Composer et NPM
+vendor/
+node_modules/
+
+# IDE et éditeurs de code
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Fichiers système (Windows & macOS)
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Dossier scratch temporaire
+scratch/

@@ -1,0 +1,32 @@
+# =============================================================================
+# FindPro — Directives d'indexation pour robots et moteurs de recherche (Google)
+# =============================================================================
+
+User-agent: *
+Allow: /
+Allow: /category.php
+Allow: /profile.php
+Allow: /search.php
+Allow: /mentions.php
+Allow: /confidentialite.php
+Allow: /regles.php
+Allow: /assets/
+Allow: /uploads/
+
+# Interdiction stricte des espaces d'administration, messagerie privée et dossiers système
+Disallow: /admin/
+Disallow: /chat/
+Disallow: /client/
+Disallow: /pro/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /logs/
+Disallow: /scratch/
+Disallow: /scripts/
+Disallow: /sql/
+Disallow: /403.php
+Disallow: /404.php
+Disallow: /500.php
+
+# Déclaration du Sitemap XML dynamique
+Sitemap: sitemap.xml

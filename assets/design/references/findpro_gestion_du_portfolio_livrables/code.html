@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#916f6c", "on-primary-fixed": "#410004", "error-container": "#ffdad6", "inverse-primary": "#ffb3ae", "secondary-container": "#fd761a", "on-primary": "#ffffff", "surface-bright": "#f9f9ff", "on-surface": "#141b2b", "primary-fixed": "#ffdad7", "on-secondary-container": "#5c2400", "primary-fixed-dim": "#ffb3ae", "on-primary-fixed-variant": "#930015", "on-primary-container": "#fff8f7", "primary-container": "#e11d2e", "tertiary-fixed-dim": "#ffb95f", "outline-variant": "#e6bdb9", "on-surface-variant": "#5d3f3d", "primary": "#b8001d", "secondary-fixed-dim": "#ffb690", "error": "#ba1a1a", "surface-container-highest": "#dce2f7", "surface-variant": "#dce2f7", "inverse-on-surface": "#edf0ff", "on-background": "#141b2b", "on-tertiary": "#ffffff", "on-error-container": "#93000a", "tertiary-fixed": "#ffddb8", "inverse-surface": "#293040", "secondary-fixed": "#ffdbca", "background": "#f9f9ff", "on-tertiary-fixed-variant": "#653e00", "on-secondary-fixed": "#341100", "surface-container-high": "#e1e8fd", "tertiary": "#805000", "surface-container-low": "#f1f3ff", "surface-tint": "#c0001f", "on-tertiary-container": "#fff9f5", "surface-dim": "#d3daef", "secondary": "#9d4300", "surface": "#f9f9ff", "surface-container-lowest": "#ffffff", "on-secondary": "#ffffff", "surface-container": "#e9edff", "on-error": "#ffffff", "on-secondary-fixed-variant": "#783200", "on-tertiary-fixed": "#2a1700", "tertiary-container": "#a16600" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "2.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter": "1.5rem", "margin": "2rem", "gutter-mobile": "1rem", "margin-mobile": "1rem" }, "fontFamily": { "headline-lg-mobile": ["Space Grotesk"], "title-md": ["Space Grotesk"], "label-sm": ["Inter"], "headline-md": ["Space Grotesk"], "display-hero": ["Space Grotesk"], "body-sm": ["Inter"], "body-lg": ["Inter"], "display-hero-mobile": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "label-md": ["Inter"], "label-lg": ["Inter"], "body-md": ["Inter"], "headline-lg": ["Space Grotesk"] }, "fontSize": { "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between py-space-lg px-space-md"><div class="flex flex-col gap-space-lg"><div class="flex items-center gap-space-sm px-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary-container text-[22px]">token</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">FindPro</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Espace Pro</span></div></div><div class="px-space-sm py-space-sm rounded-lg bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2.5 h-2.5 rounded-full bg-secondary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface">Statut dossier</span></div><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm"><span class="material-symbols-outlined text-[13px] text-secondary">hourglass_top</span>En attente</span></div><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="accueil-dashboard" href="#"><span class="material-symbols-outlined text-[20px]">space_dashboard</span><span>Accueil Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="mon-profil" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Mon Profil</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2.5 transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="portfolio-&amp;-livrables" href="#"><span class="material-symbols-outlined text-[20px]">folder_special</span><span>Portfolio &amp; Livrables</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="demandes-de-contact" href="#"><span class="material-symbols-outlined text-[20px]">mail</span><span>Demandes de contact</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="parametres" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Paramètres</span></a></nav></div><div class="flex flex-col gap-space-sm pt-space-md"><div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col overflow-hidden"><span class="font-label-md text-label-md text-on-surface truncate">Expert FindPro</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">pro@findpro.fr</span></div></div><a class="text-on-surface-variant hover:text-error transition-colors" data-path="connexion" href="#" title="Déconnexion"><span class="material-symbols-outlined text-[20px]">logout</span></a></div></div></aside><div class="pl-72 min-h-screen flex flex-col bg-surface"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Espace Membre Vérifié</span><div class="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] text-on-surface font-label-sm text-label-sm"><span class="material-symbols-outlined text-[14px] text-tertiary">verified</span><span>Accréditation en cours d'examen</span></div></div><div class="flex items-center gap-space-md"><button class="w-9 h-9 rounded-lg flex items-center justify-center bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="w-9 h-9 rounded-lg flex items-center justify-center bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors relative" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface px-gutter py-space-lg flex-1"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg w-full max-w-[1400px] mx-auto pb-space-xl">
+<!-- Top KPI & Meta Overview Banner -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md p-space-lg rounded-xl bg-surface-container-lowest shadow-sm relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-80 bg-gradient-to-l from-primary-fixed/30 to-transparent pointer-events-none"></div>
+<div class="flex flex-col gap-1 z-10">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+            Portfolio Technique Certifié
+          </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">ID: PRO-77291</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Gestion du Portfolio &amp; Livrables</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Administrez vos réalisations auditées et vos études de cas cryptées. Chaque livrable approuvé FindPro renforce votre indice de confiance auprès des donneurs d'ordre institutionnels.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm z-10 flex-wrap sm:flex-nowrap">
+<!-- Simulator Toggle (Empty vs Filled) -->
+<button class="px-3.5 py-2.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all font-label-md text-label-md flex items-center gap-2 shadow-sm" id="toggle-empty-state-btn" title="Simuler l'état sans aucun projet" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">swap_horiz</span>
+<span id="simulator-label">Simuler état vide</span>
+</button>
+<!-- Main Action CTA -->
+<button class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-lg text-label-lg shadow-md hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center gap-2" id="open-create-modal-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Ajouter une réalisation</span>
+</button>
+</div>
+</div>
+<!-- Metrics Bar -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md">
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant">Livrables Validés</span>
+<div class="flex items-baseline justify-between mt-2">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">4</span>
+<span class="text-tertiary font-label-sm text-label-sm flex items-center"><span class="material-symbols-outlined text-[14px] mr-0.5">verified_user</span> 100% Intact</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant">Sous Audit Technique</span>
+<div class="flex items-baseline justify-between mt-2">
+<span class="font-headline-md text-headline-md text-secondary font-bold">1</span>
+<span class="text-secondary font-label-sm text-label-sm flex items-center"><span class="material-symbols-outlined text-[14px] mr-0.5">pending</span> SLA: 24h</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant">Projets NDA Anonymisés</span>
+<div class="flex items-baseline justify-between mt-2">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">1</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm flex items-center"><span class="material-symbols-outlined text-[14px] mr-0.5">lock</span> ZK-Proof</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant">Vues Globales / 30j</span>
+<div class="flex items-baseline justify-between mt-2">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">1,842</span>
+<span class="text-primary font-label-sm text-label-sm font-semibold flex items-center"><span class="material-symbols-outlined text-[14px] mr-0.5">trending_up</span> +28%</span>
+</div>
+</div>
+</div>
+<!-- Filters, Search & Categories Controls -->
+<div class="flex flex-col gap-space-md bg-surface-container-lowest p-space-md rounded-xl shadow-sm" id="controls-section">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<!-- Category Segmented Filters -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0" id="category-tabs">
+<button class="cat-pill active px-4 py-2 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md transition-colors flex items-center gap-1.5 whitespace-nowrap" data-cat="all">
+<span>Tous</span>
+<span class="px-1.5 py-0.2 rounded-full bg-white/20 text-[11px] font-bold">6</span>
+</button>
+<button class="cat-pill px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors flex items-center gap-1.5 whitespace-nowrap" data-cat="saas">
+<span>Applications SaaS</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-[11px] font-medium">2</span>
+</button>
+<button class="cat-pill px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors flex items-center gap-1.5 whitespace-nowrap" data-cat="design">
+<span>Design Systems</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-[11px] font-medium">2</span>
+</button>
+<button class="cat-pill px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors flex items-center gap-1.5 whitespace-nowrap" data-cat="sec">
+<span>Sécurité &amp; Audits</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-[11px] font-medium">2</span>
+</button>
+</div>
+<!-- Search & Status Selector -->
+<div class="flex items-center gap-space-sm flex-wrap sm:flex-nowrap">
+<div class="relative flex-1 sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-[20px] text-on-surface-variant pointer-events-none">search</span>
+<input class="w-full h-11 pl-10 pr-3 rounded-lg bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm placeholder:text-on-surface-variant/60" id="search-input" placeholder="Rechercher techno, livrable..." type="text"/>
+</div>
+<div class="relative">
+<select class="h-11 pl-3 pr-8 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md appearance-none focus:outline-none cursor-pointer shadow-sm" id="status-filter">
+<option value="all">Tous les statuts</option>
+<option value="published">Publié sur l'annuaire</option>
+<option value="review">En cours d'audit technique</option>
+<option value="draft">Brouillon interne</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-[18px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dynamic Portfolio Container -->
+<div class="w-full" id="portfolio-container">
+<!-- Project Cards Grid (Default Filled State) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg" id="projects-grid">
+<!-- Project Card 1: Fintech SaaS -->
+<article class="project-card group rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden" data-category="saas" data-status="published">
+<div>
+<div class="relative h-48 w-full overflow-hidden bg-surface-container-low">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="High tech minimal user interface of a fintech cryptocurrency analytics dashboard with real-time candlestick charts, sleek glassmorphism tables, and vibrant emerald indicators with dark and red contrast accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCs6qiY4eCJu_mlNg6jXwRzRVLrmjoP219bJBHHnejCIQXHonGlNMeenpI7iEg-wDYoM018hdr5QY0Hsl5mKdSnp0E8UePnlq5XaQRrbDGRw_iQQoS2pmM65c8LYps7HJr7Cgvre7bWDQTr3fpLgBV1I9GEQfwPX1yjlvK8dybfa4F2qLHxgY4ZhOO4qIvHLZLn57JPwo5GpFmZ9XFiAyziB33UUrdnhfpT1N8H475Bcsc9YagiHid7')"></div>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#15803D]"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Publié</span>
+</div>
+<div class="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-tertiary shadow-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="font-label-sm text-label-sm font-semibold">Validé FindPro</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold">Applications SaaS</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span> 612
+                </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                Krypton Core: Plateforme Trading Institutionnel
+              </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Conception d'un moteur d'exécution d'ordres à ultra-faible latence (&lt;5ms) avec streaming WebSocket et réconciliation comptable temps réel.
+              </p>
+<div class="flex flex-wrap gap-1.5 pt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">React 18</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Next.js</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Rust WASM</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">TailwindCSS</span>
+</div>
+</div>
+</div>
+<div class="px-space-lg py-space-sm bg-surface-container-low flex items-center justify-between mt-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">HASH: 4b2f..90a1</span>
+<div class="flex items-center gap-1">
+<button class="action-preview-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Prévisualiser le rendu public" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+<button class="action-edit-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Éditer la réalisation" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="action-delete-btn p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/50 transition-colors" data-title="Krypton Core: Plateforme Trading Institutionnel" title="Supprimer" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Project Card 2: Security & Audit Under NDA -->
+<article class="project-card group rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden" data-category="sec" data-status="published">
+<div>
+<div class="relative h-48 w-full overflow-hidden bg-surface-container-low">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Cybersecurity terminal interface displaying complex network packet inspection logs, red vulnerability alert triggers, cryptographic cipher locks, and schematic network topologies." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGN5juJqdhUgo_uye29WmdctMZbTtU4ViP3GdqZjWTZ10U1HXfYBbMCNOB2f6HSlSn-rc6EQzn4f_oyVQ9-oIXbHpzYVFG_OOm1zNo6q1I_p_jVM-1D9ostp8Yt2jZd-pT6Ov-Oj8k4eyBuqZ8kb_wRSBGMnNlcUTOzxX2xUd1O2Zx_bgldVnGA5AUSy7Qg8an7e1rWR6wkPeQ1xQr4Gdq9Vv8oH9tE2mDmQhlQUPnyxz1iEF3bVVq')"></div>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#15803D]"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Publié</span>
+</div>
+<div class="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">encrypted</span>
+<span class="font-label-sm text-label-sm font-semibold">Sous NDA crypté</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold">Sécurité &amp; Audits</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span> 439
+                </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                Audit Pénétratif Smart Contracts ZK-Rollup
+              </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Revue formelle de sécurité sur un protocole DeFi de niveau 2 gérant 45M$ de TVL. Détection et mitigation de 3 vulnérabilités critiques de reentrancy.
+              </p>
+<div class="flex flex-wrap gap-1.5 pt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Solidity</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Slither</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">OWASP Top 10</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Foundry</span>
+</div>
+</div>
+</div>
+<div class="px-space-lg py-space-sm bg-surface-container-low flex items-center justify-between mt-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">AUDIT: CERT-8902-SEC</span>
+<div class="flex items-center gap-1">
+<button class="action-preview-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Prévisualiser le rendu public" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+<button class="action-edit-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Éditer la réalisation" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="action-delete-btn p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/50 transition-colors" data-title="Audit Pénétratif Smart Contracts ZK-Rollup" title="Supprimer" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Project Card 3: Design System -->
+<article class="project-card group rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden" data-category="design" data-status="published">
+<div>
+<div class="relative h-48 w-full overflow-hidden bg-surface-container-low">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="A clean modern design system workspace displaying accessible token palettes, responsive component variants, typography hierarchy scales, and clean UI components arranged in an organized grid." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpQ58eFEGUlUWNQLUaA28FMVrSJ4JJJh7ysvVAxV5IfYZPA4aUN-HaqTT7lMR_-stk7I3jcDZ6xc37FKI7wi2TdEMCrIlIYrNv9n07jlbd_KdQhfo-42fQSwoRuzLS1WP7qEPB6xpa7XBQTtmR5crNznw0nAjG9mHjLXAfx4q90Bm0ZbczCI6FJUnYTm2aRr-pL6Z9kBwH5UHUfhsQgn0Erg1I53gfDRkgZL9wF_p9NwoZxC1HWRxf')"></div>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#15803D]"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Publié</span>
+</div>
+<div class="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-tertiary shadow-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="font-label-sm text-label-sm font-semibold">Validé FindPro</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold">Design Systems</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span> 328
+                </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                Prism DS: Système d'Éléments Multi-Marques
+              </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Architecture de 120+ tokens de design et bibliothèque de composants Web Components compatible Vue, React et Angular avec support WCAG AAA.
+              </p>
+<div class="flex flex-wrap gap-1.5 pt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Figma Tokens</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Storybook</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">TypeScript</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Tailwind</span>
+</div>
+</div>
+</div>
+<div class="px-space-lg py-space-sm bg-surface-container-low flex items-center justify-between mt-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">TOKEN: v2.4.0-STABLE</span>
+<div class="flex items-center gap-1">
+<button class="action-preview-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Prévisualiser le rendu public" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+<button class="action-edit-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Éditer la réalisation" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="action-delete-btn p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/50 transition-colors" data-title="Prism DS: Système d'Éléments Multi-Marques" title="Supprimer" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Project Card 4: Under Technical Review -->
+<article class="project-card group rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden" data-category="saas" data-status="review">
+<div>
+<div class="relative h-48 w-full overflow-hidden bg-surface-container-low">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Logistics fleet tracking software layout showing automated shipping routes, map markers, cargo sensors data stream, and AI predictive route optimization graphs." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzNsim2ispFasPpnLYdyMfbTqNm8woxqOIZGu4FPCY6z8c94nqQsHLuEY8hrurqwAl04V6JmFWQt1Zygv_zzWGyMfs1hCK5gHnRntIgTZLo4naQ6LO-nuPvEInqFImG27LVe7v4aBoblIgm2wo9fC7SGykYkOZ3IaUf0aMngmlyU-xRcB7nmpTyOmoFJq1khIi16CCmaUo2BbfpItLkdiErBsBEUj05xrkaSfDKLLP9rPPUBRszSQz')"></div>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">En revue</span>
+</div>
+<div class="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high/90 backdrop-blur-md text-secondary font-medium shadow-sm">
+<span class="material-symbols-outlined text-[14px]">hourglass_bottom</span>
+<span class="font-label-sm text-label-sm">Audit en cours</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold">Applications SaaS</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span> 147
+                </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                FleetFlow: Dispatch Logistique Autonome
+              </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Plateforme temps réel orchestrant 250+ poids-lourds avec optimisation dynamique des tournées de livraison et télémétrie IoT.
+              </p>
+<div class="flex flex-wrap gap-1.5 pt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Node.js</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Next.js 14</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">PostgreSQL</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Kafka</span>
+</div>
+</div>
+</div>
+<div class="px-space-lg py-space-sm bg-surface-container-low flex items-center justify-between mt-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">SOUMIS LE: 12 NOV</span>
+<div class="flex items-center gap-1">
+<button class="action-preview-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Prévisualiser le rendu public" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+<button class="action-edit-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Éditer la réalisation" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="action-delete-btn p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/50 transition-colors" data-title="FleetFlow: Dispatch Logistique Autonome" title="Supprimer" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Project Card 5: Draft Design System -->
+<article class="project-card group rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden" data-category="design" data-status="draft">
+<div>
+<div class="relative h-48 w-full overflow-hidden bg-surface-container-low">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Technical wireframes and high precision vector isometric blueprints of a modern banking mobile interface with layout grids and interaction flow annotations." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC8oEhhH7WZrseECsizgqFhhxQjj04QJ7aww0F-7S8Wj1gV_wOK4GKym-dutDeRi4BfzNoBQutLxm9gQa6JPS8aT_JGXeA6V4FaftnjzE3hTVKsozpO7blZZNISLAoUpLHOcT-by6RGDDdVKQsX23f-f6Zd5WuFqXmCMY7A0PZl60-NV3S_uEy4iFwAkPVC7jhCRKPyy9UDxcDmUnAaka5mygRWbk-bHkDondxwWdKcd3-0y-E-cxOg')"></div>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Brouillon</span>
+</div>
+<div class="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high/90 backdrop-blur-md text-on-surface-variant shadow-sm">
+<span class="material-symbols-outlined text-[14px]">edit_note</span>
+<span class="font-label-sm text-label-sm">Non publié</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold">Design Systems</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span> 0
+                </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                Boreal FinApp: Kit UI Mobile iOS &amp; Android
+              </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Spécifications graphiques et implémentation React Native pour le rebranding d'une néobanque européenne.
+              </p>
+<div class="flex flex-wrap gap-1.5 pt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">React Native</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Figma</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Style-Dictionary</span>
+</div>
+</div>
+</div>
+<div class="px-space-lg py-space-sm bg-surface-container-low flex items-center justify-between mt-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">STATUT: BROUILLON</span>
+<div class="flex items-center gap-1">
+<button class="action-preview-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Prévisualiser le rendu public" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+<button class="action-edit-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Éditer la réalisation" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="action-delete-btn p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/50 transition-colors" data-title="Boreal FinApp: Kit UI Mobile iOS &amp; Android" title="Supprimer" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Project Card 6: Infrastructure Security -->
+<article class="project-card group rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden" data-category="sec" data-status="published">
+<div>
+<div class="relative h-48 w-full overflow-hidden bg-surface-container-low">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Secure cloud server infrastructure dashboard displaying automated Kubernetes clusters telemetry, encrypted VPC peering tunnels, and microsegmentation security policies." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDVKOQDBRhdgducFYX7e9UKMdhJD7mt-KiECrSIAxjhmO2udx8uCMKWzH9cOi9iaSnjHW-SpH40iLW-x5V7lbjnmoeRuAps2uVFjbIWra_ujYkv42tW99HlKjF4Ni8cS5giNDiLVI5iFzXNk6Oonf0D6vNJjeV_FJjZhb8OoX2XR0U4C4beelZMOSGeMHID7ouNILIJh04eDpTV3u8YZhK4fNLdbFhMkH1HGS0NVpxSoVX7XnL3UrdV')"></div>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#15803D]"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Publié</span>
+</div>
+<div class="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-tertiary shadow-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="font-label-sm text-label-sm font-semibold">Validé FindPro</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold">Sécurité &amp; Audits</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span> 316
+                </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                Durcissement Cloud AWS &amp; Sécurisation SOC2
+              </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Automatisation Terraform de l'infrastructure bancaire conforme ISO 27001 et SOC2 Type II avec pipeline CI/CD DevSecOps.
+              </p>
+<div class="flex flex-wrap gap-1.5 pt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Terraform</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">AWS IAM</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Trivy</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm font-medium">Kubernetes</span>
+</div>
+</div>
+</div>
+<div class="px-space-lg py-space-sm bg-surface-container-low flex items-center justify-between mt-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">SOC2 COMPLIANT</span>
+<div class="flex items-center gap-1">
+<button class="action-preview-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Prévisualiser le rendu public" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+<button class="action-edit-btn p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" title="Éditer la réalisation" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="action-delete-btn p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/50 transition-colors" data-title="Durcissement Cloud AWS &amp; Sécurisation SOC2" title="Supprimer" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Empty State View (Initially Hidden) -->
+<div class="hidden flex-col items-center justify-center p-space-xl bg-surface-container-lowest rounded-xl shadow-sm text-center max-w-3xl mx-auto my-8" id="empty-state-view">
+<div class="w-20 h-20 rounded-full bg-primary-fixed/40 flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-primary text-[42px]">folder_special</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-2">
+          Aucun livrable publié pour le moment
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mb-space-lg">
+          Votre portfolio est le reflet direct de votre expertise technique. Ajoutez votre première étude de cas ou un livrable assaini sous NDA pour booster votre visibilité sur l'annuaire FindPro.
+        </p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md w-full text-left mb-space-lg">
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+<span class="material-symbols-outlined text-secondary text-[22px]">verified_user</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">1. Déposez votre code</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">URL de démo ou rapport sanitatisé sans données sensibles.</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+<span class="material-symbols-outlined text-tertiary text-[22px]">fact_check</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">2. Audit FindPro</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Revue technique par nos pairs sous 24 heures ouvrées.</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+<span class="material-symbols-outlined text-primary text-[22px]">rocket_launch</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">3. Gain de visibilité</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Accédez aux missions exclusives à haut TJM.</span>
+</div>
+</div>
+<button class="px-6 py-3 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-lg text-label-lg shadow-md hover:shadow-lg transition-all flex items-center gap-2" id="empty-state-cta" type="button">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>Publier ma première réalisation</span>
+</button>
+</div>
+</div>
+</div>
+<!-- MODAL: ADD / EDIT LIVRABLE -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-on-surface/40 backdrop-blur-sm transition-opacity" id="project-modal">
+<div class="relative w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden max-h-[942px] flex flex-col">
+<!-- Modal Header -->
+<div class="px-space-lg py-space-md bg-surface-container-lowest flex items-center justify-between border-b border-surface-container-high">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[22px]">post_add</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-tight" id="modal-title">Ajouter une réalisation</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Attestation de livrable pour l'annuaire vérifié</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" id="close-modal-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body (Scrollable) -->
+<form class="p-space-lg overflow-y-auto flex flex-col gap-space-md" id="livrable-form">
+<!-- Field 1: Title -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between" for="form-title">
+<span>Titre de la réalisation</span>
+<span class="text-on-surface-variant font-normal font-label-sm text-label-sm">Requis</span>
+</label>
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-low text-on-surface text-body-md focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all" id="form-title" placeholder="Ex: Moteur de recommandation e-commerce sous Kubernetes" required="" type="text"/>
+</div>
+<!-- Field 2: Category & Status Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="form-category">Catégorie de projet</label>
+<div class="relative">
+<select class="w-full h-11 pl-3 pr-8 rounded-lg bg-surface-container-low text-on-surface text-body-sm appearance-none focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container" id="form-category">
+<option value="saas">Applications SaaS &amp; Cloud</option>
+<option value="design">Design Systems &amp; UI Architecture</option>
+<option value="sec">Sécurité &amp; Audits Techniques</option>
+<option value="ai">Intelligence Artificielle &amp; ML</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-[18px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="form-impact">Métrique d'impact principal</label>
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-low text-on-surface text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all" id="form-impact" placeholder="Ex: Temps de latence divisé par 4, 1.2M req/j" type="text"/>
+</div>
+</div>
+<!-- Field 3: Short Description -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="form-desc">Description courte et contexte technique</label>
+<textarea class="w-full p-3 rounded-lg bg-surface-container-low text-on-surface text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container resize-none transition-all" id="form-desc" placeholder="Présentez brièvement les contraintes architecturales, votre rôle précis et la valeur ajoutée générée pour le client..." rows="3"></textarea>
+</div>
+<!-- Field 4: Removable Tech Tags -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Outils et technologies utilisés</label>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex flex-wrap items-center gap-1.5 min-h-[48px]" id="tags-wrapper">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+              React
+              <button class="remove-tag text-on-surface-variant hover:text-error" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+              Next.js
+              <button class="remove-tag text-on-surface-variant hover:text-error" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+              PostgreSQL
+              <button class="remove-tag text-on-surface-variant hover:text-error" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<input class="bg-transparent text-on-surface font-body-sm text-body-sm focus:outline-none px-2 py-0.5 flex-1 min-w-[120px]" id="tag-input" placeholder="+ Ajouter tag (Entrée)" type="text"/>
+</div>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Tapez un mot-clé (ex: Docker, GraphQL) et validez avec Entrée</span>
+</div>
+<!-- Field 5: Image Drag and Drop Zone -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Image de couverture &amp; aperçu</label>
+<div class="w-full p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors flex flex-col items-center justify-center gap-2 cursor-pointer text-center group">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">cloud_upload</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Glissez une capture haute définition ou cliquez pour explorer</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">PNG, JPG, WebP jusqu'à 8 Mo (Format 16:9 recommandé)</span>
+</div>
+</div>
+</div>
+<!-- Field 6: External URLs & NDA Checkbox -->
+<div class="flex flex-col gap-space-sm pt-2">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="form-demo-url">URL de démonstration en direct (optionnel)</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-on-surface-variant">link</span>
+<input class="w-full h-11 pl-10 pr-3 rounded-lg bg-surface-container-low text-on-surface text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container" id="form-demo-url" placeholder="https://app.monprojet.com" type="url"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="form-repo-url">Dépôt de code assaini (GitHub / GitLab)</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-on-surface-variant">code</span>
+<input class="w-full h-11 pl-10 pr-3 rounded-lg bg-surface-container-low text-on-surface text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container" id="form-repo-url" placeholder="https://github.com/mon-profil/showcase-repo" type="url"/>
+</div>
+</div>
+<!-- NDA Checkbox -->
+<div class="flex items-start gap-3 p-space-sm rounded-lg bg-surface-container-low mt-1">
+<input class="mt-1 h-4 w-4 rounded text-primary focus:ring-primary-container cursor-pointer" id="nda-checkbox" type="checkbox"/>
+<div class="flex flex-col">
+<label class="font-label-md text-label-md text-on-surface font-medium cursor-pointer" for="nda-checkbox">
+                Projet confidentiel sous NDA (rapport d'audit sanitatisé)
+              </label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+                Seuls les validateurs certifiés FindPro examineront le hash d'intégrité sans exposer le nom du client final.
+              </span>
+</div>
+</div>
+</div>
+</form>
+<!-- Modal Footer -->
+<div class="px-space-lg py-space-md bg-surface-container-lowest flex items-center justify-between border-t border-surface-container-high">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" id="cancel-modal-btn" type="button">
+          Annuler
+        </button>
+<div class="flex items-center gap-space-sm">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors" id="save-draft-btn" type="button">
+            Enregistrer le brouillon
+          </button>
+<button class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-md text-label-md shadow-md hover:shadow-lg transition-all flex items-center gap-1.5" id="submit-audit-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Soumettre à l'audit technique</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL: CONFIRM DELETE -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-on-surface/40 backdrop-blur-sm transition-opacity" id="delete-modal">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-xl shadow-2xl p-space-lg flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[28px]">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Supprimer ce livrable ?</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Êtes-vous sûr de vouloir retirer <strong class="text-on-surface" id="delete-item-title">ce livrable</strong> de votre profil public ? Les donneurs d'ordre ne pourront plus consulter cette preuve technique certifiée.
+        </p>
+</div>
+<div class="p-space-sm rounded-lg bg-error-container/30 flex items-center gap-2 text-on-error-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-error">info</span>
+<span>Cette action révoquera les attestations associées.</span>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-2">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" id="cancel-delete-btn" type="button">
+          Annuler
+        </button>
+<button class="px-5 py-2.5 rounded-lg bg-error text-on-error hover:bg-error/90 font-label-md text-label-md shadow-md transition-all flex items-center gap-1" id="confirm-delete-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">delete_forever</span>
+<span>Confirmer la suppression</span>
+</button>
+</div>
+</div>
+</div>
+<!-- INTERACTIVITY JAVASCRIPT -->
+<script>
+    (function initPortfolioManager() {
+      // Elements
+      const openModalBtn = document.getElementById('open-create-modal-btn');
+      const emptyStateCta = document.getElementById('empty-state-cta');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+      const cancelModalBtn = document.getElementById('cancel-modal-btn');
+      const projectModal = document.getElementById('project-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const livrableForm = document.getElementById('livrable-form');
+
+      // Delete Modal Elements
+      const deleteModal = document.getElementById('delete-modal');
+      const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+      const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+      const deleteItemTitle = document.getElementById('delete-item-title');
+
+      // Simulator Elements
+      const toggleEmptyStateBtn = document.getElementById('toggle-empty-state-btn');
+      const simulatorLabel = document.getElementById('simulator-label');
+      const projectsGrid = document.getElementById('projects-grid');
+      const emptyStateView = document.getElementById('empty-state-view');
+
+      // Filter & Search Elements
+      const categoryTabs = document.querySelectorAll('#category-tabs .cat-pill');
+      const statusFilter = document.getElementById('status-filter');
+      const searchInput = document.getElementById('search-input');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      // Tag input logic
+      const tagsWrapper = document.getElementById('tags-wrapper');
+      const tagInput = document.getElementById('tag-input');
+
+      let currentActiveCardToDelete = null;
+
+      // Modal Open / Close
+      function openModal(isEdit = false, titleText = '') {
+        projectModal.classList.remove('hidden');
+        projectModal.classList.add('flex');
+        if (isEdit) {
+          modalTitle.textContent = "Éditer la réalisation";
+          document.getElementById('form-title').value = titleText || 'Krypton Core: Plateforme Trading';
+        } else {
+          modalTitle.textContent = "Ajouter une réalisation";
+          livrableForm.reset();
+        }
+      }
+
+      function closeModal() {
+        projectModal.classList.add('hidden');
+        projectModal.classList.remove('flex');
+      }
+
+      openModalBtn?.addEventListener('click', () => openModal(false));
+      emptyStateCta?.addEventListener('click', () => openModal(false));
+      closeModalBtn?.addEventListener('click', closeModal);
+      cancelModalBtn?.addEventListener('click', closeModal);
+
+      projectModal?.addEventListener('click', (e) => {
+        if (e.target === projectModal) closeModal();
+      });
+
+      // Tags creation & deletion
+      tagInput?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const val = tagInput.value.trim();
+          if (val) {
+            const span = document.createElement('span');
+            span.className = "inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm";
+            span.innerHTML = `${val} <button type="button" class="remove-tag text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[14px]">close</span></button>`;
+            tagsWrapper.insertBefore(span, tagInput);
+            tagInput.value = '';
+          }
+        }
+      });
+
+      tagsWrapper?.addEventListener('click', (e) => {
+        const removeBtn = e.target.closest('.remove-tag');
+        if (removeBtn) {
+          removeBtn.parentElement.remove();
+        }
+      });
+
+      // Filter Logic
+      let currentCategory = 'all';
+      let currentStatus = 'all';
+      let searchQuery = '';
+
+      function applyFilters() {
+        projectCards.forEach(card => {
+          const cardCat = card.dataset.category;
+          const cardStat = card.dataset.status;
+          const textContent = card.innerText.toLowerCase();
+
+          const matchesCat = (currentCategory === 'all' || cardCat === currentCategory);
+          const matchesStat = (currentStatus === 'all' || cardStat === currentStatus);
+          const matchesSearch = !searchQuery || textContent.includes(searchQuery);
+
+          if (matchesCat && matchesStat && matchesSearch) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      }
+
+      categoryTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          categoryTabs.forEach(t => {
+            t.classList.remove('bg-primary-container', 'text-on-primary-container', 'active');
+            t.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+          });
+          tab.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+          tab.classList.add('bg-primary-container', 'text-on-primary-container', 'active');
+
+          currentCategory = tab.dataset.cat;
+          applyFilters();
+        });
+      });
+
+      statusFilter?.addEventListener('change', (e) => {
+        currentStatus = e.target.value;
+        applyFilters();
+      });
+
+      searchInput?.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        applyFilters();
+      });
+
+      // Simulator Toggle
+      let isEmptySimulated = false;
+      toggleEmptyStateBtn?.addEventListener('click', () => {
+        isEmptySimulated = !isEmptySimulated;
+        if (isEmptySimulated) {
+          projectsGrid.classList.add('hidden');
+          emptyStateView.classList.remove('hidden');
+          emptyStateView.classList.add('flex');
+          simulatorLabel.textContent = "Restaurer les données";
+        } else {
+          projectsGrid.classList.remove('hidden');
+          emptyStateView.classList.add('hidden');
+          emptyStateView.classList.remove('flex');
+          simulatorLabel.textContent = "Simuler état vide";
+        }
+      });
+
+      // Project Actions (Edit, Delete, Preview)
+      document.querySelectorAll('.action-edit-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const card = e.target.closest('.project-card');
+          const title = card ? card.querySelector('h2').innerText : '';
+          openModal(true, title);
+        });
+      });
+
+      document.querySelectorAll('.action-delete-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const card = e.target.closest('.project-card');
+          currentActiveCardToDelete = card;
+          const title = btn.getAttribute('data-title') || 'cette réalisation';
+          deleteItemTitle.textContent = `« ${title} »`;
+          deleteModal.classList.remove('hidden');
+          deleteModal.classList.add('flex');
+        });
+      });
+
+      cancelDeleteBtn?.addEventListener('click', () => {
+        deleteModal.classList.add('hidden');
+        deleteModal.classList.remove('flex');
+        currentActiveCardToDelete = null;
+      });
+
+      confirmDeleteBtn?.addEventListener('click', () => {
+        if (currentActiveCardToDelete) {
+          currentActiveCardToDelete.remove();
+        }
+        deleteModal.classList.add('hidden');
+        deleteModal.classList.remove('flex');
+        currentActiveCardToDelete = null;
+      });
+
+      // Submit or draft mock
+      document.getElementById('submit-audit-btn')?.addEventListener('click', () => {
+        closeModal();
+      });
+
+      document.getElementById('save-draft-btn')?.addEventListener('click', () => {
+        closeModal();
+      });
+
+    })();
+  </script>
+</div></main></div></body></html>

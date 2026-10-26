@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>MCD Merise — FindPro</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0f172a;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      color: #0f172a;
+    }
+    #canvas-container {
+      background: #ffffff;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4);
+      border-radius: 16px;
+      overflow: hidden;
+      width: 2700px;
+      height: 1950px;
+      position: relative;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="canvas-container">
+    <svg viewBox="0 0 2700 1950" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Gradients pour les en-têtes d'entités -->
+        <linearGradient id="ent-user" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#1e3a8a" />
+          <stop offset="100%" stop-color="#2563eb" />
+        </linearGradient>
+        <linearGradient id="ent-pro" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#065f46" />
+          <stop offset="100%" stop-color="#059669" />
+        </linearGradient>
+        <linearGradient id="ent-cat" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#7c2d12" />
+          <stop offset="100%" stop-color="#ea580c" />
+        </linearGradient>
+        <linearGradient id="ent-demande" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#4c1d95" />
+          <stop offset="100%" stop-color="#7c3aed" />
+        </linearGradient>
+        <linearGradient id="ent-chat" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0f766e" />
+          <stop offset="100%" stop-color="#0d9488" />
+        </linearGradient>
+        <linearGradient id="ent-avis" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#b45309" />
+          <stop offset="100%" stop-color="#d97706" />
+        </linearGradient>
+        <linearGradient id="ent-admin" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#991b1b" />
+          <stop offset="100%" stop-color="#dc2626" />
+        </linearGradient>
+        
+        <!-- Ombres portées -->
+        <filter id="shadow" x="-5%" y="-5%" width="112%" height="116%" filterUnits="userSpaceOnUse">
+          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+        </filter>
+      </defs>
+
+      <!-- Grille de fond subtile -->
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f1f5f9" stroke-width="1.2"/>
+      </pattern>
+      <rect width="2700" height="1950" fill="url(#grid)" />
+
+      <!-- ========================================== -->
+      <!-- BANDEAU D'EN-TÊTE / CARTOUCHE PRINCIPAL -->
+      <!-- ========================================== -->
+      <rect x="40" y="30" width="2620" height="105" rx="12" fill="#0f172a" filter="url(#shadow)" />
+      
+      <text x="75" y="73" font-family="'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+        FINDPRO — MODÈLE CONCEPTUEL DE DONNÉES (MCD MERISE)
+      </text>
+      <text x="75" y="104" font-family="'Segoe UI', Roboto, sans-serif" font-size="15" fill="#94a3b8">
+        Mise en relation de compétences numériques (Développement, Vidéo & Motion, Cybersécurité) &bull; Conforme aux Règles de Gestion RG01 à RG14 &bull; Version MVP
+      </text>
+
+      <rect x="2190" y="50" width="225" height="38" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <text x="2302" y="74" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#38bdf8" text-anchor="middle">
+        Formalisme : MERISE
+      </text>
+
+      <rect x="2435" y="50" width="200" height="38" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <text x="2535" y="74" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#4ade80" text-anchor="middle">
+        12 Entités &bull; 14 Relations
+      </text>
+
+
+      <!-- ========================================== -->
+      <!-- TRACÉ DES LIGNES ET CARDINALITÉS MERISE -->
+      <!-- ========================================== -->
+
+      <!-- 1. UTILISATEUR <-> POSSEDER <-> PROFIL_PROFESSIONNEL -->
+      <path d="M 620 370 L 755 370" stroke="#475569" stroke-width="2.5" fill="none" />
+      <path d="M 885 370 L 1020 370" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="635" y="360" font-size="16" font-weight="700" fill="#1e3a8a">0,1</text>
+      <text x="990" y="360" font-size="16" font-weight="700" fill="#065f46">1,1</text>
+
+      <!-- 2. PROFIL_PROFESSIONNEL <-> DETENIR <-> PROJET_PORTFOLIO -->
+      <path d="M 1370 290 L 1500 290" stroke="#475569" stroke-width="2.5" fill="none" />
+      <path d="M 1620 290 L 1740 290" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="1385" y="280" font-size="16" font-weight="700" fill="#065f46">0,n</text>
+      <text x="1710" y="280" font-size="16" font-weight="700" fill="#065f46">1,1</text>
+
+      <!-- 3. PROFIL_PROFESSIONNEL <-> JUSTIFIER <-> VALIDATION_PROFIL (RG06, RG12) -->
+      <path d="M 1370 480 L 1500 480" stroke="#475569" stroke-width="2.5" fill="none" />
+      <path d="M 1640 480 L 2100 480" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="1385" y="470" font-size="16" font-weight="700" fill="#065f46">1,n</text>
+      <text x="2065" y="470" font-size="16" font-weight="700" fill="#dc2626">1,1</text>
+
+      <!-- 4. UTILISATEUR [Admin] <-> MODERER <-> VALIDATION_PROFIL (RG12) -->
+      <path d="M 450 185 L 450 155 L 2275 155 L 2275 320" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,5" fill="none" />
+      <text x="465" y="175" font-size="16" font-weight="700" fill="#1e3a8a">0,n</text>
+      <text x="2290" y="305" font-size="16" font-weight="700" fill="#dc2626">0,1</text>
+
+      <!-- 5. PROFIL_PROFESSIONNEL <-> MAITRISER <-> COMPETENCE -->
+      <path d="M 1195 565 L 1195 640" stroke="#475569" stroke-width="2.5" fill="none" />
+      <path d="M 1195 720 L 1195 750" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="1208" y="590" font-size="16" font-weight="700" fill="#065f46">0,n</text>
+      <text x="1208" y="742" font-size="16" font-weight="700" fill="#ea580c">0,n</text>
+
+      <!-- 6. CATEGORIE <-> CLASSER <-> COMPETENCE -->
+      <path d="M 1740 820 L 1570 820" stroke="#475569" stroke-width="2.5" fill="none" />
+      <path d="M 1450 820 L 1350 820" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="1705" y="810" font-size="16" font-weight="700" fill="#ea580c">0,n</text>
+      <text x="1365" y="810" font-size="16" font-weight="700" fill="#ea580c">1,1</text>
+
+      <!-- 7. UTILISATEUR [Client] <-> EMETTRE <-> DEMANDE_SERVICE (RG02, RG03) -->
+      <path d="M 450 615 L 450 710" stroke="#475569" stroke-width="2.5" fill="none" />
+      <path d="M 450 790 L 450 890" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="462" y="640" font-size="16" font-weight="700" fill="#1e3a8a">0,n</text>
+      <text x="462" y="875" font-size="16" font-weight="700" fill="#7c3aed">1,1</text>
+
+      <!-- 8. DEMANDE_SERVICE <-> DESTINER_A <-> PROFIL_PROFESSIONNEL (RG03) -->
+      <path d="M 640 960 L 820 960 L 820 540 L 1020 540" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="655" y="950" font-size="16" font-weight="700" fill="#7c3aed">1,1</text>
+      <text x="985" y="530" font-size="16" font-weight="700" fill="#065f46">0,n</text>
+
+      <!-- 9. DEMANDE_SERVICE <-> CONCERNER <-> CATEGORIE -->
+      <path d="M 640 1030 L 1895 1030 L 1895 910" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="655" y="1020" font-size="16" font-weight="700" fill="#7c3aed">1,1</text>
+      <text x="1908" y="925" font-size="16" font-weight="700" fill="#ea580c">0,n</text>
+
+      <!-- 10. DEMANDE_SERVICE <-> DECLENCHER <-> CONVERSATION (RG04, RG13) -->
+      <path d="M 450 1280 L 450 1370" stroke="#475569" stroke-width="2.5" fill="none" />
+      <path d="M 450 1450 L 450 1520" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="462" y="1305" font-size="16" font-weight="700" fill="#7c3aed">1,1</text>
+      <text x="462" y="1505" font-size="16" font-weight="700" fill="#0f766e">1,1</text>
+
+      <!-- 11. CONVERSATION <-> COMPOSER <-> MESSAGE -->
+      <path d="M 620 1600 L 730 1600" stroke="#475569" stroke-width="2.5" fill="none" />
+      <path d="M 850 1600 L 960 1600" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="635" y="1590" font-size="16" font-weight="700" fill="#0f766e">1,n</text>
+      <text x="930" y="1590" font-size="16" font-weight="700" fill="#0f766e">1,1</text>
+
+      <!-- 12. UTILISATEUR <-> EXPEDIER <-> MESSAGE -->
+      <path d="M 280 480 L 150 480 L 150 1700 L 960 1700" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,5" fill="none" />
+      <text x="240" y="470" font-size="16" font-weight="700" fill="#1e3a8a">0,n</text>
+      <text x="925" y="1690" font-size="16" font-weight="700" fill="#0f766e">1,1</text>
+
+      <!-- 13. DEMANDE_SERVICE <-> CLÔTURER_PAR <-> AVIS (RG07, RG14) -->
+      <path d="M 640 1140 L 800 1140 L 800 1260 L 1180 1260" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="655" y="1130" font-size="16" font-weight="700" fill="#7c3aed">0,1</text>
+      <text x="1145" y="1250" font-size="16" font-weight="700" fill="#d97706">1,1</text>
+
+      <!-- 14. PROFIL_PROFESSIONNEL <-> RECEVOIR_AVIS <-> AVIS -->
+      <path d="M 1270 565 L 1270 1100" stroke="#475569" stroke-width="2.5" fill="none" />
+      <path d="M 1270 1170 L 1270 1220" stroke="#475569" stroke-width="2.5" fill="none" />
+      <text x="1282" y="590" font-size="16" font-weight="700" fill="#065f46">0,n</text>
+      <text x="1282" y="1210" font-size="16" font-weight="700" fill="#d97706">1,1</text>
+
+      <!-- 15. UTILISATEUR <-> DECLARER <-> SIGNALEMENT (RG12) (Parcours par le haut) -->
+      <path d="M 450 185 L 450 135 L 2500 135 L 2500 1145 L 2347 1145" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,5" fill="none" />
+      <path d="M 2275 1180 L 2275 1220" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,5" fill="none" />
+      <text x="465" y="150" font-size="16" font-weight="700" fill="#1e3a8a">0,n</text>
+      <text x="2290" y="1210" font-size="16" font-weight="700" fill="#dc2626">1,1</text>
+
+      <!-- 16. UTILISATEUR [Admin] <-> CONSIGNER <-> JOURNAL_MODERATION (RG12) -->
+      <path d="M 450 185 L 450 125 L 2460 125 L 2460 635 L 2347 635" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,5" fill="none" />
+      <path d="M 2275 660 L 2275 680" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,5" fill="none" />
+      <text x="465" y="130" font-size="16" font-weight="700" fill="#1e3a8a">0,n</text>
+      <text x="2290" y="675" font-size="16" font-weight="700" fill="#dc2626">1,1</text>
+
+
+      <!-- ========================================== -->
+      <!-- ASSOCIATIONS MERISE (OVALES / ELLIPSES) -->
+      <!-- ========================================== -->
+
+      <!-- POSSEDER -->
+      <g filter="url(#shadow)">
+        <ellipse cx="820" cy="370" rx="65" ry="35" fill="#f0fdf4" stroke="#059669" stroke-width="2.5"/>
+        <text x="820" y="375" font-size="13.5" font-weight="800" fill="#065f46" text-anchor="middle">POSSÉDER</text>
+      </g>
+
+      <!-- DETENIR -->
+      <g filter="url(#shadow)">
+        <ellipse cx="1560" cy="290" rx="60" ry="35" fill="#f0fdf4" stroke="#059669" stroke-width="2.5"/>
+        <text x="1560" y="295" font-size="13.5" font-weight="800" fill="#065f46" text-anchor="middle">DÉTENIR</text>
+      </g>
+
+      <!-- JUSTIFIER (RG06, RG12) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="1570" cy="480" rx="70" ry="36" fill="#fef2f2" stroke="#dc2626" stroke-width="2.5"/>
+        <text x="1570" y="477" font-size="13.5" font-weight="800" fill="#991b1b" text-anchor="middle">JUSTIFIER</text>
+        <rect x="1538" y="490" width="64" height="18" rx="4" fill="#fee2e2"/>
+        <text x="1570" y="503" font-size="10" font-weight="700" fill="#b91c1c" text-anchor="middle">RG06, RG12</text>
+      </g>
+
+      <!-- MODERER (RG12) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="1360" cy="155" rx="72" ry="32" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+        <text x="1360" y="160" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">MODÉRER [RG12]</text>
+      </g>
+
+      <!-- MAITRISER (attribut niveau) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="1195" cy="680" rx="75" ry="42" fill="#f0fdf4" stroke="#059669" stroke-width="2.5"/>
+        <text x="1195" y="673" font-size="13" font-weight="800" fill="#065f46" text-anchor="middle">MAÎTRISER</text>
+        <line x1="1140" y1="682" x2="1250" y2="682" stroke="#cbd5e1" stroke-width="1.5"/>
+        <text x="1195" y="699" font-size="12" font-style="italic" fill="#047857" text-anchor="middle">niveau</text>
+      </g>
+
+      <!-- CLASSER -->
+      <g filter="url(#shadow)">
+        <ellipse cx="1510" cy="820" rx="60" ry="35" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5"/>
+        <text x="1510" y="825" font-size="13.5" font-weight="800" fill="#9a3412" text-anchor="middle">CLASSER</text>
+      </g>
+
+      <!-- EMETTRE (RG02, RG03) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="450" cy="750" rx="65" ry="38" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.5"/>
+        <text x="450" y="747" font-size="13.5" font-weight="800" fill="#5b21b6" text-anchor="middle">ÉMETTRE</text>
+        <rect x="420" y="760" width="60" height="18" rx="4" fill="#ede9fe"/>
+        <text x="450" y="773" font-size="10" font-weight="700" fill="#6d28d9" text-anchor="middle">RG02, RG03</text>
+      </g>
+
+      <!-- DESTINER_A (RG03) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="820" cy="750" rx="72" ry="38" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.5"/>
+        <text x="820" y="747" font-size="13.5" font-weight="800" fill="#5b21b6" text-anchor="middle">DESTINER_À</text>
+        <rect x="798" y="760" width="44" height="18" rx="4" fill="#ede9fe"/>
+        <text x="820" y="773" font-size="10" font-weight="700" fill="#6d28d9" text-anchor="middle">RG03</text>
+      </g>
+
+      <!-- CONCERNER -->
+      <g filter="url(#shadow)">
+        <ellipse cx="1400" cy="1030" rx="72" ry="34" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5"/>
+        <text x="1400" y="1035" font-size="13.5" font-weight="800" fill="#9a3412" text-anchor="middle">CONCERNER</text>
+      </g>
+
+      <!-- DECLENCHER (RG04, RG13) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="450" cy="1410" rx="75" ry="38" fill="#f0fdfa" stroke="#0d9488" stroke-width="2.5"/>
+        <text x="450" y="1407" font-size="13.5" font-weight="800" fill="#0f766e" text-anchor="middle">DÉCLENCHER</text>
+        <rect x="425" y="1420" width="50" height="18" rx="4" fill="#ccfbf1"/>
+        <text x="450" y="1433" font-size="10" font-weight="700" fill="#0f766e" text-anchor="middle">RG04</text>
+      </g>
+
+      <!-- COMPOSER -->
+      <g filter="url(#shadow)">
+        <ellipse cx="790" cy="1600" rx="60" ry="35" fill="#f0fdfa" stroke="#0d9488" stroke-width="2.5"/>
+        <text x="790" y="1605" font-size="13.5" font-weight="800" fill="#0f766e" text-anchor="middle">COMPOSER</text>
+      </g>
+
+      <!-- EXPEDIER -->
+      <g filter="url(#shadow)">
+        <ellipse cx="150" cy="1150" rx="65" ry="34" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+        <text x="150" y="1155" font-size="13.5" font-weight="700" fill="#1e40af" text-anchor="middle">EXPÉDIER</text>
+      </g>
+
+      <!-- CLOTURER_PAR (RG07, RG14) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="980" cy="1260" rx="78" ry="38" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+        <text x="980" y="1256" font-size="13" font-weight="800" fill="#92400e" text-anchor="middle">CLÔTURER_PAR</text>
+        <rect x="942" y="1270" width="76" height="18" rx="4" fill="#fef3c7"/>
+        <text x="980" y="1283" font-size="10" font-weight="700" fill="#b45309" text-anchor="middle">RG07, RG14</text>
+      </g>
+
+      <!-- RECEVOIR_AVIS -->
+      <g filter="url(#shadow)">
+        <ellipse cx="1270" cy="1135" rx="72" ry="35" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+        <text x="1270" y="1140" font-size="13" font-weight="800" fill="#92400e" text-anchor="middle">RECEVOIR_AVIS</text>
+      </g>
+
+      <!-- DECLARER (RG12) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="2275" cy="1145" rx="72" ry="34" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+        <text x="2275" y="1150" font-size="13" font-weight="700" fill="#1e40af" text-anchor="middle">DÉCLARER [RG12]</text>
+      </g>
+
+      <!-- CONSIGNER (RG12) -->
+      <g filter="url(#shadow)">
+        <ellipse cx="2275" cy="635" rx="72" ry="32" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+        <text x="2275" y="640" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">CONSIGNER [RG12]</text>
+      </g>
+
+
+      <!-- ========================================== -->
+      <!-- ENTITÉS MERISE (RECTANGLES AVEC EN-TÊTE) -->
+      <!-- ========================================== -->
+
+      <!-- 1. UTILISATEUR -->
+      <g filter="url(#shadow)">
+        <rect x="280" y="185" width="340" height="430" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2.5"/>
+        <rect x="280" y="185" width="340" height="48" rx="10" fill="url(#ent-user)" />
+        <rect x="280" y="223" width="340" height="10" fill="url(#ent-user)" />
+        <text x="450" y="218" font-size="17" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">UTILISATEUR</text>
+        
+        <!-- Attributs -->
+        <text x="305" y="263" font-size="14" font-weight="700" fill="#1e3a8a" text-decoration="underline"># id_utilisateur : INT</text>
+        <text x="305" y="291" font-size="13.5" fill="#334155">nom : VARCHAR(100)</text>
+        <text x="305" y="317" font-size="13.5" fill="#334155">prenom : VARCHAR(100)</text>
+        <text x="305" y="343" font-size="13.5" fill="#334155">email : VARCHAR(191)</text>
+        <text x="305" y="369" font-size="13.5" fill="#334155">telephone : VARCHAR(20)</text>
+        <text x="305" y="395" font-size="13.5" fill="#334155">mot_de_passe : VARCHAR(255) <tspan fill="#dc2626" font-size="11" font-weight="bold">[RG08]</tspan></text>
+        <text x="305" y="421" font-size="13.5" fill="#334155">role : ENUM(client, pro, admin) <tspan fill="#2563eb" font-size="11" font-weight="bold">[RG09]</tspan></text>
+        <text x="305" y="447" font-size="13.5" fill="#334155">est_actif : TINYINT(1)</text>
+        <text x="305" y="473" font-size="13.5" fill="#64748b">date_creation : DATETIME</text>
+        <text x="305" y="499" font-size="13.5" fill="#64748b">date_modification : DATETIME</text>
+
+        <!-- Badge Rôle -->
+        <rect x="298" y="525" width="304" height="68" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="310" y="547" font-size="11.5" font-weight="700" fill="#475569">Spécialisation métier :</text>
+        <text x="310" y="567" font-size="11" fill="#64748b">&bull; client &rarr; émet demandes, dépose avis</text>
+        <text x="310" y="583" font-size="11" fill="#64748b">&bull; professionnel &rarr; possède profil_pro</text>
+      </g>
+
+      <!-- 2. PROFIL_PROFESSIONNEL -->
+      <g filter="url(#shadow)">
+        <rect x="1020" y="185" width="350" height="380" rx="10" fill="#ffffff" stroke="#059669" stroke-width="2.5"/>
+        <rect x="1020" y="185" width="350" height="48" rx="10" fill="url(#ent-pro)" />
+        <rect x="1020" y="223" width="350" height="10" fill="url(#ent-pro)" />
+        <text x="1195" y="218" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">PROFIL_PROFESSIONNEL</text>
+        
+        <!-- Attributs -->
+        <text x="1045" y="263" font-size="14" font-weight="700" fill="#065f46" text-decoration="underline"># id_profil : INT</text>
+        <text x="1045" y="289" font-size="13.5" fill="#334155">titre_professionnel : VARCHAR(150)</text>
+        <text x="1045" y="313" font-size="13.5" fill="#334155">biographie : TEXT</text>
+        <text x="1045" y="337" font-size="13.5" fill="#334155">photo_profil : VARCHAR(255)</text>
+        <text x="1045" y="361" font-size="13.5" fill="#334155">annees_experience : TINYINT</text>
+        <text x="1045" y="385" font-size="13.5" fill="#334155">commune : VARCHAR(100)</text>
+        <text x="1045" y="409" font-size="13.5" fill="#334155">adresse_complete : VARCHAR(255)</text>
+        <text x="1045" y="433" font-size="13.5" fill="#334155">disponibilite : TINYINT(1)</text>
+        <text x="1045" y="457" font-size="13.5" fill="#334155">statut_profil : ENUM(...) <tspan fill="#059669" font-size="11" font-weight="bold">[RG01, RG05, RG06]</tspan></text>
+        <text x="1045" y="481" font-size="13.5" fill="#334155">note_moyenne : DECIMAL(3,2)</text>
+        <text x="1045" y="505" font-size="13.5" fill="#334155">nombre_avis : INT</text>
+        <text x="1045" y="529" font-size="13.5" fill="#64748b">date_creation, date_modification</text>
+      </g>
+
+      <!-- 3. PROJET_PORTFOLIO -->
+      <g filter="url(#shadow)">
+        <rect x="1740" y="185" width="310" height="235" rx="10" fill="#ffffff" stroke="#059669" stroke-width="2.5"/>
+        <rect x="1740" y="185" width="310" height="48" rx="10" fill="url(#ent-pro)" />
+        <rect x="1740" y="223" width="310" height="10" fill="url(#ent-pro)" />
+        <text x="1895" y="218" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">PROJET_PORTFOLIO</text>
+        
+        <!-- Attributs -->
+        <text x="1765" y="263" font-size="14" font-weight="700" fill="#065f46" text-decoration="underline"># id_projet : INT</text>
+        <text x="1765" y="289" font-size="13.5" fill="#334155">titre : VARCHAR(150)</text>
+        <text x="1765" y="313" font-size="13.5" fill="#334155">description : TEXT</text>
+        <text x="1765" y="337" font-size="13.5" fill="#334155">lien_externe : VARCHAR(255)</text>
+        <text x="1765" y="361" font-size="13.5" fill="#334155">fichier_image : VARCHAR(255)</text>
+        <text x="1765" y="385" font-size="13.5" fill="#334155">est_couverture : TINYINT(1)</text>
+        <text x="1765" y="409" font-size="13.5" fill="#64748b">date_creation : DATETIME</text>
+      </g>
+
+      <!-- 4. COMPETENCE -->
+      <g filter="url(#shadow)">
+        <rect x="1070" y="750" width="280" height="150" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="2.5"/>
+        <rect x="1070" y="750" width="280" height="48" rx="10" fill="url(#ent-cat)" />
+        <rect x="1070" y="788" width="280" height="10" fill="url(#ent-cat)" />
+        <text x="1210" y="783" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">COMPETENCE</text>
+        
+        <!-- Attributs -->
+        <text x="1095" y="828" font-size="14" font-weight="700" fill="#9a3412" text-decoration="underline"># id_competence : INT</text>
+        <text x="1095" y="856" font-size="13.5" fill="#334155">nom : VARCHAR(100)</text>
+        <text x="1095" y="882" font-size="13.5" fill="#334155">slug : VARCHAR(120)</text>
+      </g>
+
+      <!-- 5. CATEGORIE -->
+      <g filter="url(#shadow)">
+        <rect x="1740" y="660" width="310" height="250" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="2.5"/>
+        <rect x="1740" y="660" width="310" height="48" rx="10" fill="url(#ent-cat)" />
+        <rect x="1740" y="698" width="310" height="10" fill="url(#ent-cat)" />
+        <text x="1895" y="693" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">CATEGORIE</text>
+        
+        <!-- Attributs -->
+        <text x="1765" y="738" font-size="14" font-weight="700" fill="#9a3412" text-decoration="underline"># id_categorie : INT</text>
+        <text x="1765" y="766" font-size="13.5" fill="#334155">nom : VARCHAR(100)</text>
+        <text x="1765" y="794" font-size="13.5" fill="#334155">slug : VARCHAR(120)</text>
+        <text x="1765" y="822" font-size="13.5" fill="#334155">description : VARCHAR(255)</text>
+        <text x="1765" y="850" font-size="13.5" fill="#334155">icone : VARCHAR(50)</text>
+        <text x="1765" y="878" font-size="13.5" fill="#334155">est_active, ordre_affichage</text>
+      </g>
+
+      <!-- 6. DEMANDE_SERVICE -->
+      <g filter="url(#shadow)">
+        <rect x="260" y="890" width="380" height="390" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="2.5"/>
+        <rect x="260" y="890" width="380" height="48" rx="10" fill="url(#ent-demande)" />
+        <rect x="260" y="928" width="380" height="10" fill="url(#ent-demande)" />
+        <text x="450" y="923" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">DEMANDE_SERVICE</text>
+        
+        <!-- Attributs -->
+        <text x="285" y="968" font-size="14" font-weight="700" fill="#5b21b6" text-decoration="underline"># id_demande : INT</text>
+        <text x="285" y="996" font-size="13.5" fill="#334155">titre : VARCHAR(150)</text>
+        <text x="285" y="1024" font-size="13.5" fill="#334155">description : TEXT <tspan fill="#7c3aed" font-size="11" font-weight="bold">[RG11]</tspan></text>
+        <text x="285" y="1052" font-size="13.5" fill="#334155">budget : INT (FCFA) <tspan fill="#64748b" font-size="11">[RG10 pas de paiement]</tspan></text>
+        <text x="285" y="1080" font-size="13.5" fill="#334155">date_souhaitee : DATE</text>
+        <text x="285" y="1108" font-size="13.5" fill="#334155">statut : ENUM(...) <tspan fill="#7c3aed" font-size="11" font-weight="bold">[RG14]</tspan></text>
+        <text x="285" y="1136" font-size="13.5" fill="#334155">motif_refus : VARCHAR(255)</text>
+        <text x="285" y="1164" font-size="13.5" fill="#334155">date_confirmation : DATETIME <tspan fill="#7c3aed" font-size="11" font-weight="bold">[RG14]</tspan></text>
+        <text x="285" y="1192" font-size="13.5" fill="#64748b">date_creation : DATETIME</text>
+        <text x="285" y="1218" font-size="13.5" fill="#64748b">date_modification : DATETIME</text>
+
+        <rect x="280" y="1235" width="340" height="32" rx="4" fill="#faf5ff"/>
+        <text x="450" y="1256" font-size="11" font-weight="600" fill="#6b21a8" text-anchor="middle">Cycle : envoyee &rarr; acceptee &rarr; en_cours &rarr; a_confirmer &rarr; terminee</text>
+      </g>
+
+      <!-- 7. CONVERSATION -->
+      <g filter="url(#shadow)">
+        <rect x="280" y="1520" width="340" height="190" rx="10" fill="#ffffff" stroke="#0d9488" stroke-width="2.5"/>
+        <rect x="280" y="1520" width="340" height="48" rx="10" fill="url(#ent-chat)" />
+        <rect x="280" y="1558" width="340" height="10" fill="url(#ent-chat)" />
+        <text x="450" y="1553" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">CONVERSATION</text>
+        
+        <!-- Attributs -->
+        <text x="305" y="1598" font-size="14" font-weight="700" fill="#0f766e" text-decoration="underline"># id_conversation : INT</text>
+        <text x="305" y="1628" font-size="13.5" fill="#334155">date_dernier_message : DATETIME</text>
+        <text x="305" y="1656" font-size="13.5" fill="#64748b">date_creation : DATETIME</text>
+        <text x="305" y="1686" font-size="11.5" font-weight="bold" fill="#0d9488">[RG04] Liée à la demande &bull; accès restreint</text>
+      </g>
+
+      <!-- 8. MESSAGE -->
+      <g filter="url(#shadow)">
+        <rect x="960" y="1520" width="330" height="210" rx="10" fill="#ffffff" stroke="#0d9488" stroke-width="2.5"/>
+        <rect x="960" y="1520" width="330" height="48" rx="10" fill="url(#ent-chat)" />
+        <rect x="960" y="1558" width="330" height="10" fill="url(#ent-chat)" />
+        <text x="1125" y="1553" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">MESSAGE</text>
+        
+        <!-- Attributs -->
+        <text x="985" y="1598" font-size="14" font-weight="700" fill="#0f766e" text-decoration="underline"># id_message : INT</text>
+        <text x="985" y="1628" font-size="13.5" fill="#334155">contenu : TEXT</text>
+        <text x="985" y="1656" font-size="13.5" fill="#334155">est_lu : TINYINT(1)</text>
+        <text x="985" y="1684" font-size="13.5" fill="#64748b">date_envoi : DATETIME</text>
+        <text x="985" y="1712" font-size="11.5" font-weight="bold" fill="#0f766e">[RG13] Max 3 msg avant acceptation</text>
+      </g>
+
+      <!-- 9. AVIS -->
+      <g filter="url(#shadow)">
+        <rect x="1180" y="1220" width="330" height="240" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2.5"/>
+        <rect x="1180" y="1220" width="330" height="48" rx="10" fill="url(#ent-avis)" />
+        <rect x="1180" y="1258" width="330" height="10" fill="url(#ent-avis)" />
+        <text x="1345" y="1253" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">AVIS</text>
+        
+        <!-- Attributs -->
+        <text x="1205" y="1298" font-size="14" font-weight="700" fill="#92400e" text-decoration="underline"># id_avis : INT</text>
+        <text x="1205" y="1326" font-size="13.5" fill="#334155">note : TINYINT (1 à 5)</text>
+        <text x="1205" y="1354" font-size="13.5" fill="#334155">commentaire : TEXT</text>
+        <text x="1205" y="1382" font-size="13.5" fill="#334155">statut : ENUM(publie, masque)</text>
+        <text x="1205" y="1410" font-size="13.5" fill="#64748b">date_creation : DATETIME</text>
+        <text x="1205" y="1438" font-size="11.5" font-weight="bold" fill="#b45309">[RG07] Demande terminée uniquement</text>
+      </g>
+
+      <!-- 10. VALIDATION_PROFIL -->
+      <g filter="url(#shadow)">
+        <rect x="2100" y="320" width="350" height="290" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
+        <rect x="2100" y="320" width="350" height="48" rx="10" fill="url(#ent-admin)" />
+        <rect x="2100" y="358" width="350" height="10" fill="url(#ent-admin)" />
+        <text x="2275" y="353" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">VALIDATION_PROFIL</text>
+        
+        <!-- Attributs -->
+        <text x="2125" y="398" font-size="14" font-weight="700" fill="#991b1b" text-decoration="underline"># id_validation : INT</text>
+        <text x="2125" y="426" font-size="13.5" fill="#334155">type_document : VARCHAR(80)</text>
+        <text x="2125" y="454" font-size="13.5" fill="#334155">fichier_justificatif : VARCHAR(255)</text>
+        <text x="2125" y="482" font-size="13.5" fill="#334155">statut_decision : ENUM(...) <tspan fill="#dc2626" font-size="11" font-weight="bold">[RG06]</tspan></text>
+        <text x="2125" y="510" font-size="13.5" fill="#334155">commentaire_admin : TEXT <tspan fill="#dc2626" font-size="11" font-weight="bold">[RG12]</tspan></text>
+        <text x="2125" y="538" font-size="13.5" fill="#64748b">date_soumission : DATETIME</text>
+        <text x="2125" y="566" font-size="13.5" fill="#64748b">date_decision : DATETIME</text>
+        <text x="2125" y="595" font-size="11.5" font-weight="bold" fill="#b91c1c">[RG12] Traçabilité : qui, quand, quoi, pourquoi</text>
+      </g>
+
+      <!-- 11. JOURNAL_MODERATION (RG12) -->
+      <g filter="url(#shadow)">
+        <rect x="2100" y="680" width="350" height="285" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
+        <rect x="2100" y="680" width="350" height="48" rx="10" fill="url(#ent-admin)" />
+        <rect x="2100" y="718" width="350" height="10" fill="url(#ent-admin)" />
+        <text x="2275" y="713" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">JOURNAL_MODERATION</text>
+        
+        <!-- Attributs -->
+        <text x="2125" y="758" font-size="14" font-weight="700" fill="#991b1b" text-decoration="underline"># id_journal : INT</text>
+        <text x="2125" y="784" font-size="13.5" fill="#334155">id_admin : INT (FK)</text>
+        <text x="2125" y="810" font-size="13.5" fill="#334155">type_action : ENUM(...) <tspan fill="#dc2626" font-size="11" font-weight="bold">[Quoi]</tspan></text>
+        <text x="2125" y="836" font-size="13.5" fill="#334155">type_entite : ENUM(user, pro, avis, ...)</text>
+        <text x="2125" y="862" font-size="13.5" fill="#334155">id_entite : INT</text>
+        <text x="2125" y="888" font-size="13.5" fill="#334155">motif : TEXT <tspan fill="#dc2626" font-size="11" font-weight="bold">[Pourquoi - RG12]</tspan></text>
+        <text x="2125" y="914" font-size="13.5" fill="#64748b">date_action : DATETIME <tspan fill="#dc2626" font-size="11" font-weight="bold">[Quand]</tspan></text>
+        <text x="2125" y="945" font-size="11.5" font-weight="bold" fill="#b91c1c">[RG12] Traçabilité unifiée des décisions</text>
+      </g>
+
+      <!-- 12. SIGNALEMENT -->
+      <g filter="url(#shadow)">
+        <rect x="2100" y="1220" width="350" height="300" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
+        <rect x="2100" y="1220" width="350" height="48" rx="10" fill="url(#ent-admin)" />
+        <rect x="2100" y="1258" width="350" height="10" fill="url(#ent-admin)" />
+        <text x="2275" y="1253" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">SIGNALEMENT</text>
+        
+        <!-- Attributs -->
+        <text x="2125" y="1298" font-size="14" font-weight="700" fill="#991b1b" text-decoration="underline"># id_signalement : INT</text>
+        <text x="2125" y="1326" font-size="13.5" fill="#334155">type_cible : ENUM(profil, conv, msg, ...)</text>
+        <text x="2125" y="1354" font-size="13.5" fill="#334155">id_cible : INT</text>
+        <text x="2125" y="1382" font-size="13.5" fill="#334155">motif : VARCHAR(100)</text>
+        <text x="2125" y="1410" font-size="13.5" fill="#334155">description : TEXT</text>
+        <text x="2125" y="1438" font-size="13.5" fill="#334155">statut : ENUM(nouveau, en_cours, traite, ...)</text>
+        <text x="2125" y="1466" font-size="13.5" fill="#334155">decision_admin : VARCHAR(255) <tspan fill="#dc2626" font-size="11" font-weight="bold">[RG12]</tspan></text>
+        <text x="2125" y="1494" font-size="13.5" fill="#64748b">date_signalement, date_traitement</text>
+      </g>
+
+
+      <!-- ========================================== -->
+      <!-- ENCART : MAPPAGE DES RÈGLES DE GESTION -->
+      <!-- ========================================== -->
+      <g filter="url(#shadow)">
+        <rect x="1560" y="1560" width="1070" height="350" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+        <rect x="1560" y="1560" width="1070" height="42" rx="12" fill="#1e293b"/>
+        <rect x="1560" y="1592" width="1070" height="10" fill="#1e293b"/>
+        <text x="1585" y="1588" font-size="15" font-weight="800" fill="#f8fafc" letter-spacing="0.5">
+          RÉFÉRENTIEL DES RÈGLES DE GESTION APPLIQUÉES AU MCD (RG01 &rarr; RG14)
+        </text>
+
+        <!-- Colonne 1 -->
+        <text x="1585" y="1625" font-size="12" font-weight="700" fill="#1e40af">RG01 :</text>
+        <text x="1635" y="1625" font-size="12" fill="#334155">Visite libre des profils approuvés (sans création de compte requise).</text>
+
+        <text x="1585" y="1650" font-size="12" font-weight="700" fill="#1e40af">RG02 :</text>
+        <text x="1635" y="1650" font-size="12" fill="#334155">Seul un client authentifié peut envoyer une demande de service.</text>
+
+        <text x="1585" y="1675" font-size="12" font-weight="700" fill="#1e40af">RG03 :</text>
+        <text x="1635" y="1675" font-size="12" fill="#334155">Une demande est liée à 1 seul client émetteur et 1 seul professionnel cible (1,1).</text>
+
+        <text x="1585" y="1700" font-size="12" font-weight="700" fill="#1e40af">RG04 :</text>
+        <text x="1635" y="1700" font-size="12" fill="#334155">Conversation privée accessible après envoi de la demande, réservée aux participants.</text>
+
+        <text x="1585" y="1725" font-size="12" font-weight="700" fill="#1e40af">RG05 :</text>
+        <text x="1635" y="1725" font-size="12" fill="#334155">Seuls les profils approuvés sont visibles dans la recherche publique.</text>
+
+        <text x="1585" y="1750" font-size="12" font-weight="700" fill="#1e40af">RG06 :</text>
+        <text x="1635" y="1750" font-size="12" fill="#334155">Modification de profil par le pro avec re-vérification possible par l'administration.</text>
+
+        <text x="1585" y="1775" font-size="12" font-weight="700" fill="#1e40af">RG07 :</text>
+        <text x="1635" y="1775" font-size="12" fill="#334155">Avis possible UNIQUEMENT après demande terminée et confirmée par le client.</text>
+
+        <!-- Colonne 2 -->
+        <text x="2115" y="1625" font-size="12" font-weight="700" fill="#b91c1c">RG08 :</text>
+        <text x="2165" y="1625" font-size="12" fill="#334155">Mots de passe sécurisés par hachage fort (BCRYPT / ARGON2).</text>
+
+        <text x="2115" y="1650" font-size="12" font-weight="700" fill="#b91c1c">RG09 :</text>
+        <text x="2165" y="1650" font-size="12" fill="#334155">Contrôles d'accès et droits vérifiés côté serveur selon le rôle.</text>
+
+        <text x="2115" y="1675" font-size="12" font-weight="700" fill="#b91c1c">RG10 :</text>
+        <text x="2165" y="1675" font-size="12" fill="#334155">Aucun paiement intégré dans le MVP ; aucun flux financier simulé.</text>
+
+        <text x="2115" y="1700" font-size="12" font-weight="700" fill="#b91c1c">RG11 :</text>
+        <text x="2165" y="1700" font-size="12" fill="#334155">Services de cybersécurité : autorisation expresse du propriétaire requise.</text>
+
+        <text x="2115" y="1725" font-size="12" font-weight="700" fill="#b91c1c">RG12 :</text>
+        <text x="2165" y="1725" font-size="12" fill="#334155">Traçabilité complète des modérations : qui, quand, quoi, pourquoi.</text>
+
+        <text x="2115" y="1750" font-size="12" font-weight="700" fill="#b91c1c">RG13 :</text>
+        <text x="2165" y="1750" font-size="12" fill="#334155">Limite stricte de 3 messages client avant acceptation de la demande.</text>
+
+        <text x="2115" y="1775" font-size="12" font-weight="700" fill="#b91c1c">RG14 :</text>
+        <text x="2165" y="1775" font-size="12" fill="#334155">Demande terminée après marquage a_confirmer pro puis validation client.</text>
+
+        <!-- Ligne de note Merise -->
+        <line x1="1585" y1="1805" x2="2600" y2="1805" stroke="#e2e8f0" stroke-width="1.5"/>
+        <text x="1585" y="1830" font-size="11.5" font-weight="600" fill="#64748b">
+          Conventions MERISE : Entité [Rectangle avec clé primaire soulignée] &bull; Association [Ovale avec verbe d'action] &bull; Cardinalités [min, max]
+        </text>
+        <text x="1585" y="1850" font-size="11" fill="#94a3b8">
+          Liaisons en pointillés : relations d'action / administration (administrateur modérateur, auteur du signalement, émetteur du message).
+        </text>
+      </g>
+
+      <!-- ========================================== -->
+      <!-- LÉGENDE DES COULEURS & NOTATIONS -->
+      <!-- ========================================== -->
+      <g filter="url(#shadow)">
+        <rect x="40" y="1740" width="900" height="170" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+        <text x="65" y="1775" font-size="15" font-weight="800" fill="#0f172a">LÉGENDE DES DOMAINES DU MODÈLE CONCEPTUEL</text>
+        
+        <circle cx="80" cy="1810" r="10" fill="#2563eb" />
+        <text x="105" y="1815" font-size="13" font-weight="600" fill="#334155">Comptes & Utilisateurs</text>
+
+        <circle cx="280" cy="1810" r="10" fill="#059669" />
+        <text x="305" y="1815" font-size="13" font-weight="600" fill="#334155">Profils Pro & Réalisations</text>
+
+        <circle cx="510" cy="1810" r="10" fill="#ea580c" />
+        <text x="535" y="1815" font-size="13" font-weight="600" fill="#334155">Catégories & Métiers</text>
+
+        <circle cx="710" cy="1810" r="10" fill="#7c3aed" />
+        <text x="735" y="1815" font-size="13" font-weight="600" fill="#334155">Demandes de Service</text>
+
+        <circle cx="80" cy="1855" r="10" fill="#0d9488" />
+        <text x="105" y="1860" font-size="13" font-weight="600" fill="#334155">Messagerie & Chat</text>
+
+        <circle cx="280" cy="1855" r="10" fill="#d97706" />
+        <text x="305" y="1860" font-size="13" font-weight="600" fill="#334155">Évaluations & Avis</text>
+
+        <circle cx="510" cy="1855" r="10" fill="#dc2626" />
+        <text x="535" y="1860" font-size="13" font-weight="600" fill="#334155">Modération, Validation & Audit [RG12]</text>
+
+        <text x="65" y="1895" font-size="11.5" font-style="italic" fill="#64748b">
+          Note : Les clés primaires (#) sont soulignées. Les clés étrangères (FK) sont dérivées au niveau logique (MLD) selon les cardinalités.
+        </text>
+      </g>
+
+    </svg>
+  </div>
+</body>
+</html>

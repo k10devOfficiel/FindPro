@@ -1,0 +1,537 @@
+/**
+ * FINDPRO — Styles de base et variables de la charte graphique
+ * 
+ * Toutes les variables de couleurs et de typographies proviennent
+ * rigoureusement du document docs/CHARTE_GRAPHIQUE_FINDPRO.md.
+ */
+
+:root {
+    /* 1. Couleurs de marque */
+    --color-brand-red: #E11D2E;
+    --color-brand-orange: #F97316;
+    --color-accent: #F59E0B;
+    --gradient-brand: linear-gradient(135deg, #E11D2E 0%, #F97316 100%);
+
+    /* 2. Couleur principale de l'interface et structure */
+    --color-primary: #111827;
+    --color-bg-main: #F8FAFC;
+    --color-bg-surface: #FFFFFF;
+    --color-text-main: #1F2937;
+    --color-text-secondary: #64748B;
+    --color-border: #E2E8F0;
+
+    /* 3. Couleurs de statut */
+    --color-success: #15803D;
+    --color-danger: #B91C1C;
+    --color-warning: #B45309;
+
+    /* 4. Typographies */
+    --font-title: 'Oxanium', system-ui, -apple-system, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* 5. Rayons de courbure */
+    --radius-btn: 8px;
+    --radius-card: 12px;
+}
+
+/* Base et structure globale (mobile d'abord) */
+html,
+body {
+    min-height: 100vh;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--color-text-main);
+    background-color: var(--color-bg-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Titres */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-title);
+    color: var(--color-primary);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+/* Liens */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+}
+
+a:hover {
+    color: var(--color-brand-orange);
+}
+
+.hover-primary:hover {
+    color: var(--color-primary) !important;
+}
+
+/* Barre de navigation */
+.navbar {
+    background-color: var(--color-bg-surface) !important;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navbar-brand {
+    padding: 0;
+}
+
+.navbar-nav .nav-link {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--color-text-main);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-btn);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: var(--color-brand-orange);
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--color-brand-red);
+    font-weight: 600;
+}
+
+/* ========================================================================= */
+/* SYSTÈME DE BOUTONS FINDPRO (Charte officielle & Compatibilité Bootstrap 5) */
+/* ========================================================================= */
+
+.btn {
+    border-radius: var(--radius-btn);
+    font-family: var(--font-body);
+    font-weight: 600;
+    padding: 0.55rem 1.15rem;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+}
+
+/* 1. Bouton de Marque : Dégradé Rouge-Orange FindPro (#E11D2E -> #F97316) */
+.btn-brand,
+a.btn-brand,
+button.btn-brand {
+    --bs-btn-color: #FFFFFF !important;
+    --bs-btn-bg: #E11D2E !important;
+    --bs-btn-border-color: transparent !important;
+    --bs-btn-hover-color: #FFFFFF !important;
+    --bs-btn-hover-bg: #C81523 !important;
+    --bs-btn-hover-border-color: transparent !important;
+    --bs-btn-active-color: #FFFFFF !important;
+    --bs-btn-active-bg: #B91C1C !important;
+    --bs-btn-disabled-color: #FFFFFF !important;
+    --bs-btn-disabled-bg: #F87171 !important;
+    background: linear-gradient(135deg, #E11D2E 0%, #F97316 100%) !important;
+    background-color: #E11D2E !important;
+    border: none !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(225, 29, 46, 0.25);
+}
+
+.btn-brand:hover,
+a.btn-brand:hover,
+button.btn-brand:hover {
+    background: linear-gradient(135deg, #CC1827 0%, #EA580C 100%) !important;
+    background-color: #CC1827 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 12px rgba(225, 29, 46, 0.35);
+    transform: translateY(-1px);
+}
+
+.btn-brand:focus,
+.btn-brand:active,
+a.btn-brand:active,
+button.btn-brand:active {
+    background: linear-gradient(135deg, #B91C1C 0%, #C2410C 100%) !important;
+    background-color: #B91C1C !important;
+    color: #FFFFFF !important;
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(225, 29, 46, 0.2);
+}
+
+/* 2. Bouton Principal : Bleu Nuit Profond FindPro (#111827) */
+.btn-primary,
+a.btn-primary,
+button.btn-primary {
+    --bs-btn-color: #FFFFFF !important;
+    --bs-btn-bg: #111827 !important;
+    --bs-btn-border-color: #111827 !important;
+    --bs-btn-hover-color: #FFFFFF !important;
+    --bs-btn-hover-bg: #1F2937 !important;
+    --bs-btn-hover-border-color: #1F2937 !important;
+    --bs-btn-active-color: #FFFFFF !important;
+    --bs-btn-active-bg: #030712 !important;
+    --bs-btn-active-border-color: #030712 !important;
+    background-color: #111827 !important;
+    border-color: #111827 !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    box-shadow: 0 1px 3px rgba(17, 24, 39, 0.15);
+}
+
+.btn-primary:hover,
+a.btn-primary:hover,
+button.btn-primary:hover {
+    background-color: #1F2937 !important;
+    border-color: #1F2937 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 8px rgba(17, 24, 39, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+a.btn-primary:active,
+button.btn-primary:active {
+    background-color: #030712 !important;
+    border-color: #030712 !important;
+    color: #FFFFFF !important;
+    transform: translateY(0);
+}
+
+/* 3. Bouton Contour Primaire (Outline Primary) */
+.btn-outline-primary,
+a.btn-outline-primary,
+button.btn-outline-primary {
+    --bs-btn-color: #111827 !important;
+    --bs-btn-border-color: #CBD5E1 !important;
+    --bs-btn-bg: #FFFFFF !important;
+    --bs-btn-hover-color: #FFFFFF !important;
+    --bs-btn-hover-bg: #111827 !important;
+    --bs-btn-hover-border-color: #111827 !important;
+    --bs-btn-active-color: #FFFFFF !important;
+    --bs-btn-active-bg: #030712 !important;
+    --bs-btn-active-border-color: #030712 !important;
+    color: #111827 !important;
+    background-color: #FFFFFF !important;
+    border: 1.5px solid #CBD5E1 !important;
+    font-weight: 600 !important;
+}
+
+.btn-outline-primary:hover,
+a.btn-outline-primary:hover,
+button.btn-outline-primary:hover {
+    background-color: #111827 !important;
+    border-color: #111827 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 10px rgba(17, 24, 39, 0.15);
+    transform: translateY(-1px);
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+a.btn-outline-primary:active,
+button.btn-outline-primary:active {
+    background-color: #030712 !important;
+    border-color: #030712 !important;
+    color: #FFFFFF !important;
+    transform: translateY(0);
+}
+
+/* 4. Bouton Contour Secondaire (Outline Secondary) */
+.btn-outline-secondary,
+a.btn-outline-secondary,
+button.btn-outline-secondary {
+    --bs-btn-color: #475569 !important;
+    --bs-btn-border-color: #CBD5E1 !important;
+    --bs-btn-bg: #FFFFFF !important;
+    --bs-btn-hover-color: #0F172A !important;
+    --bs-btn-hover-bg: #F1F5F9 !important;
+    --bs-btn-hover-border-color: #94A3B8 !important;
+    color: #475569 !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    font-weight: 500 !important;
+}
+
+.btn-outline-secondary:hover,
+a.btn-outline-secondary:hover,
+button.btn-outline-secondary:hover {
+    background-color: #F1F5F9 !important;
+    border-color: #94A3B8 !important;
+    color: #0F172A !important;
+}
+
+/* 5. Bouton Contour Clair (Sur fond sombre, ex: bannière CTA) */
+.btn-outline-light,
+a.btn-outline-light,
+button.btn-outline-light {
+    --bs-btn-color: #FFFFFF !important;
+    --bs-btn-border-color: rgba(255, 255, 255, 0.4) !important;
+    --bs-btn-bg: transparent !important;
+    --bs-btn-hover-color: #111827 !important;
+    --bs-btn-hover-bg: #FFFFFF !important;
+    --bs-btn-hover-border-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    background-color: transparent !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+    font-weight: 600 !important;
+}
+
+.btn-outline-light:hover,
+a.btn-outline-light:hover,
+button.btn-outline-light:hover {
+    background-color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+    color: #111827 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 6. Boutons de Statut (Danger, Succès, Avertissement) */
+.btn-danger,
+a.btn-danger,
+button.btn-danger {
+    --bs-btn-color: #FFFFFF !important;
+    --bs-btn-bg: #DC2626 !important;
+    --bs-btn-border-color: #DC2626 !important;
+    --bs-btn-hover-color: #FFFFFF !important;
+    --bs-btn-hover-bg: #B91C1C !important;
+    --bs-btn-hover-border-color: #B91C1C !important;
+    background-color: #DC2626 !important;
+    border-color: #DC2626 !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+}
+
+.btn-success,
+a.btn-success,
+button.btn-success {
+    --bs-btn-color: #FFFFFF !important;
+    --bs-btn-bg: #16A34A !important;
+    --bs-btn-border-color: #16A34A !important;
+    --bs-btn-hover-color: #FFFFFF !important;
+    --bs-btn-hover-bg: #15803D !important;
+    --bs-btn-hover-border-color: #15803D !important;
+    background-color: #16A34A !important;
+    border-color: #16A34A !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+}
+
+.btn-warning,
+a.btn-warning,
+button.btn-warning {
+    --bs-btn-color: #111827 !important;
+    --bs-btn-bg: #F59E0B !important;
+    --bs-btn-border-color: #F59E0B !important;
+    --bs-btn-hover-color: #111827 !important;
+    --bs-btn-hover-bg: #D97706 !important;
+    --bs-btn-hover-border-color: #D97706 !important;
+    background-color: #F59E0B !important;
+    border-color: #F59E0B !important;
+    color: #111827 !important;
+    font-weight: 700 !important;
+}
+
+/* Cartes */
+.card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.hover-lift {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -3px rgba(17, 24, 39, 0.08), 0 4px 6px -4px rgba(17, 24, 39, 0.04) !important;
+}
+
+/* Espace réservé gris pour visuels manquants */
+.img-placeholder {
+    background-color: var(--color-border);
+    color: var(--color-text-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    text-align: center;
+    min-height: 160px;
+}
+
+.img-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Alertes harmonisées avec les couleurs de statut */
+.alert-success {
+    background-color: #F0FDF4;
+    border-color: #BBF7D0;
+    color: var(--color-success);
+}
+
+.alert-danger {
+    background-color: #FEF2F2;
+    border-color: #FECACA;
+    color: var(--color-danger);
+}
+
+.alert-warning {
+    background-color: #FFFBEB;
+    border-color: #FDE68A;
+    color: var(--color-warning);
+}
+
+/* Accessibilité et focus */
+:focus-visible {
+    outline: 2px solid var(--color-brand-orange);
+    outline-offset: 2px;
+}
+
+/* ========================================================================= */
+/* MESSAGERIE INSTANTANÉE FINDPRO : BULLES, AVATARS ET INDICATEUR DE FRAPPE  */
+/* ========================================================================= */
+
+.chat-avatar-bubble {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid #E2E8F0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    flex-shrink: 0;
+}
+
+.chat-avatar-bubble.is-me {
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Indicateur animé "En train d'écrire" */
+.typing-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding-left: 2px;
+}
+
+.typing-dots .dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-brand-red, #E11D2E);
+    border-radius: 50%;
+    display: inline-block;
+    animation: typingBounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dots .dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.typing-dots .dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+.typing-dots .dot:nth-child(3) {
+    animation-delay: 0s;
+}
+
+@keyframes typingBounce {
+    0%, 80%, 100% {
+        transform: translateY(0) scale(0.6);
+        opacity: 0.35;
+    }
+    40% {
+        transform: translateY(-4px) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   NOTIFICATIONS TEMPS RÉEL FLOTTANTES (LIVE-SYNC & DEMANDES EN DIRECT)
+   ========================================================================== */
+.live-toast-alert {
+    animation: slideDownToast 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDownToast {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.live-card-highlight {
+    animation: highlightNewCard 2.5s ease-out forwards;
+}
+
+@keyframes highlightNewCard {
+    0% {
+        box-shadow: 0 0 0 3px rgba(225, 29, 46, 0.45);
+        background-color: #FEF2F2;
+    }
+    100% {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        background-color: #FFFFFF;
+    }
+}
+
+
+
+/* ==========================================================================
+   UTILITAIRES DE LARGEUR RESPONSIVE (w-sm-auto, w-md-auto, w-lg-auto)
+   ========================================================================== */
+@media (min-width: 576px) {
+    .w-sm-auto { width: auto !important; }
+    .w-sm-100  { width: 100% !important; }
+}
+
+@media (min-width: 768px) {
+    .w-md-auto { width: auto !important; }
+    .w-md-100  { width: 100% !important; }
+}
+
+@media (min-width: 992px) {
+    .w-lg-auto { width: auto !important; }
+    .w-lg-100  { width: 100% !important; }
+}
+
+@media (min-width: 1200px) {
+    .w-xl-auto { width: auto !important; }
+    .w-xl-100  { width: 100% !important; }
+}
+
+/* ==========================================================================
+   COLONNE D'ACTIONS DES CARTES DE DEMANDES (client/demandes & pro/demandes)
+   ========================================================================== */
+.card-action-column {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .card-action-column {
+        width: auto !important;
+        min-width: 210px;
+        max-width: 235px;
+        border-left: 1px solid #E2E8F0;
+        padding-left: 1.25rem !important;
+        margin-left: 0.5rem;
+    }
+}
